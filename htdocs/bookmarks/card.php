@@ -26,7 +26,7 @@
  */
 
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/bookmarks/class/bookmark.class.php';
 
@@ -183,7 +183,7 @@ if ($action == 'create') {
 	dol_set_focus('#titlebookmark');
 
 	// URL
-	print '<tr><td class="fieldrequired">'.$langs->trans("UrlOrLink").'</td><td><input class="flat quatrevingtpercent minwidth500" name="url" value="'.dol_escape_htmltag($url).'"></td><td class="hideonsmartphone"><span class="opacitymedium">'.$langs->trans("UseAnExternalHttpLinkOrRelativeDolibarrLink").'</span></td></tr>';
+	print '<tr><td class="fieldrequired">'.$langs->trans("UrlOrLink").'</td><td><input class="flat quatrevingtpercent minwidth500" name="url" value="'.dol_escape_htmltag($url).'"></td><td class="hideonsmartphone"><span class="opacitymedium">'.$langs->trans("UseAnExternalHttpLinkOrRelativeDCADMINLink").'</span></td></tr>';
 
 	// Target
 	print '<tr><td>'.$langs->trans("BehaviourOnClick").'</td><td>';

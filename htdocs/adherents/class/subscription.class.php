@@ -24,7 +24,7 @@
  *		\brief		File of class to manage subscriptions of foundation members
  */
 
-//namespace DolibarrMember;
+//namespace DCADMINMember;
 
 require_once DOL_DOCUMENT_ROOT.'/core/class/commonobject.class.php';
 
@@ -81,7 +81,7 @@ class Subscription extends CommonObject
 	 * Alias of $dateh exposed by the REST API GET response so the same payload
 	 * can be sent back to POST /members/{id}/subscriptions without renaming
 	 * client-side. Matches the date_start / date_end naming convention used by
-	 * other Dolibarr objects. Not persisted (see issue #38279).
+	 * other DCADMIN objects. Not persisted (see issue #38279).
 	 *
 	 * @var integer
 	 */

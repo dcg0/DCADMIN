@@ -23,7 +23,7 @@
  *		\brief      List of IRPF payments
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/compta/localtax/class/localtax.class.php';
 

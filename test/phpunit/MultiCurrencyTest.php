@@ -218,8 +218,8 @@ class MultiCurrencyTest extends CommonClassTest
 		$this->assertEqualsWithDelta(1.0, (float) $ratenotfound, 0.00001, 'getIdAndTxFromCode() must fall back to a neutral 1:1 rate when the code is unknown');
 
 		// getAmountConversionFromInvoiceRate() with an explicit rate does not need a real invoice row
-		$this->assertEqualsWithDelta(200.0, (float) MultiCurrency::getAmountConversionFromInvoiceRate(0, 100, 'dolibarr', 'facture', 2.0), 0.00001, '100 in the foreign currency converted at rate 2 must be 200 in the Dolibarr currency');
-		$this->assertEqualsWithDelta(50.0, (float) MultiCurrency::getAmountConversionFromInvoiceRate(0, 100, 'fromdolibarr', 'facture', 2.0), 0.00001, '100 in the Dolibarr currency converted at rate 2 must be 50 in the foreign currency');
+		$this->assertEqualsWithDelta(200.0, (float) MultiCurrency::getAmountConversionFromInvoiceRate(0, 100, 'dolibarr', 'facture', 2.0), 0.00001, '100 in the foreign currency converted at rate 2 must be 200 in the DCADMIN currency');
+		$this->assertEqualsWithDelta(50.0, (float) MultiCurrency::getAmountConversionFromInvoiceRate(0, 100, 'fromdolibarr', 'facture', 2.0), 0.00001, '100 in the DCADMIN currency converted at rate 2 must be 50 in the foreign currency');
 
 		return $localobject;
 	}

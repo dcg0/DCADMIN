@@ -29,7 +29,7 @@
  *       \brief      Page to manage documents joined to vendor invoices
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 
 /**

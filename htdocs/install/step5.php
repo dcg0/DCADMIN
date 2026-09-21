@@ -198,7 +198,7 @@ if ($action == "set") {		// Test on permissions not required here
 
 $morehtml = '';
 
-pHeader($langs->trans("DolibarrSetup"), "step5", 'set', '', '', 'main-inside main-inside-borderbottom no-bottom');
+pHeader($langs->trans("DCADMINSetup"), "step5", 'set', '', '', 'main-inside main-inside-borderbottom no-bottom');
 print '<br>';
 
 // Test if we can run a first install process
@@ -339,7 +339,7 @@ if ($action == "set" || empty($action) || preg_match('/upgrade/i', $action)) {
 				// Insert MAIN_VERSION_FIRST_INSTALL in a dedicated transaction. So if it fails (when first install was already done), we can do other following requests.
 				$db->begin();
 				dolibarr_install_syslog('step5: set MAIN_VERSION_FIRST_INSTALL const to '.$targetversion, LOG_DEBUG);
-				$resql = $db->query("INSERT INTO ".MAIN_DB_PREFIX."const(name, value, type, visible, note, entity) values(".$db->encrypt('MAIN_VERSION_FIRST_INSTALL').", ".$db->encrypt($targetversion).", 'chaine', 0, 'Dolibarr version when first install', 0)");
+				$resql = $db->query("INSERT INTO ".MAIN_DB_PREFIX."const(name, value, type, visible, note, entity) values(".$db->encrypt('MAIN_VERSION_FIRST_INSTALL').", ".$db->encrypt($targetversion).", 'chaine', 0, 'DCADMIN version when first install', 0)");
 				if ($resql) {
 					$conf->global->MAIN_VERSION_FIRST_INSTALL = $targetversion;
 					$db->commit();
@@ -355,7 +355,7 @@ if ($action == "set" || empty($action) || preg_match('/upgrade/i', $action)) {
 				if (!$resql) {
 					dol_print_error($db, 'Error in setup program');
 				}
-				$resql = $db->query("INSERT INTO ".MAIN_DB_PREFIX."const(name,value,type,visible,note,entity) values(".$db->encrypt('MAIN_VERSION_LAST_INSTALL').", ".$db->encrypt($targetversion).", 'chaine', 0, 'Dolibarr version when last install', 0)");
+				$resql = $db->query("INSERT INTO ".MAIN_DB_PREFIX."const(name,value,type,visible,note,entity) values(".$db->encrypt('MAIN_VERSION_LAST_INSTALL').", ".$db->encrypt($targetversion).", 'chaine', 0, 'DCADMIN version when last install', 0)");
 				if (!$resql) {
 					dol_print_error($db, 'Error in setup program');
 				}
@@ -492,7 +492,7 @@ if ($action == "set" || empty($action) || preg_match('/upgrade/i', $action)) {
 				if (!$resql) {
 					dol_print_error($db, 'Error in setup program');
 				}
-				$resql = $db->query("INSERT INTO ".MAIN_DB_PREFIX."const(name, value, type, visible, note, entity) VALUES (".$db->encrypt('MAIN_VERSION_LAST_UPGRADE').", ".$db->encrypt($targetversion).", 'chaine', 0, 'Dolibarr version for last upgrade', 0)");
+				$resql = $db->query("INSERT INTO ".MAIN_DB_PREFIX."const(name, value, type, visible, note, entity) VALUES (".$db->encrypt('MAIN_VERSION_LAST_UPGRADE').", ".$db->encrypt($targetversion).", 'chaine', 0, 'DCADMIN version for last upgrade', 0)");
 				if (!$resql) {
 					dol_print_error($db, 'Error in setup program');
 				}
@@ -608,7 +608,7 @@ if ($action == "set") {
 		print "<br>";
 
 		$morehtml = '<br><div class="center"><a class="buttonGoToupgrade" href="../index.php?mainmenu=home'.(isset($login) ? '&username='.urlencode($login) : '').'">';
-		$morehtml .= '<span class="fas fa-link-alt"></span> '.$langs->trans("GoToDolibarr").'...';
+		$morehtml .= '<span class="fas fa-link-alt"></span> '.$langs->trans("GoToDCADMIN").'...';
 		$morehtml .= '</a></div><br>';
 	} else {
 		// If here MAIN_VERSION_LAST_UPGRADE is not empty
@@ -635,7 +635,7 @@ if ($error && isset($argv[1])) {
 }
 dolibarr_install_syslog("Exit ".$ret);
 
-dolibarr_install_syslog("--- step5: Dolibarr setup finished");
+dolibarr_install_syslog("--- step5: DCADMIN setup finished");
 
 pFooter(1, $setuplang, '', 0, $morehtml);
 

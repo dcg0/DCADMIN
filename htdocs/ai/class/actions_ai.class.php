@@ -210,7 +210,7 @@ class ActionsAi
 			// List/dashboard pages: no single object, but the user's own active
 			// filters are context enough - emitted uninterpreted, the model
 			// maps them onto tool arguments (which validate as always).
-			// Dolibarr's list search form submits by POST, so a filter the user
+			// DCADMIN's list search form submits by POST, so a filter the user
 			// just typed never appears in $_GET: read both, GET last so a
 			// bookmarked/paginated URL wins over a stale POST body.
 			$filters = array();

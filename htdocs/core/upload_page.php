@@ -161,7 +161,7 @@ if ($action == 'uploadfile') {	// Test on permission not required here. Done lat
 
 $form = new Form($db);
 
-// Important: Following code is to avoid page request by browser and PHP CPU at each Dolibarr page access.
+// Important: Following code is to avoid page request by browser and PHP CPU at each DCADMIN page access.
 /*
 if (GETPOSTINT('cache')) {
 	header('Cache-Control: max-age='.GETPOSTINT('cache').', public');

@@ -18,7 +18,7 @@
 
 /**
  * Class JsonResponse
- * used for ajax responses in Dolibarr
+ * used for ajax responses in DCADMIN
  */
 class JsonResponse
 {

@@ -28,7 +28,7 @@
  *	\brief      Page to show notes of a supplier proposal request
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf

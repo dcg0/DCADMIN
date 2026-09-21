@@ -24,7 +24,7 @@
  * \brief   BookCal setup page.
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf
@@ -89,7 +89,7 @@ $dirmodels = array_merge(array('/'), (array) $conf->modules_parts['models']);
  * Actions
  */
 
-// For retrocompatibility Dolibarr < 15.0
+// For retrocompatibility DCADMIN < 15.0
 if (versioncompare(explode('.', DOL_VERSION), array(15)) < 0 && $action == 'update' && !empty($user->admin)) {
 	$formSetup->saveConfFromPost();
 }

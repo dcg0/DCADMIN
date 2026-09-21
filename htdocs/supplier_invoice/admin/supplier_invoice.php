@@ -31,7 +31,7 @@
  *  \brief      Setup to admin supplier invoices
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 
 /**

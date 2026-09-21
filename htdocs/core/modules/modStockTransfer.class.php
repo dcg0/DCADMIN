@@ -27,12 +27,12 @@
  *  \ingroup    stocktransfer
  *  \brief      Description and activation file for module StockTransfer
  */
-include_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
+include_once DOL_DOCUMENT_ROOT.'/core/modules/DCADMINModules.class.php';
 
 /**
  *  Description and activation class for module StockTransfer
  */
-class modStockTransfer extends DolibarrModules
+class modStockTransfer extends DCADMINModules
 {
 	/**
 	 * Constructor. Define names, constants, directories, boxes, permissions
@@ -46,7 +46,7 @@ class modStockTransfer extends DolibarrModules
 
 		$langs->load('stocks');
 		// Id for module (must be unique).
-		// Use here a free id (See in Home -> System information -> Dolibarr for list of used modules id).
+		// Use here a free id (See in Home -> System information -> DCADMIN for list of used modules id).
 		$this->numero = 701; // TODO Go on page https://wiki.dolibarr.org/index.php/List_of_modules_id to reserve an id number for your module
 		// Key text used to identify module (for permissions, menus, etc...)
 		$this->rights_class = 'stocktransfer';
@@ -415,7 +415,7 @@ class modStockTransfer extends DolibarrModules
 
 	/**
 	 *  Function called when module is enabled.
-	 *  The init function add constants, boxes, permissions and menus (defined in constructor) into Dolibarr database.
+	 *  The init function add constants, boxes, permissions and menus (defined in constructor) into DCADMIN database.
 	 *  It also creates data directories
 	 *
 	 *  @param      string  $options    Options when enabling module ('', 'noboxes')
@@ -482,7 +482,7 @@ class modStockTransfer extends DolibarrModules
 
 	/**
 	 *  Function called when module is disabled.
-	 *  Remove from database constants, boxes and permissions from Dolibarr database.
+	 *  Remove from database constants, boxes and permissions from DCADMIN database.
 	 *  Data directories are not deleted
 	 *
 	 *  @param      string	$options    Options when enabling module ('', 'noboxes')

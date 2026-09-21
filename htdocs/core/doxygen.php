@@ -20,16 +20,16 @@
 /**
  *	    \file       htdocs/core/doxygen.php
  *      \ingroup    core
- *		\mainpage	Dolibarr documentation of source code
+ *		\mainpage	DCADMIN documentation of source code
  *
- *	    This is source documentation for Dolibarr ERP/CRM.<br>
+ *	    This is source documentation for DCADMIN ERP/CRM.<br>
  *      This documentation can be built or updated running the script <b>dev/build/doxygen/dolibarr-doxygen-build.pl</b> or from Eclipse with Doxygen plugin.<br>
  *      <br>
- *      Dolibarr official web site: <a href="https://www.dolibarr.org">www.dolibarr.org</a><br>
+ *      DCADMIN official web site: <a href="https://www.dolibarr.org">www.dolibarr.org</a><br>
  *      <br>
- *      Dolibarr french portal: <a href="https://www.dolibarr.fr">www.dolibarr.fr</a><br>
- *      Dolibarr spanish portal: <a href="https://www.dolibarr.es">www.dolibarr.es</a><br>
- *      Dolibarr italian portal: <a href="https://www.dolibarr.it">www.dolibarr.it</a><br>
- *      Dolibarr german portal: <a href="https://www.dolibarr.de">www.dolibarr.de</a><br>
+ *      DCADMIN french portal: <a href="https://www.dolibarr.fr">www.dolibarr.fr</a><br>
+ *      DCADMIN spanish portal: <a href="https://www.dolibarr.es">www.dolibarr.es</a><br>
+ *      DCADMIN italian portal: <a href="https://www.dolibarr.it">www.dolibarr.it</a><br>
+ *      DCADMIN german portal: <a href="https://www.dolibarr.de">www.dolibarr.de</a><br>
  *      <br>
  */

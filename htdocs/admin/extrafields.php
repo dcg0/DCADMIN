@@ -24,7 +24,7 @@
  *		            core/lib/admin_extrafields.lib.php.
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf

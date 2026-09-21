@@ -25,7 +25,7 @@
  *   \brief      Page with system information of database
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 
 /**

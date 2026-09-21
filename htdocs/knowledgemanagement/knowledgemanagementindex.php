@@ -25,7 +25,7 @@
  *	\brief      Home page of knowledgemanagement top menu
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 
 require_once DOL_DOCUMENT_ROOT.'/core/class/html.formfile.class.php';

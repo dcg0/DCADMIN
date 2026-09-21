@@ -28,7 +28,7 @@
  *	\brief      Page to list stock movements
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf

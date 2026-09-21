@@ -24,7 +24,7 @@
  *		\brief      Page with geographical statistics on members
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf

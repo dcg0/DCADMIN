@@ -255,7 +255,7 @@ for ($i = 1; $i <= 4; $i++) {
 
 <?php if (isModEnabled('member')) { ?>
 <tr>
-	<td width="25%" valign="top"><?php echo $langs->trans("LinkedToDolibarrMember"); ?></td>
+	<td width="25%" valign="top"><?php echo $langs->trans("LinkedToDCADMINMember"); ?></td>
 	<td colspan="3"><?php echo $this->control->tpl['linked_member']; ?></td>
 </tr>
 <?php } ?>

@@ -31,7 +31,7 @@ if (!defined('NOSTYLECHECK')) {
 	define('NOSTYLECHECK', '1');
 }
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf

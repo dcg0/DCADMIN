@@ -16,7 +16,7 @@
  */
 
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../../../main.inc.php';
 
 /**
@@ -63,7 +63,7 @@ if (empty($usedolheader)) {
 	<html>
 	<head>
 	<meta name="robots" content="noindex,nofollow" />
-	<meta name="author" content="Dolibarr Development Team">
+	<meta name="author" content="DCADMIN Development Team">
 	<title>Test page</title>
 	<!-- Includes for JQuery (Ajax library) -->
 	<link rel="stylesheet" type="text/css" href="<?php echo DOL_URL_ROOT ?>/public/includes/jquery/css/base/jquery-ui.css" />

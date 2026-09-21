@@ -1,6 +1,6 @@
 <?php
 /**
- * A service class for generic OAuth2 providers added for Dolibarr project to manage generic use cases.
+ * A service class for generic OAuth2 providers added for DCADMIN project to manage generic use cases.
  */
 namespace OAuth\OAuth2\Service;
 

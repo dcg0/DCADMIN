@@ -23,7 +23,7 @@
  *		\brief      Home page of setup area
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf

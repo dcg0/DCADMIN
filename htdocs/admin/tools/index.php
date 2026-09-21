@@ -23,7 +23,7 @@
  * 		\brief      Page d'accueil de l'espace outils admin
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 
 /**

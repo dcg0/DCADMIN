@@ -27,7 +27,7 @@
  */
 
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/resource/class/dolresource.class.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/functions2.lib.php';

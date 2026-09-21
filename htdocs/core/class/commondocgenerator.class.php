@@ -835,7 +835,7 @@ abstract class CommonDocGenerator
 			}
 
 			// Calculate total up and total discount percentage
-			// Note that this added fields does not match a field into database in Dolibarr (Dolibarr manage discount on lines not as a global property of object)
+			// Note that this added fields does not match a field into database in DCADMIN (DCADMIN manage discount on lines not as a global property of object)
 			$resarray['object_total_up'] = $totalUp;
 			$resarray['object_total_up_locale'] = price($resarray['object_total_up'], 0, $outputlangs);
 			if (method_exists($object, 'getTotalDiscount') && in_array(get_class($object), array('Propal', 'Proposal', 'Commande', 'Facture', 'SupplierProposal', 'CommandeFournisseur', 'FactureFournisseur'))) {
@@ -1141,7 +1141,7 @@ abstract class CommonDocGenerator
 	 * @phpstan-template T
 	 *
 	 * @phpstan-param T $object
-	 * @param   array<string,CommonObject|float|int|string>|CommonObject	$object		Dolibarr Object
+	 * @param   array<string,CommonObject|float|int|string>|CommonObject	$object		DCADMIN Object
 	 * @param   Translate			$outputlangs	Language object for output
 	 * @param   boolean|int			$recursive		Want to fetch child array or child object.
 	 * @return	array<string,mixed>					Array of substitution key->code

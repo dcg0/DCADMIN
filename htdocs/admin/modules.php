@@ -42,7 +42,7 @@ if (!isset($_GET['mainmenu']) && !isset($_POST['mainmenu'])) {
 	$_GET['mainmenu'] = 'home';
 }
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf
@@ -62,7 +62,7 @@ require_once DOL_DOCUMENT_ROOT.'/core/lib/files.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/geturl.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/functions2.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/core/class/events.class.php';
-require_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
+require_once DOL_DOCUMENT_ROOT.'/core/modules/DCADMINModules.class.php';
 require_once DOL_DOCUMENT_ROOT.'/admin/remotestore/class/externalModules.class.php';
 
 
@@ -256,12 +256,12 @@ if ($action == 'install' && $allowonlineinstall) {
 	} else {
 		if (!$error && !preg_match('/\.zip$/i', $original_file)) {
 			$langs->load("errors");
-			setEventMessages($langs->trans("ErrorFileMustBeADolibarrPackage", $original_file), null, 'errors');
+			setEventMessages($langs->trans("ErrorFileMustBeADCADMINPackage", $original_file), null, 'errors');
 			$error++;
 		}
 		if (!$error && !preg_match('/^(module[a-zA-Z0-9]*_|theme_|).*\-([0-9][0-9\.]*)(\s\(\d+\)\s)?\.zip$/i', $original_file)) {
 			$langs->load("errors");
-			setEventMessages($langs->trans("ErrorFilenameDosNotMatchDolibarrPackageRules", $original_file, 'modulename-x[.y.z].zip'), null, 'errors');
+			setEventMessages($langs->trans("ErrorFilenameDosNotMatchDCADMINPackageRules", $original_file, 'modulename-x[.y.z].zip'), null, 'errors');
 			$error++;
 		}
 	}
@@ -324,7 +324,7 @@ if ($action == 'install' && $allowonlineinstall) {
 										if ($modName) {
 											if (class_exists($modName)) {
 												$objMod = new $modName($db);
-												'@phan-var-force DolibarrModules $objMod';
+												'@phan-var-force DCADMINModules $objMod';
 
 												//var_dump($objMod);
 											}
@@ -339,12 +339,12 @@ if ($action == 'install' && $allowonlineinstall) {
 				}
 				*/
 
-				// Check if module is in the remote malware blacklist (at URL DolibarrModules::URL_FOR_BLACKLISTED_MODULES)
+				// Check if module is in the remote malware blacklist (at URL DCADMINModules::URL_FOR_BLACKLISTED_MODULES)
 				if (!$error) {
 					if (GETPOST('checkforcompliance') == 'on') {
 						try {
-							$res = include_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
-							$dolibarrmodule = new DolibarrModules($db);
+							$res = include_once DOL_DOCUMENT_ROOT.'/core/modules/DCADMINModules.class.php';
+							$dolibarrmodule = new DCADMINModules($db);
 							$checkRes = $dolibarrmodule->checkForcompliance($modulename);
 
 							if (!is_numeric($checkRes) && $checkRes != '') {
@@ -584,8 +584,8 @@ foreach ($modulesdir as $dir) {
 						$res = include_once $dir.$file; // A class already exists in a different file will send a non catchable fatal error.
 						if (class_exists($modName)) {
 							$objMod = new $modName($db);
-							'@phan-var-force DolibarrModules $objMod';
-							/** @var DolibarrModules $objMod */
+							'@phan-var-force DCADMINModules $objMod';
+							/** @var DCADMINModules $objMod */
 							$modNameLoaded[$modName] = $dir;
 							if (!$objMod->numero > 0 && $modName != 'modUser') {
 								dol_syslog('The module descriptor '.$modName.' must have a numero property', LOG_ERR);
@@ -702,8 +702,8 @@ foreach ($modulesdir as $dir) {
 	}
 }
 
-'@phan-var-force array<string,DolibarrModules> $modules';
-/** @var array<string,DolibarrModules> $modules */
+'@phan-var-force array<string,DCADMINModules> $modules';
+/** @var array<string,DCADMINModules> $modules */
 
 if ($action == 'reset_confirm' && $user->admin) {
 	if (!empty($modules[$value])) {
@@ -806,7 +806,7 @@ if ($mode == 'common' || $mode == 'commonkanban') {
 	$moreforfilter .= '<div class="floatright right pagination paddingtop --module-list"><ul><li>';
 	$moreforfilter .= dolGetButtonTitle(
 		$langs->trans('CheckForModuleUpdate'),
-		$langs->trans('CheckForModuleUpdate').'<br><br>'.img_warning('', '', 'paddingright').$langs->trans('CheckForModuleUpdateHelp').' '.$langs->trans('CheckForModuleUpdateHelp2', DolibarrModules::URL_FOR_BLACKLISTED_MODULES).'<br>'.$langs->trans("YourIPWillBeRevealedToThisExternalProviders"),
+		$langs->trans('CheckForModuleUpdate').'<br><br>'.img_warning('', '', 'paddingright').$langs->trans('CheckForModuleUpdateHelp').' '.$langs->trans('CheckForModuleUpdateHelp2', DCADMINModules::URL_FOR_BLACKLISTED_MODULES).'<br>'.$langs->trans("YourIPWillBeRevealedToThisExternalProviders"),
 		'fa fa-sync',
 		$_SERVER["PHP_SELF"].'?action=checklastversion&token='.newToken().'&mode='.$mode.$param,
 		'',
@@ -926,7 +926,7 @@ if ($mode == 'common' || $mode == 'commonkanban') {
 
 		$modName = $filename[$key];
 
-		/** @var DolibarrModules $objMod */
+		/** @var DCADMINModules $objMod */
 		$objMod = $modules[$modName];
 
 		if (!is_object($objMod)) {
@@ -1074,7 +1074,7 @@ if ($mode == 'common' || $mode == 'commonkanban') {
 		if ($objMod->isCoreOrExternalModule() == 'external' && ($action == 'checklastversion' || getDolGlobalString('CHECKLASTVERSION_EXTERNALMODULE'))) {
 			// Setting CHECKLASTVERSION_EXTERNALMODULE to on is a bad practice to activate a check on an external access during the building of the admin page.
 			// 1 external module can hang the application.
-			// Adding a cron job could be a good idea: see DolibarrModules::checkForUpdate()
+			// Adding a cron job could be a good idea: see DCADMINModules::checkForUpdate()
 			$checkRes = $objMod->checkForUpdate();
 			if ($checkRes > 0) {
 				setEventMessages($objMod->getName().' : '.preg_replace('/[^a-z0-9_\.\-\s]/i', '', $versiontrans).' -> '.preg_replace('/[^a-z0-9_\.\-\s]/i', '', $objMod->lastVersion), null, 'warnings');
@@ -1084,7 +1084,7 @@ if ($mode == 'common' || $mode == 'commonkanban') {
 		}
 
 		if ($objMod->isCoreOrExternalModule() == 'external' && $action == 'checklastversion' && !getDolGlobalString('DISABLE_CHECK_ON_MALWARE_MODULES')) {
-			$checkRes = $objMod->checkForCompliance();	// Check if module is reported as non compliant with Dolibarr rules and law
+			$checkRes = $objMod->checkForCompliance();	// Check if module is reported as non compliant with DCADMIN rules and law
 			if (!is_numeric($checkRes) && $checkRes != '') {
 				$langs->load("errors");
 				setEventMessages($objMod->getName().' : '.$langs->trans($checkRes), null, 'errors');
@@ -1160,7 +1160,7 @@ if ($mode == 'common' || $mode == 'commonkanban') {
 
 					$codeenabledisable .= '<a class="reposition valignmiddle" id="iddisable'.$objMod->numero.'" data-alreadyclicked="0" href="'.$_SERVER["PHP_SELF"].'?id='.((int) $objMod->numero).'&token='.newToken().'&module_position='.$module_position.'&action=reset&value='.urlencode($modName).'&mode='.urlencode($mode).'&confirm=yes'.$param.'"';
 					if ($warningmessagefordisable) {
-						$codeenabledisable .= ' onclick="return confirmDolibarr(\''.dol_escape_js($warningmessagefordisable).'\', \'iddisable'.$objMod->numero.'\', 600, 300, 0);"';
+						$codeenabledisable .= ' onclick="return confirmDCADMIN(\''.dol_escape_js($warningmessagefordisable).'\', \'iddisable'.$objMod->numero.'\', 600, 300, 0);"';
 					}
 					$codeenabledisable .= '>';
 					$codeenabledisable .= img_picto($langs->trans("Activated").($warningstring ? ' '.$warningstring : ''), 'switch_on');
@@ -1289,7 +1289,7 @@ if ($mode == 'common' || $mode == 'commonkanban') {
 				$codeenabledisable .= '<!-- Message to show: '.$warningmessage.' -->'."\n";
 				$codeenabledisable .= '<a class="reposition" id="idqualified'.$objMod->numero.'" data-alreadyclicked="0" href="'.$urltogo.'"';
 				if ($warningmessage) {
-					$codeenabledisable .= ' onclick="return confirmDolibarr(\''.dol_escape_js($warningmessage).'\', \'idqualified'.$objMod->numero.'\', '.$popupWidth.', '.$popupHeight.','.$disableCancel.');"';
+					$codeenabledisable .= ' onclick="return confirmDCADMIN(\''.dol_escape_js($warningmessage).'\', \'idqualified'.$objMod->numero.'\', '.$popupWidth.', '.$popupHeight.','.$disableCancel.');"';
 				}
 				$codeenabledisable .= '>';
 				$codeenabledisable .= img_picto($langs->trans("Disabled"), 'switch_off');
@@ -1312,7 +1312,7 @@ if ($mode == 'common' || $mode == 'commonkanban') {
 			// Picto + Name of module
 			print '  <td class="tdoverflowmax200 minwidth200imp" title="'.dol_escape_htmltag($objMod->getName()).'">';
 			$alttext = '';
-			//if (is_array($objMod->need_dolibarr_version)) $alttext.=($alttext?' - ':'').'Dolibarr >= '.join('.',$objMod->need_dolibarr_version);
+			//if (is_array($objMod->need_dolibarr_version)) $alttext.=($alttext?' - ':'').'DCADMIN >= '.join('.',$objMod->need_dolibarr_version);
 			//if (is_array($objMod->phpmin)) $alttext.=($alttext?' - ':'').'PHP >= '.join('.',$objMod->phpmin);
 			if (!empty($objMod->picto)) {
 				if (preg_match('/^\//i', $objMod->picto)) {
@@ -1418,7 +1418,7 @@ if ($mode == 'marketplace') {
 
 
 	// Source Community github
-	$url = 'https://github.com/Dolibarr/dolibarr-community-modules';
+	$url = 'https://github.com/DCADMIN/dolibarr-community-modules';
 
 	print '<tr class="oddeven nohover" height="100">'."\n";
 	print '<td class="hideonsmartphone center width150 nopaddingleftimp nopaddingrightimp"><a href="'.$url.'" target="_blank" rel="noopener noreferrer external"><img border="0" class="imgautosize imgmaxwidth100" src="'.DOL_URL_ROOT.'/theme/dolibarr_logo.svg"></a></td>';
@@ -1627,7 +1627,7 @@ if ($mode == 'deploy') {
 			print $langs->trans("YouCanSubmitFile").'<br><br><br>';
 
 			print '<span class="opacitymedium"><input class="paddingright" type="checkbox" name="checkforcompliance" id="checkforcompliance"'.(getDolGlobalString('DISABLE_CHECK_ON_MALWARE_MODULES') ? ' disabled="disabled"' : 'checked="checked"').'>';
-			print '<label for="checkforcompliance">'.$form->textwithpicto($langs->trans("CheckIfModuleIsNotBlackListed"), $langs->trans("CheckIfModuleIsNotBlackListedHelp").'<br><br>'.DolibarrModules::URL_FOR_BLACKLISTED_MODULES).'</label>';
+			print '<label for="checkforcompliance">'.$form->textwithpicto($langs->trans("CheckIfModuleIsNotBlackListed"), $langs->trans("CheckIfModuleIsNotBlackListedHelp").'<br><br>'.DCADMINModules::URL_FOR_BLACKLISTED_MODULES).'</label>';
 			print '</span><br><br>';
 
 			$max = getDolGlobalString('MAIN_UPLOAD_DOC'); // In Kb

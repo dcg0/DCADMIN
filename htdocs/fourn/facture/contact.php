@@ -28,7 +28,7 @@
  *      \brief      Onglet de gestion des contacts des factures
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 
 /**

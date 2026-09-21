@@ -349,7 +349,7 @@ class PrivacyGuard
 			'Subtotal'
 		];
 
-		// Dynamic Dolibarr Translations
+		// Dynamic DCADMIN Translations
 		// If $langs is available, we add the months in the current user's language.
 		$dynamic_excludes = [];
 		if (is_object($langs)) {

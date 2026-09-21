@@ -33,9 +33,9 @@ dol_include_once('/compta/paiement/class/paiement.class.php');
  * API class for paiement
  *
  * @access protected
- * @class  DolibarrApiAccess {@requires user,external}
+ * @class  DCADMINApiAccess {@requires user,external}
  */
-class Paiements extends DolibarrApi
+class Paiements extends DCADMINApi
 {
 	/**
 	 * @var Paiement {@type Paiement}
@@ -74,7 +74,7 @@ class Paiements extends DolibarrApi
 	 */
 	public function get($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('facture', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('facture', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -111,7 +111,7 @@ class Paiements extends DolibarrApi
 		$obj_ret = array();
 		$tmpobject = new Paiement($this->db);
 
-		if (!DolibarrApiAccess::$user->hasRight('facture', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('facture', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -178,7 +178,7 @@ class Paiements extends DolibarrApi
 	 */
 	public function put($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('facture', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('facture', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -203,7 +203,7 @@ class Paiements extends DolibarrApi
 		// Clean data
 		// $this->paiement->abc = sanitizeVal($this->paiement->abc, 'alphanohtml');
 
-		if ($this->paiement->update(DolibarrApiAccess::$user, 0) > 0) {
+		if ($this->paiement->update(DCADMINApiAccess::$user, 0) > 0) {
 			return $this->get($id);
 		} else {
 			throw new RestException(500, $this->paiement->error);
@@ -226,7 +226,7 @@ class Paiements extends DolibarrApi
 	 */
 	public function delete($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('facture', 'paiement')) {
+		if (!DCADMINApiAccess::$user->hasRight('facture', 'paiement')) {
 			throw new RestException(403);
 		}
 
@@ -235,9 +235,9 @@ class Paiements extends DolibarrApi
 			throw new RestException(404, 'Paiement not found');
 		}
 
-		if ($this->paiement->delete(DolibarrApiAccess::$user) == 0) {
+		if ($this->paiement->delete(DCADMINApiAccess::$user) == 0) {
 			throw new RestException(409, 'Error when deleting Paiement : '.$this->paiement->error);
-		} elseif ($this->paiement->delete(DolibarrApiAccess::$user) < 0) {
+		} elseif ($this->paiement->delete(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, 'Error when deleting Paiement : '.$this->paiement->error);
 		}
 

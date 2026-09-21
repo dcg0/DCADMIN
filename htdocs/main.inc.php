@@ -38,7 +38,7 @@
 /**
  *	\file       htdocs/main.inc.php
  *	\ingroup	core
- *	\brief      File that defines environment for Dolibarr GUI pages only (file not required by scripts)
+ *	\brief      File that defines environment for DCADMIN GUI pages only (file not required by scripts)
  */
 
 //@ini_set('memory_limit', '128M');	// This may be useless if memory is hard limited by your PHP
@@ -67,7 +67,7 @@ if (defined('NOREQUIREUSER') && !defined('NOREQUIREMENU')) {
 	exit;
 }
 
-// This is to make Dolibarr working with Plesk
+// This is to make DCADMIN working with Plesk
 if (!empty($_SERVER['DOCUMENT_ROOT']) && substr($_SERVER['DOCUMENT_ROOT'], -6) !== 'htdocs') {
 	set_include_path($_SERVER['DOCUMENT_ROOT'].'/htdocs');
 }
@@ -116,7 +116,7 @@ if (!empty($php_session_save_handler) && $php_session_save_handler == 'db') {
 	require_once 'core/lib/phpsessionin'.$php_session_save_handler.'.lib.php';
 }
 
-// Init session. Name of session is specific to Dolibarr instance.
+// Init session. Name of session is specific to DCADMIN instance.
 // Must be done after the include of filefunc.inc.php so global variables of conf file are defined (like $dolibarr_main_instance_unique_id or $dolibarr_main_force_https).
 // Note: the function dol_getprefix() is defined into functions.lib.php but may have been defined to return a different key to manage another area to protect.
 $prefix = dol_getprefix('');
@@ -210,7 +210,7 @@ register_shutdown_function('dol_shutdown');
 if (isModEnabled('debugbar') && !GETPOST('dol_use_jmobile') && empty($_SESSION['dol_use_jmobile'])) {
 	global $debugbar;
 	include_once DOL_DOCUMENT_ROOT.'/debugbar/class/DebugBar.php';
-	$debugbar = new DolibarrDebugBar();
+	$debugbar = new DCADMINDebugBar();
 	$renderer = $debugbar->getJavascriptRenderer();
 	if (!getDolGlobalString('MAIN_HTML_HEADER')) {
 		$conf->global->MAIN_HTML_HEADER = '';
@@ -887,9 +887,9 @@ if (!defined('NOLOGIN')) {
 				// Load translation files required by page
 				$langs->loadLangs(array('main', 'errors'));
 
-				$_SESSION["dol_loginmesg"] = $langs->transnoentitiesnoconv("ErrorCantLoadUserFromDolibarrDatabase", $login);
+				$_SESSION["dol_loginmesg"] = $langs->transnoentitiesnoconv("ErrorCantLoadUserFromDCADMINDatabase", $login);
 
-				$user->context['audit'] = 'ErrorCantLoadUserFromDolibarrDatabase - login='.$login;
+				$user->context['audit'] = 'ErrorCantLoadUserFromDCADMINDatabase - login='.$login;
 			} elseif ($resultFetchUser < 0) {
 				$_SESSION["dol_loginmesg"] = $user->error;
 
@@ -980,9 +980,9 @@ if (!defined('NOLOGIN')) {
 			if ($resultFetchUser == 0) {
 				$langs->loadLangs(array('main', 'errors'));
 
-				$_SESSION["dol_loginmesg"] = $langs->transnoentitiesnoconv("ErrorCantLoadUserFromDolibarrDatabase", $login);
+				$_SESSION["dol_loginmesg"] = $langs->transnoentitiesnoconv("ErrorCantLoadUserFromDCADMINDatabase", $login);
 
-				$user->context['audit'] = 'ErrorCantLoadUserFromDolibarrDatabase - login='.$login;
+				$user->context['audit'] = 'ErrorCantLoadUserFromDCADMINDatabase - login='.$login;
 			} elseif ($resultFetchUser < 0) {
 				$_SESSION["dol_loginmesg"] = $user->error;
 
@@ -1634,7 +1634,7 @@ function top_httphead($contenttype = 'text/html', $forcenocache = 0)
 			$contentsecuritypolicy .= $hookmanager->resPrint; // Concat CSP
 		}
 
-		// Add Dolibarr to Content-Security-Policy
+		// Add DCADMIN to Content-Security-Policy
 		$contentsecuritypolicy = preg_replace('/default-src \'self\'/', 'default-src \'self\' *.dolibarr.org', $contentsecuritypolicy);
 
 		if (!empty($contentsecuritypolicy)) {
@@ -1674,7 +1674,7 @@ function top_httphead($contenttype = 'text/html', $forcenocache = 0)
 			$contentsecuritypolicy .= $hookmanager->resPrint; // Concat CSP
 		}
 
-		// Add Dolibarr to Content-Security-Policy
+		// Add DCADMIN to Content-Security-Policy
 		$contentsecuritypolicy = preg_replace('/default-src \'self\'/', 'default-src \'self\' ping.dolibarr.org', $contentsecuritypolicy);
 
 		if (!empty($contentsecuritypolicy)) {
@@ -1775,7 +1775,7 @@ function top_htmlhead($head, $title = '', $disablejs = 0, $disablehead = 0, $arr
 		print '<meta charset="utf-8">'."\n";
 		print '<meta name="robots" content="'.($disablenoindex ? 'index' : 'noindex').($disablenofollow ? ',follow' : ',nofollow').'">'."\n"; // Do not index
 		print '<meta name="viewport" content="width=device-width, initial-scale=1.0">'."\n"; // Scale for mobile device
-		print '<meta name="author" content="Dolibarr Development Team">'."\n";
+		print '<meta name="author" content="DCADMIN Development Team">'."\n";
 		print '<meta name="anti-csrf-newtoken" content="'.newToken().'">'."\n";
 		print '<meta name="anti-csrf-currenttoken" content="'.currentToken().'">'."\n";
 		if (getDolGlobalInt('MAIN_FEATURES_LEVEL')) {
@@ -1899,7 +1899,7 @@ function top_htmlhead($head, $title = '', $disablejs = 0, $disablehead = 0, $arr
 
 		$jsContextPathUrl = DOL_URL_ROOT . '/public/includes/dolibarr-js-context';
 		$jsContextFiles = [
-			'dolibarr-context.umd.js', // The js Dolibarr context definition
+			'dolibarr-context.umd.js', // The js DCADMIN context definition
 			'dolibarr-tool.seteventmessage.js' // The first tools to help dev for easy event in js
 		];
 
@@ -1917,7 +1917,7 @@ function top_htmlhead($head, $title = '', $disablejs = 0, $disablehead = 0, $arr
 		}
 
 		// DEFINE FIRST NEEDED JS CONTEXT VARS
-		print '<script nonce="'.getNonce().'">Dolibarr.setContextVars('.json_encode($jsContextVars).');</script>'."\n";
+		print '<script nonce="'.getNonce().'">DCADMIN.setContextVars('.json_encode($jsContextVars).');</script>'."\n";
 
 		// -- END OF DEFINITION OF DOLIBARR JS CONTEXT AND TOOLS
 
@@ -1969,7 +1969,7 @@ function top_htmlhead($head, $title = '', $disablejs = 0, $disablehead = 0, $arr
 		}
 
 		if (!defined('DISABLE_CSS_DEFAULT_THEME')) {
-			print '<!-- Includes CSS for Dolibarr theme -->'."\n";
+			print '<!-- Includes CSS for DCADMIN theme -->'."\n";
 			print '<link rel="stylesheet" type="text/css" href="' . $themepath . $themeparam . '">' . "\n";
 		}
 
@@ -2147,13 +2147,13 @@ function top_htmlhead($head, $title = '', $disablejs = 0, $disablehead = 0, $arr
 					$enablebrowsernotif = false;
 				}
 				if ($enablebrowsernotif) {
-					print '<!-- Includes JS of Dolibarr (browser layout = '.$conf->browser->layout.')-->'."\n";
+					print '<!-- Includes JS of DCADMIN (browser layout = '.$conf->browser->layout.')-->'."\n";
 					print '<script nonce="'.getNonce().'" src="'.DOL_URL_ROOT.'/core/js/lib_notification.js.php?lang='.$langs->defaultlang. '&' . $ext . '"></script>'."\n";
 				}
 			}
 
 			// Global js function
-			print '<!-- Includes JS of Dolibarr -->'."\n";
+			print '<!-- Includes JS of DCADMIN -->'."\n";
 			if (!defined('DISABLE_LIB_HEAD_JS')) {
 				print '<script nonce="' . getNonce() . '" src="' . DOL_URL_ROOT . '/core/js/lib_head.js.php?lang=' . $langs->defaultlang . '&' . $ext . '"></script>' . "\n";
 			}
@@ -2398,7 +2398,7 @@ function top_menu($head, $title = '', $target = '', $disablejs = 0, $disablehead
 			$toprightmenu .= $form->textwithtooltip('', $langs->trans("PrintContentArea"), 2, 1, $text, 'login_block_elem', 2);
 		}
 
-		// Link to Dolibarr wiki pages
+		// Link to DCADMIN wiki pages
 		if (!getDolGlobalString('MAIN_HELP_DISABLELINK') && !getDolGlobalString('MAIN_OPTIMIZEFORTEXTBROWSER')) {
 			$langs->load("help");
 
@@ -3585,7 +3585,7 @@ function left_menu($menu_array_before, $helppagename = '', $notused = '', $menu_
 			$menumanager->showmenu('left', array('searchform' => $searchform)); // output menu_array and menu found in database
 		}
 
-		// Dolibarr version + help + bug report link
+		// DCADMIN version + help + bug report link
 		if (getDolGlobalString('MAIN_SHOW_VERSION') || getDolGlobalString('MAIN_BUGTRACK_ENABLELINK')) {
 			print "\n";
 			print "<!-- Begin Help Block-->\n";
@@ -3644,7 +3644,7 @@ function left_menu($menu_array_before, $helppagename = '', $notused = '', $menu_
 				require_once DOL_DOCUMENT_ROOT.'/core/lib/functions2.lib.php';
 
 				if (getDolGlobalString('MAIN_BUGTRACK_ENABLELINK') == 'github') {
-					$bugbaseurl = 'https://github.com/Dolibarr/dolibarr/issues/new?labels=Bug';
+					$bugbaseurl = 'https://github.com/DCADMIN/dolibarr/issues/new?labels=Bug';
 					$bugbaseurl .= '&title=';
 					$bugbaseurl .= urlencode("Bug: ");
 					$bugbaseurl .= '&body=';
@@ -4011,7 +4011,7 @@ if (!function_exists("llxFooter")) {
 		}
 
 		if (!empty($conf->use_javascript_ajax)) {
-			print "\n".'<!-- Includes JS Footer of Dolibarr -->'."\n";
+			print "\n".'<!-- Includes JS Footer of DCADMIN -->'."\n";
 			print '<script src="'.DOL_URL_ROOT.'/core/js/lib_foot.js.php?lang='.$langs->defaultlang . '&' . $ext .'"></script>'."\n";
 		}
 

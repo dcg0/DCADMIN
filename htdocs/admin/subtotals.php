@@ -27,7 +27,7 @@
  *  \brief      Activation page for the subtotals module in the other modules
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf

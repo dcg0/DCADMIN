@@ -42,7 +42,7 @@ if (!defined('NOREQUIRESOC')) {
 	define('NOREQUIRETRAN', '1');
 }*/
 
-// Load Dolibarr environment and check user is logged.
+// Load DCADMIN environment and check user is logged.
 require '../../main.inc.php';
 /**
  * @var Conf $conf

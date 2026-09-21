@@ -1569,7 +1569,7 @@ class SMTPs
 		$trackid = $this->getTrackId();
 		if ($trackid) {
 			$_header .= 'Message-ID: <'.(empty($this->_msgId) ? uniqid().'.SMTPs-dolibarr-'.$trackid.'@'.$host : $this->_msgId).">\r\n";
-			$_header .= 'X-Dolibarr-TRACKID: '.$trackid.'@'.$host."\r\n";
+			$_header .= 'X-DCADMIN-TRACKID: '.$trackid.'@'.$host."\r\n";
 		} else {
 			$_header .= 'Message-ID: <'.(empty($this->_msgId) ? uniqid().'.SMTPs@'.$host : $this->_msgId).">\r\n";
 		}
@@ -1600,8 +1600,8 @@ class SMTPs
 			$_header .= "Reply-To: ".$this->getReplyTo('addr')."\r\n";
 		}
 
-		$_header .= 'X-Mailer: Dolibarr version '.DOL_VERSION.' (using SMTPs Mailer)'."\r\n";
-		$_header .= 'X-Dolibarr-Option: '.($conf->global->MAIN_MAIL_USE_MULTI_PART ? 'MAIN_MAIL_USE_MULTI_PART' : 'No MAIN_MAIL_USE_MULTI_PART')."\r\n";
+		$_header .= 'X-Mailer: DCADMIN version '.DOL_VERSION.' (using SMTPs Mailer)'."\r\n";
+		$_header .= 'X-DCADMIN-Option: '.($conf->global->MAIN_MAIL_USE_MULTI_PART ? 'MAIN_MAIL_USE_MULTI_PART' : 'No MAIN_MAIL_USE_MULTI_PART')."\r\n";
 		$_header .= 'Mime-Version: 1.0'."\r\n";
 
 		// Add also $this->references and In-Reply-To

@@ -25,7 +25,7 @@
  *       \brief      Page to show user list of token
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf
@@ -158,7 +158,7 @@ if (empty($reshook)) {
 
 		$nbok = 0;
 
-		// $toselect could contain duplicate entries, cf https://github.com/Dolibarr/dolibarr/issues/26244
+		// $toselect could contain duplicate entries, cf https://github.com/DCADMIN/dolibarr/issues/26244
 		$unique_arr = array_unique($toselect);
 		foreach ($unique_arr as $toselectid) {
 			$sql = "DELETE FROM ".MAIN_DB_PREFIX."oauth_token";

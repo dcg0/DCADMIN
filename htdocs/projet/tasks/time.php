@@ -32,7 +32,7 @@
  *    \brief        Page to add new time spent on a task
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf

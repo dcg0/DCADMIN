@@ -32,7 +32,7 @@
  *		\brief      Tab for HR and bank
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/usergroups.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/bank.lib.php';
@@ -398,7 +398,7 @@ if ($action != 'edit' && $action != 'create') {		// If not bank account yet, $ac
 	print '<tr><td class="titlefieldmiddle">'.$langs->trans("Login").'</td>';
 	if (!empty($object->ldap_sid) && $object->status == 0) {
 		print '<td class="error">';
-		print $langs->trans("LoginAccountDisableInDolibarr");
+		print $langs->trans("LoginAccountDisableInDCADMIN");
 		print '</td>';
 	} else {
 		print '<td>';

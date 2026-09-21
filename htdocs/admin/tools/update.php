@@ -20,14 +20,14 @@
 
 /**
  *		\file 		htdocs/admin/tools/update.php
- *		\brief      Page to make a Dolibarr online upgrade
+ *		\brief      Page to make a DCADMIN online upgrade
  */
 
 if (! defined('CSRFCHECK_WITH_TOKEN')) {
 	define('CSRFCHECK_WITH_TOKEN', '1');		// Force use of CSRF protection with tokens even for GET
 }
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/admin.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/files.lib.php';
@@ -143,7 +143,7 @@ print '<b>'.$langs->trans("StepNb", 1).'</b>: ';
 $fullurl = '<a href="'.$urldolibarr.'" target="_blank" rel="noopener noreferrer">'.$urldolibarr.'</a>';
 print str_replace('{s}', $fullurl, $langs->trans("DownloadPackageFromWebSite", '{s}')).'<br>';
 print '<b>'.$langs->trans("StepNb", 2).'</b>: ';
-print str_replace('{s}', $dolibarrroot, $langs->trans("UnpackPackageInDolibarrRoot", '{s}')).'<br>';
+print str_replace('{s}', $dolibarrroot, $langs->trans("UnpackPackageInDCADMINRoot", '{s}')).'<br>';
 print '<b>'.$langs->trans("StepNb", 3).'</b>: ';
 print $langs->trans("RemoveLock", $dolibarrdataroot.'/install.lock').'<br>';
 print '<b>'.$langs->trans("StepNb", 4).'</b>: ';

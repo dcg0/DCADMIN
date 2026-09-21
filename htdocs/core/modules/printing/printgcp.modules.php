@@ -142,7 +142,7 @@ class printing_printgcp extends PrintingDriver
 			$expire = false;
 			// Is token expired or will token expire in the next 30 seconds
 			if ($token !== null) {
-				// time() is used internally in token @phan-suppress-next-line DolibarrForbiddenFunctionPlugin
+				// time() is used internally in token @phan-suppress-next-line DCADMINForbiddenFunctionPlugin
 				$expire = ($token->getEndOfLife() !== -9002 && $token->getEndOfLife() !== -9001 && time() > ($token->getEndOfLife() - 30));
 			}
 
@@ -424,7 +424,7 @@ class printing_printgcp extends PrintingDriver
 
 		$keyforprovider = 'googleprint';
 
-		// Dolibarr Token storage
+		// DCADMIN Token storage
 		$storage = new DoliStorage($this->db, $conf, $keyforprovider);
 		// Setup the credentials for the requests
 		$credentials = new Credentials(

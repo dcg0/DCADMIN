@@ -39,7 +39,7 @@ if (!defined('NOBROWSERNOTIF')) {
 	define('NOBROWSERNOTIF', '1');
 }
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php'; // Load $user and permissions
 /**
  * @var Conf $conf

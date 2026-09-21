@@ -23,7 +23,7 @@
  * \brief       Page to show a fiscal year
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf

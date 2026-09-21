@@ -31,7 +31,7 @@ require_once DOL_DOCUMENT_ROOT.'/core/triggers/dolibarrtriggers.class.php';
 /**
  *  Class of triggers for ldap module
  */
-class InterfaceLdapsynchro extends DolibarrTriggers
+class InterfaceLdapsynchro extends DCADMINTriggers
 {
 	/**
 	 * Constructor
@@ -44,13 +44,13 @@ class InterfaceLdapsynchro extends DolibarrTriggers
 
 		$this->name = preg_replace('/^Interface/i', '', get_class($this));
 		$this->family = "ldap";
-		$this->description = "Triggers of this module allows to synchronize Dolibarr toward a LDAP database.";
+		$this->description = "Triggers of this module allows to synchronize DCADMIN toward a LDAP database.";
 		$this->version = self::VERSIONS['prod'];
 		$this->picto = 'technic';
 	}
 
 	/**
-	 * Function called when a Dolibarr business event is done.
+	 * Function called when a DCADMIN business event is done.
 	 * All functions "runTrigger" are triggered if file is inside directory htdocs/core/triggers or htdocs/module/code/triggers (and declared)
 	 *
 	 * @param string		$action		Event action code

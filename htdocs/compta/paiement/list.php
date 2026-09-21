@@ -32,7 +32,7 @@
  *  \brief      Payment page for customer invoices
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf

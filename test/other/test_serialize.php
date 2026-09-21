@@ -39,7 +39,7 @@ foreach ($tmp as $key => $value) {
 
 // Show information
 print "\n";
-print "*** PHP Version : ".PHP_VERSION." - Dolibarr Version : ".DOL_VERSION."\n";
+print "*** PHP Version : ".PHP_VERSION." - DCADMIN Version : ".DOL_VERSION."\n";
 
 print "*** print_r() of object used to generate the key to hash for blockedlog on the object sample:\n";
 print print_r($object, true);

@@ -26,7 +26,7 @@
  *		\brief      Onglet vcard d'un contact
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/contact/class/contact.class.php';
 require_once DOL_DOCUMENT_ROOT.'/societe/class/societe.class.php';
@@ -63,7 +63,7 @@ if ($contact->socid) {
 
 // We create VCard
 $v = new vCard();
-$v->setProdId('Dolibarr '.DOL_VERSION);
+$v->setProdId('DCADMIN '.DOL_VERSION);
 
 $v->setUid('DOLIBARR-CONTACTID-'.$contact->id);
 $v->setName($contact->lastname, $contact->firstname, "", $contact->civility, "");

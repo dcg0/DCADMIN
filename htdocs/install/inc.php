@@ -256,11 +256,11 @@ if (!defined('DONOTLOADCONF') && file_exists($conffile) && filesize($conffile) >
 			if (!empty($dolibarr_main_document_root) && !empty($dolibarr_main_db_type)) {
 				$result = include_once $dolibarr_main_document_root."/core/db/".$dolibarr_main_db_type.'.class.php';
 				if (!$result) {
-					$includeconferror = 'ErrorBadValueForDolibarrMainDBType';
+					$includeconferror = 'ErrorBadValueForDCADMINMainDBType';
 				}
 			}
 		} else {
-			$includeconferror = 'ErrorBadValueForDolibarrMainDocumentRoot';
+			$includeconferror = 'ErrorBadValueForDCADMINMainDocumentRoot';
 		}
 	} else {
 		$includeconferror = 'ErrorBadFormatForConfFile';
@@ -424,7 +424,7 @@ if (GETPOST('lang', 'aZ09')) {
 /**
  * Load conf file (file must exists)
  *
- * @param	string		$dolibarr_main_document_root		Root directory of Dolibarr program files
+ * @param	string		$dolibarr_main_document_root		Root directory of DCADMIN program files
  * @param	?string		$realpathconf						Real path of conf class if class was already included
  * @return	int												Return integer <0 if KO, >0 if OK
  */
@@ -578,7 +578,7 @@ function pHeader($subtitle, $next, $action = 'set', $param = '', $forcejqueryurl
 	print '<head>'."\n";
 	print '<meta charset="'.$conf->file->character_set_client.'">'."\n";
 	print '<meta name="viewport" content="width=device-width, initial-scale=1.0">'."\n";
-	print '<meta name="generator" content="Dolibarr installer">'."\n";
+	print '<meta name="generator" content="DCADMIN installer">'."\n";
 	print '<link rel="stylesheet" type="text/css" href="default.css">'."\n";
 	print '<link rel="stylesheet" type="text/css" href="../public/theme/common/fontawesome-5/css/all.min.css?layout=classic">'."\n";
 
@@ -601,13 +601,13 @@ function pHeader($subtitle, $next, $action = 'set', $param = '', $forcejqueryurl
 		print '<script type="text/javascript" src="../public/includes/jquery/js/jquery-ui.min.js"></script>'."\n";
 	}
 
-	print '<title>'.$langs->trans("DolibarrSetup").'</title>'."\n";
+	print '<title>'.$langs->trans("DCADMINSetup").'</title>'."\n";
 	print '</head>'."\n";
 
 	print '<body>'."\n";
 
 	print '<div class="divlogoinstall" style="text-align:center">';
-	print '<img class="imglogoinstall" src="../theme/dolibarr_logo.svg" alt="Dolibarr logo" width="300px"><br>';
+	print '<img class="imglogoinstall" src="../theme/dolibarr_logo.svg" alt="DCADMIN logo" width="300px"><br>';
 	print '<span class="opacitymedium">'.DOL_VERSION.'</span>';
 	print '</div><br>';
 
@@ -615,7 +615,7 @@ function pHeader($subtitle, $next, $action = 'set', $param = '', $forcejqueryurl
 	if ($subtitle) {
 		print $subtitle;
 	} else {
-		print $langs->trans("DolibarrSetup");
+		print $langs->trans("DCADMINSetup");
 	}
 	print '</span>'."\n";
 
@@ -717,7 +717,7 @@ function dolibarr_install_syslog($message, $level = LOG_DEBUG)
 }
 
 /**
- * Automatically detect Dolibarr's main document root
+ * Automatically detect DCADMIN's main document root
  *
  * @return string
  */
@@ -740,7 +740,7 @@ function detect_dolibarr_main_document_root()
 }
 
 /**
- * Automatically detect Dolibarr's main data root
+ * Automatically detect DCADMIN's main data root
  *
  * @param string $dolibarr_main_document_root Current main document root
  * @return string
@@ -752,7 +752,7 @@ function detect_dolibarr_main_data_root($dolibarr_main_document_root)
 }
 
 /**
- * Automatically detect Dolibarr's main URL root
+ * Automatically detect DCADMIN's main URL root
  *
  * @return string
  */

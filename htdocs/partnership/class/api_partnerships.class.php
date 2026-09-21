@@ -34,9 +34,9 @@ require_once DOL_DOCUMENT_ROOT.'/core/lib/company.lib.php';
  * API class for partnership partnership
  *
  * @access protected
- * @class  DolibarrApiAccess {@requires user,external}
+ * @class  DCADMINApiAccess {@requires user,external}
  */
-class Partnerships extends DolibarrApi
+class Partnerships extends DCADMINApi
 {
 	/**
 	 * @var Partnership {@type Partnership}
@@ -70,7 +70,7 @@ class Partnerships extends DolibarrApi
 	 */
 	public function get($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('partnership', 'read')) {
+		if (!DCADMINApiAccess::$user->hasRight('partnership', 'read')) {
 			throw new RestException(403);
 		}
 
@@ -79,8 +79,8 @@ class Partnerships extends DolibarrApi
 			throw new RestException(404, 'Partnership not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('partnership', $this->partnership->id, 'partnership')) {
-			throw new RestException(403, 'Access to instance id='.$this->partnership->id.' of object not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('partnership', $this->partnership->id, 'partnership')) {
+			throw new RestException(403, 'Access to instance id='.$this->partnership->id.' of object not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		return $this->_cleanObjectDatas($this->partnership);
@@ -111,18 +111,18 @@ class Partnerships extends DolibarrApi
 		$obj_ret = array();
 		$tmpobject = new Partnership($this->db);
 
-		if (!DolibarrApiAccess::$user->hasRight('partnership', 'read')) {
+		if (!DCADMINApiAccess::$user->hasRight('partnership', 'read')) {
 			throw new RestException(403);
 		}
 
-		$socid = DolibarrApiAccess::$user->socid ?: 0;
+		$socid = DCADMINApiAccess::$user->socid ?: 0;
 
 		$restrictonsocid = 0; // Set to 1 if there is a field socid in table of object
 
 		// If the internal user must only see his customers, force searching by him
 		$search_sale = 0;
-		if ($restrictonsocid && !DolibarrApiAccess::$user->hasRight('societe', 'client', 'voir') && !$socid) {
-			$search_sale = DolibarrApiAccess::$user->id;
+		if ($restrictonsocid && !DCADMINApiAccess::$user->hasRight('societe', 'client', 'voir') && !$socid) {
+			$search_sale = DCADMINApiAccess::$user->id;
 		}
 
 		$sql = "SELECT t.rowid";
@@ -195,7 +195,7 @@ class Partnerships extends DolibarrApi
 	 */
 	public function post($request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('partnership', 'write')) {
+		if (!DCADMINApiAccess::$user->hasRight('partnership', 'write')) {
 			throw new RestException(403);
 		}
 
@@ -215,7 +215,7 @@ class Partnerships extends DolibarrApi
 		// Clean data
 		// $this->partnership->abc = sanitizeVal($this->partnership->abc, 'alphanohtml');
 
-		if ($this->partnership->create(DolibarrApiAccess::$user) < 0) {
+		if ($this->partnership->create(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, "Error creating Partnership", array_merge(array($this->partnership->error), $this->partnership->errors));
 		}
 		return $this->partnership->id;
@@ -236,7 +236,7 @@ class Partnerships extends DolibarrApi
 	 */
 	public function put($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('partnership', 'write')) {
+		if (!DCADMINApiAccess::$user->hasRight('partnership', 'write')) {
 			throw new RestException(403);
 		}
 
@@ -245,8 +245,8 @@ class Partnerships extends DolibarrApi
 			throw new RestException(404, 'Partnership not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('partnership', $this->partnership->id, 'partnership')) {
-			throw new RestException(403, 'Access to instance id='.$this->partnership->id.' of object not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('partnership', $this->partnership->id, 'partnership')) {
+			throw new RestException(403, 'Access to instance id='.$this->partnership->id.' of object not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		foreach ($request_data as $field => $value) {
@@ -271,7 +271,7 @@ class Partnerships extends DolibarrApi
 		// Clean data
 		// $this->partnership->abc = sanitizeVal($this->partnership->abc, 'alphanohtml');
 
-		if ($this->partnership->update(DolibarrApiAccess::$user, 0) > 0) {
+		if ($this->partnership->update(DCADMINApiAccess::$user, 0) > 0) {
 			return $this->get($id);
 		} else {
 			throw new RestException(500, $this->partnership->error);
@@ -292,7 +292,7 @@ class Partnerships extends DolibarrApi
 	 */
 	public function delete($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('partnership', 'delete')) {
+		if (!DCADMINApiAccess::$user->hasRight('partnership', 'delete')) {
 			throw new RestException(403);
 		}
 		$result = $this->partnership->fetch($id);
@@ -300,11 +300,11 @@ class Partnerships extends DolibarrApi
 			throw new RestException(404, 'Partnership not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('partnership', $this->partnership->id, 'partnership')) {
-			throw new RestException(403, 'Access to instance id='.$this->partnership->id.' of object not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('partnership', $this->partnership->id, 'partnership')) {
+			throw new RestException(403, 'Access to instance id='.$this->partnership->id.' of object not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		if (!$this->partnership->delete(DolibarrApiAccess::$user)) {
+		if (!$this->partnership->delete(DCADMINApiAccess::$user)) {
 			throw new RestException(500, 'Error when deleting Partnership : '.$this->partnership->error);
 		}
 

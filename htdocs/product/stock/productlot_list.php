@@ -25,7 +25,7 @@
  *              Initially built by build_class_from_table on 2016-05-17 12:22
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf

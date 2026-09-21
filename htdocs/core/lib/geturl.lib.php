@@ -25,7 +25,7 @@
 
 /**
  * Function to get a content from an URL (use proxy if proxy defined).
- * Support Dolibarr setup for timeout (MAIN_USE_*_TIMEOUT) and proxy (MAIN_PROXY_*)
+ * Support DCADMIN setup for timeout (MAIN_USE_*_TIMEOUT) and proxy (MAIN_PROXY_*)
  * Enhancement of CURL to add an anti SSRF protection:
  * - you can set MAIN_SECURITY_ANTI_SSRF_SERVER_IP to set static ip of server
  * - common local lookup ips like 127.*.*.* are automatically added
@@ -84,7 +84,7 @@ function getURLContent($url, $postorget = 'GET', $param = '', $followlocation = 
 	 print $nvpStr;
 	 exit;*/
 	curl_setopt($ch, CURLOPT_VERBOSE, true);
-	curl_setopt($ch, CURLOPT_USERAGENT, 'Dolibarr geturl function');	// set the Dolibarr user agent name
+	curl_setopt($ch, CURLOPT_USERAGENT, 'DCADMIN geturl function');	// set the DCADMIN user agent name
 
 	// We use @ here because this may return warning if safe mode is on or open_basedir is on (following location is forbidden when safe mode is on).
 	// We force value to false so we will manage redirection ourself later.

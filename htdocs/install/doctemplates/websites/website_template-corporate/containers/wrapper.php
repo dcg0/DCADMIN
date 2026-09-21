@@ -83,7 +83,7 @@ $original_file = str_replace("../", "/", $original_file);
 // Cache or not
 if (GETPOST("cache", 'aZ09') || image_format_supported($original_file) >= 0) {
 	// Important: Following code is to avoid page request by browser and PHP CPU at
-	// each Dolibarr page access.
+	// each DCADMIN page access.
 	header('Cache-Control: max-age=3600, public, must-revalidate');
 	header('Pragma: cache'); // This is to avoid having Pragma: no-cache
 }

@@ -186,7 +186,7 @@ function check_user_password_ldap($usertotest, $passwordtotest, $entitytotest)
 						print "DEBUG: badPasswordTime = ".dol_print_date($ldap->badpwdtime, 'day')."<br>\n";
 					}
 
-					// We search for the Dolibarr user based on its LDAP SID (only for Active Directory)
+					// We search for the DCADMIN user based on its LDAP SID (only for Active Directory)
 					$sid = null;
 					if (getDolGlobalString('LDAP_SERVER_TYPE') == "activedirectory") {
 						$sid = $ldap->getObjectSid($login);
@@ -199,7 +199,7 @@ function check_user_password_ldap($usertotest, $passwordtotest, $entitytotest)
 					$resultFetchUser = $usertmp->fetch(0, $login, (string) $sid, 1, ($entitytotest > 0 ? $entitytotest : -1));
 					if ($resultFetchUser > 0) {
 						dol_syslog("functions_ldap::check_user_password_ldap Sync user found user id=".$usertmp->id);
-						// Verify if the login changed and update the Dolibarr attributes
+						// Verify if the login changed and update the DCADMIN attributes
 
 						if ($usertmp->login != $ldap->login && $ldap->login) {
 							$usertmp->login = $ldap->login;

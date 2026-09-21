@@ -89,7 +89,7 @@ class mymodulewidget1 extends ModeleBoxes
 	}
 
 	/**
-	 * Load data into info_box_contents array to show array later. Called by Dolibarr before displaying the box.
+	 * Load data into info_box_contents array to show array later. Called by DCADMIN before displaying the box.
 	 *
 	 * @param	int<0,max>	$max	Maximum number of records to load
 	 * @return	void

@@ -26,7 +26,7 @@
  *    \brief      About page of module Zapier.
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 
 // Libraries
@@ -77,7 +77,7 @@ $backtopage = GETPOST('backtopage', 'alpha');
 
 $form = new Form($db);
 
-$page_name = "ZapierForDolibarrSetup";
+$page_name = "ZapierForDCADMINSetup";
 $help_url = 'EN:Module_Zapier';
 llxHeader('', $langs->trans($page_name), $help_url, '', 0, 0, '', '', '', 'mod-zapier page-admin_about');
 

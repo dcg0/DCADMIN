@@ -51,7 +51,7 @@ class ImportXlsx extends ModeleImports
 	public $id;
 
 	/**
-	 * Dolibarr version of driver
+	 * DCADMIN version of driver
 	 * @var string Version, possible values are: 'development', 'experimental', 'dolibarr', 'dolibarr_deprecated' or a version string like 'x.y.z'''|'development'|'dolibarr'|'experimental'
 	 */
 	public $version = 'dolibarr';
@@ -180,7 +180,7 @@ class ImportXlsx extends ModeleImports
 		// phpcs:enable
 		global $user, $conf, $langs, $file;
 		// create a temporary object, the final output will be generated in footer
-		$this->workbook->getProperties()->setCreator($user->getFullName($outputlangs) . ' - Dolibarr ' . DOL_VERSION);
+		$this->workbook->getProperties()->setCreator($user->getFullName($outputlangs) . ' - DCADMIN ' . DOL_VERSION);
 		$this->workbook->getProperties()->setTitle($outputlangs->trans("Import") . ' - ' . $file);
 		$this->workbook->getProperties()->setSubject($outputlangs->trans("Import") . ' - ' . $file);
 		$this->workbook->getProperties()->setDescription($outputlangs->trans("Import") . ' - ' . $file);

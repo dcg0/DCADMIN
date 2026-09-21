@@ -64,7 +64,7 @@ function llxFooterVierge()  // @phan-suppress-current-line PhanRedefineFunction
 	print '</body></html>';
 }
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/don/class/don.class.php';
 /**

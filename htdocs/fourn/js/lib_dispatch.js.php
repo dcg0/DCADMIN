@@ -57,7 +57,7 @@ $langs->loadLangs(array("productbatch"));
 
 // Define javascript type
 top_httphead('text/javascript; charset=UTF-8');
-// Important: Following code is to avoid page request by browser and PHP CPU at each Dolibarr page access.
+// Important: Following code is to avoid page request by browser and PHP CPU at each DCADMIN page access.
 header('Cache-Control: max-age=10800, public, must-revalidate');
 
 ?>

@@ -35,7 +35,7 @@ if (! defined("NOLOGIN"))                  define("NOLOGIN", '1');					// If thi
 //if (! defined('NOBROWSERNOTIF'))     		 define('NOBROWSERNOTIF', '1');				// Disable browser notification
 
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 
 

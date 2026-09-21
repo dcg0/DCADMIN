@@ -34,7 +34,7 @@ $error = 0;
 
 $confirm = isset($argv[1]) ? $argv[1] : '';
 
-// Include Dolibarr environment
+// Include DCADMIN environment
 $res = 0;
 $reg = array();
 if (!$res && file_exists($path."../../master.inc.php")) {

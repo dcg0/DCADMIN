@@ -23,7 +23,7 @@
  *		\brief      Page  setup proxy to use for external web access
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf

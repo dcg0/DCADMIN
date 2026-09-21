@@ -23,7 +23,7 @@
  *	\brief      Page d'index du module margin
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 
 /**

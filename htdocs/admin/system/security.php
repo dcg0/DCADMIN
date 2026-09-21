@@ -22,7 +22,7 @@
  *  \brief      Page to show Security information
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf
@@ -340,7 +340,7 @@ $installmoduleslock = DOL_DATA_ROOT.'/installmodules.lock';
 
 // Is install (upgrade) locked
 $test = file_exists($installlock);
-print '<strong>'.$langs->trans("DolibarrSetup").'</strong>: ';
+print '<strong>'.$langs->trans("DCADMINSetup").'</strong>: ';
 if ($test) {
 	if (file_exists($upgradeunlock)) {
 		print img_picto('', 'tick').' '.$langs->trans("InstallLockedBy", $installlock);
@@ -357,7 +357,7 @@ print '<br>';
 // Is upgrade unlocked
 if (file_exists($installlock)) {	// If install not locked, no need to show this.
 	if (file_exists($upgradeunlock)) {
-		print '<strong>'.$langs->trans("DolibarrUpgrade").'</strong>: ';
+		print '<strong>'.$langs->trans("DCADMINUpgrade").'</strong>: ';
 		print img_warning().' '.$langs->trans("WarningUpgradeHasBeenUnlocked", $upgradeunlock);
 		print '<br>';
 		print '<br>';
@@ -366,7 +366,7 @@ if (file_exists($installlock)) {	// If install not locked, no need to show this.
 
 // Is addon install locked ?
 $test = file_exists($installmoduleslock);
-print '<strong>'.$langs->trans("DolibarrAddonInstall").'</strong>: ';
+print '<strong>'.$langs->trans("DCADMINAddonInstall").'</strong>: ';
 if ($test) {
 	print img_picto('', 'tick').' '.$langs->trans("InstallAndUpgradeLockedBy", $installmoduleslock);
 } else {
@@ -1109,12 +1109,12 @@ print $langs->trans("RecommendMitigationOnURL").'<br>';
 print '</span>';
 
 print '<br>';
-$urlexamplebase = 'https://github.com/Dolibarr/dolibarr/blob/develop/dev/setup/fail2ban/filter.d/';
+$urlexamplebase = 'https://github.com/DCADMIN/dolibarr/blob/develop/dev/setup/fail2ban/filter.d/';
 print '<span class="fas fa-shield-alt"></span> Login or API authentication (see <a target="_blank" rel="noopener" href="'.$urlexamplebase.'web-dolibarr-rulesbruteforce.conf">fail2ban example on GitHub</a>)<br>';
 print '<span class="fas fa-shield-alt"></span> '.DOL_URL_ROOT.'/passwordforgotten.php (see <a target="_blank" rel="noopener" href="'.$urlexamplebase.'web-dolibarr-rulespassforgotten.conf">fail2ban example on GitHub</a>)<br>';
 print '<span class="fas fa-shield-alt"></span> '.DOL_URL_ROOT.'/public/* (see <a target="_blank" rel="noopener" href="'.$urlexamplebase.'web-dolibarr-limitpublic.conf">fail2ban example on GitHub</a>)<br>';
 print '<br>';
-$urlexamplebase = 'https://github.com/Dolibarr/dolibarr/blob/develop/dev/setup/apache/';
+$urlexamplebase = 'https://github.com/DCADMIN/dolibarr/blob/develop/dev/setup/apache/';
 print '<span class="fas fa-shield-alt"></span> You can also protect the application using a HTTP Basic authentication layer (see <a target="_blank" rel="noopener" href="'.$urlexamplebase.'virtualhost">apache2 virtualhost example on GitHub</a>)<br>';
 
 print '</div>';

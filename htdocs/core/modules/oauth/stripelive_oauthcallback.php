@@ -24,7 +24,7 @@
  *      \brief      Page to get oauth callback
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/includes/OAuth/bootstrap.php';
 /**
@@ -74,7 +74,7 @@ $httpClient = new \OAuth\Common\Http\Client\CurlClient();
 //$httpClient->setCurlParameters($params);
 $serviceFactory->setHttpClient($httpClient);
 
-// Dolibarr storage
+// DCADMIN storage
 $storage = new DoliStorage($db, $conf, $keyforprovider);
 
 // Setup the credentials for the requests

@@ -31,9 +31,9 @@ require_once DOL_DOCUMENT_ROOT.'/core/lib/company.lib.php';
  * @since	5.0.0	Initial implementation
  *
  * @access protected
- * @class  DolibarrApiAccess {@requires user,external}
+ * @class  DCADMINApiAccess {@requires user,external}
  */
-class AgendaEvents extends DolibarrApi
+class AgendaEvents extends DCADMINApi
 {
 	/**
 	 * @var string[]       Mandatory fields, checked when create and update object
@@ -73,7 +73,7 @@ class AgendaEvents extends DolibarrApi
 	 */
 	public function get($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('agenda', 'myactions', 'read')) {
+		if (!DCADMINApiAccess::$user->hasRight('agenda', 'myactions', 'read')) {
 			throw new RestException(403, "Insufficient rights to read an event");
 		}
 		if ($id === 0) {
@@ -89,12 +89,12 @@ class AgendaEvents extends DolibarrApi
 			throw new RestException(404, 'Agenda Events not found');
 		}
 
-		if (!DolibarrApiAccess::$user->hasRight('agenda', 'allactions', 'read') && $this->actioncomm->userownerid != DolibarrApiAccess::$user->id) {
-			throw new RestException(403, 'Insufficient rights to read event of this owner id. Your id is '.DolibarrApiAccess::$user->id);
+		if (!DCADMINApiAccess::$user->hasRight('agenda', 'allactions', 'read') && $this->actioncomm->userownerid != DCADMINApiAccess::$user->id) {
+			throw new RestException(403, 'Insufficient rights to read event of this owner id. Your id is '.DCADMINApiAccess::$user->id);
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('agenda', $this->actioncomm->id, 'actioncomm', '', 'fk_soc', 'id')) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('agenda', $this->actioncomm->id, 'actioncomm', '', 'fk_soc', 'id')) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 		return $this->_cleanObjectDatas($this->actioncomm);
 	}
@@ -127,17 +127,17 @@ class AgendaEvents extends DolibarrApi
 
 		$obj_ret = array();
 
-		if (!DolibarrApiAccess::$user->hasRight('agenda', 'myactions', 'read')) {
+		if (!DCADMINApiAccess::$user->hasRight('agenda', 'myactions', 'read')) {
 			throw new RestException(403, "Insufficient rights to read events");
 		}
 
 		// case of external user
-		$socid = DolibarrApiAccess::$user->socid ?: 0;
+		$socid = DCADMINApiAccess::$user->socid ?: 0;
 
 		// If the internal user must only see his customers, force searching by him
 		$search_sale = 0;
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'client', 'voir') && !$socid) {
-			$search_sale = DolibarrApiAccess::$user->id;
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'client', 'voir') && !$socid) {
+			$search_sale = DCADMINApiAccess::$user->id;
 		}
 		if (!isModEnabled('societe')) {
 			$search_sale = 0; // If module thirdparty not enabled, sale representative is something that does not exists
@@ -235,11 +235,11 @@ class AgendaEvents extends DolibarrApi
 	 */
 	public function post($request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('agenda', 'myactions', 'create')) {
+		if (!DCADMINApiAccess::$user->hasRight('agenda', 'myactions', 'create')) {
 			throw new RestException(403, "Insufficient rights to create your Agenda Event");
 		}
-		if (!DolibarrApiAccess::$user->hasRight('agenda', 'allactions', 'create') && DolibarrApiAccess::$user->id != $request_data['userownerid']) {
-			throw new RestException(403, "Insufficient rights to create an Agenda Event for owner id ".$request_data['userownerid'].' Your id is '.DolibarrApiAccess::$user->id);
+		if (!DCADMINApiAccess::$user->hasRight('agenda', 'allactions', 'create') && DCADMINApiAccess::$user->id != $request_data['userownerid']) {
+			throw new RestException(403, "Insufficient rights to create an Agenda Event for owner id ".$request_data['userownerid'].' Your id is '.DCADMINApiAccess::$user->id);
 		}
 
 		// Check mandatory fields
@@ -262,7 +262,7 @@ class AgendaEvents extends DolibarrApi
 		  $this->expensereport->lines = $lines;
 		}*/
 
-		if ($this->actioncomm->create(DolibarrApiAccess::$user) < 0) {
+		if ($this->actioncomm->create(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, "Error creating event", array_merge(array($this->actioncomm->error), $this->actioncomm->errors));
 		}
 
@@ -285,11 +285,11 @@ class AgendaEvents extends DolibarrApi
 	 */
 	public function put($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('agenda', 'myactions', 'create')) {
+		if (!DCADMINApiAccess::$user->hasRight('agenda', 'myactions', 'create')) {
 			throw new RestException(403, "Insufficient rights to create your Agenda Event");
 		}
-		if (!DolibarrApiAccess::$user->hasRight('agenda', 'allactions', 'create') && DolibarrApiAccess::$user->id != $request_data['userownerid']) {
-			throw new RestException(403, "Insufficient rights to create an Agenda Event for owner id ".$request_data['userownerid'].' Your id is '.DolibarrApiAccess::$user->id);
+		if (!DCADMINApiAccess::$user->hasRight('agenda', 'allactions', 'create') && DCADMINApiAccess::$user->id != $request_data['userownerid']) {
+			throw new RestException(403, "Insufficient rights to create an Agenda Event for owner id ".$request_data['userownerid'].' Your id is '.DCADMINApiAccess::$user->id);
 		}
 
 		$result = $this->actioncomm->fetch($id);
@@ -302,8 +302,8 @@ class AgendaEvents extends DolibarrApi
 			throw new RestException(404, 'actioncomm not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('actioncomm', $this->actioncomm->id, 'actioncomm', '', 'fk_soc', 'id')) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('actioncomm', $this->actioncomm->id, 'actioncomm', '', 'fk_soc', 'id')) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 		foreach ($request_data as $field => $value) {
 			if ($field == 'id') {
@@ -324,7 +324,7 @@ class AgendaEvents extends DolibarrApi
 			$this->actioncomm->$field = $this->_checkValForAPI($field, $value, $this->actioncomm);
 		}
 
-		if ($this->actioncomm->update(DolibarrApiAccess::$user, 1) > 0) {
+		if ($this->actioncomm->update(DCADMINApiAccess::$user, 1) > 0) {
 			return $this->get($id);
 		}
 
@@ -346,7 +346,7 @@ class AgendaEvents extends DolibarrApi
 	 */
 	public function delete($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('agenda', 'myactions', 'delete')) {
+		if (!DCADMINApiAccess::$user->hasRight('agenda', 'myactions', 'delete')) {
 			throw new RestException(403, "Insufficient rights to delete your Agenda Event");
 		}
 
@@ -357,19 +357,19 @@ class AgendaEvents extends DolibarrApi
 			$this->actioncomm->oldcopy = clone $this->actioncomm;  // @phan-suppress-current-line PhanTypeMismatchProperty
 		}
 
-		if (!DolibarrApiAccess::$user->hasRight('agenda', 'allactions', 'delete') && DolibarrApiAccess::$user->id != $this->actioncomm->userownerid) {
-			throw new RestException(403, "Insufficient rights to delete an Agenda Event of owner id ".$this->actioncomm->userownerid.' Your id is '.DolibarrApiAccess::$user->id);
+		if (!DCADMINApiAccess::$user->hasRight('agenda', 'allactions', 'delete') && DCADMINApiAccess::$user->id != $this->actioncomm->userownerid) {
+			throw new RestException(403, "Insufficient rights to delete an Agenda Event of owner id ".$this->actioncomm->userownerid.' Your id is '.DCADMINApiAccess::$user->id);
 		}
 
 		if (!$result) {
 			throw new RestException(404, 'Agenda Event not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('actioncomm', $this->actioncomm->id, 'actioncomm', '', 'fk_soc', 'id')) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('actioncomm', $this->actioncomm->id, 'actioncomm', '', 'fk_soc', 'id')) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		if (!$this->actioncomm->delete(DolibarrApiAccess::$user)) {
+		if (!$this->actioncomm->delete(DCADMINApiAccess::$user)) {
 			throw new RestException(500, 'Error when delete Agenda Event : '.$this->actioncomm->error);
 		}
 

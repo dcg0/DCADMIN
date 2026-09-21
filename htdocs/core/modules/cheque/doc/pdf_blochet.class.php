@@ -180,7 +180,7 @@ class BordereauChequeBlochet extends ModeleChequeReceipts
 
 		$pdf->SetTitle($outputlangs->transnoentities("CheckReceipt")." ".$number);
 		$pdf->SetSubject($outputlangs->transnoentities("CheckReceipt"));
-		$pdf->SetCreator("Dolibarr ".DOL_VERSION);
+		$pdf->SetCreator("DCADMIN ".DOL_VERSION);
 		$pdf->SetAuthor($outputlangs->convToOutputCharset($user->getAnonymisableFullName($outputlangs)));
 		$pdf->SetKeyWords($outputlangs->transnoentities("CheckReceipt")." ".$number);
 		if (getDolGlobalString('MAIN_DISABLE_PDF_COMPRESSION')) {

@@ -24,7 +24,7 @@
  *		\brief      Page to edit relative discount of a customer
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf

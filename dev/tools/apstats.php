@@ -40,7 +40,7 @@ error_reporting(E_ALL & ~E_DEPRECATED);
 define('PRODUCT', "apstats");
 define('VERSION', "1.0");
 
-// Include Dolibarr environment
+// Include DCADMIN environment
 if (!is_readable("{$path}../../htdocs/config/config.php")) {
 	define("DOL_DOCUMENT_ROOT", __DIR__."/../../htdocs");
 } else {
@@ -119,7 +119,7 @@ if (!is_readable($PHAN_CONFIG)) {
 $timestart = time();
 
 // Retrieve the .git information
-$urlgit = 'https://github.com/Dolibarr/dolibarr/blob/develop/';
+$urlgit = 'https://github.com/DCADMIN/dolibarr/blob/develop/';
 
 // Count lines of code of application
 $output_arrproj = array();
@@ -378,8 +378,8 @@ $html .= '<meta charset="utf-8">'."\n";
 $html .= '<meta http-equiv="refresh" content="300">'."\n";
 $html .= '<meta name="viewport" content="width=device-width, initial-scale=1.0">'."\n";
 $html .= '<meta name="keywords" content="erp, crm, dolibarr, statistics, project, security alerts">'."\n";
-$html .= '<meta name="title" content="Dolibarr project statistics">'."\n";
-$html .= '<meta name="description" content="Statistics about the Dolibarr ERP CRM Open Source project (lines of code, contributions, security alerts, technical debt...">'."\n";
+$html .= '<meta name="title" content="DCADMIN project statistics">'."\n";
+$html .= '<meta name="description" content="Statistics about the DCADMIN ERP CRM Open Source project (lines of code, contributions, security alerts, technical debt...">'."\n";
 $html .= '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" integrity="sha512-q3eWabyZPc1XTCmF+8/LuE1ozpg5xxn7iO89yfSOd5/oKvyqLngoNGsx8jq92Y8eXJ/IRxQbEC+FGSYxtk2oiw==" crossorigin="anonymous" referrerpolicy="no-referrer" />'."\n";
 $html .= '<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>'."\n";
 $html .= '<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">';
@@ -552,7 +552,7 @@ $html .= '<body>'."\n";
 $html .= '<header>'."\n";
 $html .= '<h1>Advanced Project Status</h1>'."\n";
 $currentDate = date("Y-m-d H:i:s"); // Format: Year-Month-Day Hour:Minute:Second
-$html .= '<span class="opacitymedium">Generated on '.$currentDate.' in '.($timeend - $timestart).' seconds by <a target="_blank" href="https://github.com/Dolibarr/dolibarr/blob/develop/dev/tools/apstats.php">apstats</a></span>'."\n";
+$html .= '<span class="opacitymedium">Generated on '.$currentDate.' in '.($timeend - $timestart).' seconds by <a target="_blank" href="https://github.com/DCADMIN/dolibarr/blob/develop/dev/tools/apstats.php">apstats</a></span>'."\n";
 $html .= '</header>'."\n";
 
 
@@ -643,7 +643,7 @@ $html .= <<<END
 <a href="https://next.ossinsight.io/widgets/official/analyze-repo-loc-per-month?repo_id=1957456" target="_blank" style="display: block" align="center">
 <picture>
 <source media="(prefers-color-scheme: dark)" srcset="https://next.ossinsight.io/widgets/official/analyze-repo-loc-per-month/thumbnail.png?repo_id=1957456&image_size=auto&color_scheme=dark" width="721" height="auto">
-<img alt="Lines of Code Changes of Dolibarr/dolibarr" src="https://next.ossinsight.io/widgets/official/analyze-repo-loc-per-month/thumbnail.png?repo_id=1957456&image_size=auto&color_scheme=light" width="721" height="auto">
+<img alt="Lines of Code Changes of DCADMIN/dolibarr" src="https://next.ossinsight.io/widgets/official/analyze-repo-loc-per-month/thumbnail.png?repo_id=1957456&image_size=auto&color_scheme=light" width="721" height="auto">
 </picture>
 </a>
 
@@ -668,7 +668,7 @@ $html .= <<<END
 <a href="https://next.ossinsight.io/widgets/official/analyze-repo-pushes-and-commits-per-month?repo_id=1957456" target="_blank" style="display: block" align="center">
 <picture>
 <source media="(prefers-color-scheme: dark)" srcset="https://next.ossinsight.io/widgets/official/analyze-repo-pushes-and-commits-per-month/thumbnail.png?repo_id=1957456&image_size=auto&color_scheme=dark" width="721" height="auto">
-<img alt="Pushes and Commits of Dolibarr/dolibarr" src="https://next.ossinsight.io/widgets/official/analyze-repo-pushes-and-commits-per-month/thumbnail.png?repo_id=1957456&image_size=auto&color_scheme=light" width="721" height="auto">
+<img alt="Pushes and Commits of DCADMIN/dolibarr" src="https://next.ossinsight.io/widgets/official/analyze-repo-pushes-and-commits-per-month/thumbnail.png?repo_id=1957456&image_size=auto&color_scheme=light" width="721" height="auto">
 </picture>
 </a>
 
@@ -680,7 +680,7 @@ $html .= <<<END
 <a href="https://next.ossinsight.io/widgets/official/analyze-repo-pull-requests-size-per-month?repo_id=1957456" target="_blank" style="display: block" align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://next.ossinsight.io/widgets/official/analyze-repo-pull-requests-size-per-month/thumbnail.png?repo_id=1957456&image_size=auto&color_scheme=dark" width="721" height="auto">
-    <img alt="Pull Request Size of Dolibarr/dolibarr" src="https://next.ossinsight.io/widgets/official/analyze-repo-pull-requests-size-per-month/thumbnail.png?repo_id=1957456&image_size=auto&color_scheme=light" width="721" height="auto">
+    <img alt="Pull Request Size of DCADMIN/dolibarr" src="https://next.ossinsight.io/widgets/official/analyze-repo-pull-requests-size-per-month/thumbnail.png?repo_id=1957456&image_size=auto&color_scheme=light" width="721" height="auto">
   </picture>
 </a>
 
@@ -704,7 +704,7 @@ $html .= '<div class="boxallwidth">'."\n";
 $html .= <<<END
 <center><br>Thumbs of most active contributors<br>
 <br>
-<a href="https://github.com/Dolibarr/dolibarr/graphs/contributors"><img src="https://opencollective.com/dolibarr/contributors.svg?width=890&button=false" alt="Dolibarr" data-canonical-src="https://opencollective.com/dolibarr/contributors.svg?width=890&amp;button=false" style="max-width: 100%;"></a>
+<a href="https://github.com/DCADMIN/dolibarr/graphs/contributors"><img src="https://opencollective.com/dolibarr/contributors.svg?width=890&button=false" alt="DCADMIN" data-canonical-src="https://opencollective.com/dolibarr/contributors.svg?width=890&amp;button=false" style="max-width: 100%;"></a>
 </center>
 <br>
 END;
@@ -716,7 +716,7 @@ $html .= <<<END
 <a href="https://next.ossinsight.io/widgets/official/compose-contributors?repo_id=1957456&limit=200" target="_blank" style="display: block" align="center">
 <picture>
 <source media="(prefers-color-scheme: dark)" srcset="https://next.ossinsight.io/widgets/official/compose-contributors/thumbnail.png?repo_id=1957456&limit=200&image_size=auto&color_scheme=dark" width="655" height="auto">
-<img alt="Contributors of Dolibarr/dolibarr" src="https://next.ossinsight.io/widgets/official/compose-contributors/thumbnail.png?repo_id=1957456&limit=200&image_size=auto&color_scheme=light" width="655" height="auto">
+<img alt="Contributors of DCADMIN/dolibarr" src="https://next.ossinsight.io/widgets/official/compose-contributors/thumbnail.png?repo_id=1957456&limit=200&image_size=auto&color_scheme=light" width="655" height="auto">
 </picture>
 </a>
 
@@ -731,7 +731,7 @@ $html .= <<<END
 <a href="https://next.ossinsight.io/widgets/official/analyze-repo-stars-history?repo_id=1957456" target="_blank" style="display: block" align="center">
 <picture>
 <source media="(prefers-color-scheme: dark)" srcset="https://next.ossinsight.io/widgets/official/analyze-repo-stars-history/thumbnail.png?repo_id=1957456&image_size=auto&color_scheme=dark" width="721" height="auto">
-<img alt="Star History of Dolibarr/dolibarr" src="https://next.ossinsight.io/widgets/official/analyze-repo-stars-history/thumbnail.png?repo_id=1957456&image_size=auto&color_scheme=light" width="721" height="auto">
+<img alt="Star History of DCADMIN/dolibarr" src="https://next.ossinsight.io/widgets/official/analyze-repo-stars-history/thumbnail.png?repo_id=1957456&image_size=auto&color_scheme=light" width="721" height="auto">
 </picture>
 </a>
 
@@ -846,9 +846,9 @@ $html .= '<tr class="trgroup"><td>Commit ID</td><td>Date</td><td style="white-sp
 foreach ($arrayofalerts as $key => $alert) {
 	$cve = '';
 	$vdp = empty($alert['issueidvdp']) ? '' : $alert['issueidvdp'];
-	$arrayofalerts[$key]['url_commit'] = 'https://github.com/Dolibarr/dolibarr/commit/'.$alert['commitid'];
+	$arrayofalerts[$key]['url_commit'] = 'https://github.com/DCADMIN/dolibarr/commit/'.$alert['commitid'];
 	if (!empty($alert['issueid'])) {
-		$arrayofalerts[$key]['url_issue'] = 'https://github.com/Dolibarr/dolibarr/issues/'.$alert['issueid'];
+		$arrayofalerts[$key]['url_issue'] = 'https://github.com/DCADMIN/dolibarr/issues/'.$alert['issueid'];
 	}
 	if (!empty($alert['issueidcve'])) {
 		$cve = preg_replace('/\s+/', '-', trim($alert['issueidcve']));
@@ -869,8 +869,8 @@ foreach ($arrayofalerts as $key => $alert) {
 	if (!empty($alert['commitidbis'])) {
 		$html .= ' <div class="more inline"><span class="seeothercommit badge">+</span><div class="morediv hidden">';
 		foreach ($alert['commitidbis'] as $tmpcommitidbis) {
-			$html .= '<a target="_blank" href="https://github.com/Dolibarr/dolibarr/commit/'.$tmpcommitidbis.'">'.dol_trunc($tmpcommitidbis, 8).'</a><br>';
-			$arrayofalerts[$key]['description'] .= "\n<br>".'Commit ID: <a href="https://github.com/Dolibarr/dolibarr/commit/'.$tmpcommitidbis.'">'.dol_trunc($tmpcommitidbis, 8).'</a>';
+			$html .= '<a target="_blank" href="https://github.com/DCADMIN/dolibarr/commit/'.$tmpcommitidbis.'">'.dol_trunc($tmpcommitidbis, 8).'</a><br>';
+			$arrayofalerts[$key]['description'] .= "\n<br>".'Commit ID: <a href="https://github.com/DCADMIN/dolibarr/commit/'.$tmpcommitidbis.'">'.dol_trunc($tmpcommitidbis, 8).'</a>';
 		}
 		$html .= '</div></div>';
 	}
@@ -985,7 +985,7 @@ if ($fh) {
 
 	// Loop on array of alerts on stable branches
 	foreach ($arrayofalerts as $alert) {
-		$alert['url_commit'] = 'https://github.com/Dolibarr/dolibarr/commit/'.$alert['commitid'];
+		$alert['url_commit'] = 'https://github.com/DCADMIN/dolibarr/commit/'.$alert['commitid'];
 
 		fwrite($fh, '<item>'."\n");
 		fwrite($fh, '<title>' . htmlspecialchars($alert['title']) . '</title>'."\n");

@@ -25,7 +25,7 @@
  *  \ingroup    eventorganization
  *  \brief      Description and activation file for the EventOrganization
  */
-include_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
+include_once DOL_DOCUMENT_ROOT.'/core/modules/DCADMINModules.class.php';
 require_once DOL_DOCUMENT_ROOT.'/categories/class/categorie.class.php';
 
 /**
@@ -33,7 +33,7 @@ require_once DOL_DOCUMENT_ROOT.'/categories/class/categorie.class.php';
  *  This module is base on this specification :
  *  https://wiki.dolibarr.org/index.php/Draft:Module_Event_Organization
  */
-class modEventOrganization extends DolibarrModules
+class modEventOrganization extends DCADMINModules
 {
 	/**
 	 * Constructor. Define names, constants, directories, boxes, permissions
@@ -127,7 +127,7 @@ class modEventOrganization extends DolibarrModules
 
 		// Prerequisites
 		$this->phpmin = array(7, 0); // Minimum version of PHP required by module
-		$this->need_dolibarr_version = array(13, -3); // Minimum version of Dolibarr required by module
+		$this->need_dolibarr_version = array(13, -3); // Minimum version of DCADMIN required by module
 
 		// Messages at activation
 		$this->warnings_activation = array();
@@ -454,7 +454,7 @@ class modEventOrganization extends DolibarrModules
 
 	/**
 	 *  Function called when module is enabled.
-	 *  The init function add constants, boxes, permissions and menus (defined in constructor) into Dolibarr database.
+	 *  The init function add constants, boxes, permissions and menus (defined in constructor) into DCADMIN database.
 	 *  It also creates data directories
 	 *
 	 *  @param      string  $options    Options when enabling module ('', 'noboxes')
@@ -541,7 +541,7 @@ class modEventOrganization extends DolibarrModules
 
 	/**
 	 *  Function called when module is disabled.
-	 *  Remove from database constants, boxes and permissions from Dolibarr database.
+	 *  Remove from database constants, boxes and permissions from DCADMIN database.
 	 *  Data directories are not deleted
 	 *
 	 *  @param      string	$options    Options when enabling module ('', 'noboxes')

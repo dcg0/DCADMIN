@@ -25,7 +25,7 @@
  * \brief 	Main Chat Interface for MCP Server AI Assistant
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/ai/lib/ai.lib.php';
 /**

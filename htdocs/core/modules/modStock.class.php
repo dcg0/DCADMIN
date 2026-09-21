@@ -29,13 +29,13 @@
  *	\brief      Description and activation file for the module Stock
  */
 
-include_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
+include_once DOL_DOCUMENT_ROOT.'/core/modules/DCADMINModules.class.php';
 
 
 /**
  *	Class to describe and enable module Stock
  */
-class modStock extends DolibarrModules
+class modStock extends DCADMINModules
 {
 	/**
 	 *   Constructor. Define names, constants, directories, boxes, permissions
@@ -547,7 +547,7 @@ class modStock extends DolibarrModules
 
 	/**
 	 *  Function called when module is enabled.
-	 *  The init function add constants, boxes, permissions and menus (defined in constructor) into Dolibarr database.
+	 *  The init function add constants, boxes, permissions and menus (defined in constructor) into DCADMIN database.
 	 *  It also creates data directories
 	 *
 	 *  @param      string	$options    Options when enabling module ('', 'noboxes')

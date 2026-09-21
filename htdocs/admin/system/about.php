@@ -22,10 +22,10 @@
 
 /**
  *       \file       htdocs/admin/system/about.php
- *       \brief      About Dolibarr File page
+ *       \brief      About DCADMIN File page
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/admin.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/files.lib.php';
@@ -72,7 +72,7 @@ print '<div class="fichecenter"><div class="fichehalfleft">';
 
 print '<div class="divsection wordwrap">';
 print '<div class="floatright paddingright">'.img_picto_common('', 'dolibarr_box.png', 'height="100"').'</div>';
-print $langs->trans("DolibarrLicense").' : ';
+print $langs->trans("DCADMINLicense").' : ';
 print '<ul><li>';
 print '<a href="https://www.gnu.org/copyleft/gpl.html" target="_blank">GNU-GPL v3+</a></li>';
 print '</li></ul>';
@@ -83,8 +83,8 @@ print'</div>';
 print '<div class="divsection wordwrap">';
 print $langs->trans("Developpers").':';
 print '<ul>';
-print '<li>'.$langs->trans("SourcesRepository").': <a href="https://www.github.com/Dolibarr/dolibarr" target="_blank" rel="noopener noreferrer external">https://www.github.com/Dolibarr/dolibarr</a></li>';
-print '<li>'.$langs->trans("SeeWikiForAllTeam").': <a href="https://wiki.dolibarr.org/index.php/Dolibarr_Project" target="_blank" rel="noopener noreferrer external">https://wiki.dolibarr.org/index.php/Dolibarr_Project</a></li>';
+print '<li>'.$langs->trans("SourcesRepository").': <a href="https://www.github.com/DCADMIN/dolibarr" target="_blank" rel="noopener noreferrer external">https://www.github.com/DCADMIN/dolibarr</a></li>';
+print '<li>'.$langs->trans("SeeWikiForAllTeam").': <a href="https://wiki.dolibarr.org/index.php/DCADMIN_Project" target="_blank" rel="noopener noreferrer external">https://wiki.dolibarr.org/index.php/DCADMIN_Project</a></li>';
 print '</ul>';
 print '</div>';
 
@@ -186,7 +186,7 @@ print '<ul>';
 
 $url = 'https://saas.dolibarr.org'; $title = $langs->trans("OfficialWebHostingService");
 if (preg_match('/^fr_/i', $langs->getDefaultLang())) {
-	$url = 'https://wiki.dolibarr.org/index.php/Solutions_Cloud_pour_Dolibarr_ERP_CRM';
+	$url = 'https://wiki.dolibarr.org/index.php/Solutions_Cloud_pour_DCADMIN_ERP_CRM';
 }
 if (preg_match('/^es_/i', $langs->getDefaultLang())) {
 	$url = 'https://wiki.dolibarr.org/index.php/Soluciones_en_la_Nube';

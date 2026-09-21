@@ -26,7 +26,7 @@
  *		\brief      Page to setup supplier invoices payments
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 
 /**

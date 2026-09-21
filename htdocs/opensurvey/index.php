@@ -23,7 +23,7 @@
  *	\brief      Home page of opensurvey area
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf

@@ -26,7 +26,7 @@
  *      \brief      Page to setup external calendars for agenda module
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf

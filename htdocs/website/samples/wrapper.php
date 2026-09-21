@@ -143,7 +143,7 @@ $original_file = str_replace("../", "/", $original_file);
 $cachestring = GETPOST("cache", 'aZ09');	// May be 1, or an int (delay in second of the cache if < 999999, or a timestamp), or a hash
 $cachedelay = GETPOSTINT('cachedelay') ? GETPOSTINT('cachedelay') : ((is_numeric($cachestring) && (int) $cachestring > 1 && (int) $cachestring < 999999) ? $cachestring : '3600');
 if ($cachestring || image_format_supported($original_file) >= 0) {
-	// Important: Following code is to avoid page request by browser and PHP CPU at each Dolibarr page access.
+	// Important: Following code is to avoid page request by browser and PHP CPU at each DCADMIN page access.
 	header('Cache-Control: max-age='.$cachedelay.', public, must-revalidate');
 	header('Pragma: cache'); // This is to avoid having Pragma: no-cache
 	header('Expires: '.gmdate('D, d M Y H:i:s', time() + (int) $cachedelay).' GMT');	// This is to avoid to have Expires set by proxy or web server

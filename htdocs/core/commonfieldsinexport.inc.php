@@ -2,12 +2,12 @@
 /* Copyright (C) 2024-2026	MDW							<mdeweerd@users.noreply.github.com>
  */
 '
-@phan-var-force DolibarrModules $this
+@phan-var-force DCADMINModules $this
 @phan-var-force int $r
 ';
 
 /**
- * @var DolibarrModules $this
+ * @var DCADMINModules $this
  * @var int $r
  */
 

@@ -70,7 +70,7 @@ class IntracommReport extends CommonObject
 	 *  	'date', 'datetime', 'timestamp', 'duration',
 	 *  	'boolean', 'checkbox', 'radio', 'array',
 	 *  	'mail', 'phone', 'url', 'password', 'ip'
-	 *		Note: Filter must be a Dolibarr Universal Filter syntax string. Example: "(t.ref:like:'SO-%') or (t.date_creation:>:'20160101') or (t.status:!=:0) or (t.nature:is:NULL)"
+	 *		Note: Filter must be a DCADMIN Universal Filter syntax string. Example: "(t.ref:like:'SO-%') or (t.date_creation:>:'20160101') or (t.status:!=:0) or (t.nature:is:NULL)"
 	 *  'length' the length of field. Example: 255, '24,8'
 	 *  'label' the translation key.
 	 *  'alias' the alias used into some old hard coded SQL requests
@@ -316,7 +316,7 @@ class IntracommReport extends CommonObject
 		$party->addAttribute('partyRole', $conf->global->INTRACOMMREPORT_ROLE_ACTEUR);
 		$party->addChild('partyId', $party_id);
 		$party->addChild('partyName', $declarant);
-		$envelope->addChild('softwareUsed', 'Dolibarr');
+		$envelope->addChild('softwareUsed', 'DCADMIN');
 		$declaration = $envelope->addChild('Declaration');
 		$declaration->addChild('declarationId', $id_declaration);
 		$declaration->addChild('referencePeriod', $period_reference);

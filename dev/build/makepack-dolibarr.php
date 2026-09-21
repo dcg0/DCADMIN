@@ -2,14 +2,14 @@
 <?php
 /**
  * \file         build/makepack-dolibarr.php
- * \brief        Dolibarr package builder (tgz, zip, rpm, deb, exe, aps)
+ * \brief        DCADMIN package builder (tgz, zip, rpm, deb, exe, aps)
  * \author       (c)2026 Eric Seigne  <eric.seigne@cap-rel.fr>
  *
  * PHP CLI rewrite of makepack-dolibarr.pl
  *
  * Environment variables you can set to have generated packages moved into a specific dir:
- * DESTIBETARC='/media/HDDATA1_LD/Mes Sites/Web/Dolibarr/dolibarr.org/files/lastbuild'
- * DESTISTABLE='/media/HDDATA1_LD/Mes Sites/Web/Dolibarr/dolibarr.org/files/stable'
+ * DESTIBETARC='/media/HDDATA1_LD/Mes Sites/Web/DCADMIN/dolibarr.org/files/lastbuild'
+ * DESTISTABLE='/media/HDDATA1_LD/Mes Sites/Web/DCADMIN/dolibarr.org/files/stable'
  * DESTIMODULES='/media/HDDATA1_LD/Mes Sites/Web/Admin1/wwwroot/files/modules'
  */
 
@@ -147,8 +147,8 @@ if (!$ENVDESTIBETARC || !$ENVDESTISTABLE) {
 	echo "set DESTIBETARC=c:/tmp\n";
 	echo "set DESTISTABLE=c:/tmp\n";
 	echo "\n";
-	echo "Example: DESTIBETARC='/media/HDDATA1_LD/Mes Sites/Web/Dolibarr/dolibarr.org/files/lastbuild'\n";
-	echo "Example: DESTISTABLE='/media/HDDATA1_LD/Mes Sites/Web/Dolibarr/dolibarr.org/files/stable'\n";
+	echo "Example: DESTIBETARC='/media/HDDATA1_LD/Mes Sites/Web/DCADMIN/dolibarr.org/files/lastbuild'\n";
+	echo "Example: DESTISTABLE='/media/HDDATA1_LD/Mes Sites/Web/DCADMIN/dolibarr.org/files/stable'\n";
 	sleep(2);
 	exit(1);
 }
@@ -1310,11 +1310,11 @@ if ($nboftargetok) {
 		if ($tgt === 'ASSO' && preg_match('/[a-z]/i', $BUILD)) {
 			// Not stable
 			$filestoscansf = [
-				"$DESTI/$FILENAMERPM"                  => 'Dolibarr installer for Fedora-Redhat-Mandriva-Opensuse (DoliRpm)',
-				"$DESTI/${FILENAMEDEB}_all.deb"         => 'Dolibarr installer for Debian-Ubuntu (DoliDeb)',
-				"$DESTI/$FILENAMEEXEDOLIWAMP.exe"       => 'Dolibarr installer for Windows (DoliWamp)',
-				"$DESTI/$FILENAMETGZ.tgz"              => 'Dolibarr ERP-CRM',
-				"$DESTI/$FILENAMETGZ.zip"              => 'Dolibarr ERP-CRM',
+				"$DESTI/$FILENAMERPM"                  => 'DCADMIN installer for Fedora-Redhat-Mandriva-Opensuse (DoliRpm)',
+				"$DESTI/${FILENAMEDEB}_all.deb"         => 'DCADMIN installer for Debian-Ubuntu (DoliDeb)',
+				"$DESTI/$FILENAMEEXEDOLIWAMP.exe"       => 'DCADMIN installer for Windows (DoliWamp)',
+				"$DESTI/$FILENAMETGZ.tgz"              => 'DCADMIN ERP-CRM',
+				"$DESTI/$FILENAMETGZ.zip"              => 'DCADMIN ERP-CRM',
 			];
 			$filestoscanstableasso = [
 				"$DESTI/$FILENAMERPM"                  => '',
@@ -1326,16 +1326,16 @@ if ($nboftargetok) {
 		} else {
 			$filestoscansf = [
 				"$DESTI/signatures/filelist-$MAJOR.$MINOR.$BUILD.xml"            => 'none',
-				"$DESTI/package_rpm_generic/$FILENAMERPM"                         => 'Dolibarr installer for Fedora-Redhat-Mandriva-Opensuse (DoliRpm)',
+				"$DESTI/package_rpm_generic/$FILENAMERPM"                         => 'DCADMIN installer for Fedora-Redhat-Mandriva-Opensuse (DoliRpm)',
 				"$DESTI/package_rpm_generic/$FILENAMERPMSRC"                      => 'none',
-				"$DESTI/package_debian-ubuntu/${FILENAMEDEB}_all.deb"             => 'Dolibarr installer for Debian-Ubuntu (DoliDeb)',
+				"$DESTI/package_debian-ubuntu/${FILENAMEDEB}_all.deb"             => 'DCADMIN installer for Debian-Ubuntu (DoliDeb)',
 				"$DESTI/package_debian-ubuntu/${FILENAMEDEB}_amd64.changes"       => 'none',
 				"$DESTI/package_debian-ubuntu/${FILENAMEDEB}.dsc"                 => 'none',
 				"$DESTI/package_debian-ubuntu/${FILENAMEDEB}.debian.tar.gz"       => 'none',
 				"$DESTI/package_debian-ubuntu/${FILENAMEDEBSHORT}.orig.tar.gz"    => 'none',
-				"$DESTI/package_windows/$FILENAMEEXEDOLIWAMP.exe"                => 'Dolibarr installer for Windows (DoliWamp)',
-				"$DESTI/standard/$FILENAMETGZ.tgz"                               => 'Dolibarr ERP-CRM',
-				"$DESTI/standard/$FILENAMETGZ.zip"                               => 'Dolibarr ERP-CRM',
+				"$DESTI/package_windows/$FILENAMEEXEDOLIWAMP.exe"                => 'DCADMIN installer for Windows (DoliWamp)',
+				"$DESTI/standard/$FILENAMETGZ.tgz"                               => 'DCADMIN ERP-CRM',
+				"$DESTI/standard/$FILENAMETGZ.zip"                               => 'DCADMIN ERP-CRM',
 			];
 			$filestoscanstableasso = [
 				"$DESTI/signatures/filelist-$MAJOR.$MINOR.$BUILD.xml"            => 'signatures',

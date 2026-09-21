@@ -33,15 +33,15 @@ require_once DOL_DOCUMENT_ROOT.'/core/class/cregion.class.php';
 require_once DOL_DOCUMENT_ROOT.'/core/class/ccountry.class.php';
 require_once DOL_DOCUMENT_ROOT.'/hrm/class/establishment.class.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/admin.lib.php';
-require_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
+require_once DOL_DOCUMENT_ROOT.'/core/modules/DCADMINModules.class.php';
 
 /**
  * API class for dictionaries
  *
  * @access protected
- * @class DolibarrApiAccess {@requires user,external}
+ * @class DCADMINApiAccess {@requires user,external}
  */
-class Setup extends DolibarrApi
+class Setup extends DCADMINApi
 {
 	/**
 	 * @var ?Translate
@@ -153,7 +153,7 @@ class Setup extends DolibarrApi
 	{
 		$list = array();
 
-		if (!DolibarrApiAccess::$user->hasRight('commande', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('commande', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -219,7 +219,7 @@ class Setup extends DolibarrApi
 	{
 		$list = array();
 
-		if (!DolibarrApiAccess::$user->hasRight('commande', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('commande', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -286,7 +286,7 @@ class Setup extends DolibarrApi
 	{
 		$list = array();
 
-		if (!DolibarrApiAccess::$user->hasRight('propal', 'lire') && !DolibarrApiAccess::$user->hasRight('commande', 'lire') && !DolibarrApiAccess::$user->hasRight('facture', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('propal', 'lire') && !DCADMINApiAccess::$user->hasRight('commande', 'lire') && !DCADMINApiAccess::$user->hasRight('facture', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -444,7 +444,7 @@ class Setup extends DolibarrApi
 	 *
 	 * The names of the states will be translated to the given language if
 	 * the $lang parameter is provided. The value of $lang must be a language
-	 * code supported by Dolibarr, for example 'en_US' or 'fr_FR'.
+	 * code supported by DCADMIN, for example 'en_US' or 'fr_FR'.
 	 * The returned list is sorted by state ID.
 	 *
 	 * @param string    $sortfield  Sort field
@@ -559,7 +559,7 @@ class Setup extends DolibarrApi
 	 *
 	 * The names of the countries will be translated to the given language if
 	 * the $lang parameter is provided. The value of $lang must be a language
-	 * code supported by Dolibarr, for example 'en_US' or 'fr_FR'.
+	 * code supported by DCADMIN, for example 'en_US' or 'fr_FR'.
 	 * The returned list is sorted by country ID.
 	 *
 	 * @param string    $sortfield  Sort field
@@ -827,7 +827,7 @@ class Setup extends DolibarrApi
 	{
 		$list = array();
 
-		if (!DolibarrApiAccess::$user->hasRight('commande', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('commande', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -1014,7 +1014,7 @@ class Setup extends DolibarrApi
 	{
 		$list = array();
 
-		if (!DolibarrApiAccess::$user->hasRight('expensereport', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('expensereport', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -1085,7 +1085,7 @@ class Setup extends DolibarrApi
 		global $langs;
 		$langs->loadLangs(array('holiday'));
 
-		if (!DolibarrApiAccess::$user->hasRight('holiday', 'read')) {
+		if (!DCADMINApiAccess::$user->hasRight('holiday', 'read')) {
 			throw new RestException(403);
 		}
 
@@ -1165,7 +1165,7 @@ class Setup extends DolibarrApi
 		global $langs;
 		$langs->loadLangs(array('hrm'));
 
-		if (!DolibarrApiAccess::$user->hasRight('holiday', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('holiday', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -1459,8 +1459,8 @@ class Setup extends DolibarrApi
 	{
 		$list = array();
 
-		if (!DolibarrApiAccess::$user->admin
-			&& (!getDolGlobalString('API_LOGINS_ALLOWED_FOR_GET_EXTRAFIELDS') || DolibarrApiAccess::$user->login != getDolGlobalString('API_LOGINS_ALLOWED_FOR_GET_EXTRAFIELDS'))) {
+		if (!DCADMINApiAccess::$user->admin
+			&& (!getDolGlobalString('API_LOGINS_ALLOWED_FOR_GET_EXTRAFIELDS') || DCADMINApiAccess::$user->login != getDolGlobalString('API_LOGINS_ALLOWED_FOR_GET_EXTRAFIELDS'))) {
 			throw new RestException(403, 'Error API open to admin users only or to the users with logins defined into constant API_LOGINS_ALLOWED_FOR_GET_EXTRAFIELDS');
 		}
 
@@ -1543,7 +1543,7 @@ class Setup extends DolibarrApi
 	 */
 	public function deleteExtrafieldsFromNames($attrname, $elementtype)
 	{
-		if (!DolibarrApiAccess::$user->admin) {
+		if (!DCADMINApiAccess::$user->admin) {
 			throw new RestException(403, 'Only an admin user can delete an extrafield by attrname and elementtype');
 		}
 
@@ -1584,7 +1584,7 @@ class Setup extends DolibarrApi
 	{
 		$answer = array();
 
-		if (!DolibarrApiAccess::$user->admin) {
+		if (!DCADMINApiAccess::$user->admin) {
 			throw new RestException(403, 'Only an admin user can get list of extrafields');
 		}
 
@@ -1661,7 +1661,7 @@ class Setup extends DolibarrApi
 	 */
 	public function postExtrafields($attrname, $elementtype, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->admin) {
+		if (!DCADMINApiAccess::$user->admin) {
 			throw new RestException(403, 'Only an admin user can create an extrafield');
 		}
 
@@ -1679,7 +1679,7 @@ class Setup extends DolibarrApi
 			$extrafields->$field = $this->_checkValForAPI($field, $value, $extrafields);
 		}
 
-		$entity = DolibarrApiAccess::$user->entity;
+		$entity = DCADMINApiAccess::$user->entity;
 		if (empty($entity)) {
 			$entity = 1;
 		}
@@ -1752,7 +1752,7 @@ class Setup extends DolibarrApi
 	public function updateExtrafields($attrname, $elementtype, $request_data = null)
 	{
 		dol_syslog(__METHOD__, LOG_DEBUG);
-		if (!DolibarrApiAccess::$user->admin) {
+		if (!DCADMINApiAccess::$user->admin) {
 			throw new RestException(403, 'Only an admin user can create an extrafield');
 		}
 
@@ -1767,7 +1767,7 @@ class Setup extends DolibarrApi
 			$extrafields->$field = $this->_checkValForAPI($field, $value, $extrafields);
 		}
 
-		$entity = DolibarrApiAccess::$user->entity;
+		$entity = DCADMINApiAccess::$user->entity;
 		if (empty($entity)) {
 			$entity = 1;
 		}
@@ -1915,7 +1915,7 @@ class Setup extends DolibarrApi
 	{
 		$list = array();
 
-		if (!DolibarrApiAccess::$user->hasRight('propal', 'lire') && !DolibarrApiAccess::$user->hasRight('commande', 'lire') && !DolibarrApiAccess::$user->hasRight('facture', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('propal', 'lire') && !DCADMINApiAccess::$user->hasRight('commande', 'lire') && !DCADMINApiAccess::$user->hasRight('facture', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -2688,8 +2688,8 @@ class Setup extends DolibarrApi
 	{
 		global $mysoc;
 
-		if (!DolibarrApiAccess::$user->admin
-			&& (!getDolGlobalString('API_LOGINS_ALLOWED_FOR_GET_COMPANY') || DolibarrApiAccess::$user->login != getDolGlobalString('API_LOGINS_ALLOWED_FOR_GET_COMPANY'))) {
+		if (!DCADMINApiAccess::$user->admin
+			&& (!getDolGlobalString('API_LOGINS_ALLOWED_FOR_GET_COMPANY') || DCADMINApiAccess::$user->login != getDolGlobalString('API_LOGINS_ALLOWED_FOR_GET_COMPANY'))) {
 			throw new RestException(403, 'Error API open to admin users only or to the users with logins defined into constant API_LOGINS_ALLOWED_FOR_GET_COMPANY');
 		}
 
@@ -2747,7 +2747,7 @@ class Setup extends DolibarrApi
 	public function getEstablishments()
 	{
 		$list = array();
-		if (!DolibarrApiAccess::$user->admin) {
+		if (!DCADMINApiAccess::$user->admin) {
 			throw new RestException(403, 'Error API open to admin users only');
 		}
 
@@ -2788,7 +2788,7 @@ class Setup extends DolibarrApi
 	 */
 	public function getEtablishmentByID($id)
 	{
-		if (!DolibarrApiAccess::$user->admin) {
+		if (!DCADMINApiAccess::$user->admin) {
 			throw new RestException(403, 'Error API open to admin users only');
 		}
 
@@ -2824,8 +2824,8 @@ class Setup extends DolibarrApi
 	{
 		global $conf;
 
-		if (!DolibarrApiAccess::$user->admin
-			&& (!getDolGlobalString('API_LOGINS_ALLOWED_FOR_CONST_READ') || DolibarrApiAccess::$user->login != getDolGlobalString('API_LOGINS_ALLOWED_FOR_CONST_READ'))) {
+		if (!DCADMINApiAccess::$user->admin
+			&& (!getDolGlobalString('API_LOGINS_ALLOWED_FOR_CONST_READ') || DCADMINApiAccess::$user->login != getDolGlobalString('API_LOGINS_ALLOWED_FOR_CONST_READ'))) {
 			throw new RestException(403, 'Error API open to admin users only or to the users with logins defined into constant API_LOGINS_ALLOWED_FOR_CONST_READ');
 		}
 
@@ -2857,8 +2857,8 @@ class Setup extends DolibarrApi
 	{
 		$list = array();
 
-		if (!DolibarrApiAccess::$user->admin
-			&& (!getDolGlobalString('API_LOGINS_ALLOWED_FOR_CONST_READ') || DolibarrApiAccess::$user->login != getDolGlobalString('API_LOGINS_ALLOWED_FOR_CONST_READ'))) {
+		if (!DCADMINApiAccess::$user->admin
+			&& (!getDolGlobalString('API_LOGINS_ALLOWED_FOR_CONST_READ') || DCADMINApiAccess::$user->login != getDolGlobalString('API_LOGINS_ALLOWED_FOR_CONST_READ'))) {
 			throw new RestException(403, 'Error API open to admin users only or to the users with logins defined into constant API_LOGINS_ALLOWED_FOR_CONST_READ');
 		}
 
@@ -2887,7 +2887,7 @@ class Setup extends DolibarrApi
 	/**
 	 * Do a test of integrity for files and setup.
 	 *
-	 * @param string	$target			Can be 'local' or 'default' or Url of the signatures file to use for the test. Must be reachable by the tested Dolibarr.
+	 * @param string	$target			Can be 'local' or 'default' or Url of the signatures file to use for the test. Must be reachable by the tested DCADMIN.
 	 * @return array					Result of file and setup integrity check
 	 * @phan-return array{resultcode:string,resultcomment:string,expectedchecksum:string,currentchecksum:string,out:string}
 	 * @phpstan-return array{resultcode:string,resultcomment:string,expectedchecksum:string,currentchecksum:string,out:string}
@@ -2902,8 +2902,8 @@ class Setup extends DolibarrApi
 	{
 		global $langs, $conf;
 
-		if (!DolibarrApiAccess::$user->admin
-			&& (!getDolGlobalString('API_LOGINS_ALLOWED_FOR_INTEGRITY_CHECK') || DolibarrApiAccess::$user->login != getDolGlobalString('API_LOGINS_ALLOWED_FOR_INTEGRITY_CHECK'))) {
+		if (!DCADMINApiAccess::$user->admin
+			&& (!getDolGlobalString('API_LOGINS_ALLOWED_FOR_INTEGRITY_CHECK') || DCADMINApiAccess::$user->login != getDolGlobalString('API_LOGINS_ALLOWED_FOR_INTEGRITY_CHECK'))) {
 			throw new RestException(403, 'Error API open to admin users only or to the users with logins defined into constant API_LOGINS_ALLOWED_FOR_INTEGRITY_CHECK');
 		}
 
@@ -3223,8 +3223,8 @@ class Setup extends DolibarrApi
 		dol_syslog("Setup::getModules is DEPRECATED, use /api/index.php/setup/modules/status", LOG_INFO);
 		global $conf;
 
-		if (!DolibarrApiAccess::$user->admin
-			&& (!getDolGlobalString('API_LOGINS_ALLOWED_FOR_GET_MODULES') || DolibarrApiAccess::$user->login != getDolGlobalString('API_LOGINS_ALLOWED_FOR_GET_MODULES'))) {
+		if (!DCADMINApiAccess::$user->admin
+			&& (!getDolGlobalString('API_LOGINS_ALLOWED_FOR_GET_MODULES') || DCADMINApiAccess::$user->login != getDolGlobalString('API_LOGINS_ALLOWED_FOR_GET_MODULES'))) {
 			throw new RestException(403, 'Error API open to admin users only or to the users with logins defined into constant API_LOGINS_ALLOWED_FOR_GET_MODULES');
 		}
 
@@ -3247,10 +3247,10 @@ class Setup extends DolibarrApi
 	public function getModulesList($status = "active", $origin = 'all')
 	{
 		global $db;
-		$moduleObject = new DolibarrModules($this->db);
+		$moduleObject = new DCADMINModules($this->db);
 
-		if (!DolibarrApiAccess::$user->admin
-			&& (!getDolGlobalString('API_LOGINS_ALLOWED_FOR_GET_MODULES') || DolibarrApiAccess::$user->login != getDolGlobalString('API_LOGINS_ALLOWED_FOR_GET_MODULES'))) {
+		if (!DCADMINApiAccess::$user->admin
+			&& (!getDolGlobalString('API_LOGINS_ALLOWED_FOR_GET_MODULES') || DCADMINApiAccess::$user->login != getDolGlobalString('API_LOGINS_ALLOWED_FOR_GET_MODULES'))) {
 			throw new RestException(403, 'Error API open to admin users only or to the users with logins defined into constant API_LOGINS_ALLOWED_FOR_GET_MODULES');
 		}
 
@@ -3349,8 +3349,8 @@ class Setup extends DolibarrApi
 	{
 		global $db;
 
-		if (!DolibarrApiAccess::$user->admin
-			&& (!getDolGlobalString('API_LOGINS_ALLOWED_FOR_GET_MODULES') || DolibarrApiAccess::$user->login != getDolGlobalString('API_LOGINS_ALLOWED_FOR_GET_MODULES'))) {
+		if (!DCADMINApiAccess::$user->admin
+			&& (!getDolGlobalString('API_LOGINS_ALLOWED_FOR_GET_MODULES') || DCADMINApiAccess::$user->login != getDolGlobalString('API_LOGINS_ALLOWED_FOR_GET_MODULES'))) {
 			throw new RestException(403, 'Error API open to admin users only or to the users with logins defined into constant API_LOGINS_ALLOWED_FOR_GET_MODULES');
 		}
 

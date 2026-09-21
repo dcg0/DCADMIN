@@ -52,7 +52,7 @@ class Import
 	public $errno;
 
 	/**
-	 * @var array<array{position_of_profile:string,module:DolibarrModules}>
+	 * @var array<array{position_of_profile:string,module:DCADMINModules}>
 	 */
 	public $array_import_module;
 
@@ -232,7 +232,7 @@ class Import
 				$classname = $modulename;
 				require_once $file;
 				$module = new $classname($this->db);
-				'@phan-var-force DolibarrModules $module';
+				'@phan-var-force DCADMINModules $module';
 
 				if (isset($module->import_code) && is_array($module->import_code)) {
 					foreach ($module->import_code as $r => $value) {  // @phan-suppress-current-line PhanTypeMismatchForeach

@@ -34,7 +34,7 @@ if ((array_key_exists('action', $_GET) && $_GET['action'] == 'dl') || (array_key
 	}
 }
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/company.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/files.lib.php';
@@ -524,7 +524,7 @@ if ($result && $action == "dl" && !$error) {	// Test on permission not required 
 		// batch: a month of activity holds hundreds of documents and one query per document
 		// would make the export crawl. Only customer and supplier invoices can carry tags,
 		// the other items of the export (various payments, expense reports, salaries,
-		// donations, social contributions, loan payments) have no category type in Dolibarr
+		// donations, social contributions, loan payments) have no category type in DCADMIN
 		// and keep an empty column.
 		$tagsofdocuments = array();
 		foreach (array('Invoice' => 'invoice', 'SupplierInvoice' => 'supplier_invoice') as $itemfortags => $tablefortags) {

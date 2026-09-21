@@ -154,7 +154,7 @@ class ExternalModules
 		$this->shop_url  = getDolGlobalString('MAIN_MODULE_DOLISTORE_SHOP_URL', 'https://www.dolistore.com');
 
 		// For community modules
-		$this->file_source_url = "https://raw.githubusercontent.com/Dolibarr/dolibarr-community-modules/refs/heads/main/index.yaml";
+		$this->file_source_url = "https://raw.githubusercontent.com/DCADMIN/dolibarr-community-modules/refs/heads/main/index.yaml";
 		$this->cache_file = DOL_DATA_ROOT.'/admin/temp/remote_github_modules_file.yaml';
 
 		$lang       = $langs->defaultlang;
@@ -324,7 +324,7 @@ class ExternalModules
 	 * Generate HTML for products.
 	 *
 	 * @param 	array<string,mixed> 	$options 	Options for the request
-	 * @param 	array<string,DolibarrModules>	$modules	Array of locally installed modules (keyed by module class name)
+	 * @param 	array<string,DCADMINModules>	$modules	Array of locally installed modules (keyed by module class name)
 	 * @return 	string|null 						HTML string representing the products.
 	 */
 	public function getProducts($options, $modules = array())
@@ -595,7 +595,7 @@ class ExternalModules
 						// Remove "-" followed by current version at the end of the string if it exists
 						$module_name = preg_replace('/-' . preg_quote($current_version, '/') . '$/', '', $module_name);
 
-						$urldownload = 'https://github.com/Dolibarr/dolibarr-community-modules/raw/refs/heads/main/dev/build/bin/module_' . $module_name . '-' . $current_version . '.zip';
+						$urldownload = 'https://github.com/DCADMIN/dolibarr-community-modules/raw/refs/heads/main/dev/build/bin/module_' . $module_name . '-' . $current_version . '.zip';
 
 						$reg = array();
 						$urlview = $product["dolistore-download"];		// View on Dolistore
@@ -682,7 +682,7 @@ class ExternalModules
 				$html .= '</span>';
 			}
 			$html .= '<br><span class="small">';
-			$html .= $version;			// Version Dolibarr. No dol_escape_htmltag, it is already escape html
+			$html .= $version;			// Version DCADMIN. No dol_escape_htmltag, it is already escape html
 			$html .= '</span>';
 			$html .= '</h2>';
 
@@ -1383,7 +1383,7 @@ class ExternalModules
 
 
 	/**
-	 * Download a Dolibarr module from a Git repository URL or Dolistore download URL.
+	 * Download a DCADMIN module from a Git repository URL or Dolistore download URL.
 	 *
 	 * @param  array<string, mixed> 	$producttoinstall Product information array
 	 * @return string|false				Path to the final ZIP file, or false on error
@@ -1436,7 +1436,7 @@ class ExternalModules
 				break;
 			case 'githubcommunity':
 				if ($producttoinstall['direct-download'] && in_array($producttoinstall['direct-download'], array('yes', 'dolistore'))) {
-					$source_url = 'https://github.com/Dolibarr/dolibarr-community-modules/raw/refs/heads/main/dev/build/bin/module_' . $module_name . '-' . $current_version . '.zip';
+					$source_url = 'https://github.com/DCADMIN/dolibarr-community-modules/raw/refs/heads/main/dev/build/bin/module_' . $module_name . '-' . $current_version . '.zip';
 					$downloaded = $this->_downloadFile($source_url, $tmpdir);
 					if (!$downloaded) {
 						dol_syslog(__METHOD__ . ': GitHub community module download failed: ' . $source_url . ', Try to find a Dolistore link', LOG_WARNING);
@@ -1468,7 +1468,7 @@ class ExternalModules
 
 
 	/**
-	 * Download a remote URL to a local file using getURLContent (native Dolibarr).
+	 * Download a remote URL to a local file using getURLContent (native DCADMIN).
 	 *
 	 * @param  string  $url         Remote URL to download
 	 * @param  string  $dest_path   Local path to write the downloaded file (directory, not including filename)

@@ -72,7 +72,7 @@ class pdf_eagle_proforma extends ModelePDFStockTransfer
 	public $type;
 
 	/**
-	 * Dolibarr version of the loaded document
+	 * DCADMIN version of the loaded document
 	 * @var string Version, possible values are: 'development', 'experimental', 'dolibarr', 'dolibarr_deprecated' or a version string like 'x.y.z'''|'development'|'dolibarr'|'experimental'
 	 */
 	public $version = 'dolibarr';
@@ -307,7 +307,7 @@ class pdf_eagle_proforma extends ModelePDFStockTransfer
 
 				$pdf->SetTitle($outputlangs->convToOutputCharset($object->ref));
 				$pdf->SetSubject($outputlangs->transnoentities("StockTransferSheetProforma"));
-				$pdf->SetCreator("Dolibarr ".DOL_VERSION);
+				$pdf->SetCreator("DCADMIN ".DOL_VERSION);
 				$pdf->SetAuthor($outputlangs->convToOutputCharset($user->getAnonymisableFullName($outputlangs)));
 				$pdf->SetKeyWords($outputlangs->convToOutputCharset($object->ref)." ".$outputlangs->transnoentities("StockTransfer"));
 				if (getDolGlobalString('MAIN_DISABLE_PDF_COMPRESSION')) {

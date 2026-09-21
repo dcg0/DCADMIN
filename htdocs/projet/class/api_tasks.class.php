@@ -33,9 +33,9 @@ require_once DOL_DOCUMENT_ROOT.'/core/lib/company.lib.php';
  *
  * @since	5.0.0	Initial implementation
  * @access protected
- * @class  DolibarrApiAccess {@requires user,external}
+ * @class  DCADMINApiAccess {@requires user,external}
  */
-class Tasks extends DolibarrApi
+class Tasks extends DCADMINApi
 {
 	/**
 	 * @var string[]       Mandatory fields, checked when create and update object
@@ -76,7 +76,7 @@ class Tasks extends DolibarrApi
 	 */
 	public function get($id, $includetimespent = 0)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('projet', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('projet', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -85,8 +85,8 @@ class Tasks extends DolibarrApi
 			throw new RestException(404, 'Task not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('task', $this->task->id)) {
-			throw new RestException(403, 'Access not allowed for login ' . DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('task', $this->task->id)) {
+			throw new RestException(403, 'Access not allowed for login ' . DCADMINApiAccess::$user->login);
 		}
 
 		if ($includetimespent == 1) {
@@ -124,19 +124,19 @@ class Tasks extends DolibarrApi
 	{
 		global $db, $conf;
 
-		if (!DolibarrApiAccess::$user->hasRight('projet', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('projet', 'lire')) {
 			throw new RestException(403);
 		}
 
 		$obj_ret = array();
 
 		// case of external user, $thirdparty_ids param is ignored and replaced by user's socid
-		$socids = DolibarrApiAccess::$user->socid ?: 0;
+		$socids = DCADMINApiAccess::$user->socid ?: 0;
 
 		// If the internal user must only see his customers, force searching by him
 		$search_sale = 0;
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'client', 'voir') && !$socids) {
-			$search_sale = DolibarrApiAccess::$user->id;
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'client', 'voir') && !$socids) {
+			$search_sale = DCADMINApiAccess::$user->id;
 		}
 
 		$sql = "SELECT t.rowid";
@@ -235,7 +235,7 @@ class Tasks extends DolibarrApi
 	public function post($request_data = null)
 	{
 		global $conf;
-		if (!DolibarrApiAccess::$user->hasRight('projet', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('projet', 'creer')) {
 			throw new RestException(403, "Insufficiant rights");
 		}
 		// Check mandatory fields
@@ -300,7 +300,7 @@ class Tasks extends DolibarrApi
 			$this->task->ref = $defaultref;
 		}
 
-		if ($this->task->create(DolibarrApiAccess::$user) < 0) {
+		if ($this->task->create(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, "Error creating task", array_merge(array($this->task->error), $this->task->errors));
 		}
 
@@ -319,7 +319,7 @@ class Tasks extends DolibarrApi
 	 */
 	public function getTimespent($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('projet', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('projet', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -328,8 +328,8 @@ class Tasks extends DolibarrApi
 			throw new RestException(404, 'Task not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('tasks', $this->task->id)) {
-			throw new RestException(403, 'Access not allowed for login ' . DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('tasks', $this->task->id)) {
+			throw new RestException(403, 'Access not allowed for login ' . DCADMINApiAccess::$user->login);
 		}
 
 		$this->task->fetchTimeSpentOnTask();
@@ -359,7 +359,7 @@ class Tasks extends DolibarrApi
 	{
 		global $db;
 
-		if (!DolibarrApiAccess::$user->hasRight('projet', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('projet', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -368,11 +368,11 @@ class Tasks extends DolibarrApi
 			throw new RestException(404, 'Task not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('tasks', $this->task->id)) {
-			throw new RestException(403, 'Access not allowed for login ' . DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('tasks', $this->task->id)) {
+			throw new RestException(403, 'Access not allowed for login ' . DCADMINApiAccess::$user->login);
 		}
 
-		$usert = DolibarrApiAccess::$user;
+		$usert = DCADMINApiAccess::$user;
 		if ($userid > 0) {
 			$usert = new User($this->db);
 			$usert->fetch($userid);
@@ -402,7 +402,7 @@ class Tasks extends DolibarrApi
 	/*
 	public function postLine($id, $request_data = null)
 	{
-		if(! DolibarrApiAccess::$user->hasRight('projet', 'creer')) {
+		if(! DCADMINApiAccess::$user->hasRight('projet', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -411,8 +411,8 @@ class Tasks extends DolibarrApi
 			throw new RestException(404, 'Project not found');
 		}
 
-		if( ! DolibarrApi::_checkAccessToResource('project',$this->project->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if( ! DCADMINApi::_checkAccessToResource('project',$this->project->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$request_data = (object) $request_data;
@@ -471,7 +471,7 @@ class Tasks extends DolibarrApi
 	/*
 	public function putLine($id, $lineid, $request_data = null)
 	{
-		if(! DolibarrApiAccess::$user->hasRight('projet', 'creer')) {
+		if(! DCADMINApiAccess::$user->hasRight('projet', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -480,8 +480,8 @@ class Tasks extends DolibarrApi
 			throw new RestException(404, 'Project not found');
 		}
 
-		if( ! DolibarrApi::_checkAccessToResource('project',$this->project->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if( ! DCADMINApi::_checkAccessToResource('project',$this->project->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$request_data = (object) $request_data;
@@ -534,7 +534,7 @@ class Tasks extends DolibarrApi
 	 */
 	public function put($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('projet', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('projet', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -543,8 +543,8 @@ class Tasks extends DolibarrApi
 			throw new RestException(404, 'Task not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('task', $this->task->id)) {
-			throw new RestException(403, 'Access not allowed for login ' . DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('task', $this->task->id)) {
+			throw new RestException(403, 'Access not allowed for login ' . DCADMINApiAccess::$user->login);
 		}
 		foreach ($request_data as $field => $value) {
 			if ($field == 'id') {
@@ -565,7 +565,7 @@ class Tasks extends DolibarrApi
 			$this->task->$field = $this->_checkValForAPI($field, $value, $this->task);
 		}
 
-		if ($this->task->update(DolibarrApiAccess::$user) > 0) {
+		if ($this->task->update(DCADMINApiAccess::$user) > 0) {
 			return $this->get($id);
 		} else {
 			throw new RestException(500, $this->task->error);
@@ -586,7 +586,7 @@ class Tasks extends DolibarrApi
 	 */
 	public function delete($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('projet', 'supprimer')) {
+		if (!DCADMINApiAccess::$user->hasRight('projet', 'supprimer')) {
 			throw new RestException(403);
 		}
 		$result = $this->task->fetch($id);
@@ -594,11 +594,11 @@ class Tasks extends DolibarrApi
 			throw new RestException(404, 'Task not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('task', $this->task->id)) {
-			throw new RestException(403, 'Access not allowed for login ' . DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('task', $this->task->id)) {
+			throw new RestException(403, 'Access not allowed for login ' . DCADMINApiAccess::$user->login);
 		}
 
-		if ($this->task->delete(DolibarrApiAccess::$user) <= 0) {
+		if ($this->task->delete(DCADMINApiAccess::$user) <= 0) {
 			throw new RestException(500, 'Error when delete task : ' . $this->task->error);
 		}
 
@@ -627,7 +627,7 @@ class Tasks extends DolibarrApi
 	public function getTimeSpentByID($id, $timespent_id)
 	{
 		dol_syslog("API Rest request::getTimeSpent", LOG_DEBUG);
-		if (! DolibarrApiAccess::$user->hasRight('projet', 'lire')) {
+		if (! DCADMINApiAccess::$user->hasRight('projet', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -635,8 +635,8 @@ class Tasks extends DolibarrApi
 		if (!$taskresult ) {
 			throw new RestException(404, 'Task with id='.$id.' not found');
 		}
-		if (!DolibarrApi::_checkAccessToResource('task', $this->task->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('task', $this->task->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$timespent = new TimeSpent($this->db);
@@ -644,8 +644,8 @@ class Tasks extends DolibarrApi
 		if (!$timeresult ) {
 			throw new RestException(404, 'Timespent with id='.$timespent_id.' not found');
 		}
-		if (!DolibarrApi::_checkAccessToResource('time', $timespent->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('time', $timespent->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		return $this->_cleanTimeSpentObjectDatas($timespent);
@@ -676,7 +676,7 @@ class Tasks extends DolibarrApi
 	 */
 	public function addTimeSpent($id, $date, $duration, $product_id = null, $user_id = 0, $note = '', $progress = -1)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('projet', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('projet', 'creer')) {
 			throw new RestException(403);
 		}
 		$result = $this->task->fetch($id);
@@ -684,13 +684,13 @@ class Tasks extends DolibarrApi
 			throw new RestException(404, 'Task not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('project', (int) $this->task->fk_project)) {
-			throw new RestException(403, 'Access not allowed for login ' . DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('project', (int) $this->task->fk_project)) {
+			throw new RestException(403, 'Access not allowed for login ' . DCADMINApiAccess::$user->login);
 		}
 
 		$uid = $user_id;
 		if (empty($uid)) {
-			$uid = DolibarrApiAccess::$user->id;
+			$uid = DCADMINApiAccess::$user->id;
 		}
 
 		$newdate = dol_stringtotime($date, 1);
@@ -706,7 +706,7 @@ class Tasks extends DolibarrApi
 			$this->task->progress  		= $progress;
 		}
 
-		$result = $this->task->addTimeSpent(DolibarrApiAccess::$user, 0);
+		$result = $this->task->addTimeSpent(DCADMINApiAccess::$user, 0);
 		if ($result == 0) {
 			throw new RestException(304, 'Error nothing done. May be object is already validated');
 		}
@@ -746,13 +746,13 @@ class Tasks extends DolibarrApi
 	 */
 	public function putTimeSpent($id, $timespent_id, $date, $duration, $product_id = null, $user_id = 0, $note = '')
 	{
-		if (!DolibarrApiAccess::$user->hasRight('projet', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('projet', 'creer')) {
 			throw new RestException(403);
 		}
 		$this->timespentRecordChecks($id, $timespent_id);
 
-		if (!DolibarrApi::_checkAccessToResource('task', $this->task->id)) {
-			throw new RestException(403, 'Access not allowed for login ' . DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('task', $this->task->id)) {
+			throw new RestException(403, 'Access not allowed for login ' . DCADMINApiAccess::$user->login);
 		}
 
 		$newdate = dol_stringtotime($date, 1);
@@ -761,10 +761,10 @@ class Tasks extends DolibarrApi
 		$this->task->timespent_withhour = 1;
 		$this->task->timespent_duration = $duration;
 		$this->task->timespent_fk_product  = $product_id;
-		$this->task->timespent_fk_user  = $user_id ?? DolibarrApiAccess::$user->id;
+		$this->task->timespent_fk_user  = $user_id ?? DCADMINApiAccess::$user->id;
 		$this->task->timespent_note     = $note;
 
-		$result = $this->task->updateTimeSpent(DolibarrApiAccess::$user, 0);
+		$result = $this->task->updateTimeSpent(DCADMINApiAccess::$user, 0);
 		if ($result == 0) {
 			throw new RestException(304, 'Error nothing done.');
 		}
@@ -796,16 +796,16 @@ class Tasks extends DolibarrApi
 	 */
 	public function deleteTimeSpent($id, $timespent_id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('projet', 'supprimer')) {
+		if (!DCADMINApiAccess::$user->hasRight('projet', 'supprimer')) {
 			throw new RestException(403);
 		}
 		$this->timespentRecordChecks($id, $timespent_id);
 
-		if (!DolibarrApi::_checkAccessToResource('task', $this->task->id)) {
-			throw new RestException(403, 'Access not allowed for login ' . DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('task', $this->task->id)) {
+			throw new RestException(403, 'Access not allowed for login ' . DCADMINApiAccess::$user->login);
 		}
 
-		if ($this->task->delTimeSpent(DolibarrApiAccess::$user, 0) < 0) {
+		if ($this->task->delTimeSpent(DCADMINApiAccess::$user, 0) < 0) {
 			throw new RestException(500, 'Error when deleting time spent: ' . $this->task->error);
 		}
 
@@ -1058,7 +1058,7 @@ class Tasks extends DolibarrApi
 	 */
 	public function getContacts($id, $type = '')
 	{
-		if (!DolibarrApiAccess::$user->hasRight('projet', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('projet', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -1067,8 +1067,8 @@ class Tasks extends DolibarrApi
 			throw new RestException(404, 'Task not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('task', $this->task->id)) {
-			throw new RestException(403, 'Access not allowed for login ' . DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('task', $this->task->id)) {
+			throw new RestException(403, 'Access not allowed for login ' . DCADMINApiAccess::$user->login);
 		}
 
 		$contacts = $this->task->liste_contact(-1, 'external', 0, $type);
@@ -1101,7 +1101,7 @@ class Tasks extends DolibarrApi
 	 */
 	public function addContact($id, $fk_socpeople, $type_contact, $source, $notrigger = 0)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('projet', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('projet', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -1110,8 +1110,8 @@ class Tasks extends DolibarrApi
 			throw new RestException(404, 'Task not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('task', $this->task->id)) {
-			throw new RestException(403, 'Access not allowed for login ' . DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('task', $this->task->id)) {
+			throw new RestException(403, 'Access not allowed for login ' . DCADMINApiAccess::$user->login);
 		}
 
 		$result = $this->task->add_contact($fk_socpeople, $type_contact, $source, $notrigger);
@@ -1146,7 +1146,7 @@ class Tasks extends DolibarrApi
 	 */
 	public function deleteContact($id, $contactid, $type)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('projet', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('projet', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -1155,8 +1155,8 @@ class Tasks extends DolibarrApi
 			throw new RestException(404, 'Task not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('task', $this->task->id)) {
-			throw new RestException(403, 'Access not allowed for login ' . DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('task', $this->task->id)) {
+			throw new RestException(403, 'Access not allowed for login ' . DCADMINApiAccess::$user->login);
 		}
 
 		foreach (array('internal', 'external') as $source) {

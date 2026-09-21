@@ -30,7 +30,7 @@
  *		\brief      Page to create/view a bank account
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf

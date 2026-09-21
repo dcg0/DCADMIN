@@ -26,7 +26,7 @@
  *	\brief      Payment reports page
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/core/modules/rapport/pdf_paiement.class.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/files.lib.php';

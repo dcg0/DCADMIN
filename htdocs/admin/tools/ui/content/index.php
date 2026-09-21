@@ -17,7 +17,7 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../../../main.inc.php';
 
 /**

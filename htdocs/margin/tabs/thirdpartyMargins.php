@@ -23,7 +23,7 @@
  *	\brief      Page for invoice margins of a thirdparty
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf

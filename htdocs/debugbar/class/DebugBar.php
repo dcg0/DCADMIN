@@ -33,17 +33,17 @@ dol_include_once('/debugbar/class/DataCollector/DolMemoryCollector.php');
 dol_include_once('/debugbar/class/DataCollector/DolPhpCollector.php');
 dol_include_once('/debugbar/class/DataCollector/DolExceptionsCollector.php');
 dol_include_once('/debugbar/class/DataCollector/DolQueryCollector.php');
-dol_include_once('/debugbar/class/DataCollector/DolibarrCollector.php');
+dol_include_once('/debugbar/class/DataCollector/DCADMINCollector.php');
 dol_include_once('/debugbar/class/DataCollector/DolLogsCollector.php');
 dol_include_once('/debugbar/class/DataCollector/DolHooksCollector.php');
 
 /**
- * DolibarrDebugBar class
+ * DCADMINDebugBar class
  *
  * @see http://phpdebugbar.com/docs/base-collectors.html#base-collectors
  */
 
-class DolibarrDebugBar extends DebugBar
+class DCADMINDebugBar extends DebugBar
 {
 	/**
 	 * Constructor
@@ -60,7 +60,7 @@ class DolibarrDebugBar extends DebugBar
 		$this->addCollector(new DolMemoryCollector());
 		//$this->addCollector(new DolExceptionsCollector());
 		$this->addCollector(new DolQueryCollector());
-		$this->addCollector(new DolibarrCollector());
+		$this->addCollector(new DCADMINCollector());
 		$this->addCollector(new DolHooksCollector());
 		if (isModEnabled('syslog')) {
 			$this->addCollector(new DolLogsCollector());

@@ -37,7 +37,7 @@ require_once DOL_DOCUMENT_ROOT.'/core/lib/files.lib.php';
  * @access protected
  * @class Documents {@requires user,external}
  */
-class Documents extends DolibarrApi
+class Documents extends DCADMINApi
 {
 	/**
 	 * Constructor
@@ -99,7 +99,7 @@ class Documents extends DolibarrApi
 		$relativefile = $tmpreldir.dol_sanitizeFileName($object->ref); */
 		$relativefile = $original_file;
 
-		$check_access = dol_check_secure_access_document($modulepart, $relativefile, $entity, DolibarrApiAccess::$user, '', 'read');
+		$check_access = dol_check_secure_access_document($modulepart, $relativefile, $entity, DCADMINApiAccess::$user, '', 'read');
 		$accessallowed = $check_access['accessallowed'];
 		$sqlprotectagainstexternals = $check_access['sqlprotectagainstexternals'];
 		$original_file = $check_access['original_file'];
@@ -111,7 +111,7 @@ class Documents extends DolibarrApi
 			throw new RestException(403);
 		}
 
-		if (DolibarrApiAccess::$user->socid > 0) {
+		if (DCADMINApiAccess::$user->socid > 0) {
 			if ($sqlprotectagainstexternals) {
 				$resql = $this->db->query($sqlprotectagainstexternals);
 				if ($resql) {
@@ -119,7 +119,7 @@ class Documents extends DolibarrApi
 					$i = 0;
 					while ($i < $num) {
 						$obj = $this->db->fetch_object($resql);
-						if (DolibarrApiAccess::$user->socid != $obj->fk_soc) {
+						if (DCADMINApiAccess::$user->socid != $obj->fk_soc) {
 							throw new RestException(403, 'Not allowed to download documents with such a ref');
 						}
 						$i++;
@@ -202,7 +202,7 @@ class Documents extends DolibarrApi
 		$relativefile = $tmpreldir.dol_sanitizeFileName($object->ref); */
 		$relativefile = $original_file;
 
-		$check_access = dol_check_secure_access_document($modulepart, $relativefile, $entity, DolibarrApiAccess::$user, '', 'write');
+		$check_access = dol_check_secure_access_document($modulepart, $relativefile, $entity, DCADMINApiAccess::$user, '', 'write');
 		$accessallowed              = $check_access['accessallowed'];
 		$sqlprotectagainstexternals = $check_access['sqlprotectagainstexternals'];
 		$original_file              = $check_access['original_file'];
@@ -214,7 +214,7 @@ class Documents extends DolibarrApi
 			throw new RestException(403);
 		}
 
-		if (DolibarrApiAccess::$user->socid > 0) {
+		if (DCADMINApiAccess::$user->socid > 0) {
 			if ($sqlprotectagainstexternals) {
 				$resql = $this->db->query($sqlprotectagainstexternals);
 				if ($resql) {
@@ -222,7 +222,7 @@ class Documents extends DolibarrApi
 					$i = 0;
 					while ($i < $num) {
 						$obj = $this->db->fetch_object($resql);
-						if (DolibarrApiAccess::$user->socid != $obj->fk_soc) {
+						if (DCADMINApiAccess::$user->socid != $obj->fk_soc) {
 							throw new RestException(403, 'Not allowed to download documents with such a ref');
 						}
 						$i++;
@@ -482,120 +482,120 @@ class Documents extends DolibarrApi
 		$upload_dir = getMultidirOutput($object, '', 1);
 
 		// Check object-level permissions
-		$ok = checkUserAccessToObject(DolibarrApiAccess::$user, array($object->element), $object, $object->table_element, '');
+		$ok = checkUserAccessToObject(DCADMINApiAccess::$user, array($object->element), $object, $object->table_element, '');
 		if (empty($ok)) {
 			throw new RestException(403, 'Access not allowed to this object (refused by checkUserAccessToObject)');
 		}
 
 		// Check permission on module
 		if ($modulepart == 'societe' || $modulepart == 'thirdparty') {
-			if (!DolibarrApiAccess::$user->hasRight('societe', 'lire')) {
+			if (!DCADMINApiAccess::$user->hasRight('societe', 'lire')) {
 				throw new RestException(403);
 			}
 		} elseif ($modulepart == 'user') {
 			// Can get doc if has permission to read all user or if it is user itself
-			if (!DolibarrApiAccess::$user->hasRight('user', 'user', 'lire') && DolibarrApiAccess::$user->id != $id) {
+			if (!DCADMINApiAccess::$user->hasRight('user', 'user', 'lire') && DCADMINApiAccess::$user->id != $id) {
 				throw new RestException(403);
 			}
 		} elseif ($modulepart == 'adherent' || $modulepart == 'member') {
-			if (!DolibarrApiAccess::$user->hasRight('adherent', 'lire')) {
+			if (!DCADMINApiAccess::$user->hasRight('adherent', 'lire')) {
 				throw new RestException(403);
 			}
 		} elseif ($modulepart == 'propal' || $modulepart == 'proposal') {
-			if (!DolibarrApiAccess::$user->hasRight('propal', 'lire')) {
+			if (!DCADMINApiAccess::$user->hasRight('propal', 'lire')) {
 				throw new RestException(403);
 			}
 		} elseif ($modulepart == 'supplier_proposal') {
-			if (!DolibarrApiAccess::$user->hasRight('supplier_proposal', 'read')) {
+			if (!DCADMINApiAccess::$user->hasRight('supplier_proposal', 'read')) {
 				throw new RestException(403);
 			}
 		} elseif ($modulepart == 'commande' || $modulepart == 'order') {
-			if (!DolibarrApiAccess::$user->hasRight('commande', 'lire')) {
+			if (!DCADMINApiAccess::$user->hasRight('commande', 'lire')) {
 				throw new RestException(403);
 			}
 		} elseif ($modulepart == 'commande_fournisseur' || $modulepart == 'supplier_order') {
 			$modulepart = 'supplier_order';
-			if (!DolibarrApiAccess::$user->hasRight('fournisseur', 'commande', 'lire') && !DolibarrApiAccess::$user->hasRight('supplier_order', 'lire')) {
+			if (!DCADMINApiAccess::$user->hasRight('fournisseur', 'commande', 'lire') && !DCADMINApiAccess::$user->hasRight('supplier_order', 'lire')) {
 				throw new RestException(403);
 			}
 		} elseif ($modulepart == 'shipment' || $modulepart == 'expedition') {
-			if (!DolibarrApiAccess::$user->hasRight('expedition', 'lire')) {
+			if (!DCADMINApiAccess::$user->hasRight('expedition', 'lire')) {
 				throw new RestException(403);
 			}
 		} elseif ($modulepart == 'facture' || $modulepart == 'invoice') {
-			if (!DolibarrApiAccess::$user->hasRight('facture', 'lire')) {
+			if (!DCADMINApiAccess::$user->hasRight('facture', 'lire')) {
 				throw new RestException(403);
 			}
 		} elseif ($modulepart == 'facture_fournisseur' || $modulepart == 'supplier_invoice') {
 			$modulepart = 'supplier_invoice';
-			if (!DolibarrApiAccess::$user->hasRight('fournisseur', 'facture', 'lire') && !DolibarrApiAccess::$user->hasRight('supplier_invoice', 'lire')) {
+			if (!DCADMINApiAccess::$user->hasRight('fournisseur', 'facture', 'lire') && !DCADMINApiAccess::$user->hasRight('supplier_invoice', 'lire')) {
 				throw new RestException(403);
 			}
 		} elseif ($modulepart == 'produit' || $modulepart == 'product' || $modulepart == 'service') {
-			if (!DolibarrApiAccess::$user->hasRight('produit', 'lire')) {
+			if (!DCADMINApiAccess::$user->hasRight('produit', 'lire')) {
 				throw new RestException(403);
 			}
 		} elseif ($modulepart == 'agenda' || $modulepart == 'action' || $modulepart == 'event' || $modulepart == 'actioncomm') {
-			if (!DolibarrApiAccess::$user->hasRight('agenda', 'myactions', 'read') && !DolibarrApiAccess::$user->hasRight('agenda', 'allactions', 'read')) {
+			if (!DCADMINApiAccess::$user->hasRight('agenda', 'myactions', 'read') && !DCADMINApiAccess::$user->hasRight('agenda', 'allactions', 'read')) {
 				throw new RestException(403);
 			}
 		} elseif ($modulepart == 'expensereport') {
-			if (!DolibarrApiAccess::$user->hasRight('expensereport', 'read')) {
+			if (!DCADMINApiAccess::$user->hasRight('expensereport', 'read')) {
 				throw new RestException(403);
 			}
 		} elseif ($modulepart == 'holiday') {
-			if (!DolibarrApiAccess::$user->hasRight('holiday', 'read')) {
+			if (!DCADMINApiAccess::$user->hasRight('holiday', 'read')) {
 				throw new RestException(403);
 			}
 		} elseif ($modulepart == 'ticket') {
-			if (!DolibarrApiAccess::$user->hasRight('ticket', 'read')) {
+			if (!DCADMINApiAccess::$user->hasRight('ticket', 'read')) {
 				throw new RestException(403);
 			}
 		} elseif ($modulepart == 'knowledgemanagement') {
-			if (!DolibarrApiAccess::$user->hasRight('knowledgemanagement', 'knowledgerecord', 'read')) {
+			if (!DCADMINApiAccess::$user->hasRight('knowledgemanagement', 'knowledgerecord', 'read')) {
 				throw new RestException(403);
 			}
 		} elseif ($modulepart == 'categorie' || $modulepart == 'category') {
-			if (!DolibarrApiAccess::$user->hasRight('categorie', 'lire')) {
+			if (!DCADMINApiAccess::$user->hasRight('categorie', 'lire')) {
 				throw new RestException(403);
 			}
 		} elseif ($modulepart == 'ecm') {
 			throw new RestException(500, 'Modulepart Ecm not implemented yet.');
-			// if (!DolibarrApiAccess::$user->hasRight('ecm', 'read')) {
+			// if (!DCADMINApiAccess::$user->hasRight('ecm', 'read')) {
 			// 	throw new RestException(403);
 			// }
 		} elseif ($modulepart == 'contrat' || $modulepart == 'contract') {
 			$modulepart = 'contrat';
-			if (!DolibarrApiAccess::$user->hasRight('contrat', 'lire')) {
+			if (!DCADMINApiAccess::$user->hasRight('contrat', 'lire')) {
 				throw new RestException(403);
 			}
 		} elseif ($modulepart == 'intervention' || $modulepart == 'ficheinter') {
 			$modulepart = 'ficheinter';
-			if (!DolibarrApiAccess::$user->hasRight('ficheinter', 'lire')) {
+			if (!DCADMINApiAccess::$user->hasRight('ficheinter', 'lire')) {
 				throw new RestException(403);
 			}
 		} elseif ($modulepart == 'projet' || $modulepart == 'project') {
 			$modulepart = 'project';
-			if (!DolibarrApiAccess::$user->hasRight('projet', 'lire')) {
+			if (!DCADMINApiAccess::$user->hasRight('projet', 'lire')) {
 				throw new RestException(403);
 			}
 		} elseif ($modulepart == 'task' || $modulepart == 'project_task') {
 			$modulepart = 'project_task';
-			if (!DolibarrApiAccess::$user->hasRight('projet', 'lire')) {
+			if (!DCADMINApiAccess::$user->hasRight('projet', 'lire')) {
 				throw new RestException(403);
 			}
 		} elseif ($modulepart == 'mrp') {
 			$modulepart = 'mrp';
-			if (!DolibarrApiAccess::$user->hasRight('mrp', 'read')) {
+			if (!DCADMINApiAccess::$user->hasRight('mrp', 'read')) {
 				throw new RestException(403);
 			}
 		} elseif ($modulepart == 'contact' || $modulepart == 'socpeople') {
 			$modulepart = 'contact';
-			if (!DolibarrApiAccess::$user->hasRight('societe', 'contact', 'lire')) {
+			if (!DCADMINApiAccess::$user->hasRight('societe', 'contact', 'lire')) {
 				throw new RestException(403);
 			}
 		} elseif ($modulepart == 'stock') {
-			if (!DolibarrApiAccess::$user->hasRight('stock', 'lire')) {
+			if (!DCADMINApiAccess::$user->hasRight('stock', 'lire')) {
 				throw new RestException(403);
 			}
 		} else {
@@ -769,7 +769,7 @@ class Documents extends DolibarrApi
 
 		// Define $uploadir
 		$object = null;
-		$entity = DolibarrApiAccess::$user->entity;
+		$entity = DCADMINApiAccess::$user->entity;
 		if (empty($entity)) {
 			$entity = 1;
 		}
@@ -916,13 +916,13 @@ class Documents extends DolibarrApi
 			} else {
 				$relativefile = $tmpreldir.dol_sanitizeFileName((string) $object->ref);
 			}
-			$tmp = dol_check_secure_access_document($modulepart, $relativefile, $entity, DolibarrApiAccess::$user, $ref, 'write');
+			$tmp = dol_check_secure_access_document($modulepart, $relativefile, $entity, DCADMINApiAccess::$user, $ref, 'write');
 			if (empty($tmp['accessallowed'])) {
 				throw new RestException(403, 'Access not allowed to upload file into this directory');
 			}
 			$upload_dir = $tmp['original_file']; // No dirname here, tmp['original_file'] is already the dir because dol_check_secure_access_document was called with param original_file that is only the dir
 			/*} else {
-				if (!DolibarrApiAccess::$user->hasRight('ecm', 'upload')) {
+				if (!DCADMINApiAccess::$user->hasRight('ecm', 'upload')) {
 					throw new RestException(403, 'Missing permission to upload files in ECM module');
 				}
 				$upload_dir = $conf->medias->multidir_output[$conf->entity];
@@ -942,13 +942,13 @@ class Documents extends DolibarrApi
 			// Test on permissions
 			if ($modulepart != 'ecm') {
 				$relativefile = $subdir;
-				$tmp = dol_check_secure_access_document($modulepart, $relativefile, $entity, DolibarrApiAccess::$user, '', 'write');
+				$tmp = dol_check_secure_access_document($modulepart, $relativefile, $entity, DCADMINApiAccess::$user, '', 'write');
 				if (empty($tmp['accessallowed'])) {
 					throw new RestException(403, 'Access not allowed to upload file into this directory');
 				}
 				$upload_dir = $tmp['original_file']; // No dirname here, tmp['original_file'] is already the dir because dol_check_secure_access_document was called with param original_file that is only the dir
 			} else {
-				if (!DolibarrApiAccess::$user->hasRight('ecm', 'upload')) {
+				if (!DCADMINApiAccess::$user->hasRight('ecm', 'upload')) {
 					throw new RestException(403, 'Missing permission to upload files in ECM module');
 				}
 				$upload_dir = $conf->medias->multidir_output[$conf->entity];
@@ -1129,7 +1129,7 @@ class Documents extends DolibarrApi
 		$relativefile = $tmpreldir.dol_sanitizeFileName($object->ref); */
 		$relativefile = $original_file;
 
-		$check_access = dol_check_secure_access_document($modulepart, $relativefile, $entity, DolibarrApiAccess::$user, '', 'write');
+		$check_access = dol_check_secure_access_document($modulepart, $relativefile, $entity, DCADMINApiAccess::$user, '', 'write');
 		$accessallowed = $check_access['accessallowed'];
 		$sqlprotectagainstexternals = $check_access['sqlprotectagainstexternals'];
 		$original_file = $check_access['original_file'];
@@ -1141,7 +1141,7 @@ class Documents extends DolibarrApi
 			throw new RestException(403);
 		}
 
-		if (DolibarrApiAccess::$user->socid > 0) {
+		if (DCADMINApiAccess::$user->socid > 0) {
 			if ($sqlprotectagainstexternals) {
 				$resql = $this->db->query($sqlprotectagainstexternals);
 				if ($resql) {
@@ -1149,7 +1149,7 @@ class Documents extends DolibarrApi
 					$i = 0;
 					while ($i < $num) {
 						$obj = $this->db->fetch_object($resql);
-						if (DolibarrApiAccess::$user->socid != $obj->fk_soc) {
+						if (DCADMINApiAccess::$user->socid != $obj->fk_soc) {
 							throw new RestException(403, 'Not allowed to download documents with such a ref');
 						}
 						$i++;

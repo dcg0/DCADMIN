@@ -1374,7 +1374,7 @@ function show_contacts($conf, $langs, $db, $object, $backtopage = '', $showuserl
 		'sc.role' => array('label' => "ContactByDefaultFor", 'checked' => '1', 'position' => 40),
 		't.birthday' => array('label' => "Birthday", 'checked' => '0', 'position' => 45),
 		't.statut' => array('label' => "Status", 'checked' => '1', 'position' => 50, 'class' => 'center'),
-		'u.user' => array('label' => "DolibarrLogin", 'checked' => '1', 'position' => 50, 'class' => 'center'),
+		'u.user' => array('label' => "DCADMINLogin", 'checked' => '1', 'position' => 50, 'class' => 'center'),
 	);
 	// Extra fields
 	$extrafieldsobjectkey = $contactstatic->table_element;
@@ -1631,7 +1631,7 @@ function show_contacts($conf, $langs, $db, $object, $backtopage = '', $showuserl
 		}
 	}
 	if ($showuserlogin) {
-		print '<th class="wrapcolumntitle liste_titre">' . $langs->trans("DolibarrLogin") . '</th>';
+		print '<th class="wrapcolumntitle liste_titre">' . $langs->trans("DCADMINLogin") . '</th>';
 	}
 	// Extra fields
 	$extrafieldsobjectkey = $contactstatic->table_element;

@@ -29,7 +29,7 @@
  *		\brief      File that defines the balance of paid holiday of users.
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf

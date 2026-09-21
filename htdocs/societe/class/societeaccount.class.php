@@ -65,7 +65,7 @@ class SocieteAccount extends CommonObject
 	 *  	'date', 'datetime', 'timestamp', 'duration',
 	 *  	'boolean', 'checkbox', 'radio', 'array',
 	 *  	'mail', 'phone', 'url', 'password', 'ip'
-	 *		Note: Filter must be a Dolibarr Universal Filter syntax string. Example: "(t.ref:like:'SO-%') or (t.date_creation:>:'20160101') or (t.status:!=:0) or (t.nature:is:NULL)"
+	 *		Note: Filter must be a DCADMIN Universal Filter syntax string. Example: "(t.ref:like:'SO-%') or (t.date_creation:>:'20160101') or (t.status:!=:0) or (t.nature:is:NULL)"
 	 *  'label' the translation key.
 	 *  'picto' is code of a picto to show before value in forms
 	 *  'enabled' is a condition when the field must be managed (Example: 1 or 'getDolGlobalInt("MY_SETUP_PARAM")' or 'isModEnabled("multicurrency")' ...)
@@ -245,7 +245,7 @@ class SocieteAccount extends CommonObject
 		if (isModEnabled('webportal')) {
 			$this->fields['site']['visible'] = 1;
 			$this->fields['site']['enabled'] = 1;
-			$site_type_list['dolibarr_portal'] = $langs->trans('WebsiteTypeDolibarrPortal');
+			$site_type_list['dolibarr_portal'] = $langs->trans('WebsiteTypeDCADMINPortal');
 		}
 
 		if (isModEnabled('website')) {
@@ -253,7 +253,7 @@ class SocieteAccount extends CommonObject
 			$this->fields['fk_website']['enabled'] = 1;
 			$this->fields['site']['visible'] = 1;
 			$this->fields['site']['enabled'] = 1;
-			$site_type_list['dolibarr_website'] = $langs->trans('WebsiteTypeDolibarrWebsite');
+			$site_type_list['dolibarr_website'] = $langs->trans('WebsiteTypeDCADMINWebsite');
 		}
 
 		$this->fields['site']['arrayofkeyval'] = $site_type_list;

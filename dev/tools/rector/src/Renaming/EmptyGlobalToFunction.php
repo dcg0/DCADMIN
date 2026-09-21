@@ -1,6 +1,6 @@
 <?php
 
-namespace Dolibarr\Rector\Renaming;
+namespace DCADMIN\Rector\Renaming;
 
 use PhpParser\Node;
 use PhpParser\Node\Arg;

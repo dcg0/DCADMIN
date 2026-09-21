@@ -24,7 +24,7 @@
 
 /**
  *	\file       htdocs/index.php
- *	\brief      Dolibarr home page
+ *	\brief      DCADMIN home page
  */
 
 
@@ -202,7 +202,7 @@ if (!getDolGlobalString('MAIN_REMOVE_INSTALL_WARNING')) {
 }
 
 /*
- * Dashboard Dolibarr statistics
+ * Dashboard DCADMIN statistics
  * Hidden for external users
  */
 
@@ -211,7 +211,7 @@ print load_fiche_titre('&nbsp;', $resultboxes['selectboxlist'], '', 0, '', 'titl
 // Load translation files required by page
 $langs->loadLangs(array('commercial', 'bills', 'orders', 'contracts'));
 
-// Dolibarr Working Board with weather
+// DCADMIN Working Board with weather
 if (!getDolGlobalString('MAIN_DISABLE_GLOBAL_WORKBOARD') && getDolGlobalInt('MAIN_OPTIMIZEFORTEXTBROWSER') < 2) {
 	$showweather = (!getDolGlobalString('MAIN_DISABLE_METEO') || getDolGlobalInt('MAIN_DISABLE_METEO') == 2) ? 1 : 0;
 
@@ -545,7 +545,7 @@ if (!getDolGlobalString('MAIN_DISABLE_GLOBAL_WORKBOARD') && getDolGlobalInt('MAI
 	$boxwork .= '<div class="box">';
 	$boxwork .= '<table summary="'.dol_escape_htmltag($langs->trans("WorkingBoard")).'" class="noborder boxtable boxtablenobottom boxworkingboard centpercent">'."\n";
 	$boxwork .= '<tr class="liste_titre">';
-	$boxwork .= '<th class="liste_titre"><div class="inline-block valignmiddle">'.$langs->trans("DolibarrWorkBoard").'</div>';
+	$boxwork .= '<th class="liste_titre"><div class="inline-block valignmiddle">'.$langs->trans("DCADMINWorkBoard").'</div>';
 	if ($showweather) {
 		if ($totallate > 0) {
 			$text = $langs->transnoentitiesnoconv("WarningYouHaveAtLeastOneTaskLate").' ('.$langs->transnoentitiesnoconv(

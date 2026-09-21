@@ -25,13 +25,13 @@
  *      \brief      Description and activation file for the module FTP
  */
 
-include_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
+include_once DOL_DOCUMENT_ROOT.'/core/modules/DCADMINModules.class.php';
 
 
 /**
  * 	Description and activation class for module FTP
  */
-class modFTP extends DolibarrModules
+class modFTP extends DCADMINModules
 {
 	/**
 	 *   Constructor. Define names, constants, directories, boxes, permissions

@@ -19,7 +19,7 @@
 
 // Put here all includes required by your class file
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf

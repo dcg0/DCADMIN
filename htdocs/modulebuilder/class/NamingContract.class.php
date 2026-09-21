@@ -32,7 +32,7 @@ require_once DOL_DOCUMENT_ROOT . '/core/lib/functions.lib.php';
  * entries sequentially on the same string.
  *
  * applyTo() uses str_replace() directly — NOT make_substitutions() — to avoid unintended
- * processing of Dolibarr's __(key)__ and __[key]__ patterns present in raw template content.
+ * processing of DCADMIN's __(key)__ and __[key]__ patterns present in raw template content.
  */
 final class NamingContract
 {
@@ -131,7 +131,7 @@ final class NamingContract
 	/**
 	 * Apply substitution to a filename (lowercase tokens only).
 	 *
-	 * Filenames in Dolibarr are always lowercase — only mymodule/myobject are substituted.
+	 * Filenames in DCADMIN are always lowercase — only mymodule/myobject are substituted.
 	 * For module-only contracts (objectNameLower = ''), myobject is not substituted.
 	 *
 	 * @param string $filename Template filename containing mymodule/myobject placeholders

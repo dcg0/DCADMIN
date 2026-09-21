@@ -208,12 +208,12 @@ if (isModEnabled('ecm') && getDolGlobalString('DAV_ALLOW_ECM_DIR')) {
 
 
 // Principals Backend
-//$principalBackend = new \Sabre\DAVACL\PrincipalBackend\Dolibarr($user,$db);
+//$principalBackend = new \Sabre\DAVACL\PrincipalBackend\DCADMIN($user,$db);
 // /principals
 //$nodes[] = new \Sabre\DAVACL\PrincipalCollection($principalBackend);
 // CardDav & CalDav Backend
-//$carddavBackend   = new \Sabre\CardDAV\Backend\Dolibarr($user,$db,$langs);
-//$caldavBackend    = new \Sabre\CalDAV\Backend\Dolibarr($user,$db,$langs, $cdavLib);
+//$carddavBackend   = new \Sabre\CardDAV\Backend\DCADMIN($user,$db,$langs);
+//$caldavBackend    = new \Sabre\CalDAV\Backend\DCADMIN($user,$db,$langs, $cdavLib);
 // /addressbook
 //$nodes[] = new \Sabre\CardDAV\AddressBookRoot($principalBackend, $carddavBackend);
 // /calendars

@@ -1061,13 +1061,13 @@ class Conf extends stdClass
 			$this->theme = $this->global->MAIN_THEME;
 			$this->css = "/theme/".$this->theme."/style.css.php";
 
-			// conf->email_from = email by default to send Dolibarr automatic emails
+			// conf->email_from = email by default to send DCADMIN automatic emails
 			$this->email_from = "robot@example.com";
 			if (!empty($this->global->MAIN_MAIL_EMAIL_FROM)) {
 				$this->email_from = $this->global->MAIN_MAIL_EMAIL_FROM;
 			}
 
-			// conf->notification->email_from = email by default to send Dolibarr notifications
+			// conf->notification->email_from = email by default to send DCADMIN notifications
 			if (isModEnabled('notification')) {
 				$this->notification->email_from = $this->email_from;
 				if (!empty($this->global->NOTIFICATION_EMAIL_FROM)) {

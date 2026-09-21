@@ -593,7 +593,7 @@ class CMailFile
 				$smtps->setMoreInHeader($moreinheader);
 			}
 
-			//X-Dolibarr-TRACKID, In-Reply-To, References and $moreinheader will be added to header inside the smtps->getHeader
+			//X-DCADMIN-TRACKID, In-Reply-To, References and $moreinheader will be added to header inside the smtps->getHeader
 
 			if (!empty($this->html)) {
 				if (!empty($css)) {
@@ -681,7 +681,7 @@ class CMailFile
 			// Adding a trackid header to a message
 			$headers = $this->message->getHeaders();
 
-			$headers->addTextHeader('X-Dolibarr-TRACKID', $this->trackid.'@'.$host);
+			$headers->addTextHeader('X-DCADMIN-TRACKID', $this->trackid.'@'.$host);
 			$this->msgid = uniqid('', true).'.swiftmailer-dolibarr-'.$this->trackid.'@'.$host;
 			$headerID = $this->msgid;
 			$msgid = $headers->get('Message-ID');
@@ -1162,7 +1162,7 @@ class CMailFile
 						$expire = false;
 						// Is token expired or will token expire in the next 30 seconds
 						if (is_object($tokenobj)) {
-							// time() is used in tokenobj @phan-suppress-next-line DolibarrForbiddenFunctionPlugin
+							// time() is used in tokenobj @phan-suppress-next-line DCADMINForbiddenFunctionPlugin
 							$expire = ($tokenobj->getEndOfLife() !== -9002 && $tokenobj->getEndOfLife() !== -9001 && time() > ($tokenobj->getEndOfLife() - 30));
 						}
 						// Token expired so we refresh it
@@ -1354,7 +1354,7 @@ class CMailFile
 						$expire = false;
 						// Is token expired or will token expire in the next 30 seconds
 						if (is_object($tokenobj)) {
-							// time() is used in tokenobj @phan-suppress-next-line DolibarrForbiddenFunctionPlugin
+							// time() is used in tokenobj @phan-suppress-next-line DCADMINForbiddenFunctionPlugin
 							$expire = ($tokenobj->getEndOfLife() !== -9002 && $tokenobj->getEndOfLife() !== -9001 && time() > ($tokenobj->getEndOfLife() - 30));
 						}
 						// Token expired so we refresh it
@@ -1733,7 +1733,7 @@ class CMailFile
 		if ($trackid) {
 			$this->msgid = uniqid('', true).'.phpmail-dolibarr-'.$trackid.'@'.$host;
 			$out .= 'Message-ID: <'.$this->msgid.">".$this->eol2; // Uppercase seems replaced by phpmail
-			$out .= 'X-Dolibarr-TRACKID: '.$trackid.'@'.$host.$this->eol2;
+			$out .= 'X-DCADMIN-TRACKID: '.$trackid.'@'.$host.$this->eol2;
 		} else {
 			$this->msgid = uniqid('', true).'.phpmail@'.$host;
 			$out .= 'Message-ID: <'.$this->msgid.">".$this->eol2;
@@ -1751,7 +1751,7 @@ class CMailFile
 		if (!empty($_SERVER['REMOTE_ADDR'])) {
 			$out .= "X-RemoteAddr: ".$_SERVER['REMOTE_ADDR'].$this->eol2;
 		}
-		$out .= "X-Mailer: Dolibarr version ".DOL_VERSION." (using php mail)".$this->eol2;
+		$out .= "X-Mailer: DCADMIN version ".DOL_VERSION." (using php mail)".$this->eol2;
 		$out .= "Mime-Version: 1.0".$this->eol2;
 
 		//$out.= "From: ".$this->getValidAddress($this->addr_from,3,1).$this->eol;

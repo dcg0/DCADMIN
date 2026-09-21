@@ -32,7 +32,7 @@ if (!defined('NOTOKENRENEWAL')) {
 }
 
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf
@@ -93,7 +93,7 @@ $modulesdir = dolGetModulesDirs();
 
 
 $filename = array();
-'@phan-var-force DolibarrModules[] $modules';
+'@phan-var-force DCADMINModules[] $modules';
 $modules = array();
 $orders = array();
 $categ = array();
@@ -127,7 +127,7 @@ foreach ($modulesdir as $dir) {
 						if (class_exists($modName)) {
 							try {
 								$objMod = new $modName($db);
-								'@phan-var-force DolibarrModules $objMod';
+								'@phan-var-force DCADMINModules $objMod';
 								$modNameLoaded[$modName] = $dir;
 
 								if (!$objMod->numero > 0 && $modName != 'modUser') {
@@ -242,7 +242,7 @@ $key = -1;
 $i = 0;
 foreach ($orders as $tmpkey => $tmpvalue) {
 	$tmpMod = $modules[$tmpkey];
-	'@phan-var-force DolibarrModules $tmpMod';
+	'@phan-var-force DCADMINModules $tmpMod';
 	if ($tmpMod->numero == $id) {
 		$key = $i;
 		$modName = $filename[$tmpkey];

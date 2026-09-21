@@ -24,7 +24,7 @@
  *      \brief      Page to setup external calendars for agenda module
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/admin.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/core/class/html.formadmin.class.php';
@@ -200,7 +200,7 @@ print '<table class="border tableforfield centpercent">';
 print '<tr><td id="anchorforperms" class="titlefield">'.$langs->trans("Login").'</td>';
 if (!empty($object->ldap_sid) && $object->status == 0) {
 	print '<td class="error">';
-	print $langs->trans("LoginAccountDisableInDolibarr");
+	print $langs->trans("LoginAccountDisableInDCADMIN");
 	print '</td>';
 } else {
 	print '<td>';

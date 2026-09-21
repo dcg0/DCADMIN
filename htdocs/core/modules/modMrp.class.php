@@ -28,12 +28,12 @@
  *  \ingroup    mrp
  *  \brief      Description and activation file for the module Mrp
  */
-include_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
+include_once DOL_DOCUMENT_ROOT.'/core/modules/DCADMINModules.class.php';
 
 /**
  *  Description and activation class for module Mrp
  */
-class modMrp extends DolibarrModules
+class modMrp extends DCADMINModules
 {
 	/**
 	 * Constructor. Define names, constants, directories, boxes, permissions
@@ -46,7 +46,7 @@ class modMrp extends DolibarrModules
 		$this->db = $db;
 
 		// Id for module (must be unique).
-		// Use here a free id (See in Home -> System information -> Dolibarr for list of used modules id).
+		// Use here a free id (See in Home -> System information -> DCADMIN for list of used modules id).
 		$this->numero = 660;
 		// Key text used to identify module (for permissions, menus, etc...)
 		$this->rights_class = 'mrp';
@@ -125,7 +125,7 @@ class modMrp extends DolibarrModules
 		$this->conflictwith = array(); // List of module class names as string this module is in conflict with. Example: array('modModuleToDisable1', ...)
 		$this->langfiles = array("mrp");
 		$this->phpmin = array(7, 0); // Minimum version of PHP required by module
-		$this->need_dolibarr_version = array(8, 0); // Minimum version of Dolibarr required by module
+		$this->need_dolibarr_version = array(8, 0); // Minimum version of DCADMIN required by module
 		$this->warnings_activation = array();
 		$this->warnings_activation_ext = array();
 		//$this->automatic_activation = array('FR'=>'MrpWasAutomaticallyActivatedBecauseOfYourCountryChoice');
@@ -506,7 +506,7 @@ class modMrp extends DolibarrModules
 
 	/**
 	 *  Function called when module is enabled.
-	 *  The init function add constants, boxes, permissions and menus (defined in constructor) into Dolibarr database.
+	 *  The init function add constants, boxes, permissions and menus (defined in constructor) into DCADMIN database.
 	 *  It also creates data directories
 	 *
 	 *  @param      string  $options    Options when enabling module ('', 'noboxes')
@@ -550,7 +550,7 @@ class modMrp extends DolibarrModules
 
 	/**
 	 *  Function called when module is disabled.
-	 *  Remove from database constants, boxes and permissions from Dolibarr database.
+	 *  Remove from database constants, boxes and permissions from DCADMIN database.
 	 *  Data directories are not deleted
 	 *
 	 *  @param      string	$options    Options when enabling module ('', 'noboxes')

@@ -36,7 +36,7 @@ if (!defined('NOIPCHECK')) {
 	define('NOIPCHECK', '1'); // Do not check IP defined into conf $dolibarr_main_restrict_ip
 }
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 require_once '../../core/lib/functions2.lib.php';
 /**
@@ -204,7 +204,7 @@ foreach ($modulesdir as $dir) {
 	}
 }
 
-'@phan-var-force DolibarrModules[] $modules';
+'@phan-var-force DCADMINModules[] $modules';
 asort($orders);
 
 
@@ -254,7 +254,7 @@ if (GETPOST('action', 'aZ09') == 'gotodemo') {     // Action run when we click o
 
 $head = '';
 $head .= '<meta name="keywords" content="demo,online,demonstration,example,test,erp,crm,demos,web">'."\n";
-$head .= '<meta name="description" content="Dolibarr ERP and CRM demo. You can test here several profiles for Dolibarr ERP and CRM demonstration.">'."\n";
+$head .= '<meta name="description" content="DCADMIN ERP and CRM demo. You can test here several profiles for DCADMIN ERP and CRM demonstration.">'."\n";
 
 $head .= '
 <script type="text/javascript">
@@ -283,14 +283,14 @@ jQuery(document).ready(function () {
 });
 </script>';
 
-llxHeaderVierge($langs->trans("DolibarrDemo"), $head);
+llxHeaderVierge($langs->trans("DCADMINDemo"), $head);
 
 
 print "\n";
 
 print '<div class="demoban demobackground">';
 print '<div class="right" style="padding-right: 30px; padding-top: 30px;">';
-print '<a alt="Official portal of your ERP CRM application" targe="_blank" href="https://www.dolibarr.org?utm_medium=website&utm_source=demo"><img class="demologo" src="'.DOL_URL_ROOT.'/theme/dolibarr_logo.svg" alt="Dolibarr logo"></a>';
+print '<a alt="Official portal of your ERP CRM application" targe="_blank" href="https://www.dolibarr.org?utm_medium=website&utm_source=demo"><img class="demologo" src="'.DOL_URL_ROOT.'/theme/dolibarr_logo.svg" alt="DCADMIN logo"></a>';
 print '</div>';
 print '</div>';
 
@@ -346,7 +346,7 @@ foreach ($demoprofiles as $profilearray) {
 		print '<input type="hidden" name="dol_no_mouse_hover" value="'.$conf->dol_no_mouse_hover.'">'."\n";
 		print '<input type="hidden" name="dol_use_jmobile" value="'.$conf->dol_use_jmobile.'">'."\n";
 
-		print '<div id="div'.$profilearray['key'].'" summary="Dolibarr online demonstration for profile '.$profilearray['label'].'" class="center inline-block CTable CTableRow'.($i % 2 == 0 ? '1' : '0').'">'."\n";
+		print '<div id="div'.$profilearray['key'].'" summary="DCADMIN online demonstration for profile '.$profilearray['label'].'" class="center inline-block CTable CTableRow'.($i % 2 == 0 ? '1' : '0').'">'."\n";
 
 
 		print '<div id="a1'.$profilearray['key'].'" class="demobox '.(empty($profilearray['url']) ? 'modulelineshow cursorpointer maxwidth1000' : 'nomodulelines').'">';

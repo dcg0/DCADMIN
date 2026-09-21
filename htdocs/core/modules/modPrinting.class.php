@@ -26,14 +26,14 @@
  *  \ingroup    printing
  *  \brief      Description and activation file for the module Direct Printing
  */
-include_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
+include_once DOL_DOCUMENT_ROOT.'/core/modules/DCADMINModules.class.php';
 
 
 
 /**
  *  Class to describe and activate module Direct Printing
  */
-class modPrinting extends DolibarrModules
+class modPrinting extends DCADMINModules
 {
 	/**
 	 *  Constructor
@@ -71,7 +71,7 @@ class modPrinting extends DolibarrModules
 		$this->requiredby = array(); // List of module ids to disable if this one is disabled
 		$this->conflictwith = array(); // List of module class names as string this module is in conflict with
 		$this->phpmin = array(7, 0); // Minimum version of PHP required by module
-		$this->need_dolibarr_version = array(3, 7, -2); // Minimum version of Dolibarr required by module
+		$this->need_dolibarr_version = array(3, 7, -2); // Minimum version of DCADMIN required by module
 		$this->conflictwith = array();
 		$this->langfiles = array("printing");
 

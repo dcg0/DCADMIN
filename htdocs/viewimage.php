@@ -22,7 +22,7 @@
 
 /**
  *		\file       htdocs/viewimage.php
- *		\brief      Wrapper to show images into Dolibarr screens.
+ *		\brief      Wrapper to show images into DCADMIN screens.
  *		\remarks    Call to wrapper is :
  *					DOL_URL_ROOT.'/viewimage.php?modulepart=diroffile&file=relativepathofofile&cache=0
  *					DOL_URL_ROOT.'/viewimage.php?hashp=sharekey
@@ -201,7 +201,7 @@ if ($modulepart == 'fckeditor') {
 
 $cachestring = GETPOST("cache", 'aZ09');	// May be 1, or an int, or a hash
 if ($cachestring) {
-	// Important: The following code is to avoid a page request by the browser and PHP CPU at each Dolibarr page access.
+	// Important: The following code is to avoid a page request by the browser and PHP CPU at each DCADMIN page access.
 	// We are here when param cache=xxx to force a cache policy:
 	//  xxx=1 means cache of 3600s
 	//  xxx=abcdef or 123456789 means a cache of 1 week (the key will be modified to get break cache use)

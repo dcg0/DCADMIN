@@ -19,7 +19,7 @@
 /**
  * \file    htdocs/zapier/lib/zapier.lib.php
  * \ingroup zapier
- * \brief   Library files with common functions for ZapierForDolibarr
+ * \brief   Library files with common functions for ZapierForDCADMIN
  */
 
 /**

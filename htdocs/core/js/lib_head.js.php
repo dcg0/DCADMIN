@@ -65,7 +65,7 @@ if (!defined('MAIN_ALREADY_INCLUDED')) {
 if (!defined('MAIN_ALREADY_INCLUDED')) {
 	// Define javascript type
 	top_httphead('text/javascript; charset=UTF-8');
-	// Important: Following code is to avoid page request by browser and PHP CPU at each Dolibarr page access.
+	// Important: Following code is to avoid page request by browser and PHP CPU at each DCADMIN page access.
 	header('Cache-Control: max-age=10800, public, must-revalidate');
 }
 
@@ -145,7 +145,7 @@ if ($thousand == 'Space') {
 }
 
 ?>
-// Javascript libraries for Dolibarr ERP CRM (https://www.dolibarr.org)
+// Javascript libraries for DCADMIN ERP CRM (https://www.dolibarr.org)
 
 
 /*
@@ -582,7 +582,7 @@ function cleanSerialize(expr) {
  * See also document_preview() that also maje a dialogforpopup.dialog().
  * See also newpopup that use window.open.
  */
-function confirmDolibarr(msg, id, popupWidth = 400, popupHeight = 300, disableCancelButton = 0) {
+function confirmDCADMIN(msg, id, popupWidth = 400, popupHeight = 300, disableCancelButton = 0) {
 	let alink = document.getElementById(id);
 	let title = <?php echo "'".dol_escape_js($langs->transnoentitiesnoconv("Note"))."'"; ?>;
 
@@ -590,7 +590,7 @@ function confirmDolibarr(msg, id, popupWidth = 400, popupHeight = 300, disableCa
 		return true;
 	}
 
-	console.log("Call confirmDolibarr disableCancelButton="+disableCancelButton);
+	console.log("Call confirmDCADMIN disableCancelButton="+disableCancelButton);
 
 	let buttons = {};
 	if (disableCancelButton === 0) {
@@ -699,9 +699,9 @@ function setConstant(url, code, input, entity, strict, forcereload, userid, toke
 			}
 		});
 
-		// Execute js context Dolibarr Hooks
-		if (typeof Dolibarr != 'undefined') {
-			Dolibarr.executeHook('setConstant', {url : saved_url, code, input, entity, strict, forcereload, userid, token, value, userconst});
+		// Execute js context DCADMIN Hooks
+		if (typeof DCADMIN != 'undefined') {
+			DCADMIN.executeHook('setConstant', {url : saved_url, code, input, entity, strict, forcereload, userid, token, value, userconst});
 		}
 
 		if (forcereload) {
@@ -811,9 +811,9 @@ function delConstant(url, code, input, entity, strict, forcereload, userid, toke
 			}
 		});
 
-		// Execute js context Dolibarr Hooks
-		if (typeof Dolibarr != 'undefined') {
-			Dolibarr.executeHook('delConstant', {url : saved_url, code, input, entity, strict, forcereload, userid, token, userconst});
+		// Execute js context DCADMIN Hooks
+		if (typeof DCADMIN != 'undefined') {
+			DCADMIN.executeHook('delConstant', {url : saved_url, code, input, entity, strict, forcereload, userid, token, userconst});
 		}
 
 		if (forcereload) {
@@ -1057,7 +1057,7 @@ function copyToClipboard(text, text2, popupTitle = '')
  * @param	url			Url
  * @param	title  		Title of popup
  * @return	boolean		False
- * @see document_preview() and confirmDolibarr()
+ * @see document_preview() and confirmDCADMIN()
  */
 function newpopup(url, title) {
 	var argv = newpopup.arguments;
@@ -1082,7 +1082,7 @@ function newpopup(url, title) {
  * @param 	type 		Mime file type ("image/jpeg", "application/pdf", "text/html")
  * @param 	title		Title of popup
  * @return	void
- * @see also confirmDolibarr() that also make a dialogforpopup.dialog()
+ * @see also confirmDCADMIN() that also make a dialogforpopup.dialog()
  * @see also newpopup()that use window.open
  */
 function document_preview(file, type, title)
@@ -1450,7 +1450,7 @@ function dolroundjs(number, decimals) { return +(Math.round(number + "e+" + deci
  * @param  {number|string} amount    The amount to show
  * @param  {string} mode             'MT' or 'MU'
  * @param  {string} currency_code    ISO code of currency (empty by default)
- * @param  {string} force_locale     ISO code locale to use (if empty, will use Dolibarr's current locale code)
+ * @param  {string} force_locale     ISO code locale to use (if empty, will use DCADMIN's current locale code)
  * @return {string}                  The amount with digits
  *
  */
@@ -1484,7 +1484,7 @@ function pricejs(amount, mode = 'MT', currency_code = '', force_locale = '') {
 		return Intl.NumberFormat(locale_code.replace('_', '-'), formattingOptions).format(amount);
 	}
 
-	// No Intl -> attempt to format the number in a way similar to Dolibarr PHP's `price()` function
+	// No Intl -> attempt to format the number in a way similar to DCADMIN PHP's `price()` function
 	amountAsLocalizedString = amount.toFixed(nDigits).replace(
 		/((?!^)(?:\d{3})*)(?:\.(\d+))?$/,
 		(fullMatch, digitsByThree, decimals) =>

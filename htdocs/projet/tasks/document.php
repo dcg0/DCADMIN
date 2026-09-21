@@ -27,7 +27,7 @@
  *	\brief      Page de gestion des documents attachees a une tache d'un projet
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf

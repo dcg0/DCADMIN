@@ -109,7 +109,7 @@ abstract class CommonClassTest extends TestCase
 	protected $savmysoc;
 
 	/**
-	 * Number of Dolibarr log lines to show in case of error
+	 * Number of DCADMIN log lines to show in case of error
 	 *
 	 * @var integer
 	 */
@@ -358,7 +358,7 @@ abstract class CommonClassTest extends TestCase
 	/**
 	 * Map module names to the 'class' name (the class is: mod<CLASSNAME>)
 	 * Value is null when the module is not internal to the default
-	 * Dolibarr setup.
+	 * DCADMIN setup.
 	 */
 	const VALID_MODULE_MAPPING = array(
 		'accounting' => 'Accounting',
@@ -476,7 +476,7 @@ abstract class CommonClassTest extends TestCase
 	/**
 	 * Map module names to the 'class' name (the class is: mod<CLASSNAME>)
 	 * Value is null when the module is not internal to the default
-	 * Dolibarr setup.
+	 * DCADMIN setup.
 	 */
 	const OTHER_MODULE_MAPPING = array(
 		'captureserver' => 'CaptureServer'

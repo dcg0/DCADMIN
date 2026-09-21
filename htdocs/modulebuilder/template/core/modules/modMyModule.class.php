@@ -26,14 +26,14 @@
  *  \ingroup    mymodule
  *  \brief      Description and activation file for module MyModule
  */
-include_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
+include_once DOL_DOCUMENT_ROOT.'/core/modules/DCADMINModules.class.php';
 require_once DOL_DOCUMENT_ROOT . '/core/lib/functions.lib.php';
 
 
 /**
  *  Description and activation class for module MyModule
  */
-class modMyModule extends DolibarrModules
+class modMyModule extends DCADMINModules
 {
 	/**
 	 * Constructor. Define names, constants, directories, boxes, permissions
@@ -47,7 +47,7 @@ class modMyModule extends DolibarrModules
 		$this->db = $db;
 
 		// Id for module (must be unique).
-		// Use here a free id (See in Home -> System information -> Dolibarr for list of used modules id).
+		// Use here a free id (See in Home -> System information -> DCADMIN for list of used modules id).
 		$this->numero = 500000; // TODO Go on page https://wiki.dolibarr.org/index.php/List_of_modules_id to reserve an id number for your module
 
 		// Key text used to identify module (for permissions, menus, etc...)
@@ -172,8 +172,8 @@ class modMyModule extends DolibarrModules
 		// Prerequisites
 		$this->phpmin = array(7, 2); // Minimum version of PHP required by module
 		// $this->phpmax = array(8, 0); // Maximum version of PHP required by module
-		$this->need_dolibarr_version = array(19, -3); // Minimum version of Dolibarr required by module
-		// $this->max_dolibarr_version = array(19, -3); // Maximum version of Dolibarr required by module
+		$this->need_dolibarr_version = array(19, -3); // Minimum version of DCADMIN required by module
+		// $this->max_dolibarr_version = array(19, -3); // Maximum version of DCADMIN required by module
 		$this->need_javascript_ajax = 0;
 
 		// Messages at activation
@@ -474,7 +474,7 @@ class modMyModule extends DolibarrModules
 
 	/**
 	 *  Function called when module is enabled.
-	 *  The init function add constants, boxes, permissions and menus (defined in constructor) into Dolibarr database.
+	 *  The init function add constants, boxes, permissions and menus (defined in constructor) into DCADMIN database.
 	 *  It also creates data directories
 	 *
 	 *  @param      string  $options    Options when enabling module ('', 'noboxes')
@@ -542,7 +542,7 @@ class modMyModule extends DolibarrModules
 
 	/**
 	 *	Function called when module is disabled.
-	 *	Remove from database constants, boxes and permissions from Dolibarr database.
+	 *	Remove from database constants, boxes and permissions from DCADMIN database.
 	 *	Data directories are not deleted
 	 *
 	 *	@param	string		$options	Options when enabling module ('', 'noboxes')

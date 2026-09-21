@@ -26,7 +26,7 @@ if (!defined("NOHTTPSREDIRECT")) {
 	define("NOHTTPSREDIRECT", '1');
 }
 
-// Defined some constants and load Dolibarr env to reduce PHPStan bootstrap that fails to load a lot of things.
+// Defined some constants and load DCADMIN env to reduce PHPStan bootstrap that fails to load a lot of things.
 $dolibarr_main_document_root = __DIR__ . '/../../../htdocs';
 define('DOL_DOCUMENT_ROOT', __DIR__ . '/../../../htdocs');
 define('DOL_DATA_ROOT', __DIR__ . '/../../../documents');

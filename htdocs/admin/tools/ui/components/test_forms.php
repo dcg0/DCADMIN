@@ -21,7 +21,7 @@ define("NOCSRFCHECK", 1); // We accept to go on this page from external web site
 	define('NOSESSION', '1');
 }*/
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../../../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/date.lib.php';
 
@@ -48,7 +48,7 @@ llxHeader();
 
 ?>
 
-This page is a sample of page using Dolibarr HTML widget methods. It is designed to make test with<br>
+This page is a sample of page using DCADMIN HTML widget methods. It is designed to make test with<br>
 - css (add parameter &amp;theme=newtheme to test another theme or edit css of current theme)<br>
 - jmobile (add parameter <a class="wordbreak" href="<?php echo $_SERVER["PHP_SELF"].'?dol_use_jmobile=1&dol_optimize_smallscreen=1'; ?>">dol_use_jmobile=1&amp;dol_optimize_smallscreen=1</a> and switch to small screen < 570 to enable with emulated jmobile)<br>
 - no javascript / usage for blind people (add parameter <a class="wordbreak" href="<?php echo $_SERVER["PHP_SELF"].'?nojs=1'; ?>">nojs=1</a> to force disable javascript)<br>

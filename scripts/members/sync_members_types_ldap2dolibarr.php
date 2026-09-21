@@ -25,7 +25,7 @@
 /**
  * \file 	scripts/members/sync_members_types_ldap2dolibarr.php
  * \ingroup ldap member
- * \brief 	Script to update members types into Dolibarr from LDAP
+ * \brief 	Script to update members types into DCADMIN from LDAP
  */
 
 if (!defined('NOSESSION')) {
@@ -119,7 +119,7 @@ print "login=" . getDolGlobalString('LDAP_ADMIN_DN')."\n";
 print "pass=".preg_replace('/./i', '*', getDolGlobalString('LDAP_ADMIN_PASS'))."\n";
 print "DN to extract=" . getDolGlobalString('LDAP_MEMBER_TYPE_DN')."\n";
 print 'Filter=(' . getDolGlobalString('LDAP_KEY_MEMBERS_TYPES').'=*)'."\n";
-print "----- To Dolibarr database:\n";
+print "----- To DCADMIN database:\n";
 print "type=".$conf->db->type."\n";
 print "host=".$conf->db->host."\n";
 print "port=".$conf->db->port."\n";
@@ -136,14 +136,14 @@ if (!$confirmed) {
 }
 
 if (!getDolGlobalString('LDAP_MEMBER_TYPE_DN')) {
-	print $langs->trans("Error").': '.$langs->trans("LDAP setup for members types not defined inside Dolibarr");
+	print $langs->trans("Error").': '.$langs->trans("LDAP setup for members types not defined inside DCADMIN");
 	exit(1);
 }
 
 $ldap = new Ldap();
 $result = $ldap->connectBind();
 if ($result >= 0) {
-	// We disable synchro Dolibarr-LDAP
+	// We disable synchro DCADMIN-LDAP
 	$conf->global->LDAP_MEMBER_TYPE_ACTIVE = 0;
 
 	$ldaprecords = $ldap->getRecords('*', getDolGlobalString('LDAP_MEMBER_TYPE_DN'), getDolGlobalString('LDAP_KEY_MEMBERS_TYPES'), $required_fields, 0, array(getDolGlobalString('LDAP_MEMBER_TYPE_FIELD_GROUPMEMBERS')));

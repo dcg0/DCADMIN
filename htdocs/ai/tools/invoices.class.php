@@ -33,7 +33,7 @@ require_once DOL_DOCUMENT_ROOT . '/core/lib/date.lib.php';
 /**
  * Class ToolInvoices
  *
- * Provides various tools related to Dolibarr invoices.
+ * Provides various tools related to DCADMIN invoices.
  */
 class ToolInvoices extends McpTool
 {
@@ -45,7 +45,7 @@ class ToolInvoices extends McpTool
 	 *
 	 * 	@param	DoliDB		$db			Database handler
 	 * 	@param	User|null	$user		Service user provided by McpHandler (from AI_MCP_USER_ID)
-	 * 	@param	Conf|null	$conf		Dolibarr config (optional)
+	 * 	@param	Conf|null	$conf		DCADMIN config (optional)
 	 */
 	public function __construct(DoliDB $db, $user = null, $conf = null)
 	{
@@ -306,7 +306,7 @@ class ToolInvoices extends McpTool
 			$sql .= " AND f.fk_statut IN (1, 2)";
 		} else {
 			// Default: 'unpaid'
-			// In Dolibarr: fk_statut=1 means Validated but not fully paid.
+			// In DCADMIN: fk_statut=1 means Validated but not fully paid.
 			$sql .= " AND f.fk_statut = 1 AND f.paye = 0";
 		}
 

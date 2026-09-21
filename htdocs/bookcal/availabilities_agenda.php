@@ -22,7 +22,7 @@
  *  \brief      Tab of events on Availabilities
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf

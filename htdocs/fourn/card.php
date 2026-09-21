@@ -31,7 +31,7 @@
  *	\brief      Page for supplier third party card (view, edit)
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf
@@ -478,7 +478,7 @@ if ($object->id > 0) {
 	if (isModEnabled('member')) {
 		$langs->load("members");
 		$langs->load("users");
-		print '<tr><td>'.$langs->trans("LinkedToDolibarrMember").'</td>';
+		print '<tr><td>'.$langs->trans("LinkedToDCADMINMember").'</td>';
 		print '<td>';
 		$adh = new Adherent($db);
 		$result = $adh->fetch(0, '', $object->id);
@@ -507,7 +507,7 @@ if ($object->id > 0) {
 
 	// Summary link
 	$boxstat .= '<div class="box divboxtable box-halfright">';
-	$boxstat .= '<table summary="'.dol_escape_htmltag($langs->trans("DolibarrStateBoard")).'" class="border boxtable boxtablenobottom boxtablenotop" width="100%">';
+	$boxstat .= '<table summary="'.dol_escape_htmltag($langs->trans("DCADMINStateBoard")).'" class="border boxtable boxtablenobottom boxtablenotop" width="100%">';
 	$boxstat .= '<tr class="impair nohover"><td colspan="2" class="tdboxstats nohover">';
 
 	if (isModEnabled('supplier_proposal')) {

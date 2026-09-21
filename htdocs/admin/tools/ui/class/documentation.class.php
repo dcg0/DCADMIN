@@ -86,8 +86,8 @@ class Documentation
 
 		$hookmanager->initHooks(array('uidocumentation'));
 
-		// Go back to Dolibarr
-		$this->menu['BackToDolibarr'] = array(
+		// Go back to DCADMIN
+		$this->menu['BackToDCADMIN'] = array(
 			'url' => dol_buildpath('modulebuilder/index.php', 1),
 			'icon' => 'fas fa-arrow-left',
 			'submenu' => array(),
@@ -238,33 +238,33 @@ class Documentation
 		);
 
 		// Elements
-		$this->menu['UxDolibarrContext'] = array(
+		$this->menu['UxDCADMINContext'] = array(
 			'url' => dol_buildpath($this->baseUrl.'/dolibarr-context/index.php', 1),
 			'icon' => 'fab fa-fort-awesome',
 			'submenu' => array(
-				'UxDolibarrContextHowItWork' => array(
+				'UxDCADMINContextHowItWork' => array(
 					'url' => dol_buildpath($this->baseUrl.'/dolibarr-context/index.php', 1),
 					'icon' => 'fab fa-fort-awesome',
 					'submenu' => array(),
 					'summary' => array(
 						'Introduction' => '#titlesection-basicusage',
 						'ConsoleHelp' => '#titlesection-console-help',
-						'JSDolibarrhooks' => '#titlesection-hooks',
-						'JSDolibarrhooksReadyVsInit' => '#titlesection-event-init-vs-ready',
-						'JSDolibarrAwaitHooks' => '#titlesection-await-hooks',
-						'JSDolibarrhooksAjaxSpecial' => '#titlesection-dom-initnewcontent',
+						'JSDCADMINhooks' => '#titlesection-hooks',
+						'JSDCADMINhooksReadyVsInit' => '#titlesection-event-init-vs-ready',
+						'JSDCADMINAwaitHooks' => '#titlesection-await-hooks',
+						'JSDCADMINhooksAjaxSpecial' => '#titlesection-dom-initnewcontent',
 						'ExampleOfCreatingNewContextTool' => '#titlesection-create-tool-example',
 						'SetEventMessageTool' => '#titlesection-tool-seteventmessage',
 						'SetAndUseContextVars' => '#titlesection-contextvars',
 					),
 				),
-				'UxDolibarrContextLangsTool' => array(
+				'UxDCADMINContextLangsTool' => array(
 					'url' => dol_buildpath($this->baseUrl.'/dolibarr-context/langs-tool.php', 1),
 					'icon' => 'far fa-flag',
 					'submenu' => array(),
 					'summary' => array(),
 				),
-				'UxDolibarrContextKnowsHooks' => array(
+				'UxDCADMINContextKnowsHooks' => array(
 					'url' => dol_buildpath($this->baseUrl.'/dolibarr-context/knows-hooks.php', 1),
 					'icon' => 'fa fa-anchor',
 					'submenu' => array(),
@@ -399,7 +399,7 @@ class Documentation
 		foreach ($menu as $key => $item) {
 			$levelclass = (!empty($item['submenu'])) ? 'li-withsubmenu' : '';
 			$levelclass .= (in_array($key, $this->view)) ? ' active' : '';
-			$levelclass .= ($key == 'BackToDolibarr') ? ' li-withseparator' : '';
+			$levelclass .= ($key == 'BackToDCADMIN') ? ' li-withseparator' : '';
 
 			print '<li class="'.trim($levelclass).' level-'.$level.'">';
 			print '<a href="'.$item['url'].'" class="'.((!empty($item['submenu'])) ? 'link-withsubmenu' : '').'">';

@@ -156,7 +156,7 @@ try {
 	$pdf_dimensions = [$format['width'], $format['height']];
 	$pdf = pdf_getInstance($pdf_dimensions, $format['unit'], 'l');
 	$default_font_size = pdf_getPDFFontSize($outputlangs);
-	$pdf->SetCreator("Dolibarr AI");
+	$pdf->SetCreator("DCADMIN AI");
 	$pdf->SetAuthor($user->getFullName($langs));
 
 	$pdf->SetTitle($title);

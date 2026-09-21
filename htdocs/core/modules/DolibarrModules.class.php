@@ -26,17 +26,17 @@
  */
 
 /**
- * \file           htdocs/core/modules/DolibarrModules.class.php
+ * \file           htdocs/core/modules/DCADMINModules.class.php
  * \brief          File of parent class of module descriptor class files
  */
 
 
 /**
- * Class DolibarrModules
+ * Class DCADMINModules
  *
  * Parent class for module descriptor class files
  */
-class DolibarrModules // Can not be abstract, because we need to instantiate it into unActivateModule to be able to disable a module whose files were removed.
+class DCADMINModules // Can not be abstract, because we need to instantiate it into unActivateModule to be able to disable a module whose files were removed.
 {
 	/**
 	 * @var DoliDB	Database handler
@@ -502,14 +502,14 @@ class DolibarrModules // Can not be abstract, because we need to instantiate it 
 	public $phpmax;
 
 	/**
-	 * @var null|int[] Minimum version of Dolibarr required by module.
-	 * e.g.: Dolibarr ≥ 3.6 = array(3, 6)
+	 * @var null|int[] Minimum version of DCADMIN required by module.
+	 * e.g.: DCADMIN ≥ 3.6 = array(3, 6)
 	 */
 	public $need_dolibarr_version;
 
 	/**
-	 * @var int[] Maximum version of Dolibarr required by module.
-	 * e.g.: Dolibarr ≤ 3.6 = array(3, 6)
+	 * @var int[] Maximum version of DCADMIN required by module.
+	 * e.g.: DCADMIN ≤ 3.6 = array(3, 6)
 	 */
 	public $max_dolibarr_version;
 
@@ -991,7 +991,7 @@ class DolibarrModules // Can not be abstract, because we need to instantiate it 
 	/**
 	 * Gives module version (translated if param $translated is on)
 	 * For 'experimental' modules, gives 'experimental' translation
-	 * For 'dolibarr' modules, gives Dolibarr version
+	 * For 'dolibarr' modules, gives DCADMIN version
 	 *
 	 * @param  int 		$translated 		1=Special version keys are translated, 0=Special version keys are not translated
 	 * @return string               		Module version
@@ -2274,9 +2274,9 @@ class DolibarrModules // Can not be abstract, because we need to instantiate it 
 						if ($modName && $modName != get_class($this)) {
 							include_once $dir.$file;
 							if (class_exists($modName)) {
-								'@phan-var-force class-string<DolibarrModules> $modName';
+								'@phan-var-force class-string<DCADMINModules> $modName';
 								$objMod = new $modName($db);
-								'@phan-var-force DolibarrModules $objMod';
+								'@phan-var-force DCADMINModules $objMod';
 								if (!empty($objMod->rights_class) && $objMod->rights_class === $rightsclass) {
 									$result = array('family' => $objMod->family, 'position' => (int) $objMod->getModulePosition());
 									break 2;
@@ -2751,7 +2751,7 @@ class DolibarrModules // Can not be abstract, because we need to instantiate it 
 
 	/**
 	 * Function called when module is enabled.
-	 * The init function adds tabs, constants, boxes, permissions and menus (defined in constructor) into Dolibarr database.
+	 * The init function adds tabs, constants, boxes, permissions and menus (defined in constructor) into DCADMIN database.
 	 * It also creates data directories
 	 *
 	 * @param  string $options Options when enabling module ('', 'newboxdefonly', 'noboxes', 'menuonly')
@@ -2765,7 +2765,7 @@ class DolibarrModules // Can not be abstract, because we need to instantiate it 
 
 	/**
 	 * Function called when module is disabled.
-	 * The remove() function removes tabs, constants, boxes, permissions and menus from Dolibarr database.
+	 * The remove() function removes tabs, constants, boxes, permissions and menus from DCADMIN database.
 	 * Data directories are not deleted
 	 *
 	 * @param  string $options Options when enabling module ('', 'noboxes', 'newboxdefonly')
@@ -2818,7 +2818,7 @@ class DolibarrModules // Can not be abstract, because we need to instantiate it 
 	    <div class="info-box-icon'.(!getDolGlobalString($const_name) ? '' : ' info-box-icon-module-enabled'.($versiontrans ? ' info-box-icon-module-warning' : '')).'">';
 
 		$alttext = '';
-		//if (is_array($objMod->need_dolibarr_version)) $alttext.=($alttext?' - ':'').'Dolibarr >= '.join('.',$objMod->need_dolibarr_version);
+		//if (is_array($objMod->need_dolibarr_version)) $alttext.=($alttext?' - ':'').'DCADMIN >= '.join('.',$objMod->need_dolibarr_version);
 		//if (is_array($objMod->phpmin)) $alttext.=($alttext?' - ':'').'PHP >= '.join('.',$objMod->phpmin);
 		if (!empty($this->picto)) {
 			if (preg_match('/^\//i', $this->picto)) {
@@ -2899,7 +2899,7 @@ class DolibarrModules // Can not be abstract, because we need to instantiate it 
 	}
 
 	/**
-	 * Check for module compliance with Dolibarr rules and law
+	 * Check for module compliance with DCADMIN rules and law
 	 * If a module is reported by this function,it is surely a malware. Delete it as soon as possible.
 	 *
 	 * @param	string		$nametocheck		Name to check

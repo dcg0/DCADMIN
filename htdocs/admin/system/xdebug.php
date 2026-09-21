@@ -22,7 +22,7 @@
  *     \brief      Page administration XDebug
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 
 /**

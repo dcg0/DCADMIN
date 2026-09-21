@@ -389,7 +389,7 @@ class vCard
 			$text .= $newkey.":".$value."\r\n";
 		}
 		$text .= "REV:".date("Ymd")."T".date("His")."Z\r\n";
-		//$text .= "MAILER: Dolibarr\r\n";
+		//$text .= "MAILER: DCADMIN\r\n";
 		$text .= "END:VCARD\r\n";
 
 		return $text;
@@ -420,7 +420,7 @@ class vCard
 	{
 		global $dolibarr_main_instance_unique_id;
 
-		$this->setProdId('Dolibarr '.DOL_VERSION);
+		$this->setProdId('DCADMIN '.DOL_VERSION);
 
 		$this->setUID('DOL-USERID-'.dol_trunc(md5('vcard'.$dolibarr_main_instance_unique_id), 8, 'right', 'UTF-8', 1).'-'.$object->id);
 		$this->setName($object->lastname, $object->firstname, "", $object->civility_code, "");

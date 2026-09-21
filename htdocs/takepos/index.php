@@ -41,7 +41,7 @@ if (!defined('NOREQUIREAJAX')) {
 	define('NOREQUIREAJAX', '1');
 }
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php'; // Load $user and permissions
 /**
  * @var Conf $conf
@@ -131,7 +131,7 @@ if (getDolGlobalInt('TAKEPOS_COLOR_THEME') == 1) {
 
 
 // Title
-$title = 'TakePOS - Dolibarr '.DOL_VERSION;
+$title = 'TakePOS - DCADMIN '.DOL_VERSION;
 if (getDolGlobalString('MAIN_APPLICATION_TITLE')) {
 	$title = 'TakePOS - ' . getDolGlobalString('MAIN_APPLICATION_TITLE');
 }
@@ -1168,8 +1168,8 @@ function OpenDrawer(){
 }
 
 /* Click on button to open drawer */
-function DolibarrOpenDrawer() {
-	console.log("DolibarrOpenDrawer call ajax url /takepos/ajax/ajax.php?action=opendrawer&token=<?php echo currentToken();?>&term=<?php print urlencode(empty($_SESSION["takeposterminal"]) ? '' : $_SESSION["takeposterminal"]); ?>");
+function DCADMINOpenDrawer() {
+	console.log("DCADMINOpenDrawer call ajax url /takepos/ajax/ajax.php?action=opendrawer&token=<?php echo currentToken();?>&term=<?php print urlencode(empty($_SESSION["takeposterminal"]) ? '' : $_SESSION["takeposterminal"]); ?>");
 	$.ajax({
 		type: "GET",
 		data: { token: '<?php echo currentToken(); ?>' },
@@ -1688,7 +1688,7 @@ if (getDolGlobalString('TAKEPOS_PRINT_METHOD') == "takeposconnector") {
 if (getDolGlobalInt('TAKEPOS_ADD_BUTTON_OPEN_DRAWER'.$term) > 0) {
 	$menus[$r++] = array(
 		'title' => '<span class="fa fa-receipt paddingrightonly"></span><div class="trunc">'.$langs->trans("DOL_OPEN_DRAWER").'</div>',
-		'action' => 'DolibarrOpenDrawer();',
+		'action' => 'DCADMINOpenDrawer();',
 	);
 }
 

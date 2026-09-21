@@ -26,7 +26,7 @@
  *		\brief      Page to display expense tax ik. Used when MAIN_USE_EXPENSE_IK is set.
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/admin.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/expensereport.lib.php';

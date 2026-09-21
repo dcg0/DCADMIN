@@ -22,7 +22,7 @@
 /**
  *      \file       htdocs/core/login/functions_dolibarr.php
  *      \ingroup    core
- *      \brief      Authentication functions for Dolibarr mode (check user on login or email and check pass)
+ *      \brief      Authentication functions for DCADMIN mode (check user on login or email and check pass)
  */
 
 

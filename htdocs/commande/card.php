@@ -39,7 +39,7 @@
  *   \brief     Page to show sales order
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf
@@ -2339,7 +2339,7 @@ if ($action == 'create' && $usercancreate) {
 		$note_public = $object->getDefaultCreateValueFor('note_public');
 	}
 
-	// If form was posted (but error returned), we must reuse the value posted in priority (standard Dolibarr behaviour)
+	// If form was posted (but error returned), we must reuse the value posted in priority (standard DCADMIN behaviour)
 	if (!GETPOST('changecompany')) {
 		if (GETPOSTISSET('cond_reglement_id')) {
 			$cond_reglement_id = GETPOSTINT('cond_reglement_id');

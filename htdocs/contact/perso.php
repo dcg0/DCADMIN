@@ -26,7 +26,7 @@
  *       \brief      Contact personal information tab
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf

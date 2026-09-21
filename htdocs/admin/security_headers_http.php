@@ -24,7 +24,7 @@
  *      \brief      Security options setup
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf
@@ -126,7 +126,7 @@ if (preg_match('/set_([a-z0-9_\-]+)/i', $action, $reg)) {
 			$securitycspstring .= $directive . $sourcestring;
 		}
 
-		// Add a protection against bad setup that break Dolibarr
+		// Add a protection against bad setup that break DCADMIN
 		$securitycspstring = cleanSecurityCSP($securitycspstring);
 
 		$res = dolibarr_set_const($db, 'MAIN_SECURITY_FORCECSP', $securitycspstring, 'chaine', 0, '', $conf->entity);
@@ -201,7 +201,7 @@ if (preg_match('/set_([a-z0-9_\-]+)/i', $action, $reg)) {
 			$securitycspstring .= $directive . $sourcestring;
 		}
 
-		// Add a protection against bad setup that break Dolibarr
+		// Add a protection against bad setup that break DCADMIN
 		$securitycspstring = cleanSecurityCSP($securitycspstring);
 
 		$res = dolibarr_set_const($db, 'MAIN_SECURITY_FORCECSP', $securitycspstring, 'chaine', 0, '', $conf->entity);
@@ -228,7 +228,7 @@ if (preg_match('/set_([a-z0-9_\-]+)/i', $action, $reg)) {
 	$securitycsp = GETPOST('MAIN_SECURITY_FORCECSP', 'alpha');
 	$securitycspro = GETPOST('MAIN_SECURITY_FORCECSPRO', 'alpha');
 
-	// Add a protection against bad setup that break Dolibarr
+	// Add a protection against bad setup that break DCADMIN
 	$securitycsp = cleanSecurityCSP($securitycsp);
 	$securitycspro = cleanSecurityCSP($securitycspro);
 

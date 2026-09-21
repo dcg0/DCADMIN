@@ -24,7 +24,7 @@
  *		\brief      Page to create/edit/view stocktransfer
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../../main.inc.php';
 /**
  * @var Conf $conf

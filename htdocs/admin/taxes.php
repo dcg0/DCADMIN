@@ -28,7 +28,7 @@
  *     \brief      Page to setup module tax
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf

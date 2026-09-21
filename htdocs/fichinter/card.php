@@ -35,7 +35,7 @@
  *	\ingroup    ficheinter
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf
@@ -860,7 +860,7 @@ if (empty($reshook)) {
 		$result = $objectline->update($user);
 		if ($result < 0) {
 			// Surface validation errors (e.g. mandatory extrafield left empty) as an
-			// event message on the same page instead of breaking with a full Dolibarr
+			// event message on the same page instead of breaking with a full DCADMIN
 			// error screen that loses the user's edit context.
 			setEventMessages($objectline->error, $objectline->errors, 'errors');
 		}

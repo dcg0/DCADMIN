@@ -74,7 +74,7 @@ function llxHeader($head = '', $title = '', $help_url = '', $target = '', $disab
 {
 	print '<html>'."\n";
 	print '<head>'."\n";
-	print '<title>Asterisk redirection from Dolibarr...</title>'."\n";
+	print '<title>Asterisk redirection from DCADMIN...</title>'."\n";
 	print '</head>'."\n";
 }
 
@@ -187,7 +187,7 @@ if (!empty($number)) {
 	if ($pos === false) {
 		$errno = 0;
 		$errstr = 0;
-		$strCallerId = "Dolibarr caller $found <".strtolower($number).">";
+		$strCallerId = "DCADMIN caller $found <".strtolower($number).">";
 		$oSocket = @fsockopen($strHost, (int) $port, $errno, $errstr, 10);
 		if (!$oSocket) {
 			print '<body>'."\n";

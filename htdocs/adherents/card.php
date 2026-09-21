@@ -32,7 +32,7 @@
  */
 
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf
@@ -752,7 +752,7 @@ if (empty($reshook)) {
 					$subjecttosend = make_substitutions($subject, $substitutionarray, $outputlangs);
 					$texttosend = make_substitutions(dol_concatdesc($msg, $adht->getMailOnValid()), $substitutionarray, $outputlangs);
 
-					$moreinheader = 'X-Dolibarr-Info: send_an_email by adherents/card.php'."\r\n";
+					$moreinheader = 'X-DCADMIN-Info: send_an_email by adherents/card.php'."\r\n";
 
 					$result = $object->sendEmail($texttosend, $subjecttosend, array(), array(), array(), "", "", 0, -1, '', $moreinheader);
 					if ($result < 0) {
@@ -819,7 +819,7 @@ if (empty($reshook)) {
 						$subjecttosend = make_substitutions($subject, $substitutionarray, $outputlangs);
 						$texttosend = make_substitutions(dol_concatdesc($msg, $adht->getMailOnResiliate()), $substitutionarray, $outputlangs);
 
-						$moreinheader = 'X-Dolibarr-Info: send_an_email by adherents/card.php'."\r\n";
+						$moreinheader = 'X-DCADMIN-Info: send_an_email by adherents/card.php'."\r\n";
 
 						$result = $object->sendEmail($texttosend, $subjecttosend, array(), array(), array(), "", "", 0, -1, '', $moreinheader);
 						if ($result < 0) {
@@ -886,7 +886,7 @@ if (empty($reshook)) {
 						$subjecttosend = make_substitutions($subject, $substitutionarray, $outputlangs);
 						$texttosend = make_substitutions(dol_concatdesc($msg, $adht->getMailOnExclude()), $substitutionarray, $outputlangs);
 
-						$moreinheader = 'X-Dolibarr-Info: send_an_email by adherents/card.php'."\r\n";
+						$moreinheader = 'X-DCADMIN-Info: send_an_email by adherents/card.php'."\r\n";
 
 						$result = $object->sendEmail($texttosend, $subjecttosend, array(), array(), array(), "", "", 0, -1, '', $moreinheader);
 						if ($result < 0) {
@@ -1562,9 +1562,9 @@ if (is_object($objcanvas) && $objcanvas->displayCanvasExists($action)) {
 			print "</td></tr>";
 		}
 
-		// Third party Dolibarr
+		// Third party DCADMIN
 		if (isModEnabled('societe')) {
-			print '<tr><td>'.$langs->trans("LinkedToDolibarrThirdParty").'</td><td colspan="2" class="valeur">';
+			print '<tr><td>'.$langs->trans("LinkedToDCADMINThirdParty").'</td><td colspan="2" class="valeur">';
 			if ($object->socid) {
 				$company = new Societe($db);
 				$result = $company->fetch($object->socid);
@@ -1575,12 +1575,12 @@ if (is_object($objcanvas) && $objcanvas->displayCanvasExists($action)) {
 			print '</td></tr>';
 		}
 
-		// Login Dolibarr
-		print '<tr><td>'.$langs->trans("LinkedToDolibarrUser").'</td><td colspan="2" class="valeur">';
+		// Login DCADMIN
+		print '<tr><td>'.$langs->trans("LinkedToDCADMINUser").'</td><td colspan="2" class="valeur">';
 		if ($object->user_id) {
 			$form->form_users($_SERVER['PHP_SELF'].'?rowid='.$object->id, (string) $object->user_id, 'none');
 		} else {
-			print $langs->trans("NoDolibarrAccess");
+			print $langs->trans("NoDCADMINAccess");
 		}
 		print '</td></tr>';
 
@@ -1640,14 +1640,14 @@ if (is_object($objcanvas) && $objcanvas->displayCanvasExists($action)) {
 			);
 			if (isModEnabled('societe') && $object->socid > 0) {
 				$object->fetch_thirdparty();
-				$formquestion[] = array('label' => $langs->trans("UserWillBe"), 'type' => 'radio', 'name' => 'internalorexternal', 'default' => 'external', 'values' => array('external' => $langs->trans("External").' - '.$langs->trans("LinkedToDolibarrThirdParty").' '.$object->thirdparty->getNomUrl(1, '', 0, 1), 'internal' => $langs->trans("Internal")));
+				$formquestion[] = array('label' => $langs->trans("UserWillBe"), 'type' => 'radio', 'name' => 'internalorexternal', 'default' => 'external', 'values' => array('external' => $langs->trans("External").' - '.$langs->trans("LinkedToDCADMINThirdParty").' '.$object->thirdparty->getNomUrl(1, '', 0, 1), 'internal' => $langs->trans("Internal")));
 			}
 			$text = '';
 			if (isModEnabled('societe') && $object->socid <= 0) {
 				$text .= $langs->trans("UserWillBeInternalUser").'<br>';
 			}
 			$text .= $langs->trans("ConfirmCreateLogin");
-			print $form->formconfirm($_SERVER["PHP_SELF"]."?rowid=".$object->id, $langs->trans("CreateDolibarrLogin"), $text, "confirm_create_user", $formquestion, 'yes');
+			print $form->formconfirm($_SERVER["PHP_SELF"]."?rowid=".$object->id, $langs->trans("CreateDCADMINLogin"), $text, "confirm_create_user", $formquestion, 'yes');
 		}
 
 		// Confirm create third party
@@ -1673,7 +1673,7 @@ if (is_object($objcanvas) && $objcanvas->displayCanvasExists($action)) {
 				array('label' => $langs->trans("AliasNames"), 'type' => 'text', 'name' => 'companyalias', 'value' => $companyalias, 'morecss' => 'minwidth300', 'moreattr' => 'maxlength="128"')
 			);
 
-			print $form->formconfirm($_SERVER["PHP_SELF"]."?rowid=".$object->id, $langs->trans("CreateDolibarrThirdParty"), $langs->trans("ConfirmCreateThirdParty"), "confirm_create_thirdparty", $formquestion, 'yes');
+			print $form->formconfirm($_SERVER["PHP_SELF"]."?rowid=".$object->id, $langs->trans("CreateDCADMINThirdParty"), $langs->trans("ConfirmCreateThirdParty"), "confirm_create_thirdparty", $formquestion, 'yes');
 		}
 
 		// Confirm validate member
@@ -2024,11 +2024,11 @@ if (is_object($objcanvas) && $objcanvas->displayCanvasExists($action)) {
 		// Other attributes
 		include DOL_DOCUMENT_ROOT.'/core/tpl/extrafields_view.tpl.php';
 
-		// Third party Dolibarr
+		// Third party DCADMIN
 		if (isModEnabled('societe')) {
 			print '<tr><td>';
 			$editenable = $user->hasRight('adherent', 'creer');
-			print $form->editfieldkey('LinkedToDolibarrThirdParty', 'thirdparty', '', $object, $editenable);
+			print $form->editfieldkey('LinkedToDCADMINThirdParty', 'thirdparty', '', $object, $editenable);
 			print '</td><td colspan="2" class="valeur">';
 			if ($action == 'editthirdparty') {
 				$htmlname = 'socid';
@@ -2062,10 +2062,10 @@ if (is_object($objcanvas) && $objcanvas->displayCanvasExists($action)) {
 			print '</td></tr>';
 		}
 
-		// Login Dolibarr - Link to user
+		// Login DCADMIN - Link to user
 		print '<tr><td>';
 		$editenable = $user->hasRight('adherent', 'creer') && $user->hasRight('user', 'user', 'creer');
-		print $form->editfieldkey('LinkedToDolibarrUser', 'login', '', $object, (int) $editenable);
+		print $form->editfieldkey('LinkedToDCADMINUser', 'login', '', $object, (int) $editenable);
 		print '</td><td colspan="2" class="valeur">';
 		if ($action == 'editlogin') {
 			$form->form_users($_SERVER['PHP_SELF'].'?rowid='.$object->id, (string) $object->user_id, 'userid', array());
@@ -2075,7 +2075,7 @@ if (is_object($objcanvas) && $objcanvas->displayCanvasExists($action)) {
 				$linkeduser->fetch($object->user_id);
 				print $linkeduser->getNomUrl(-1);
 			} else {
-				print '<span class="opacitymedium">'.$langs->trans("NoDolibarrAccess").'</span>';
+				print '<span class="opacitymedium">'.$langs->trans("NoDCADMINAccess").'</span>';
 			}
 		}
 		print '</td></tr>';
@@ -2166,12 +2166,12 @@ if (is_object($objcanvas) && $objcanvas->displayCanvasExists($action)) {
 				if (isModEnabled('societe') && !$object->socid) {
 					if ($user->hasRight('societe', 'creer')) {
 						if (Adherent::STATUS_DRAFT != $object->status) {
-							print '<a class="butAction" href="'.dolBuildUrl($_SERVER["PHP_SELF"], ['id' => $object->id, 'action' => 'create_thirdparty'], true).'" title="'.dol_escape_htmltag($langs->trans("CreateDolibarrThirdPartyDesc")).'">'.$langs->trans("CreateDolibarrThirdParty").'</a>'."\n";
+							print '<a class="butAction" href="'.dolBuildUrl($_SERVER["PHP_SELF"], ['id' => $object->id, 'action' => 'create_thirdparty'], true).'" title="'.dol_escape_htmltag($langs->trans("CreateDCADMINThirdPartyDesc")).'">'.$langs->trans("CreateDCADMINThirdParty").'</a>'."\n";
 						} else {
-							print '<a class="butActionRefused classfortooltip" href="#" title="'.dol_escape_htmltag($langs->trans("ValidateBefore")).'">'.$langs->trans("CreateDolibarrThirdParty").'</a>'."\n";
+							print '<a class="butActionRefused classfortooltip" href="#" title="'.dol_escape_htmltag($langs->trans("ValidateBefore")).'">'.$langs->trans("CreateDCADMINThirdParty").'</a>'."\n";
 						}
 					} else {
-						print '<span class="butActionRefused classfortooltip" title="'.dol_escape_htmltag($langs->trans("NotEnoughPermissions")).'">'.$langs->trans("CreateDolibarrThirdParty").'</span>'."\n";
+						print '<span class="butActionRefused classfortooltip" title="'.dol_escape_htmltag($langs->trans("NotEnoughPermissions")).'">'.$langs->trans("CreateDCADMINThirdParty").'</span>'."\n";
 					}
 				}
 
@@ -2179,12 +2179,12 @@ if (is_object($objcanvas) && $objcanvas->displayCanvasExists($action)) {
 				if (!$user->socid && !$object->user_id) {
 					if ($user->hasRight('user', 'user', 'creer')) {
 						if (Adherent::STATUS_DRAFT != $object->status) {
-							print '<a class="butAction" href="'.dolBuildUrl($_SERVER["PHP_SELF"], ['id' => $object->id, 'action' => 'create_user'], true).'" title="'.dol_escape_htmltag($langs->trans("CreateDolibarrLoginDesc")).'">'.$langs->trans("CreateDolibarrLogin").'</a>'."\n";
+							print '<a class="butAction" href="'.dolBuildUrl($_SERVER["PHP_SELF"], ['id' => $object->id, 'action' => 'create_user'], true).'" title="'.dol_escape_htmltag($langs->trans("CreateDCADMINLoginDesc")).'">'.$langs->trans("CreateDCADMINLogin").'</a>'."\n";
 						} else {
-							print '<a class="butActionRefused classfortooltip" href="#" title="'.dol_escape_htmltag($langs->trans("ValidateBefore")).'">'.$langs->trans("CreateDolibarrLogin").'</a>'."\n";
+							print '<a class="butActionRefused classfortooltip" href="#" title="'.dol_escape_htmltag($langs->trans("ValidateBefore")).'">'.$langs->trans("CreateDCADMINLogin").'</a>'."\n";
 						}
 					} else {
-						print '<span class="butActionRefused classfortooltip" title="'.dol_escape_htmltag($langs->trans("NotEnoughPermissions")).'">'.$langs->trans("CreateDolibarrLogin").'</span>'."\n";
+						print '<span class="butActionRefused classfortooltip" title="'.dol_escape_htmltag($langs->trans("NotEnoughPermissions")).'">'.$langs->trans("CreateDCADMINLogin").'</span>'."\n";
 					}
 				}
 

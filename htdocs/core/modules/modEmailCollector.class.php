@@ -24,13 +24,13 @@
  *  \ingroup    emailcollector
  *  \brief      Description and activation file for the module emailcollector
  */
-include_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
+include_once DOL_DOCUMENT_ROOT.'/core/modules/DCADMINModules.class.php';
 
 
 /**
  *  Description and activation class for module emailcollector
  */
-class modEmailCollector extends DolibarrModules
+class modEmailCollector extends DCADMINModules
 {
 	/**
 	 * Constructor. Define names, constants, directories, boxes, permissions
@@ -44,7 +44,7 @@ class modEmailCollector extends DolibarrModules
 		$this->db = $db;
 
 		// Id for module (must be unique).
-		// Use here a free id (See in Home -> System information -> Dolibarr for list of used modules id).
+		// Use here a free id (See in Home -> System information -> DCADMIN for list of used modules id).
 		$this->numero = 50320;
 		// Key text used to identify module (for permissions, menus, etc...)
 		$this->rights_class = 'emailcollector';
@@ -183,7 +183,7 @@ class modEmailCollector extends DolibarrModules
 
 	/**
 	 *	Function called when module is enabled.
-	 *	The init function add constants, boxes, permissions and menus (defined in constructor) into Dolibarr database.
+	 *	The init function add constants, boxes, permissions and menus (defined in constructor) into DCADMIN database.
 	 *	It also creates data directories
 	 *
 	 *	@param      string	$options    Options when enabling module ('', 'noboxes')
@@ -257,8 +257,8 @@ class modEmailCollector extends DolibarrModules
 		$tmpresql = $this->db->query($tmpsql);
 		if ($tmpresql) {
 			if ($this->db->num_rows($tmpresql) == 0) {
-				$descriptionB1 = $langs->trans('EmailCollectorExampleToCollectDolibarrAnswersDesc');
-				$label = $langs->trans('EmailCollectorExampleToCollectDolibarrAnswers');
+				$descriptionB1 = $langs->trans('EmailCollectorExampleToCollectDCADMINAnswersDesc');
+				$label = $langs->trans('EmailCollectorExampleToCollectDCADMINAnswers');
 				$sqlforexampleB1 = "INSERT INTO ".MAIN_DB_PREFIX."emailcollector_emailcollector (entity, ref, label, description, source_directory, date_creation, fk_user_creat, status)";
 				$sqlforexampleB1 .= " VALUES (".((int) $conf->entity).", 'Collect_Responses_In', '".$this->db->escape($label)."', '".$this->db->escape($descriptionB1)."', 'INBOX', '".$this->db->idate(dol_now())."', ".((int) $user->id).", 0)";
 
@@ -347,7 +347,7 @@ class modEmailCollector extends DolibarrModules
 
 	/**
 	 *	Function called when module is disabled.
-	 *	Remove from database constants, boxes and permissions from Dolibarr database.
+	 *	Remove from database constants, boxes and permissions from DCADMIN database.
 	 *	Data directories are not deleted
 	 *
 	 *	@param      string	$options    Options when enabling module ('', 'noboxes')

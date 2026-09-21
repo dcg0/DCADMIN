@@ -16,7 +16,7 @@ declare(strict_types=1);
  */
 
 /**
- * Phan plugin to detect unsafe SQL variable usage in Dolibarr codebase.
+ * Phan plugin to detect unsafe SQL variable usage in DCADMIN codebase.
  *
  * This plugin checks for variables used in $sql or $sql_* assignments that are not
  * properly escaped, cast, or protected by safe methods.

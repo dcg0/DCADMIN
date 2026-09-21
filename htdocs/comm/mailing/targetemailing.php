@@ -26,7 +26,7 @@
  *       \brief      Page to define or view emailing targets
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf

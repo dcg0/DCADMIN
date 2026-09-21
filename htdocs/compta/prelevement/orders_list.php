@@ -27,7 +27,7 @@
  * 	\brief      Page to list direct debit orders or credit transfer orders
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf

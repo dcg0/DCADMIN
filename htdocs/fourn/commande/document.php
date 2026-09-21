@@ -29,7 +29,7 @@
  *	\brief      Management page of attached documents to a supplier order
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 
 /**

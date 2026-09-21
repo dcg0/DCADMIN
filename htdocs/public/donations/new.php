@@ -54,7 +54,7 @@ define("DOLENTITY", $entity);
 // }
 
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/company.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/payments.lib.php';
@@ -183,7 +183,7 @@ function llxFooterVierge()  // @phan-suppress-current-line PhanRedefineFunction
 	printCommonFooter('public');
 
 	if (!empty($conf->use_javascript_ajax)) {
-		print "\n".'<!-- Includes JS Footer of Dolibarr -->'."\n";
+		print "\n".'<!-- Includes JS Footer of DCADMIN -->'."\n";
 		print '<script src="'.DOL_URL_ROOT.'/core/js/lib_foot.js.php?lang='.$langs->defaultlang.'"></script>'."\n";
 	}
 

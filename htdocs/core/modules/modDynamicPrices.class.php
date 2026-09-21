@@ -23,13 +23,13 @@
  *  \ingroup    product
  *  \brief      Description and activation file for the module to manage dynamic prices in products
  */
-include_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
+include_once DOL_DOCUMENT_ROOT.'/core/modules/DCADMINModules.class.php';
 
 
 /**
  *  Class descriptor of DynamicPrices module
  */
-class modDynamicPrices extends DolibarrModules
+class modDynamicPrices extends DCADMINModules
 {
 	/**
 	 *   Constructor. Define names, constants, directories, boxes, permissions
@@ -87,7 +87,7 @@ class modDynamicPrices extends DolibarrModules
 
 	/**
 	 *  Function called when module is enabled.
-	 *  The init function add constants, boxes, permissions and menus (defined in constructor) into Dolibarr database.
+	 *  The init function add constants, boxes, permissions and menus (defined in constructor) into DCADMIN database.
 	 *  It also creates data directories.
 	 *
 	 *  @param      string  $options    Options

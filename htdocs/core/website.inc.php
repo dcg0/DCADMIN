@@ -91,7 +91,7 @@ if (!empty($pageid) && $pageid > 0) {
 	}
 	if (empty($srclang)) {
 		$reg = array();
-		// With Dolibarr server, url is in parameter pageref
+		// With DCADMIN server, url is in parameter pageref
 		if (defined('USEDOLIBARRSERVER') && !empty($_GET['pageref']) && preg_match('/^\/?(\w\w)\//', $_GET['pageref'], $reg) && $reg[1] != 'js') {	// We reuse $_GET['pageref'] because $pageref may have been cleaned already from the language code.
 			$srclang = $reg[1];
 		}
@@ -245,7 +245,7 @@ if (GETPOST('l', 'aZ09')) {
 	$weblangs->setDefaultLang(GETPOST('l', 'aZ09'));
 }
 // A lang was forced, so we check to find if we must make a redirect on translation page
-if ($_SERVER['PHP_SELF'] != DOL_URL_ROOT.'/website/index.php') {	// If we browsing page using Dolibarr server or a Native web server
+if ($_SERVER['PHP_SELF'] != DOL_URL_ROOT.'/website/index.php') {	// If we browsing page using DCADMIN server or a Native web server
 	//print_r(get_defined_constants(true));exit;
 	if (GETPOST('l', 'aZ09')) {
 		$sql = "SELECT wp.rowid, wp.lang, wp.pageurl, wp.fk_page";

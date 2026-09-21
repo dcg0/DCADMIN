@@ -67,7 +67,7 @@ class pdf_balance extends ModelePdfAccountancy
 	public $type;
 
 	/**
-	 * Dolibarr version of the loaded document
+	 * DCADMIN version of the loaded document
 	 * @var string Version, possible values are: 'development', 'experimental', 'dolibarr', 'dolibarr_deprecated' or a version string like 'x.y.z'''|'development'|'dolibarr'|'experimental'
 	 */
 	public $version = 'dolibarr';
@@ -239,7 +239,7 @@ class pdf_balance extends ModelePdfAccountancy
 		} else {
 			$pdf->SetSubject($outputlangs->transnoentities("AccountancyBalance"));
 		}
-		$pdf->SetCreator("Dolibarr ".DOL_VERSION);
+		$pdf->SetCreator("DCADMIN ".DOL_VERSION);
 		$pdf->SetAuthor($outputlangs->convToOutputCharset($user->getAnonymisableFullName($outputlangs)));
 		$pdf->SetKeyWords($outputlangs->convToOutputCharset($object->ref)." ".$outputlangs->transnoentities("AccountancyBalance"));
 		if (getDolGlobalString('MAIN_DISABLE_PDF_COMPRESSION')) {

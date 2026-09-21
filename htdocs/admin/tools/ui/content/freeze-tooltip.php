@@ -17,7 +17,7 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../../../main.inc.php';
 
 /**
@@ -43,10 +43,10 @@ $documentation = new Documentation($db);
 $group = 'Content';
 
 $js = [
-//  now included in Dolibarr in htdocs/core/js/lib_tooltip-freeze-by-alt-keypress.js
+//  now included in DCADMIN in htdocs/core/js/lib_tooltip-freeze-by-alt-keypress.js
 ];
 $css = [
-//  now included in Dolibarr in htdocs/theme/eldy/tooltips.inc.css
+//  now included in DCADMIN in htdocs/theme/eldy/tooltips.inc.css
 ];
 
 // Output html head + body - Param is Title
@@ -72,7 +72,7 @@ $documentation->showSidebar(); ?>
 			<h2 class="documentation-title" >Tooltip Freeze with <kbd>Alt</kbd> Key</h2>
 
 			<p>
-				A new feature allows users to <strong>freeze tooltips</strong> in Dolibarr by holding down the <kbd>Alt</kbd> key.
+				A new feature allows users to <strong>freeze tooltips</strong> in DCADMIN by holding down the <kbd>Alt</kbd> key.
 				This makes it easier to read long tooltips without having to keep the cursor perfectly still.
 			</p>
 
@@ -101,7 +101,7 @@ $documentation->showSidebar(); ?>
 			<div class="documentation-example">
 				<?php
 				$tooltip = '<p>
-    Welcome to <a href="https://dolibarr.org" title="Official Dolibarr Website">Dolibarr</a>,
+    Welcome to <a href="https://dolibarr.org" title="Official DCADMIN Website">DCADMIN</a>,
     an open-source ERP & CRM solution. This platform helps businesses manage their
     <abbr title="Customer Relationship Management">CRM</abbr>
     and <abbr title="Enterprise Resource Planning">ERP</abbr> needs efficiently.
@@ -109,14 +109,14 @@ $documentation->showSidebar(); ?>
 
 <p>
     For documentation, visit our
-    <a href="https://wiki.dolibarr.org" title="Dolibarr Documentation">Wiki</a>.
+    <a href="https://wiki.dolibarr.org" title="DCADMIN Documentation">Wiki</a>.
     Developers can contribute on
-    <a href="https://github.com/Dolibarr/dolibarr" title="Dolibarr GitHub Repository">GitHub</a>.
+    <a href="https://github.com/DCADMIN/dolibarr" title="DCADMIN GitHub Repository">GitHub</a>.
 </p>
 <p><strong class="classfortooltip" title="Tooltips in tooltips">try tooltip in a tooltip</strong></p>
 <p>
     Need help? Check out the
-    <a href="https://www.dolibarr.org/forum.php" title="Dolibarr Community Forum">Community Forum</a>.
+    <a href="https://www.dolibarr.org/forum.php" title="DCADMIN Community Forum">Community Forum</a>.
 </p>
 
 <p>

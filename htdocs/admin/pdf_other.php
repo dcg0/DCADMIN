@@ -29,7 +29,7 @@
  *       \brief      Page to setup PDF options
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf
@@ -267,7 +267,7 @@ if (isModEnabled('propal')) {
 	print '<table summary="more" class="noborder centpercent">';
 	print '<tr class="liste_titre"><td class="titlefieldmiddle">'.$langs->trans("Parameter").'</td><td width="200px"></td></tr>';
 
-	/* This feature seems not yet used into Dolibarr. So option is kept hidden and enabled by default
+	/* This feature seems not yet used into DCADMIN. So option is kept hidden and enabled by default
 	print '<tr class="oddeven"><td>';
 	print $form->textwithpicto($langs->trans("MAIN_PDF_PROPAL_USE_ELECTRONIC_SIGNING"), '');
 	print '</td><td>';

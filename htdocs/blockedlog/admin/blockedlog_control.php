@@ -25,7 +25,7 @@
  *    \brief      Page to view if a registered instance has done a backup restoration
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf
@@ -208,7 +208,7 @@ if ($inputregistrationnumber && strlen($inputregistrationnumber) < 8) {
 } elseif ($inputregistrationnumber) {
 	// Return known information on this registration number
 	if (!isModEnabled('captureserver')) {
-		print 'The module captureserver to capture the signals from installed instance is not enabled. Is this instance the master instance of the Dolibarr foundation ?';
+		print 'The module captureserver to capture the signals from installed instance is not enabled. Is this instance the master instance of the DCADMIN foundation ?';
 	} else {
 		// Report registration
 		$sql = "SELECT rowid, registerid, registername, registerprofid, registeremail, date_creation, tms, content, comment,";

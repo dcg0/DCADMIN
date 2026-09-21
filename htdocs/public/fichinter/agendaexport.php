@@ -63,7 +63,7 @@ if (is_numeric($entity)) {
 	define("DOLENTITY", $entity);
 }
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/fichinter/class/fichinter.class.php';
 /**
@@ -687,16 +687,16 @@ function build_exportfile($format, $type, $cachedelay, $filename, $filters)
 		}
 		if ($more) {
 			if (empty($title)) {
-				$title = 'Dolibarr actions '.$mysoc->name.' - '.$more;
+				$title = 'DCADMIN actions '.$mysoc->name.' - '.$more;
 			}
 			$desc = $more;
-			$desc .= ' ('.$mysoc->name.' - built by Dolibarr)';
+			$desc .= ' ('.$mysoc->name.' - built by DCADMIN)';
 		} else {
 			if (empty($title)) {
-				$title = 'Dolibarr actions '.$mysoc->name;
+				$title = 'DCADMIN actions '.$mysoc->name;
 			}
 			$desc = $langs->transnoentities('ListOfActions');
-			$desc .= ' ('.$mysoc->name.' - built by Dolibarr)';
+			$desc .= ' ('.$mysoc->name.' - built by DCADMIN)';
 		}
 
 		// Create temp file

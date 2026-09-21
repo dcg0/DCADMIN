@@ -388,7 +388,7 @@ class pdf_paiement extends CommonDocGenerator
 
 		$pdf->SetTitle($outputlangs->transnoentities("Payments"));
 		$pdf->SetSubject($outputlangs->transnoentities("Payments"));
-		$pdf->SetCreator("Dolibarr ".DOL_VERSION);
+		$pdf->SetCreator("DCADMIN ".DOL_VERSION);
 		$pdf->SetAuthor($outputlangs->convToOutputCharset($user->getAnonymisableFullName($outputlangs)));
 		//$pdf->SetKeyWords();
 		if (getDolGlobalString('MAIN_DISABLE_PDF_COMPRESSION')) {

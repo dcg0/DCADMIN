@@ -28,7 +28,7 @@
  *      \brief      Home page of category area
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php'; // Load $user and permissions
 /**
  * @var Conf $conf

@@ -63,7 +63,7 @@ class pdf_standard_inventory extends ModelePDFInventory
 	public $type;
 
 	/**
-	 * Dolibarr version of the loaded document
+	 * DCADMIN version of the loaded document
 	 * @var string Version, possible values are: 'development', 'experimental', 'dolibarr', 'dolibarr_deprecated' or a version string like 'x.y.z'''|'development'|'dolibarr'|'experimental'
 	 */
 	public $version = 'dolibarr';
@@ -263,7 +263,7 @@ class pdf_standard_inventory extends ModelePDFInventory
 
 		$pdf->SetTitle($outputlangs->convToOutputCharset($isspecimen ? 'SPECIMEN' : $object->ref));
 		$pdf->SetSubject($outputlangs->transnoentities("Inventory"));
-		$pdf->SetCreator("Dolibarr ".DOL_VERSION);
+		$pdf->SetCreator("DCADMIN ".DOL_VERSION);
 		$pdf->SetAuthor($outputlangs->convToOutputCharset($user->getFullName($outputlangs)));
 		$pdf->SetKeyWords($outputlangs->convToOutputCharset($isspecimen ? 'SPECIMEN' : $object->ref)." ".$outputlangs->transnoentities("Inventory"));
 		if (getDolGlobalString('MAIN_DISABLE_PDF_COMPRESSION')) {

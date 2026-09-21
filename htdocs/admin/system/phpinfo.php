@@ -26,7 +26,7 @@
  *		\brief      Page of PHP system information
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf
@@ -244,7 +244,7 @@ print "<td>".$name."</td>";
 print getResultColumn($name, $activatedExtensions, $loadedExtensions, $functions, $langs->trans("Optional"));
 print "</tr>";
 
-// bcmath is used only by swiftmailer for NTLM authentication that is not implemented by Dolibarr core for the moment, so i comment this.
+// bcmath is used only by swiftmailer for NTLM authentication that is not implemented by DCADMIN core for the moment, so i comment this.
 /*
 $functions = array();
 $name = "bcmath";

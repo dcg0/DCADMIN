@@ -27,7 +27,7 @@
  *       \brief      Page des stats des receptions fournisseurs clients pour un produit
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/product.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/reception/class/reception.class.php';

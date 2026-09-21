@@ -28,7 +28,7 @@ $force_install_nophpinfo = true;
 $force_install_noedit = 2;
 
 /** @var string	$force_install_message	 			Information message to add on the page to setup parameters */
-$force_install_message = 'Welcome to your Dolibarr install...';
+$force_install_message = 'Welcome to your DCADMIN install...';
 
 /** @var ?string	$force_install_main_data_root 		Data root absolute path (documents folder) */
 $force_install_main_data_root = null;
@@ -63,10 +63,10 @@ $force_install_databasepass = getenv('DOLI_DB_PASSWORD', true) ?: '';
 /** @var bool $force_install_createuser				Force database user creation */
 $force_install_createuser = false;
 
-/** @var string $force_install_dolibarrlogin		Dolibarr administrator username */
+/** @var string $force_install_dolibarrlogin		DCADMIN administrator username */
 $force_install_dolibarrlogin = 'admin';
 
-/** @var string $force_install_dolibarrpassword		Dolibarr administrator password */
+/** @var string $force_install_dolibarrpassword		DCADMIN administrator password */
 $force_install_dolibarrpassword = '';
 
 /** @var string $force_install_databaserootlogin	Database root username */

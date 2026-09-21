@@ -158,7 +158,7 @@ class NamingContractTest extends \PHPUnit\Framework\TestCase
 	public function testApplyToDoesNotAlterUntokenizedContent(): void
 	{
 		$nc      = new NamingContract('invoice', 'request');
-		$content = 'class CommonObject extends DolibarrObject {}';
+		$content = 'class CommonObject extends DCADMINObject {}';
 		$this->assertSame($content, $nc->applyTo($content)); // @phpstan-ignore method.notFound
 	}
 

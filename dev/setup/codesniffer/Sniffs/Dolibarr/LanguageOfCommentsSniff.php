@@ -16,7 +16,7 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-namespace codesniffer\Sniffs\Dolibarr;
+namespace codesniffer\Sniffs\DCADMIN;
 
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;

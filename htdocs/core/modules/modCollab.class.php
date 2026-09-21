@@ -23,13 +23,13 @@
  *  \ingroup    collab
  *  \brief      Description and activation file for the module Collab
  */
-include_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
+include_once DOL_DOCUMENT_ROOT.'/core/modules/DCADMINModules.class.php';
 
 
 /**
  *	Class to describe Websites module
  */
-class modCollab extends DolibarrModules
+class modCollab extends DCADMINModules
 {
 	/**
 	 *   Constructor. Define names, constants, directories, boxes, permissions

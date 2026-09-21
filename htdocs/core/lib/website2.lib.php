@@ -337,7 +337,7 @@ function dolSavePageContent($filetpl, Website $object, WebsitePage $objectpage, 
 		$tplcontent .= "\n";
 
 		// Page content
-		$tplcontent .= '<!-- File content defined in Dolibarr website module editor -->'."\n";
+		$tplcontent .= '<!-- File content defined in DCADMIN website module editor -->'."\n";
 		$tplcontent .= '<body id="bodywebsite" class="bodywebsite bodywebpage-'.$objectpage->ref.'">'."\n";
 
 		// Import necessary environment for the config page

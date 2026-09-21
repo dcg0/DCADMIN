@@ -23,7 +23,7 @@
  *    \brief      Page of BOM events
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf

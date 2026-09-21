@@ -17,7 +17,7 @@
  */
 
 /**
- *	\file       htdocs/debugbar/class/DataCollector/DolibarrCollector.php
+ *	\file       htdocs/debugbar/class/DataCollector/DCADMINCollector.php
  *	\brief      Class for debugbar collection
  *	\ingroup    debugbar
  */
@@ -27,10 +27,10 @@ use DebugBar\DataCollector\DataCollector;
 use DebugBar\DataCollector\Renderable;
 
 /**
- * DolibarrCollector class
+ * DCADMINCollector class
  */
 
-class DolibarrCollector extends DataCollector implements Renderable, AssetProvider
+class DCADMINCollector extends DataCollector implements Renderable, AssetProvider
 {
 	/**
 	 *	Return collector name
@@ -78,7 +78,7 @@ class DolibarrCollector extends DataCollector implements Renderable, AssetProvid
 	 *
 	 * @return string      HTML string
 	 */
-	protected function getDolibarrInfo()
+	protected function getDCADMINInfo()
 	{
 		global $conf, $langs;
 		global $dolibarr_main_prod, $dolibarr_nocsrfcheck;
@@ -144,7 +144,7 @@ class DolibarrCollector extends DataCollector implements Renderable, AssetProvid
 				"icon" => "desktop",
 				"indicator" => "PhpDebugBar.DebugBar.TooltipIndicator",
 				"tooltip" => array(
-					"html" => $this->getDolibarrInfo(),
+					"html" => $this->getDCADMINInfo(),
 					"class" => "tooltip-wide"
 				),
 				"map" => "",

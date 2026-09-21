@@ -28,9 +28,9 @@ require_once DOL_DOCUMENT_ROOT.'/core/lib/company.lib.php';
  * API class for shipments
  *
  * @access protected
- * @class  DolibarrApiAccess {@requires user,external}
+ * @class  DCADMINApiAccess {@requires user,external}
  */
-class Shipments extends DolibarrApi
+class Shipments extends DCADMINApi
 {
 	/**
 	 * @var string[]	Mandatory fields, checked when create and update object
@@ -68,7 +68,7 @@ class Shipments extends DolibarrApi
 	 */
 	public function get($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('expedition', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('expedition', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -77,8 +77,8 @@ class Shipments extends DolibarrApi
 			throw new RestException(404, 'Shipment not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('expedition', $this->shipment->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('expedition', $this->shipment->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$this->shipment->fetchObjectLinked();
@@ -108,7 +108,7 @@ class Shipments extends DolibarrApi
 	 */
 	public function index($sortfield = "t.rowid", $sortorder = 'ASC', $limit = 100, $page = 0, $thirdparty_ids = '', $sqlfilters = '', $properties = '', $pagination_data = false)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('expedition', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('expedition', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -117,12 +117,12 @@ class Shipments extends DolibarrApi
 		$obj_ret = array();
 
 		// case of external user, $thirdparty_ids param is ignored and replaced by user's socid
-		$socids = DolibarrApiAccess::$user->socid ?: $thirdparty_ids;
+		$socids = DCADMINApiAccess::$user->socid ?: $thirdparty_ids;
 
 		// If the internal user must only see his customers, force searching by him
 		$search_sale = 0;
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'client', 'voir') && !$socids) {
-			$search_sale = DolibarrApiAccess::$user->id;
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'client', 'voir') && !$socids) {
+			$search_sale = DCADMINApiAccess::$user->id;
 		}
 
 		$sql = "SELECT t.rowid";
@@ -221,7 +221,7 @@ class Shipments extends DolibarrApi
 	 */
 	public function post($request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('expedition', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('expedition', 'creer')) {
 			throw new RestException(403, "Insufficiant rights");
 		}
 		// Check mandatory fields
@@ -262,7 +262,7 @@ class Shipments extends DolibarrApi
 			$this->shipment->lines = $lines;
 		}
 
-		if ($this->shipment->create(DolibarrApiAccess::$user) < 0) {
+		if ($this->shipment->create(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, "Error creating shipment", array_merge(array($this->shipment->error), $this->shipment->errors));
 		}
 
@@ -282,7 +282,7 @@ class Shipments extends DolibarrApi
 	 */
 	public function getLines($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('expedition', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('expedition', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -291,8 +291,8 @@ class Shipments extends DolibarrApi
 			throw new RestException(404, 'Shipment not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('expedition', $this->shipment->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('expedition', $this->shipment->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 		$this->shipment->getLinesArray();
 		$result = array();
@@ -329,7 +329,7 @@ class Shipments extends DolibarrApi
 	 */
 	public function postLine($id, $fk_origin_line = 0, $qty = 0, $warehouse_id = 0, $fk_product = 0)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('expedition', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('expedition', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -338,8 +338,8 @@ class Shipments extends DolibarrApi
 			throw new RestException(404, 'Shipment not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('expedition', $this->shipment->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('expedition', $this->shipment->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		// A line can only be added while the shipment is a draft (no stock movement yet).
@@ -383,7 +383,7 @@ class Shipments extends DolibarrApi
 		$line = end($this->shipment->lines);
 		$line->fk_expedition = $this->shipment->id;
 
-		$insertRes = $line->insert(DolibarrApiAccess::$user);
+		$insertRes = $line->insert(DCADMINApiAccess::$user);
 		if ($insertRes > 0) {
 			return $insertRes;
 		}
@@ -417,7 +417,7 @@ class Shipments extends DolibarrApi
 	 */
 	public function putLine($id, $lineid, $qty = 0, $warehouse_id = 0)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('expedition', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('expedition', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -426,8 +426,8 @@ class Shipments extends DolibarrApi
 			throw new RestException(404, 'Shipment not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('expedition', $this->shipment->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('expedition', $this->shipment->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		// A line can only be edited while the shipment is a draft (no stock movement yet).
@@ -461,7 +461,7 @@ class Shipments extends DolibarrApi
 			$line->entrepot_id = (int) $warehouse_id;
 		}
 
-		$updateRes = $line->update(DolibarrApiAccess::$user);
+		$updateRes = $line->update(DCADMINApiAccess::$user);
 		if ($updateRes > 0) {
 			return $this->get($id);
 		}
@@ -490,7 +490,7 @@ class Shipments extends DolibarrApi
 	 */
 	public function deleteLine($id, $lineid)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('expedition', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('expedition', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -499,8 +499,8 @@ class Shipments extends DolibarrApi
 			throw new RestException(404, 'Shipment not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('expedition', $this->shipment->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('expedition', $this->shipment->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		// A line can only be deleted while the shipment is a draft (no stock movement yet).
@@ -517,7 +517,7 @@ class Shipments extends DolibarrApi
 			throw new RestException(404, 'Line '.((int) $lineid).' is not a line of shipment '.((int) $id));
 		}
 
-		$deleteRes = $this->shipment->deleteLine(DolibarrApiAccess::$user, $lineid);
+		$deleteRes = $this->shipment->deleteLine(DCADMINApiAccess::$user, $lineid);
 		if ($deleteRes > 0) {
 			return $this->get($id);
 		}
@@ -536,7 +536,7 @@ class Shipments extends DolibarrApi
 	 */
 	public function put($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('expedition', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('expedition', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -545,8 +545,8 @@ class Shipments extends DolibarrApi
 			throw new RestException(404, 'Shipment not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('expedition', $this->shipment->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('expedition', $this->shipment->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 		foreach ($request_data as $field => $value) {
 			if ($field == 'id') {
@@ -567,7 +567,7 @@ class Shipments extends DolibarrApi
 			$this->shipment->$field = $this->_checkValForAPI($field, $value, $this->shipment);
 		}
 
-		if ($this->shipment->update(DolibarrApiAccess::$user) > 0) {
+		if ($this->shipment->update(DCADMINApiAccess::$user) > 0) {
 			return $this->get($id);
 		} else {
 			throw new RestException(500, $this->shipment->error);
@@ -585,7 +585,7 @@ class Shipments extends DolibarrApi
 	 */
 	public function delete($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('expedition', 'supprimer')) {
+		if (!DCADMINApiAccess::$user->hasRight('expedition', 'supprimer')) {
 			throw new RestException(403);
 		}
 		$result = $this->shipment->fetch($id);
@@ -593,11 +593,11 @@ class Shipments extends DolibarrApi
 			throw new RestException(404, 'Shipment not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('expedition', $this->shipment->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('expedition', $this->shipment->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		if (!$this->shipment->delete(DolibarrApiAccess::$user)) {
+		if (!$this->shipment->delete(DCADMINApiAccess::$user)) {
 			throw new RestException(500, 'Error when deleting shipment : '.$this->shipment->error);
 		}
 
@@ -630,7 +630,7 @@ class Shipments extends DolibarrApi
 	 */
 	public function validate($id, $notrigger = 0)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('expedition', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('expedition', 'creer')) {
 			throw new RestException(403);
 		}
 		$result = $this->shipment->fetch($id);
@@ -638,11 +638,11 @@ class Shipments extends DolibarrApi
 			throw new RestException(404, 'Shipment not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('expedition', $this->shipment->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('expedition', $this->shipment->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		$result = $this->shipment->valid(DolibarrApiAccess::$user, $notrigger);
+		$result = $this->shipment->valid(DCADMINApiAccess::$user, $notrigger);
 		if ($result == 0) {
 			throw new RestException(304, 'Error nothing done. May be object is already validated');
 		}
@@ -676,7 +676,7 @@ class Shipments extends DolibarrApi
 	public function setinvoiced($id)
 	{
 
-	if(! DolibarrApiAccess::$user->hasRight('expedition', 'creer')) {
+	if(! DCADMINApiAccess::$user->hasRight('expedition', 'creer')) {
 			throw new RestException(403);
 	}
 	if(empty($id)) {
@@ -687,7 +687,7 @@ class Shipments extends DolibarrApi
 			throw new RestException(404, 'Shipment not found');
 	}
 
-	$result = $this->shipment->classifyBilled(DolibarrApiAccess::$user);
+	$result = $this->shipment->classifyBilled(DCADMINApiAccess::$user);
 	if( $result < 0) {
 			throw new RestException(400, $this->shipment->error);
 	}
@@ -715,10 +715,10 @@ class Shipments extends DolibarrApi
 
 	require_once DOL_DOCUMENT_ROOT . '/commande/class/commande.class.php';
 
-	if(! DolibarrApiAccess::$user->hasRight('expedition', 'lire')) {
+	if(! DCADMINApiAccess::$user->hasRight('expedition', 'lire')) {
 			throw new RestException(403);
 	}
-	if(! DolibarrApiAccess::$user->hasRight('expedition', 'creer')) {
+	if(! DCADMINApiAccess::$user->hasRight('expedition', 'creer')) {
 			throw new RestException(403);
 	}
 	if(empty($proposalid)) {
@@ -731,7 +731,7 @@ class Shipments extends DolibarrApi
 			throw new RestException(404, 'Order not found');
 	}
 
-	$result = $this->shipment->createFromOrder($order, DolibarrApiAccess::$user);
+	$result = $this->shipment->createFromOrder($order, DCADMINApiAccess::$user);
 	if( $result < 0) {
 			throw new RestException(405, $this->shipment->error);
 	}
@@ -752,7 +752,7 @@ class Shipments extends DolibarrApi
 	 */
 	public function close($id, $notrigger = 0)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('expedition', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('expedition', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -761,8 +761,8 @@ class Shipments extends DolibarrApi
 			throw new RestException(404, 'Shipment not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('expedition', $this->shipment->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('expedition', $this->shipment->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$result = $this->shipment->setClosed();
@@ -800,7 +800,7 @@ class Shipments extends DolibarrApi
 	 */
 	public function setToDraft($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('expedition', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('expedition', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -809,11 +809,11 @@ class Shipments extends DolibarrApi
 			throw new RestException(404, 'Shipment not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('expedition', $this->shipment->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('expedition', $this->shipment->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		$result = $this->shipment->setDraft(DolibarrApiAccess::$user);
+		$result = $this->shipment->setDraft(DCADMINApiAccess::$user);
 		if ($result == 0) {
 			throw new RestException(304, 'Error nothing done. May be object is already draft');
 		}

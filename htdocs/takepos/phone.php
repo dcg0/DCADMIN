@@ -77,7 +77,7 @@ $langs->loadLangs(array("bills", "orders", "commercial", "cashdesk", "receiptpri
  * View
  */
 
-$title = 'TakePOS - Dolibarr '.DOL_VERSION;
+$title = 'TakePOS - DCADMIN '.DOL_VERSION;
 if (getDolGlobalString('MAIN_APPLICATION_TITLE')) {
 	$title = 'TakePOS - ' . getDolGlobalString('MAIN_APPLICATION_TITLE');
 }

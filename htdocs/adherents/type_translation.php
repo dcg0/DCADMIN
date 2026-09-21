@@ -27,7 +27,7 @@
  *	\brief      Member translation page
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf

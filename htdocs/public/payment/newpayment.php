@@ -35,7 +35,7 @@
 /**
  *     	\file       htdocs/public/payment/newpayment.php
  *		\ingroup    core
- *		\brief      File to offer a way to make a payment for a particular Dolibarr object
+ *		\brief      File to offer a way to make a payment for a particular DCADMIN object
  */
 
 if (!defined('NOLOGIN')) {
@@ -63,7 +63,7 @@ if (is_numeric($entity)) {
 	define("DOLENTITY", $entity);
 }
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf
@@ -810,10 +810,10 @@ if ($action == 'charge' && isModEnabled('stripe')) {	// Test on permission not r
 			$action = '';
 		}
 
-		// Security: a succeeded PaymentIntent must not be reusable to record a payment on more than one Dolibarr object.
+		// Security: a succeeded PaymentIntent must not be reusable to record a payment on more than one DCADMIN object.
 		// Without this check, a PaymentIntent id obtained for one invoice/order/... could be resubmitted here with a
 		// different fulltag/ref to fraudulently record (and validate) a payment on a different object that was never
-		// really paid for, since Dolibarr never re-checks that a "succeeded" PaymentIntent is bound to a specific target.
+		// really paid for, since DCADMIN never re-checks that a "succeeded" PaymentIntent is bound to a specific target.
 		$paymentintentalreadyused = 0;
 		if (!$error && is_object($paymentintent) && $paymentintent->status == 'succeeded') {
 			$sql = "SELECT rowid FROM ".MAIN_DB_PREFIX."paiement";

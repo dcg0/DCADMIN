@@ -261,7 +261,7 @@ class Stripe extends CommonObject
 						}
 					}
 
-					// Create customer in Dolibarr
+					// Create customer in DCADMIN
 					$sql = "INSERT INTO ".MAIN_DB_PREFIX."societe_account (fk_soc, login, key_account, site, site_account, status, entity, date_creation, fk_user_creat)";
 					$sql .= " VALUES (".((int) $object->id).", '', '".$this->db->escape($customer->id)."', 'stripe', '".$this->db->escape($stripearrayofkeysbyenv[$status]['publishable_key'])."', ".((int) $status).", ".((int) $conf->entity).", '".$this->db->idate(dol_now())."', ".((int) $user->id).")";
 					$resql = $this->db->query($sql);
@@ -384,7 +384,7 @@ class Stripe extends CommonObject
 	 * @param   ?string			$payment_method                 	'pm_....' (if known)
 	 * @param   int<0,1>		$off_session                    	If we use an already known payment method to pay when customer is not available during the checkout flow.
 	 * @param	int<0,1>		$noidempotency_key					Do not use the idempotency_key when creating the PaymentIntent
-	 * @param	int				$did								ID of an existing line into llx_prelevement_demande (Dolibarr intent). If provided, no new line will be created.
+	 * @param	int				$did								ID of an existing line into llx_prelevement_demande (DCADMIN intent). If provided, no new line will be created.
 	 * @return 	?\Stripe\PaymentIntent				        		Stripe PaymentIntent or null if not found and failed to create
 	 */
 	public function getPaymentIntent($amount, $currency_code, $tag, $description = '', $object = null, $customer = null, $key = null, $servicestatus = 0, $usethirdpartyemailforreceiptemail = 0, $mode = 'automatic', $confirmnow = false, $payment_method = null, $off_session = 0, $noidempotency_key = 1, $did = 0)
@@ -1186,7 +1186,7 @@ class Stripe extends CommonObject
 
 								// print json_encode($sepa);
 
-								// Save the Stripe payment mode ID into the Dolibarr database
+								// Save the Stripe payment mode ID into the DCADMIN database
 								$sql = "UPDATE ".MAIN_DB_PREFIX."societe_rib";
 								$sql .= " SET stripe_card_ref = '".$this->db->escape($sepa->id)."',";
 								$sql .= " card_type = 'sepa_debit',";
@@ -1214,7 +1214,7 @@ class Stripe extends CommonObject
 					} catch (Exception $e) {
 						$sepa = null;
 						$this->error = 'Stripe error: '.$e->getMessage().'. Check the BAN information.';
-						dol_syslog($this->error, LOG_WARNING);	// Error from Stripe, so a warning on Dolibarr
+						dol_syslog($this->error, LOG_WARNING);	// Error from Stripe, so a warning on DCADMIN
 					}
 				}
 			}

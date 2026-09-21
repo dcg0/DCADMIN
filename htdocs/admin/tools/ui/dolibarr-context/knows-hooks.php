@@ -17,7 +17,7 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../../../main.inc.php';
 
 /**
@@ -40,8 +40,8 @@ $langs->load('uxdocumentation');
 
 //
 $documentation = new Documentation($db);
-$group = 'UxDolibarrContext';
-$experimentName = 'UxDolibarrContextKnowsHooks';
+$group = 'UxDCADMINContext';
+$experimentName = 'UxDCADMINContextKnowsHooks';
 
 $js = [
 	'/includes/ace/src/ace.js',
@@ -54,7 +54,7 @@ $css = [];
 $documentation->docHeader($langs->trans($experimentName, $group), $js, $css);
 
 // Set view for menu and breadcrumb
-$documentation->view = [$group, 'UxDolibarrContext', $experimentName];
+$documentation->view = [$group, 'UxDCADMINContext', $experimentName];
 
 // Output sidebar
 $documentation->showSidebar(); ?>
@@ -73,7 +73,7 @@ $documentation->showSidebar(); ?>
 			<h2 id="titlesection-basicusage" class="documentation-title">Introduction</h2>
 
 			<p>
-				Some hooks are not natively triggered by Dolibarr; instead, they rely on external modules. Therefore, we document them here to ensure everyone uses the same method of triggering them, until we provide a standardized native trigger, which does not yet exist.<br/>
+				Some hooks are not natively triggered by DCADMIN; instead, they rely on external modules. Therefore, we document them here to ensure everyone uses the same method of triggering them, until we provide a standardized native trigger, which does not yet exist.<br/>
 				Please refer to the "How it works" section for further details.
 			</p>
 
@@ -82,8 +82,8 @@ $documentation->showSidebar(); ?>
 		<div class="documentation-section">
 			<h2 id="reloadDocumentLine" class="documentation-title">Hook : reloadDocumentLine</h2>
 			<p>
-				Next, let’s focus on the “reloadDocumentLine” hook. First, it’s important to note that this hook is not triggered automatically by Dolibarr.
-				<br/>Instead, it must be activated via external modules. In the future, we plan to introduce a class directly tied to the object within Dolibarr tools, allowing this hook to be triggered natively. However, although Dolibarr does not currently initiate the trigger itself, it does listen for it.
+				Next, let’s focus on the “reloadDocumentLine” hook. First, it’s important to note that this hook is not triggered automatically by DCADMIN.
+				<br/>Instead, it must be activated via external modules. In the future, we plan to introduce a class directly tied to the object within DCADMIN tools, allowing this hook to be triggered natively. However, although DCADMIN does not currently initiate the trigger itself, it does listen for it.
 				<br/>This is because it uses this trigger to reload certain elements on the lines, particularly the drag-and-drop system for rearranging line items in the document.
 			</p>
 			<p>
@@ -96,7 +96,7 @@ $documentation->showSidebar(); ?>
 				<?php
 				$lines = array(
 					'<script>',
-					'Dolibarr.on(\'reloadDocumentLine\',',
+					'DCADMIN.on(\'reloadDocumentLine\',',
 					'	/** @param {{lineId:number, lineElement:string}} data */',
 					'	function (data) {',
 					'		// Do your stuff',
@@ -121,11 +121,11 @@ $documentation->showSidebar(); ?>
 					'',
 					'	// Trigger the hook to dispatch reloaded line event.',
 					'	// This hook will by used to rebuild drag and drop lines order system for example ',
-					'	Dolibarr.executeHook(\'reloadDocumentLine\', {lineId, lineElement});',
+					'	DCADMIN.executeHook(\'reloadDocumentLine\', {lineId, lineElement});',
 					'',
 					'	// Trigger initNewContent for all common Dom reloaded content. This will reload tooltips system for example ',
 					'	// This will reload tooltips system for example ',
-					'	Dolibarr.initNewContent(rowSelector);',
+					'	DCADMIN.initNewContent(rowSelector);',
 					'</script>',
 				);
 				$documentation->showCode($lines, 'php');

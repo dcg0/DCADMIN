@@ -29,7 +29,7 @@ $formCard = $this->formCard;
 		<?php
 		// TODO: CODE QUALITY: Avoid defining object-specific logic directly inside the template.
 		//  If object-specific handling is required, create a dedicated template file or pass the necessary variables in $vars so the template remains generic.
-		//  also you can create a getBannerAddressForWebPortal method into object (who extend Dolibarr object) but its not a good way
+		//  also you can create a getBannerAddressForWebPortal method into object (who extend DCADMIN object) but its not a good way
 		if ($formCard->object->element == 'member') {
 			print '<div class="header-card-photo">';
 			print $formCard->form->showphoto('memberphoto', $formCard->object, 0, 0, 0, 'photowithmargin photoref', 'small', 1, 0);
@@ -45,7 +45,7 @@ $formCard = $this->formCard;
 			<?php
 			// TODO: CODE QUALITY: Avoid defining object-specific logic directly inside the template.
 			//  If object-specific handling is required, create a dedicated template file or pass the necessary variables so the template remains generic.
-			//  also you can create a getBannerAddressForWebPortal method into webportal object (who extend Dolibarr object) but its not a good way
+			//  also you can create a getBannerAddressForWebPortal method into webportal object (who extend DCADMIN object) but its not a good way
 
 			if ($formCard->object->element == 'member') {
 				$object = $formCard->object;

@@ -272,7 +272,7 @@ class LinkField extends CommonField
 			$classpath = $optionParams['pathToClass'];
 			$object = $this->getObject($classname, $classpath);
 			if (isset($object) && method_exists($object, 'isExistingObject') && !self::$validator->isFetchable((int) $value, $classname, $classpath) // All class don't have isExistingObject function ...
-				&& (version_compare(DOL_VERSION, '19.0.0') < 0 || !self::$validator->isFetchableElement((int) $value, $classname)) // from V19 of Dolibarr, In some cases link use element instead of class, example project_task
+				&& (version_compare(DOL_VERSION, '19.0.0') < 0 || !self::$validator->isFetchableElement((int) $value, $classname)) // from V19 of DCADMIN, In some cases link use element instead of class, example project_task
 			) {
 				return false;
 			}
@@ -420,7 +420,7 @@ class LinkField extends CommonField
 	{
 		dol_include_once($pathToClass);
 		if ($objectClass && !class_exists($objectClass)) {
-			// from V19 of Dolibarr, In some cases link use element instead of class, example project_task
+			// from V19 of DCADMIN, In some cases link use element instead of class, example project_task
 			// TODO use newObjectByElement() introduce in V20 by PR #30036 for better errors management
 			$element_prop = getElementProperties($objectClass);
 			if ($element_prop) {

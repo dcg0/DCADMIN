@@ -23,7 +23,7 @@
 /**
  * \file scripts/user/sync_users_dolibarr2ldap.php
  * \ingroup ldap core
- * \brief Script to update users in LDAP from Dolibarr DB
+ * \brief Script to update users in LDAP from DCADMIN DB
  */
 
 if (!defined('NOSESSION')) {
@@ -76,7 +76,7 @@ dol_syslog($script_file." launched with arg ".implode(',', $argv));
 
 /*
  * if (! getDolGlobalString('LDAP_SYNCHRO_ACTIVE')) {
- * print $langs->trans("LDAPSynchronizationNotSetupInDolibarr");
+ * print $langs->trans("LDAPSynchronizationNotSetupInDCADMIN");
  * exit(1);
  * }
  */

@@ -31,13 +31,13 @@
  *    \ingroup    holiday
  *    \brief      Description and activation file for the module holiday
  */
-include_once DOL_DOCUMENT_ROOT."/core/modules/DolibarrModules.class.php";
+include_once DOL_DOCUMENT_ROOT."/core/modules/DCADMINModules.class.php";
 
 
 /**
  *		Description and activation class for module holiday
  */
-class modHoliday extends DolibarrModules
+class modHoliday extends DCADMINModules
 {
 	/**
 	 *  Constructor. Define names, constants, directories, boxes, permissions
@@ -51,7 +51,7 @@ class modHoliday extends DolibarrModules
 		$this->db = $db;
 
 		// Id for module (must be unique).
-		// Use here a free id (See in Home -> System information -> Dolibarr for list of used modules id).
+		// Use here a free id (See in Home -> System information -> DCADMIN for list of used modules id).
 		$this->numero = 20000;
 		// Key text used to identify module (for permissions, menus, etc...)
 		$this->rights_class = 'holiday';
@@ -339,7 +339,7 @@ class modHoliday extends DolibarrModules
 
 	/**
 	 *		Function called when module is enabled.
-	 *		The init function add constants, boxes, permissions and menus (defined in constructor) into Dolibarr database.
+	 *		The init function add constants, boxes, permissions and menus (defined in constructor) into DCADMIN database.
 	 *		It also creates data directories
 	 *
 	 *      @param      string	$options    Options when enabling module ('', 'newboxdefonly', 'noboxes')

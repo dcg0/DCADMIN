@@ -23,13 +23,13 @@
  *  \ingroup    modulebuilder
  *  \brief      Description and activation file for the module ModuleBuilder
  */
-include_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
+include_once DOL_DOCUMENT_ROOT.'/core/modules/DCADMINModules.class.php';
 
 
 /**
  *	Class to describe a ModuleBuilder module
  */
-class modModuleBuilder extends DolibarrModules
+class modModuleBuilder extends DCADMINModules
 {
 	/**
 	 *   Constructor. Define names, constants, directories, boxes, permissions

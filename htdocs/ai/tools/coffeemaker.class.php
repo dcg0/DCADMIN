@@ -26,7 +26,7 @@ require_once DOL_DOCUMENT_ROOT . '/core/lib/geturl.lib.php';
 /**
  * Class ToolCoffeeMaker
  *
- * Easter Egg tool to bridge Dolibarr MCP with local Home Assistant coffee configurations.
+ * Easter Egg tool to bridge DCADMIN MCP with local Home Assistant coffee configurations.
  */
 class ToolCoffeeMaker extends McpTool
 {

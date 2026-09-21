@@ -23,7 +23,7 @@
 /**
  * \file scripts/members/sync_members_dolibarr2ldap.php
  * \ingroup ldap member
- * \brief Script to update members in LDAP from the Dolibarr database
+ * \brief Script to update members in LDAP from the DCADMIN database
  */
 
 if (!defined('NOSESSION')) {
@@ -93,7 +93,7 @@ $now = $argv[1];
 print "Mails sending disabled (useless in batch mode)\n";
 $conf->global->MAIN_DISABLE_ALL_MAILS = 1; 	// We block email sending
 print "\n";
-print "----- Synchronize all records from Dolibarr database:\n";
+print "----- Synchronize all records from DCADMIN database:\n";
 print "type=".$conf->db->type."\n";
 print "host=".$conf->db->host."\n";
 print "port=".$conf->db->port."\n";
@@ -120,7 +120,7 @@ if (!$confirmed) {
 
 /*
  * if (getDolGlobalString('LDAP_MEMBER_ACTIVE') {
- * print $langs->trans("LDAPSynchronizationNotSetupInDolibarr");
+ * print $langs->trans("LDAPSynchronizationNotSetupInDCADMIN");
  * exit(1);
  * }
  */

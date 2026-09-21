@@ -99,7 +99,7 @@ trait CommonSignedObject
 
 		switch ($status) {
 			case 0:
-				$this->context['actionmsg2'] = $langs->transnoentitiesnoconv('UnsignedInDolibarr');
+				$this->context['actionmsg2'] = $langs->transnoentitiesnoconv('UnsignedInDCADMIN');
 				break;
 			case 1:
 				$this->context['actionmsg2'] = $langs->transnoentitiesnoconv('SignedSender');

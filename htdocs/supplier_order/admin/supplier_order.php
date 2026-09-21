@@ -31,7 +31,7 @@
  *  \brief      Page d'administration-configuration du module Fournisseur
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 
 /**

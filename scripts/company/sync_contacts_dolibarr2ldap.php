@@ -23,7 +23,7 @@
 /**
  * \file scripts/company/sync_contacts_dolibarr2ldap.php
  * \ingroup ldap company
- * \brief Script to update all contacts from Dolibarr into a LDAP database
+ * \brief Script to update all contacts from DCADMIN into a LDAP database
  */
 
 if (!defined('NOSESSION')) {
@@ -93,7 +93,7 @@ if (!empty($dolibarr_main_db_readonly)) {
 print "Mails sending disabled (useless in batch mode)\n";
 $conf->global->MAIN_DISABLE_ALL_MAILS = 1; // On bloque les mails
 print "\n";
-print "----- Synchronize all records from Dolibarr database:\n";
+print "----- Synchronize all records from DCADMIN database:\n";
 print "type=".$conf->db->type."\n";
 print "host=".$conf->db->host."\n";
 print "port=".$conf->db->port."\n";
@@ -120,7 +120,7 @@ if (!$confirmed) {
 
 /*
  * if (!getDolGlobalString('LDAP_CONTACT_ACTIVE')) {
- * print $langs->trans("LDAPSynchronizationNotSetupInDolibarr");
+ * print $langs->trans("LDAPSynchronizationNotSetupInDCADMIN");
  * exit(1);
  * }
  */

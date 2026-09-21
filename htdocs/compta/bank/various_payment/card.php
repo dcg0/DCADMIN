@@ -27,7 +27,7 @@
  *  \brief      Page of various expenses
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../../main.inc.php';
 
 /**

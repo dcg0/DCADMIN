@@ -1231,7 +1231,7 @@ function get_left_menu_home($mainmenu, &$newmenu, $usemenuhider = 1, $leftmenu =
 			// Load translation files required by the page
 			$langs->loadLangs(array('admin', 'help'));
 
-			$newmenu->add(dolBuildUrl('/admin/system/dolibarr.php', ['mainmenu' => 'home', 'leftmenu' => 'admintools_info']), $langs->trans('InfoDolibarr'), 1);
+			$newmenu->add(dolBuildUrl('/admin/system/dolibarr.php', ['mainmenu' => 'home', 'leftmenu' => 'admintools_info']), $langs->trans('InfoDCADMIN'), 1);
 			if ($usemenuhider || empty($leftmenu) || $leftmenu == 'admintools_info') {
 				$newmenu->add(dolBuildUrl('/admin/system/modules.php', ['mainmenu' => 'home', 'leftmenu' => 'admintools_info']), $langs->trans('Modules'), 2);
 				$newmenu->add(dolBuildUrl('/admin/triggers.php', ['mainmenu' => 'home', 'leftmenu' => 'admintools_info']), $langs->trans('Triggers'), 2);

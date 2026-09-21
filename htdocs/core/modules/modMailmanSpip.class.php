@@ -24,13 +24,13 @@
  *	\brief      Description and activation file for the module mailmanspip
  */
 
-include_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
+include_once DOL_DOCUMENT_ROOT.'/core/modules/DCADMINModules.class.php';
 
 
 /**
  *	Class to describe and enable module Click to Dial
  */
-class modMailmanSpip extends DolibarrModules
+class modMailmanSpip extends DCADMINModules
 {
 	/**
 	 *   Constructor. Define names, constants, directories, boxes, permissions

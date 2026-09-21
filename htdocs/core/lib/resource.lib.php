@@ -1,5 +1,5 @@
 <?php
-/* Module to manage locations, buildings, floors and rooms into Dolibarr ERP/CRM
+/* Module to manage locations, buildings, floors and rooms into DCADMIN ERP/CRM
  * Copyright (C) 2013       Jean-François Ferry     <jfefe@aternatik.fr>
  * Copyright (C) 2016       Gilles Poirier          <gilles.poirier@netlogic.fr>
  * Copyright (C) 2023-2026  Frédéric France         <frederic.france@free.fr>

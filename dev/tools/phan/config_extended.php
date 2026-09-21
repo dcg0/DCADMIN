@@ -64,7 +64,7 @@ $config['plugins'] = [
 // Add any issue types (such as 'PhanUndeclaredMethod')
 // here to inhibit them from being reported
 $config['suppress_issue_types'] = [
-		// Dolibarr uses a lot of internal deprecated stuff, not reporting
+		// DCADMIN uses a lot of internal deprecated stuff, not reporting
 		'PhanDeprecatedProperty',
 
 		'PhanCompatibleNegativeStringOffset',	// return false positive
@@ -78,10 +78,10 @@ $config['suppress_issue_types'] = [
 		'PhanPluginUnknownArrayFunctionReturnType',	// a lot of false positive, in most cases, we want to keep the code as it is
 		'PhanTypeMismatchArgumentSuperType', 	// a lot of false positive, in most cases, we want to keep the code as it is
 
-		'PhanPluginWhitespaceTab',		// Dolibarr used tabs
-		'PhanPluginCanUsePHP71Void',	// Dolibarr is maintaining 7.0 compatibility
-		'PhanPluginShortArray',			// Dolibarr uses array()
-		'PhanPluginShortArrayList',		// Dolibarr uses array()
+		'PhanPluginWhitespaceTab',		// DCADMIN used tabs
+		'PhanPluginCanUsePHP71Void',	// DCADMIN is maintaining 7.0 compatibility
+		'PhanPluginShortArray',			// DCADMIN uses array()
+		'PhanPluginShortArrayList',		// DCADMIN uses array()
 		// Fixers From PHPDocToRealTypesPlugin:
 		'PhanPluginCanUseParamType',			// Fixer - Report/Add types in the function definition (function abc(string $var) (adds string)
 		'PhanPluginCanUseReturnType',			// Fixer - Report/Add return types in the function definition (function abc(string $var) (adds string)

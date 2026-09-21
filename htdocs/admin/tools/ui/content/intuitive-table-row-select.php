@@ -17,7 +17,7 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../../../main.inc.php';
 
 /**
@@ -156,7 +156,7 @@ $form = new Form($db);
 									<div class="inline-block checkallactions">
 										<input type="checkbox" id="checkforselects" name="checkforselects" class="checkallactions" >
 										<script nonce="<?php echo getNonce(); ?>" >
-											// TODO : Dolibarr use this kind of script inclusion for toggle checkboxes : we need to add a more global js method
+											// TODO : DCADMIN use this kind of script inclusion for toggle checkboxes : we need to add a more global js method
 											$(document).ready(function() {
 												$("#checkforselects").click(function() {
 													if($(this).is(':checked')){

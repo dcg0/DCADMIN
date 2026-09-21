@@ -24,13 +24,13 @@
  *  \ingroup    gravatar
  *  \brief      Description and activation file for the module Gravatar
  */
-include_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
+include_once DOL_DOCUMENT_ROOT.'/core/modules/DCADMINModules.class.php';
 
 
 /**
  * 	Description and activation class for module Gravatar
  */
-class modGravatar extends DolibarrModules
+class modGravatar extends DCADMINModules
 {
 	/**
 	 *   Constructor. Define names, constants, directories, boxes, permissions
@@ -42,7 +42,7 @@ class modGravatar extends DolibarrModules
 		$this->db = $db;
 
 		// Id for module (must be unique).
-		// Use here a free id (See in Home -> System information -> Dolibarr for list of used modules id).
+		// Use here a free id (See in Home -> System information -> DCADMIN for list of used modules id).
 		$this->numero = 2700;
 		// Key text used to identify module (for permissions, menus, etc...)
 		$this->rights_class = 'gravatar';
@@ -79,7 +79,7 @@ class modGravatar extends DolibarrModules
 		$this->requiredby = array(); // List of module ids to disable if this one is disabled
 		$this->conflictwith = array(); // List of module class names as string this module is in conflict with
 		$this->phpmin = array(7, 0); // Minimum version of PHP required by module
-		$this->need_dolibarr_version = array(2, 7); // Minimum version of Dolibarr required by module
+		$this->need_dolibarr_version = array(2, 7); // Minimum version of DCADMIN required by module
 		$this->langfiles = array();
 
 		// Constants

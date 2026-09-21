@@ -27,7 +27,7 @@
  *      \brief      Page to setup receipt printer
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf

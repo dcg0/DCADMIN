@@ -44,7 +44,7 @@ if (!defined('NOREQUIREAJAX')) {
 	define('NOREQUIREAJAX', '1');
 }
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 if (!defined('INCLUDE_PHONEPAGE_FROM_PUBLIC_PAGE')) {
 	require '../main.inc.php';
 }
@@ -1710,7 +1710,7 @@ $form = new Form($db);
 
 // llxHeader
 if (defined('INCLUDE_PHONEPAGE_FROM_PUBLIC_PAGE')) {
-	$title = 'TakePOS - Dolibarr '.DOL_VERSION;
+	$title = 'TakePOS - DCADMIN '.DOL_VERSION;
 	if (getDolGlobalString('MAIN_APPLICATION_TITLE')) {
 		$title = 'TakePOS - ' . getDolGlobalString('MAIN_APPLICATION_TITLE');
 	}
@@ -2136,7 +2136,7 @@ if (getDolGlobalString('TAKEPOS_CUSTOMER_DISPLAY')) {
 // Add again js for footer because this content is injected into index.php page so all init
 // for tooltip and other js beautifiers must be reexecuted too.
 if (!empty($conf->use_javascript_ajax)) {
-	print "\n".'<!-- Includes JS Footer of Dolibarr -->'."\n";
+	print "\n".'<!-- Includes JS Footer of DCADMIN -->'."\n";
 	print '<script src="'.DOL_URL_ROOT.'/core/js/lib_foot.js.php?lang='.$langs->defaultlang.'"></script>'."\n";
 }
 

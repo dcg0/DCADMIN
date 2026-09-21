@@ -28,7 +28,7 @@
  *       \brief      Onglet de gestion des contacts de commande
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf

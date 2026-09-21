@@ -25,9 +25,9 @@ require_once DOL_DOCUMENT_ROOT.'/compta/localtax/class/localtax.class.php';
  *
  * @property DoliDB $db
  * @access protected
- * @class DolibarrApiAccess {@requires user,external}
+ * @class DCADMINApiAccess {@requires user,external}
  */
-class LocalTaxes extends DolibarrApi
+class LocalTaxes extends DCADMINApi
 {
 	/**
 	 * @var string[] Mandatory fields, checked when creating an object
@@ -60,7 +60,7 @@ class LocalTaxes extends DolibarrApi
 	 */
 	public function get($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('tax', 'charges', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('tax', 'charges', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -95,7 +95,7 @@ class LocalTaxes extends DolibarrApi
 	 */
 	public function index($sortfield = "t.rowid", $sortorder = 'ASC', $limit = 100, $page = 0, $sqlfilters = '', $properties = '', $pagination_data = false)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('tax', 'charges', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('tax', 'charges', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -179,7 +179,7 @@ class LocalTaxes extends DolibarrApi
 	 */
 	public function post($request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('tax', 'charges', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('tax', 'charges', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -202,12 +202,12 @@ class LocalTaxes extends DolibarrApi
 			$localtax->$field = $this->_checkValForAPI($field, $value, $localtax);
 		}
 
-		$localtax->fk_user_creat = DolibarrApiAccess::$user->id;
+		$localtax->fk_user_creat = DCADMINApiAccess::$user->id;
 		if (empty($localtax->tms)) {
 			$localtax->tms = dol_now();
 		}
 
-		if ($localtax->create(DolibarrApiAccess::$user) < 0) {
+		if ($localtax->create(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, 'Error when creating local tax: '.$localtax->error);
 		}
 
@@ -229,7 +229,7 @@ class LocalTaxes extends DolibarrApi
 	 */
 	public function put($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('tax', 'charges', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('tax', 'charges', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -259,9 +259,9 @@ class LocalTaxes extends DolibarrApi
 			$localtax->$field = $this->_checkValForAPI($field, $value, $localtax);
 		}
 
-		$localtax->fk_user_modif = DolibarrApiAccess::$user->id;
+		$localtax->fk_user_modif = DCADMINApiAccess::$user->id;
 
-		if ($localtax->update(DolibarrApiAccess::$user) > 0) {
+		if ($localtax->update(DCADMINApiAccess::$user) > 0) {
 			return $this->get($id);
 		} else {
 			throw new RestException(500, 'Error when updating local tax: '.$localtax->error);
@@ -282,7 +282,7 @@ class LocalTaxes extends DolibarrApi
 	 */
 	public function delete($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('tax', 'charges', 'supprimer')) {
+		if (!DCADMINApiAccess::$user->hasRight('tax', 'charges', 'supprimer')) {
 			throw new RestException(403);
 		}
 
@@ -294,7 +294,7 @@ class LocalTaxes extends DolibarrApi
 			throw new RestException(404, 'Local tax not found');
 		}
 
-		if ($localtax->delete(DolibarrApiAccess::$user) < 0) {
+		if ($localtax->delete(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, 'Error when deleting local tax: '.$localtax->error);
 		}
 

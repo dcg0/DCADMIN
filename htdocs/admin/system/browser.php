@@ -20,10 +20,10 @@
 
 /**
  *  \file       htdocs/admin/system/browser.php
- *  \brief      Page to show Dolibarr information
+ *  \brief      Page to show DCADMIN information
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 
 /**

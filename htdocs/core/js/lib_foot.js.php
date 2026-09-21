@@ -60,7 +60,7 @@ require_once '../../main.inc.php';
 
 // Define javascript type
 top_httphead('text/javascript; charset=UTF-8');
-// Important: Following code is to avoid page request by browser and PHP CPU at each Dolibarr page access.
+// Important: Following code is to avoid page request by browser and PHP CPU at each DCADMIN page access.
 header('Cache-Control: max-age=10800, public, must-revalidate');
 
 
@@ -91,12 +91,12 @@ jQuery(function() {
 
 
 		// --------------------------------
-		// Dynamic reload via Dolibarr hook
+		// Dynamic reload via DCADMIN hook
 		// --------------------------------
-		if (typeof Dolibarr !== "undefined" && Dolibarr.on) {
-			// Because Dolibarr context isn't in all Dolibarr page and lib_foot.js.php can be loaded everywhere
-			// it useful to check Dolibarr context is loaded before but we are already in a jQuery(function() so event Dolibarr:Ready can't be used here
-			Dolibarr.on('initNewContent', ({targets}) => {
+		if (typeof DCADMIN !== "undefined" && DCADMIN.on) {
+			// Because DCADMIN context isn't in all DCADMIN page and lib_foot.js.php can be loaded everywhere
+			// it useful to check DCADMIN context is loaded before but we are already in a jQuery(function() so event DCADMIN:Ready can't be used here
+			DCADMIN.on('initNewContent', ({targets}) => {
 				targets.forEach(container => {
 					initTooltips(container);
 					initAjaxTooltips(container, footerConst.DOL_URL_ROOT);
@@ -113,13 +113,13 @@ jQuery(function() {
 	});
 
 	// --------------------------------
-	// Dynamic reload via Dolibarr hook
+	// Dynamic reload via DCADMIN hook
 	// --------------------------------
 
-	if (typeof Dolibarr !== "undefined" && Dolibarr.on) {
-		// Because Dolibarr context isn't in all Dolibarr page and lib_foot.js.php can be loaded everywhere
-		// it useful to check Dolibarr context is loaded before but we are already in a jQuery(function() so event Dolibarr:Ready can't be used here
-		Dolibarr.on('initNewContent', ({ targets }) => {
+	if (typeof DCADMIN !== "undefined" && DCADMIN.on) {
+		// Because DCADMIN context isn't in all DCADMIN page and lib_foot.js.php can be loaded everywhere
+		// it useful to check DCADMIN context is loaded before but we are already in a jQuery(function() so event DCADMIN:Ready can't be used here
+		DCADMIN.on('initNewContent', ({ targets }) => {
 			targets.forEach(container => initTooltipDialogs(container, footerConst.classfortooltiponclicktextWidth));
 		});
 	};

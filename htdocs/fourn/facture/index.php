@@ -22,7 +22,7 @@
  *	\brief		Home page of customer invoices area
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 
 /**

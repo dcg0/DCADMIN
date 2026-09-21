@@ -95,7 +95,7 @@ class Memo extends CommonObject
 	 *  	'date', 'datetime', 'timestamp', 'duration',
 	 *  	'boolean', 'checkbox', 'radio', 'array',
 	 *  	'email', 'phone', 'url', 'password', 'ip'
-	 *		Note: Filter must be a Dolibarr Universal Filter syntax string. Example: "(t.ref:like:'SO-%') or (t.date_creation:>:'20160101') or (t.status:!=:0) or (t.nature:is:NULL)"
+	 *		Note: Filter must be a DCADMIN Universal Filter syntax string. Example: "(t.ref:like:'SO-%') or (t.date_creation:>:'20160101') or (t.status:!=:0) or (t.nature:is:NULL)"
 	 *  'length' the length of field. Example: 255, '24,8'
 	 *  'label' the translation key.
 	 *  'langfile' the key of the language file for translation.
@@ -477,7 +477,7 @@ class Memo extends CommonObject
 	/**
 	 * Update position of a memo for a specific user
 	 *
-	 * @param User $user Dolibarr user
+	 * @param User $user DCADMIN user
 	 * @param int  $x    Position X
 	 * @param int  $y    Position Y
 	 * @param int  $w    Width
@@ -1276,7 +1276,7 @@ class Memo extends CommonObject
 	 * Get memo context
 	 *
 	 * @param string|array<string> $context Context
-	 * @param CommonObject|null    $object the common Dolibarr object
+	 * @param CommonObject|null    $object the common DCADMIN object
 	 *
 	 * @return mixed|string
 	 */
@@ -1320,9 +1320,9 @@ class Memo extends CommonObject
 	}
 
 	/**
-	 * @param array<string, array<string>> $contextTabMapping memo context list and Dolibarr context associated
+	 * @param array<string, array<string>> $contextTabMapping memo context list and DCADMIN context associated
 	 * @param string $tabContext memo context
-	 * @param string $dolibarrContext Dolibarr context
+	 * @param string $dolibarrContext DCADMIN context
 	 *
 	 * @return void
 	 */
@@ -1343,7 +1343,7 @@ class Memo extends CommonObject
 	/**
 	 * Get available memo context
 	 *
-	 * @param null $object the common Dolibarr object
+	 * @param null $object the common DCADMIN object
 	 * @param bool $onlyActiveModules on true return only
 	 *
 	 * @return array<string, array<string>>
@@ -1354,7 +1354,7 @@ class Memo extends CommonObject
 
 		$contextTabMapping = [];
 
-		// Start Correction of no standard Dolibarr context and special context
+		// Start Correction of no standard DCADMIN context and special context
 		if (isModEnabled('propal') || !$onlyActiveModules) {
 			self::completeMemoContextMapping($contextTabMapping, 'contactcard', 'proposalcontactcard');
 		}
@@ -1392,7 +1392,7 @@ class Memo extends CommonObject
 		// End of corrections
 
 		// Generate standard context
-		// TODO : Common contexts such as document, agenda, contact card, and stat, which are used across most Dolibarr objects, are not defined as standard global contexts.
+		// TODO : Common contexts such as document, agenda, contact card, and stat, which are used across most DCADMIN objects, are not defined as standard global contexts.
 		//  Instead of having dedicated contexts like global_document, global_agenda, global_contactcard, or global_stat (similar to global_card), pages currently mix global_card with object-specific contexts (e.g. product_document, propal_agenda, etc.).
 		//  This creates inconsistent context handling. These contexts should include both their object-specific context and a proper global context (e.g. global_document or global_agenda) depending on the active tab.
 		$commonCardContext = ['document', 'agenda', 'contactcard', 'stats']; // for common object
@@ -1681,9 +1681,9 @@ class Memo extends CommonObject
 		print '<script nonce="'.getNonce().'" src="'.dol_buildpath('quickmemo/js/QuickMemo.js', 1).'" ></script>'."\n";
 
 		print '<script nonce="'.getNonce().'">
-		document.addEventListener(\'Dolibarr:Ready\', function() {
-			if(!Dolibarr.checkToolExist(\'quickMemo\')) {
-				Dolibarr.defineTool(\'quickMemo\', new QuickMemo('.json_encode($jsConfVars).') );
+		document.addEventListener(\'DCADMIN:Ready\', function() {
+			if(!DCADMIN.checkToolExist(\'quickMemo\')) {
+				DCADMIN.defineTool(\'quickMemo\', new QuickMemo('.json_encode($jsConfVars).') );
 			}
 		});
 		</script>'."\n";

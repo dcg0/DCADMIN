@@ -25,7 +25,7 @@
  * \brief	Page to assign mass categories to accounts
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 
 /**
@@ -299,7 +299,7 @@ if ($useNewSystem) {
 			$arrayofaccounts[$account['id']] = $account['account_number'].' - '.$account['label'];
 		}
 
-		// Use Dolibarr native multiselect with search
+		// Use DCADMIN native multiselect with search
 		print $form->multiselectarray('accounts_to_add', $arrayofaccounts, array(), 0, 0, '', 0, '100%', '', '', $langs->trans("SelectAccountsToAdd"));
 
 		print '</td></tr>';

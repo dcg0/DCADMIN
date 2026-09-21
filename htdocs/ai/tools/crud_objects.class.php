@@ -22,7 +22,7 @@
 /**
  * \file htdocs/ai/tools/crud_objects.class.php
  * \ingroup ai
- * \brief MCP Server tool for CRUD operations on Dolibarr objects.
+ * \brief MCP Server tool for CRUD operations on DCADMIN objects.
  */
 
 require_once DOL_DOCUMENT_ROOT . '/core/lib/company.lib.php';
@@ -30,7 +30,7 @@ require_once DOL_DOCUMENT_ROOT . '/product/class/product.class.php';
 require_once DOL_DOCUMENT_ROOT . '/societe/class/societe.class.php';
 
 /**
- * Tool class for CRUD operations on Dolibarr objects
+ * Tool class for CRUD operations on DCADMIN objects
  * TODO Remove all tools in this file. Must be into the objectname.class.php
  * to follow the same structure than APIs.
  */
@@ -46,7 +46,7 @@ class ToolCrudObjects extends McpTool
 	 *
 	 * 	@param	DoliDB		$db			Database handler
 	 * 	@param	User|null	$user		Service user provided by McpHandler (from AI_MCP_USER_ID)
-	 * 	@param	Conf|null	$conf		Dolibarr config (optional)
+	 * 	@param	Conf|null	$conf		DCADMIN config (optional)
 	 */
 	public function __construct(DoliDB $db, $user = null, $conf = null)
 	{
@@ -404,7 +404,7 @@ If user says 'order' without any qualifier, they mean a SALES ORDER - use this t
 
 	/**
 	 * Per-object-type rights are checked inside this class (PERM_MAP / delete map),
-	 * including the two permission namespaces Dolibarr uses for the same action.
+	 * including the two permission namespaces DCADMIN uses for the same action.
 	 *
 	 * @param string $toolName Tool being executed.
 	 * @return string RIGHTS_ENFORCED_DOWNSTREAM
@@ -654,7 +654,7 @@ If user says 'order' without any qualifier, they mean a SALES ORDER - use this t
 			return ["error" => "Thirdparty with id ".((int) $header['socid'])." does not exist. Use find/search to resolve the thirdparty first."];
 		}
 
-		// Instantiate the specific Dolibarr class (Propal, Commande, etc.)
+		// Instantiate the specific DCADMIN class (Propal, Commande, etc.)
 		// We treat it as 'mixed' or generic object here to allow dynamic property assignment
 		$obj = $this->instantiate($type);
 
@@ -676,7 +676,7 @@ If user says 'order' without any qualifier, they mean a SALES ORDER - use this t
 			// Map 'socid' to specific soc field
 			if ($key === 'socid' && isset($confMap['soc_field'])) {
 				$key = $confMap['soc_field'];
-				$obj->fk_soc = (int) $v; // Standard Dolibarr field for thirdparty linkage
+				$obj->fk_soc = (int) $v; // Standard DCADMIN field for thirdparty linkage
 			}
 
 			// Convert date strings to timestamp if needed
@@ -772,7 +772,7 @@ If user says 'order' without any qualifier, they mean a SALES ORDER - use this t
 	/**
 	 * Add a line to a document object.
 	 *
-	 * @param CommonObject $object The Dolibarr object (Propal, Commande, Facture, etc.).
+	 * @param CommonObject $object The DCADMIN object (Propal, Commande, Facture, etc.).
 	 * @param array<string, mixed> $args {
 	 *                                   product?: string,
 	 *                                   description?: string,
@@ -790,7 +790,7 @@ If user says 'order' without any qualifier, they mean a SALES ORDER - use this t
 	private function processAddLine(CommonObject $object, array $args)
 	{
 		global $mysoc;
-		// Check status (Dolibarr objects usually use 'statut' property, 0 = Draft)
+		// Check status (DCADMIN objects usually use 'statut' property, 0 = Draft)
 		if (isset($object->statut) && $object->statut != 0) {
 			return ["success" => false, "error" => "Document is not in draft status"];
 		}
@@ -831,8 +831,8 @@ If user says 'order' without any qualifier, they mean a SALES ORDER - use this t
 			if (is_array($findResult) && isset($findResult['error'])) {
 				// Only abort if the caller EXPLICITLY asked for a product (via the 'product'
 				// argument). If they only provided a free-text 'description', we silently
-				// fall through with $prod = null so Dolibarr creates a free-text line item,
-				// which is a perfectly valid Dolibarr feature.
+				// fall through with $prod = null so DCADMIN creates a free-text line item,
+				// which is a perfectly valid DCADMIN feature.
 				// Previous behaviour aborted ALL line creations whose description didn't
 				// match an existing product reference, which broke AI-driven creation of
 				// invoices/orders/proposals from one-off line descriptions.
@@ -863,7 +863,7 @@ If user says 'order' without any qualifier, they mean a SALES ORDER - use this t
 			$newprod->import_key = 'AI'.dol_print_date(dol_now(), '%y%m%d');
 			if (!empty($args['barcode'])) {
 				$newprod->barcode = trim((string) $args['barcode']);
-				// Dolibarr barcode features need the type (e.g. 2=EAN13): use the
+				// DCADMIN barcode features need the type (e.g. 2=EAN13): use the
 				// instance default when configured.
 				$defbctype = getDolGlobalInt('PRODUIT_DEFAULT_BARCODE_TYPE');
 				if ($defbctype > 0) {
@@ -947,7 +947,7 @@ If user says 'order' without any qualifier, they mean a SALES ORDER - use this t
 			// i.e. $qty is in position 6, not 3 (unlike customer Facture / Commande / Propal).
 			// The previous call passed our $qty as $txtva (-> a 1% VAT rate) and our $vat
 			// as $txlocaltax1, and position 6 ended up being a hardcoded 0 -> a line was
-			// inserted with qty=0, which Dolibarr silently dropped from the visible totals.
+			// inserted with qty=0, which DCADMIN silently dropped from the visible totals.
 			$res = $object->addline($desc, $price, $vat, 0, 0, $qty, $fkProduct, $discount, '', '', 0, 0, 'HT', $prodType);
 		} elseif ($docType === 'supplier_order') {
 			/** @var CommandeFournisseur $object */
@@ -1370,11 +1370,11 @@ If user says 'order' without any qualifier, they mean a SALES ORDER - use this t
 	}
 
 	/**
-	 * Factory Helper to instantiate Dolibarr objects.
+	 * Factory Helper to instantiate DCADMIN objects.
 	 *
 	 * @param   string $type  Object type key (e.g., 'proposal', 'invoice').
 	 *
-	 * @return  CommonObject  New instance of the specific Dolibarr class.
+	 * @return  CommonObject  New instance of the specific DCADMIN class.
 	 * @throws  Exception     If the type is unknown or class not found.
 	 */
 	private function instantiate(string $type): CommonObject

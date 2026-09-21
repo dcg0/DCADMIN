@@ -29,7 +29,7 @@ require_once DOL_DOCUMENT_ROOT.'/core/triggers/dolibarrtriggers.class.php';
 /**
  *  Class of triggered functions for agenda module
  */
-class InterfaceActionsBlockedLog extends DolibarrTriggers
+class InterfaceActionsBlockedLog extends DCADMINTriggers
 {
 	/**
 	 * Constructor
@@ -48,7 +48,7 @@ class InterfaceActionsBlockedLog extends DolibarrTriggers
 	}
 
 	/**
-	 * Function called on Dolibarr payment or invoice event.
+	 * Function called on DCADMIN payment or invoice event.
 	 *
 	 * @param string		$action		Event action code
 	 * @param Object		$object     Object
@@ -109,7 +109,7 @@ class InterfaceActionsBlockedLog extends DolibarrTriggers
 		// Refuse and cancel any trigger event that record or modify data, if we are running a certified version without forcing https.
 		// This is a security requirement for certification. We do this check before any other to avoid any risk of logging an event that should be blocked because of non respect of certification rules.
 		if ($isqualified && (defined('CERTIF_LNE') && (int) constant('CERTIF_LNE') == 1) && !isHTTPS() && !in_array($action, array('DOC_PREVIEW', 'DOC_DOWNLOAD'))) {
-			$errmsg = 'Error: You are using Dolibarr with the module to be compliant with the French Law Finance certification. In this version, the HTTPS is mandatory to be allowed to record any event (Your hosting does not match the install requirements).';
+			$errmsg = 'Error: You are using DCADMIN with the module to be compliant with the French Law Finance certification. In this version, the HTTPS is mandatory to be allowed to record any event (Your hosting does not match the install requirements).';
 			dol_syslog($errmsg, LOG_ERR);
 			$this->errors[] = $errmsg;
 			return -1;
@@ -117,7 +117,7 @@ class InterfaceActionsBlockedLog extends DolibarrTriggers
 
 		// Detect if a certified version was installed on an old version. So we can force the user to redo the configuration step with new requirements.
 		if ($mysoc->country_code == 'FR' && $isqualified && !isRegistrationDataSavedAndPushed()) {
-			$errmsg = 'Error: You are using Dolibarr with the module "Blocked Log" to be compliant with the French Law Finance certification, but the registration step was not done or is not complete';
+			$errmsg = 'Error: You are using DCADMIN with the module "Blocked Log" to be compliant with the French Law Finance certification, but the registration step was not done or is not complete';
 			$errmsg .= ' (MAIN_FIRST_REGISTRATION_OK_DATE='.getDolGlobalString('MAIN_FIRST_REGISTRATION_OK_DATE').', BLOCKEDLOG_REGISTRATION_NAME='.getDolGlobalString('BLOCKEDLOG_REGISTRATION_NAME').', BLOCKEDLOG_REGISTRATION_EMAIL='.getDolGlobalString('BLOCKEDLOG_REGISTRATION_EMAIL');
 			$errmsg .= ', MAIN_INFO_SIREN='.getDolGlobalString('MAIN_INFO_SIREN').', MAIN_INFO_SIRET='.getDolGlobalString('MAIN_INFO_SIRET').').';
 			$errmsg .= ' Try to reenable the module BlockedLog.';

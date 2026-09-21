@@ -55,7 +55,7 @@ if (is_numeric($entity)) {
 	define("DOLENTITY", $entity);
 }
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf
@@ -1001,7 +1001,7 @@ if ($ispaymentok) {
 							$listofmimes = array(dol_mimetype($file));
 						}
 
-						$moreinheader = 'X-Dolibarr-Info: send_an_email by public/payment/paymentok.php'."\r\n";
+						$moreinheader = 'X-DCADMIN-Info: send_an_email by public/payment/paymentok.php'."\r\n";
 
 						$result = $object->sendEmail($texttosend, $subjecttosend, $listofpaths, $listofmimes, $listofnames, "", "", 0, -1, "", $moreinheader);
 

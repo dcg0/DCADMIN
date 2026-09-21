@@ -34,7 +34,7 @@
  *	\brief		Payment list for supplier invoices
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf

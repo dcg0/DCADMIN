@@ -1055,7 +1055,7 @@ class Societe extends CommonObject
 
 		$this->db->begin();
 
-		// For automatic creation during create action (not used by Dolibarr GUI, can be used by scripts)
+		// For automatic creation during create action (not used by DCADMIN GUI, can be used by scripts)
 		if ($this->code_client == -1 || $this->code_client === 'auto') {
 			$this->get_codeclient($this, 0);
 		}
@@ -1918,7 +1918,7 @@ class Societe extends CommonObject
 	 *
 	 *    @param	int		$rowid			Id of third party to load
 	 *    @param    string	$ref			Reference of third party, name (Warning, this can return several records)
-	 *    @param    string	$ref_ext       	External reference of third party (Warning, this information is a free field not provided by Dolibarr)
+	 *    @param    string	$ref_ext       	External reference of third party (Warning, this information is a free field not provided by DCADMIN)
 	 *    @param    string	$barcode       	Barcode of third party to load
 	 *    @param    string	$idprof1		Prof id 1 of third party (Warning, this can return several records)
 	 *    @param    string	$idprof2		Prof id 2 of third party (Warning, this can return several records)
@@ -2408,7 +2408,7 @@ class Societe extends CommonObject
 	 *
 	 *    @param	int		$rowid			Id of third party
 	 *    @param    string	$ref			Reference of third party, name (Warning, this can return several records)
-	 *    @param    string	$ref_ext       	External reference of third party (Warning, this information is a free field not provided by Dolibarr)
+	 *    @param    string	$ref_ext       	External reference of third party (Warning, this information is a free field not provided by DCADMIN)
 	 *    @param    string	$barcode       	Barcode of third party to load
 	 *    @param    string	$idprof1		Prof id 1 of third party (Warning, this can return several records)
 	 *    @param    string	$idprof2		Prof id 2 of third party (Warning, this can return several records)

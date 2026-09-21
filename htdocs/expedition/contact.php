@@ -26,7 +26,7 @@
  *     \brief      Tab to manage addresses of shipments
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf

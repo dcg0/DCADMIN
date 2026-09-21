@@ -99,7 +99,7 @@ class Translate
 	 *	Constructor
 	 *
 	 *  @param	string	$dir            Force directory that contains /langs subdirectory (value is sometimes '..' like into install/* pages or support/* pages). Use '' by default.
-	 *  @param  Conf	$conf			Object with Dolibarr configuration
+	 *  @param  Conf	$conf			Object with DCADMIN configuration
 	 */
 	public function __construct($dir, $conf)
 	{

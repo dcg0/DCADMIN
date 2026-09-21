@@ -29,7 +29,7 @@
  *   2. converts their read methods into MCP tool definitions (JSON Schema built
  *      from reflection + docblock parsing), and
  *   3. executes calls IN-PROCESS on the API class (no HTTP self-call), behind a
- *      central authentication bridge (DolibarrApiAccess::$user = the acting user),
+ *      central authentication bridge (DCADMINApiAccess::$user = the acting user),
  *      catching RestException.
  *
  * Exposure model (per review feedback on the PR):
@@ -547,7 +547,7 @@ class ToolApiBridge extends McpTool
 	 *
 	 * 	@param	DoliDB		$db			Database handler
 	 * 	@param	User|null	$user		Acting user provided by McpHandler (the caller; tool calls run with this user's rights)
-	 * 	@param	Conf|null	$conf		Dolibarr config (optional)
+	 * 	@param	Conf|null	$conf		DCADMIN config (optional)
 	 */
 	public function __construct($db, $user = null, $conf = null)
 	{
@@ -559,9 +559,9 @@ class ToolApiBridge extends McpTool
 	}
 
 	/**
-	 * Load the REST API runtime (Restler autoloader + DolibarrApi base classes),
+	 * Load the REST API runtime (Restler autoloader + DCADMINApi base classes),
 	 * mirroring the bootstrap sequence of htdocs/api/index.php, so that the
-	 * endpoint classes (which extend DolibarrApi and throw RestException) can be
+	 * endpoint classes (which extend DCADMINApi and throw RestException) can be
 	 * loaded and executed outside the Restler HTTP runtime.
 	 *
 	 * @return void
@@ -814,7 +814,7 @@ class ToolApiBridge extends McpTool
 					continue;
 				}
 				if (!method_exists($ep['class'], $method)) {
-					continue;	// whitelisted method absent in this Dolibarr version
+					continue;	// whitelisted method absent in this DCADMIN version
 				}
 				$suffix = $meta['suffix'] ?? ($method === 'index' ? 'list' : strtolower($method));
 				$toolname = 'api_' . $key . '_' . $suffix;
@@ -837,7 +837,7 @@ class ToolApiBridge extends McpTool
 	/**
 	 * Path of the definitions cache file for the CURRENT state, or '' when no
 	 * writable temp directory exists. The state signature is part of the file
-	 * name, so any relevant change - a module (de)activated, a Dolibarr
+	 * name, so any relevant change - a module (de)activated, a DCADMIN
 	 * upgrade, another entity, an edit of this file (which holds the
 	 * enrichments), or a change of the DB-driven restrictions
 	 * (AI_MCP_API_BRIDGE, AI_MCP_API_BRIDGE_METHODS) - simply points to a
@@ -997,7 +997,7 @@ class ToolApiBridge extends McpTool
 			$schema['required'] = $required;
 		}
 
-		$description = $verb . ' ' . $ep['label'] . ' through the Dolibarr REST API (auto-generated tool). ' . $summary;
+		$description = $verb . ' ' . $ep['label'] . ' through the DCADMIN REST API (auto-generated tool). ' . $summary;
 		if (!empty($meta['description'])) {
 			$description = rtrim($description) . ' ' . $meta['description'];
 		}
@@ -1230,22 +1230,22 @@ class ToolApiBridge extends McpTool
 			$args['properties'] = $methodmeta['default_properties'];
 		}
 
-		// --- Authentication bridge (in-process replacement of DolibarrApiAccess::__isAllowed) ---
-		// The API endpoint methods read the authenticated user from DolibarrApiAccess::$user
+		// --- Authentication bridge (in-process replacement of DCADMINApiAccess::__isAllowed) ---
+		// The API endpoint methods read the authenticated user from DCADMINApiAccess::$user
 		// and their permission checks (hasRight) run against it. TODO: replicate entity
 		// switching for multicompany setups.
 		$this->loadApiRuntime();
 		// Establish the caller's permission context, the same way the REST entry
 		// point does in api_access.class.php ("Set also the global variable $user
 		// to the $user of API"): the API layer authenticates via
-		// DolibarrApiAccess::$user, and API/business code reads the global.
+		// DCADMINApiAccess::$user, and API/business code reads the global.
 		// Unlike a REST request, this runs in-process mid-request, so both are
 		// restored at the single exit point below — nothing after a tool call
 		// (hooks, triggers, log attribution, another handler) may inherit the
 		// tool's user.
-		$saveduserapi = DolibarrApiAccess::$user;
+		$saveduserapi = DCADMINApiAccess::$user;
 		$saveduserglobal = empty($GLOBALS['user']) ? null : $GLOBALS['user'];
-		DolibarrApiAccess::$user = $this->user;
+		DCADMINApiAccess::$user = $this->user;
 		$GLOBALS['user'] = $this->user;
 
 		require_once $ep['path'];
@@ -1297,7 +1297,7 @@ class ToolApiBridge extends McpTool
 		}
 
 		// Restore the caller's context (single exit point).
-		DolibarrApiAccess::$user = $saveduserapi;
+		DCADMINApiAccess::$user = $saveduserapi;
 		if ($saveduserglobal !== null) {
 			$GLOBALS['user'] = $saveduserglobal;
 		}

@@ -21,7 +21,7 @@
 /**
  * Class that all triggers must inherit
  */
-abstract class DolibarrTriggers
+abstract class DCADMINTriggers
 {
 	/**
 	 * Database handler
@@ -155,7 +155,7 @@ abstract class DolibarrTriggers
 	{
 		global $langs;
 		$langs->load("admin");
-		switch ($this->version) { // TODO use a match expression @ Dolibarr minimum PHP v8.0
+		switch ($this->version) { // TODO use a match expression @ DCADMIN minimum PHP v8.0
 			case self::VERSIONS['dev']:
 				return $langs->trans("VersionDevelopment");
 			case self::VERSIONS['exp']:
@@ -192,7 +192,7 @@ abstract class DolibarrTriggers
 	}
 
 	/**
-	 *  Function called when a Dolibarr business event is done.
+	 *  Function called when a DCADMIN business event is done.
 	 *  All functions "runTrigger" are triggered if file is inside directory htdocs/core/triggers or htdocs/module/code/triggers (and declared)
 	 *
 	 *  @param string       $action     Event action code

@@ -28,7 +28,7 @@
  *  \brief      	Page for trip and expense report card
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf
@@ -1175,7 +1175,7 @@ if (empty($reshook)) {
 			}
 		}
 
-		// if VAT is not used in Dolibarr, set VAT rate to 0 because VAT rate is necessary.
+		// if VAT is not used in DCADMIN, set VAT rate to 0 because VAT rate is necessary.
 		if (empty($vatrate)) {
 			$vatrate = "0.000";
 		}
@@ -1354,7 +1354,7 @@ if (empty($reshook)) {
 		$qty = price2num(GETPOST('qty', 'alpha'));
 		$vatrate = GETPOST('vatrate', 'alpha');
 
-		// if VAT is not used in Dolibarr, set VAT rate to 0 because VAT rate is necessary.
+		// if VAT is not used in DCADMIN, set VAT rate to 0 because VAT rate is necessary.
 		if (empty($vatrate)) {
 			$vatrate = "0.000";
 		}

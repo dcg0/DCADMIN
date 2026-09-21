@@ -24,7 +24,7 @@
  *		\brief      Page with events on project
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf

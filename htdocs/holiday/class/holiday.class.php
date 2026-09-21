@@ -1916,7 +1916,7 @@ class Holiday extends CommonObject
 	 *	Get list of Users or list of vacation balance.
 	 *
 	 *	@param	boolean		$stringlist	    If true return a string list of id. If false, return an array with detail.
-	 *	@param	boolean		$type			If true, read Dolibarr user list, if false, return vacation balance list.
+	 *	@param	boolean		$type			If true, read DCADMIN user list, if false, return vacation balance list.
 	 *	@param	string		$sqlFilters     Filters. Warning: This must not contain data from user input.
 	 *	@return array<array{rowid:int,id:int,name:string,lastname:string,firstname:string,gender:string,status:int,employee:int,photo:string,fk_user:int,type?:int,nb_holiday?:int}>|string|int<-1,-1>	Return an array
 	 */
@@ -1926,7 +1926,7 @@ class Holiday extends CommonObject
 
 		if ($stringlist) {
 			if ($type) {
-				// If user of Dolibarr
+				// If user of DCADMIN
 				$sql = "SELECT";
 				if (isModEnabled('multicompany') && getDolGlobalString('MULTICOMPANY_TRANSVERSE_MODE')) {
 					$sql .= " DISTINCT";
@@ -2014,9 +2014,9 @@ class Holiday extends CommonObject
 			}
 		} else {
 			// If false, return array
-			// List for Dolibarr users
+			// List for DCADMIN users
 			if ($type) {
-				// If we need users of Dolibarr
+				// If we need users of DCADMIN
 				$sql = "SELECT";
 				if (isModEnabled('multicompany') && getDolGlobalString('MULTICOMPANY_TRANSVERSE_MODE')) {
 					$sql .= " DISTINCT";
@@ -2164,7 +2164,7 @@ class Holiday extends CommonObject
 
 
 	/**
-	 *	Count number of active users in Dolibarr
+	 *	Count number of active users in DCADMIN
 	 *
 	 *  @return     int      Return numbers of users
 	 */
@@ -2180,7 +2180,7 @@ class Holiday extends CommonObject
 		return $object->compteur;
 	}
 	/**
-	 *	Count number of active users in Dolibarr without Paid leave
+	 *	Count number of active users in DCADMIN without Paid leave
 	 *
 	 *  @return     int      Return numbers of users
 	 */
@@ -2197,18 +2197,18 @@ class Holiday extends CommonObject
 	}
 
 	/**
-	 *  Compare the number of active Dolibarr users to the number of paid leave users
+	 *  Compare the number of active DCADMIN users to the number of paid leave users
 	 *
-	 *  @param    int	$userDolibarrWithoutCP	Number of active users in Dolibarr without holidays
+	 *  @param    int	$userDCADMINWithoutCP	Number of active users in DCADMIN without holidays
 	 *  @param    int	$userCP    				Number of active users into table of holidays
 	 *  @return   int							Return integer <0 if KO, >0 if OK
 	 */
-	public function verifNbUsers($userDolibarrWithoutCP, $userCP)
+	public function verifNbUsers($userDCADMINWithoutCP, $userCP)
 	{
 		if (empty($userCP)) {
 			$userCP = 0;
 		}
-		dol_syslog(get_class($this).'::verifNbUsers userDolibarr='.$userDolibarrWithoutCP.' userCP='.$userCP);
+		dol_syslog(get_class($this).'::verifNbUsers userDCADMIN='.$userDCADMINWithoutCP.' userCP='.$userCP);
 		return 1;
 	}
 

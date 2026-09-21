@@ -24,7 +24,7 @@
  *		\brief      Page to administer data tables
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 
 /**

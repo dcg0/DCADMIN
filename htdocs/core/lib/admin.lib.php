@@ -55,7 +55,7 @@ function versiontostring($versionarray)
 /**
  *	Compare 2 versions (stored into 2 arrays), to know if a version (a,b,c) is lower than (x,y,z)
  *  To check using a string version do a preg_split('/[\.\-]/', strinversion) to convert the string into an array.
- *  To check with Dolibarr version use versiondolibarrarray() to get the array of Dolibarr current version
+ *  To check with DCADMIN version use versiondolibarrarray() to get the array of DCADMIN current version
  *
  *  For example: if (versioncompare(versiondolibarrarray(),array(4,0,-5)) >= 0) is true if version is 4.0 alpha or higher.
  *  For example: if (versioncompare(versiondolibarrarray(),array(4,0,0)) >= 0) is true if version is 4.0 final or higher.
@@ -137,7 +137,7 @@ function versionphparray()
 }
 
 /**
- *	Return version Dolibarr
+ *	Return version DCADMIN
  *
  *	@return     array<int<0,2>,string>	Array of version (vermajor,verminor,vermaintenance,other)
  *  @see versioncompare()
@@ -772,7 +772,7 @@ function dolibarr_set_const($db, $name, $value, $type = 'chaine', $visible = 0, 
 		$resql = $db->query($sql);
 
 		if (!$resql) {
-			// This function is also called by very old migration scripts (upgrade of a Dolibarr instance from an
+			// This function is also called by very old migration scripts (upgrade of a DCADMIN instance from an
 			// old version), at a point of the upgrade chain where llx_const may not yet have the fk_user_creat/fk_user_modif
 			// columns (added by a later migration). Fall back to the legacy insert so old upgrade paths keep working.
 			$sql = "INSERT INTO ".MAIN_DB_PREFIX."const(name, value, type, visible, note, entity)";
@@ -995,7 +995,7 @@ function security_prepare_head()
 /**
  * Prepare array with list of tabs
  *
- * @param 	DolibarrModules		$object 	Descriptor class
+ * @param 	DCADMINModules		$object 	Descriptor class
  * @return	array<array{0:string,1:string,2:string}>	Array of tabs to show
  */
 function modulehelp_prepare_head($object)
@@ -1267,8 +1267,8 @@ function activateModule($value, $withdeps = 1, $noconfverification = 0, $options
 	}
 
 	$objMod = new $modName($db);
-	'@phan-var-force DolibarrModules $objMod';
-	/** @var DolibarrModules $objMod */
+	'@phan-var-force DCADMINModules $objMod';
+	/** @var DCADMINModules $objMod */
 
 	// Test if PHP version ok
 	$verphp = versionphparray();
@@ -1278,12 +1278,12 @@ function activateModule($value, $withdeps = 1, $noconfverification = 0, $options
 		return $ret;
 	}
 
-	// Test if Dolibarr version ok
+	// Test if DCADMIN version ok
 	$verdol = versiondolibarrarray();
 	$vermin = isset($objMod->need_dolibarr_version) ? $objMod->need_dolibarr_version : 0;
 	//print 'version: '.versioncompare($verdol,$vermin).' - '.join(',',$verdol).' - '.join(',',$vermin);exit;
 	if (is_array($vermin) && versioncompare($verdol, $vermin) < 0) {
-		$ret['errors'][] = $langs->trans("ErrorModuleRequireDolibarrVersion", versiontostring($vermin));
+		$ret['errors'][] = $langs->trans("ErrorModuleRequireDCADMINVersion", versiontostring($vermin));
 		return $ret;
 	}
 
@@ -1413,8 +1413,8 @@ function unActivateModule($value, $requiredby = 1, $options = '')
 
 	if ($found) {
 		$objMod = new $modName($db);
-		'@phan-var-force DolibarrModules $objMod';
-		/** @var DolibarrModules $objMod */
+		'@phan-var-force DCADMINModules $objMod';
+		/** @var DCADMINModules $objMod */
 
 		$result = $objMod->remove($options);
 		if ($result <= 0) {
@@ -1422,9 +1422,9 @@ function unActivateModule($value, $requiredby = 1, $options = '')
 		}
 	} else { // We come here when we try to unactivate a module when module does not exists anymore in sources
 		//print $dir.$modFile;exit;
-		// TODO Replace this after DolibarrModules is moved as abstract class with a try catch, to show if the module we try to disable has not been found or could not be loaded
-		include_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
-		$genericMod = new DolibarrModules($db);
+		// TODO Replace this after DCADMINModules is moved as abstract class with a try catch, to show if the module we try to disable has not been found or could not be loaded
+		include_once DOL_DOCUMENT_ROOT.'/core/modules/DCADMINModules.class.php';
+		$genericMod = new DCADMINModules($db);
 		$genericMod->name = preg_replace('/^mod/i', '', $modName);
 		$genericMod->rights_class = strtolower(preg_replace('/^mod/i', '', $modName));
 		$genericMod->const_name = 'MAIN_MODULE_'.strtoupper(preg_replace('/^mod/i', '', $modName));
@@ -1497,8 +1497,8 @@ function complete_dictionary_with_modules(&$taborder, &$tabname, &$tablib, &$tab
 
 						include_once $dir.$file;
 						$objMod = new $modName($db);
-						'@phan-var-force DolibarrModules $objMod';
-						/** @var DolibarrModules $objMod */
+						'@phan-var-force DCADMINModules $objMod';
+						/** @var DCADMINModules $objMod */
 
 						if ($objMod->numero > 0) {
 							$j = $objMod->numero;
@@ -1674,8 +1674,8 @@ function activateModulesRequiredByCountry($country_code)
 
 						include_once $dir.$file;
 						$objMod = new $modName($db);
-						'@phan-var-force DolibarrModules $objMod';
-						/** @var DolibarrModules $objMod */
+						'@phan-var-force DCADMINModules $objMod';
+						/** @var DCADMINModules $objMod */
 
 						$modulequalified = 1;
 
@@ -1752,7 +1752,7 @@ function complete_elementList_with_modules(&$elementList)
 					if ($modName) {
 						include_once $dir.$file;
 						$objMod = new $modName($db);
-						/** @var DolibarrModules $objMod */
+						/** @var DCADMINModules $objMod */
 
 						if ($objMod->numero > 0) {
 							$j = $objMod->numero;
@@ -2000,7 +2000,7 @@ function form_constantes($tableau, $strictw3c = 2, $helptext = '', $text = '')
 /**
  *	Show array with constants to edit
  *
- *	@param	DolibarrModules[]	$modules	Array of all modules
+ *	@param	DCADMINModules[]	$modules	Array of all modules
  *	@return	string							HTML string with warning
  */
 function showModulesExludedForExternal($modules)

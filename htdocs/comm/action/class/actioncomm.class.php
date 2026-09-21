@@ -2626,16 +2626,16 @@ class ActionComm extends CommonObject
 			}
 			if ($more) {
 				if (empty($title)) {
-					$title = 'Dolibarr actions '.$mysoc->name.' - '.$more;
+					$title = 'DCADMIN actions '.$mysoc->name.' - '.$more;
 				}
 				$desc = $more;
-				$desc .= ' ('.$mysoc->name.' - built by Dolibarr)';
+				$desc .= ' ('.$mysoc->name.' - built by DCADMIN)';
 			} else {
 				if (empty($title)) {
 					$title = $langs->transnoentities("Events").' '.$mysoc->name;
 				}
 				$desc = $langs->transnoentities('ListOfActions');
-				$desc .= ' ('.$mysoc->name.' - built by Dolibarr)';
+				$desc .= ' ('.$mysoc->name.' - built by DCADMIN)';
 			}
 
 			// Create temp file

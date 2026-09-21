@@ -47,7 +47,7 @@ $entity = (!empty($_GET['entity']) ? (int) $_GET['entity'] : (!empty($_POST['ent
 define("DOLENTITY", $entity);
 // }
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf

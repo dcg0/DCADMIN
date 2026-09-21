@@ -24,7 +24,7 @@
  *  \brief      Tab for documents linked to Workstation
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf

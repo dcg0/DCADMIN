@@ -566,7 +566,7 @@ try {
 		$toolsForLLM = cleanToolSchemaForLLM($toolsSchema, $isLargeSchema);
 
 		// Build System Prompt
-		$basePrompt = getDolGlobalString('AI_INTENT_PROMPT') ?: "You are a professional Dolibarr assistant.";
+		$basePrompt = getDolGlobalString('AI_INTENT_PROMPT') ?: "You are a professional DCADMIN assistant.";
 
 		$systemRules = "\n\nRules: Respond ONLY JSON and ensure any json string does not contains special chars and are correctly json encoded. Format: {\"tool\":..., \"arguments\":{...}}. ";
 		$systemRules .= "ALWAYS write user-facing text (the message/question/answer argument values) in the SAME LANGUAGE as the user's message. English context notes, tool names, or schemas never change the response language. ";
@@ -989,7 +989,7 @@ function recursiveUnmaskValues($data, ?PrivacyGuard $guard)
 /**
  * Detects if the query uses Non-Latin Scripts.
  *
- * Supports all Dolibarr Core Non-Latin languages:
+ * Supports all DCADMIN Core Non-Latin languages:
  * - CJK (Chinese, Japanese, Korean)
  * - Cyrillic (Russian, Ukrainian, Serbian, Bulgarian)
  * - Greek, Arabic, Hebrew, Thai
@@ -1076,7 +1076,7 @@ function aiNormalizeForMatch($word, $asStem = false)
  * into one or more predefined intent categories (e.g., billing, commercial,
  * thirdparty, stock, project, reporting).
  *
- * It leverages Dolibarr translations (`$langs->trans()`) to match localized
+ * It leverages DCADMIN translations (`$langs->trans()`) to match localized
  * keywords in the user's language and in the en_US reference.
  * For non-Latin scripts, it performs a simpler substring search.
  *
@@ -1087,7 +1087,7 @@ function aiNormalizeForMatch($word, $asStem = false)
  * Each category is detected if at least one keyword matches.
  *
  * @param string    $query The user input query to analyze.
- * @param Translate $langs The Dolibarr translation object used to resolve localized keywords.
+ * @param Translate $langs The DCADMIN translation object used to resolve localized keywords.
  *
  * @return string[] Array of detected intent categories (e.g., ['billing', 'stock']).
  */

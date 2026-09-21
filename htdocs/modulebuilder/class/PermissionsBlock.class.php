@@ -215,7 +215,7 @@ final class PermissionsBlock
 	/**
 	 * List the rights carrying indexes the renderer will drop.
 	 *
-	 * Indexes 2 and 3 are obsolete in modern Dolibarr. Dropping them is the correct migration, so
+	 * Indexes 2 and 3 are obsolete in modern DCADMIN. Dropping them is the correct migration, so
 	 * this is reported as a warning and does not prevent the write.
 	 *
 	 * @param array<int,array<int,string>> $permissions Rights array to inspect

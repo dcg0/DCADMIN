@@ -419,7 +419,7 @@ if ((!empty($_REQUEST['unused']) && $_REQUEST['unused'] == 'true') || (isset($ar
 		if (preg_match('/^ModuleCompanyCode/', $value)) {
 			$qualifiedforclean=0;
 		}
-		if (preg_match('/InDolibarr$/', $value)) {
+		if (preg_match('/InDCADMIN$/', $value)) {
 			$qualifiedforclean=0;
 		}
 		// admin.lang

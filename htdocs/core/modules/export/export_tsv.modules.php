@@ -44,7 +44,7 @@ class ExportTsv extends ModeleExports
 	public $extension;
 
 	/**
-	 * Dolibarr version of the loaded document
+	 * DCADMIN version of the loaded document
 	 * @var string Version, possible values are: 'development', 'experimental', 'dolibarr', 'dolibarr_deprecated' or a version string like 'x.y.z'''|'development'|'dolibarr'|'experimental'
 	 */
 	public $version = 'dolibarr';
@@ -88,7 +88,7 @@ class ExportTsv extends ModeleExports
 		$this->version = '1.15'; // Driver version
 
 		// If driver use an external library, put its name here
-		$this->label_lib = 'Dolibarr';
+		$this->label_lib = 'DCADMIN';
 		$this->version_lib = DOL_VERSION;
 	}
 
@@ -361,7 +361,7 @@ class ExportTsv extends ModeleExports
 		$newvalue = $langs->convToOutputCharset($newvalue, 'UTF-8', $charset); // newvalue is now encoded into $charset
 
 
-		// Rule Dolibarr: No HTML
+		// Rule DCADMIN: No HTML
 		$newvalue = dol_string_nohtmltag($newvalue, 1, $charset);
 
 		// Rule 1 TSV: No CR, LF in cells

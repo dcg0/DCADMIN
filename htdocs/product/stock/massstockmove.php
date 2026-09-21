@@ -26,7 +26,7 @@
  *  			outgoing warehouse and create all stock movements for this.
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf

@@ -17,7 +17,7 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../../../../main.inc.php';
 
 /**
@@ -63,21 +63,21 @@ $documentation->showSidebar(); ?>
 	<div class="doc-content-wrapper">
 
 		<h1 class="documentation-title"><?php echo $langs->trans('UxMenuTooltipTheme'); ?></h1>
-		<p class="documentation-text">This page list all tooltips available in Dolibarr.</p>
+		<p class="documentation-text">This page list all tooltips available in DCADMIN.</p>
 
 		<?php $documentation->showSummary(); ?>
 
 		<div class="documentation-section" id="ux-introduction" >
 			<h2 class="documentation-title">Introduction</h2>
 			<p class="documentation-text">
-				Dolibarr uses tooltips throughout the application.<br/>
+				DCADMIN uses tooltips throughout the application.<br/>
 				By default, there are two types of tooltips: standard tooltips and AJAX tooltips.<br/>
 				The first type is loaded with the page, while the second one is loaded on demand (typically when the mouse hovers over an element) in order to avoid overloading the initial page load.
 				Ajax tooltips are used for object getNomUrl() function.
 			</p>
 
 			<p class="documentation-text">
-				Dolibarr use jquery tooltip
+				DCADMIN use jquery tooltip
 			</p>
 
 			<h3>Default tooltips</h3>
@@ -142,7 +142,7 @@ $documentation->showSidebar(); ?>
 			<h2 class="documentation-title"><?php print $langs->trans('TooltipThemesAndOrientation'); ?></h2>
 
 			<p class="documentation-example">
-				You can create your own tooltips using the jQuery tooltip system by defining a custom tooltip class instead of the default <code>.mytooltip</code> used by Dolibarr.
+				You can create your own tooltips using the jQuery tooltip system by defining a custom tooltip class instead of the default <code>.mytooltip</code> used by DCADMIN.
 			</p>
 
 			<h3>jQuery-based tooltips</h3>
@@ -156,7 +156,7 @@ $documentation->showSidebar(); ?>
 
 			<p>Drawbacks:</p>
 			<ul>
-				<li>Not AJAX-friendly by default (see the "initNewContent" event system in the Dolibarr JS context)</li>
+				<li>Not AJAX-friendly by default (see the "initNewContent" event system in the DCADMIN JS context)</li>
 			</ul>
 
 			<?php

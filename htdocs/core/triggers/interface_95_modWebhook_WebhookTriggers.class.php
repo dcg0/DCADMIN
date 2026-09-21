@@ -33,7 +33,7 @@ require_once DOL_DOCUMENT_ROOT.'/webhook/class/triggerhistory.class.php';
 /**
  *  Class of triggers for Webhook module
  */
-class InterfaceWebhookTriggers extends DolibarrTriggers
+class InterfaceWebhookTriggers extends DCADMINTriggers
 {
 	/**
 	 * Constructor
@@ -53,7 +53,7 @@ class InterfaceWebhookTriggers extends DolibarrTriggers
 	}
 
 	/**
-	 * Function called when a Dolibarr business event is done.
+	 * Function called when a DCADMIN business event is done.
 	 * All functions "runTrigger" are triggered if file of function is inside directory core/triggers.
 	 *
 	 * @param string 		$action 	Event action code

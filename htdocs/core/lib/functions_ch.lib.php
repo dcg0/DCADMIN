@@ -19,7 +19,7 @@
 
 /**
  *	\file			htdocs/core/lib/functions_ch.lib.php
- *	\brief			A set of swiss functions for Dolibarr
+ *	\brief			A set of swiss functions for DCADMIN
  *					This file contains rare functions.
  */
 

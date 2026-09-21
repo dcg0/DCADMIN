@@ -34,7 +34,7 @@
  *	\brief      Page to list projects
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf

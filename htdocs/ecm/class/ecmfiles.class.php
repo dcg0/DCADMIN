@@ -454,7 +454,7 @@ class EcmFiles extends CommonObject
 		$sql .= " t.agenda_id";
 		$sql .= ' FROM '.MAIN_DB_PREFIX.$this->table_element.' as t';
 		$sql .= ' WHERE 1 = 1';
-		/* Fetching this table depends on filepath+filename, it must not depends on entity because filesystem on disk does not know what is Dolibarr entities
+		/* Fetching this table depends on filepath+filename, it must not depends on entity because filesystem on disk does not know what is DCADMIN entities
 		 if (isModEnabled('multicompany')) {
 		 $sql .= " AND entity IN (" . getEntity('ecmfiles') . ")";
 		 }*/

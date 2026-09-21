@@ -30,9 +30,9 @@ require_once DOL_DOCUMENT_ROOT.'/core/lib/company.lib.php';
  *
  * @property DoliDB $db
  * @access protected
- * @class  DolibarrApiAccess {@requires user,external}
+ * @class  DCADMINApiAccess {@requires user,external}
  */
-class SupplierInvoices extends DolibarrApi
+class SupplierInvoices extends DCADMINApi
 {
 	/**
 	 * @var string[]       Mandatory fields, checked when create and update object
@@ -69,12 +69,12 @@ class SupplierInvoices extends DolibarrApi
 	 */
 	public function get($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight("fournisseur", "facture", "lire")) {
+		if (!DCADMINApiAccess::$user->hasRight("fournisseur", "facture", "lire")) {
 			throw new RestException(403);
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('fournisseur', $id, 'facture_fourn', 'facture')) {
-			throw new RestException(403, 'Access not allowed for login ' . DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('fournisseur', $id, 'facture_fourn', 'facture')) {
+			throw new RestException(403, 'Access not allowed for login ' . DCADMINApiAccess::$user->login);
 		}
 
 		$result = $this->invoice->fetch($id);
@@ -111,19 +111,19 @@ class SupplierInvoices extends DolibarrApi
 	 */
 	public function index($sortfield = "t.rowid", $sortorder = 'ASC', $limit = 100, $page = 0, $thirdparty_ids = '', $status = '', $sqlfilters = '', $properties = '', $pagination_data = false)
 	{
-		if (!DolibarrApiAccess::$user->hasRight("fournisseur", "facture", "lire")) {
+		if (!DCADMINApiAccess::$user->hasRight("fournisseur", "facture", "lire")) {
 			throw new RestException(403);
 		}
 
 		$obj_ret = array();
 
 		// case of external user, $thirdparty_ids param is ignored and replaced by user's socid
-		$socids = DolibarrApiAccess::$user->socid ?: $thirdparty_ids;
+		$socids = DCADMINApiAccess::$user->socid ?: $thirdparty_ids;
 
 		// If the internal user must only see his customers, force searching by him
 		$search_sale = 0;
-		if (!DolibarrApiAccess::$user->hasRight("societe", "client", "voir")) {
-			$search_sale = DolibarrApiAccess::$user->id;
+		if (!DCADMINApiAccess::$user->hasRight("societe", "client", "voir")) {
+			$search_sale = DCADMINApiAccess::$user->id;
 		}
 
 		$sql = "SELECT t.rowid";
@@ -231,7 +231,7 @@ class SupplierInvoices extends DolibarrApi
 	 */
 	public function post($request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight("fournisseur", "facture", "creer")) {
+		if (!DCADMINApiAccess::$user->hasRight("fournisseur", "facture", "creer")) {
 			throw new RestException(403, "Insufficiant rights");
 		}
 
@@ -255,7 +255,7 @@ class SupplierInvoices extends DolibarrApi
 			$this->invoice->date = dol_now();
 		}
 
-		if ($this->invoice->create(DolibarrApiAccess::$user) < 0) {
+		if ($this->invoice->create(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, "Error creating invoice ", array_merge(array($this->invoice->error), $this->invoice->errors));
 		}
 		return $this->invoice->id;
@@ -275,12 +275,12 @@ class SupplierInvoices extends DolibarrApi
 	 */
 	public function put($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight("fournisseur", "facture", "creer")) {
+		if (!DCADMINApiAccess::$user->hasRight("fournisseur", "facture", "creer")) {
 			throw new RestException(403);
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('fournisseur', $id, 'facture_fourn', 'facture')) {
-			throw new RestException(403, 'Access not allowed for login ' . DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('fournisseur', $id, 'facture_fourn', 'facture')) {
+			throw new RestException(403, 'Access not allowed for login ' . DCADMINApiAccess::$user->login);
 		}
 
 		$result = $this->invoice->fetch($id);
@@ -311,7 +311,7 @@ class SupplierInvoices extends DolibarrApi
 			$this->invoice->$field = $this->_checkValForAPI($field, $value, $this->invoice);
 		}
 
-		if ($this->invoice->update(DolibarrApiAccess::$user)) {
+		if ($this->invoice->update(DCADMINApiAccess::$user)) {
 			return $this->get($id);
 		}
 
@@ -333,18 +333,18 @@ class SupplierInvoices extends DolibarrApi
 	 */
 	public function delete($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight("fournisseur", "facture", "supprimer")) {
+		if (!DCADMINApiAccess::$user->hasRight("fournisseur", "facture", "supprimer")) {
 			throw new RestException(403);
 		}
-		if (!DolibarrApi::_checkAccessToResource('fournisseur', $id, 'facture_fourn', 'facture')) {
-			throw new RestException(403, 'Access not allowed for login ' . DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('fournisseur', $id, 'facture_fourn', 'facture')) {
+			throw new RestException(403, 'Access not allowed for login ' . DCADMINApiAccess::$user->login);
 		}
 		$result = $this->invoice->fetch($id);
 		if (!$result) {
 			throw new RestException(404, 'Supplier invoice not found');
 		}
 
-		$result = $this->invoice->delete(DolibarrApiAccess::$user);
+		$result = $this->invoice->delete(DCADMINApiAccess::$user);
 		if ($result < 0) {
 			throw new RestException(500, 'Error when deleting invoice');
 		} elseif ($result == 0) {
@@ -380,12 +380,12 @@ class SupplierInvoices extends DolibarrApi
 	 */
 	public function validate($id, $idwarehouse = 0, $notrigger = 0)
 	{
-		if (!DolibarrApiAccess::$user->hasRight("fournisseur", "facture", "creer")) {
+		if (!DCADMINApiAccess::$user->hasRight("fournisseur", "facture", "creer")) {
 			throw new RestException(403);
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('fournisseur', $id, 'facture_fourn', 'facture')) {
-			throw new RestException(403, 'Access not allowed for login ' . DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('fournisseur', $id, 'facture_fourn', 'facture')) {
+			throw new RestException(403, 'Access not allowed for login ' . DCADMINApiAccess::$user->login);
 		}
 
 		$result = $this->invoice->fetch($id);
@@ -393,7 +393,7 @@ class SupplierInvoices extends DolibarrApi
 			throw new RestException(404, 'Invoice not found');
 		}
 
-		$result = $this->invoice->validate(DolibarrApiAccess::$user, '', $idwarehouse, $notrigger);
+		$result = $this->invoice->validate(DCADMINApiAccess::$user, '', $idwarehouse, $notrigger);
 		if ($result == 0) {
 			throw new RestException(304, 'Error nothing done. The invoice is already validated');
 		}
@@ -426,7 +426,7 @@ class SupplierInvoices extends DolibarrApi
 	 */
 	public function settodraft($id, $idwarehouse = -1, $notrigger = 0)
 	{
-		if (!DolibarrApiAccess::$user->hasRight("fournisseur", "facture", "creer")) {
+		if (!DCADMINApiAccess::$user->hasRight("fournisseur", "facture", "creer")) {
 			throw new RestException(403);
 		}
 		$result = $this->invoice->fetch($id);
@@ -434,11 +434,11 @@ class SupplierInvoices extends DolibarrApi
 			throw new RestException(404, 'Invoice not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('fournisseur', $id, 'facture_fourn', 'facture')) {
-			throw new RestException(403, 'Access not allowed for login ' . DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('fournisseur', $id, 'facture_fourn', 'facture')) {
+			throw new RestException(403, 'Access not allowed for login ' . DCADMINApiAccess::$user->login);
 		}
 
-		$result = $this->invoice->setDraft(DolibarrApiAccess::$user, $idwarehouse, $notrigger);
+		$result = $this->invoice->setDraft(DCADMINApiAccess::$user, $idwarehouse, $notrigger);
 		if ($result == 0) {
 			throw new RestException(304, 'Nothing done.');
 		}
@@ -475,11 +475,11 @@ class SupplierInvoices extends DolibarrApi
 			throw new RestException(400, 'Invoice ID is mandatory');
 		}
 
-		if (!DolibarrApiAccess::$user->hasRight("fournisseur", "facture", "lire")) {
+		if (!DCADMINApiAccess::$user->hasRight("fournisseur", "facture", "lire")) {
 			throw new RestException(403);
 		}
-		if (!DolibarrApi::_checkAccessToResource('fournisseur', $id, 'facture_fourn', 'facture')) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('fournisseur', $id, 'facture_fourn', 'facture')) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$result = $this->invoice->fetch($id);
@@ -524,11 +524,11 @@ class SupplierInvoices extends DolibarrApi
 			throw new RestException(400, 'Invoice ID is mandatory');
 		}
 
-		if (!DolibarrApiAccess::$user->hasRight("fournisseur", "facture", "creer")) {
+		if (!DCADMINApiAccess::$user->hasRight("fournisseur", "facture", "creer")) {
 			throw new RestException(403);
 		}
-		if (!DolibarrApi::_checkAccessToResource('fournisseur', $id, 'facture_fourn', 'facture')) {
-			throw new RestException(403, 'Access not allowed for login ' . DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('fournisseur', $id, 'facture_fourn', 'facture')) {
+			throw new RestException(403, 'Access not allowed for login ' . DCADMINApiAccess::$user->login);
 		}
 
 		$result = $this->invoice->fetch($id);
@@ -587,14 +587,14 @@ class SupplierInvoices extends DolibarrApi
 		$paiement->num_payment = $num_payment;
 		$paiement->note_private = $comment;
 
-		$paiement_id = $paiement->create(DolibarrApiAccess::$user, ($closepaidinvoices == 'yes' ? 1 : 0)); // This include closing invoices
+		$paiement_id = $paiement->create(DCADMINApiAccess::$user, ($closepaidinvoices == 'yes' ? 1 : 0)); // This include closing invoices
 		if ($paiement_id < 0) {
 			$this->db->rollback();
 			throw new RestException(400, 'Payment error : ' . $paiement->error);
 		}
 
 		if (isModEnabled("bank")) {
-			$result = $paiement->addPaymentToBank(DolibarrApiAccess::$user, 'payment_supplier', '(SupplierInvoicePayment)', $accountid, $chqemetteur, $chqbank);
+			$result = $paiement->addPaymentToBank(DCADMINApiAccess::$user, 'payment_supplier', '(SupplierInvoicePayment)', $accountid, $chqemetteur, $chqbank);
 			if ($result < 0) {
 				$this->db->rollback();
 				throw new RestException(400, 'Add payment to bank error : ' . $paiement->error);
@@ -623,7 +623,7 @@ class SupplierInvoices extends DolibarrApi
 	 */
 	public function settopaid($id, $close_code = '', $close_note = '')
 	{
-		if (!DolibarrApiAccess::$user->hasRight('fournisseur', 'facture', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('fournisseur', 'facture', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -632,11 +632,11 @@ class SupplierInvoices extends DolibarrApi
 			throw new RestException(404, 'Supplier invoice not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('fournisseur', $this->invoice->id, 'facture_fourn', 'facture')) {
-			throw new RestException(403, 'Access not allowed for login ' . DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('fournisseur', $this->invoice->id, 'facture_fourn', 'facture')) {
+			throw new RestException(403, 'Access not allowed for login ' . DCADMINApiAccess::$user->login);
 		}
 
-		$result = $this->invoice->setPaid(DolibarrApiAccess::$user, $close_code, $close_note);
+		$result = $this->invoice->setPaid(DCADMINApiAccess::$user, $close_code, $close_note);
 		if ($result == 0) {
 			throw new RestException(304, 'Error nothing done. Maybe object is already paid or not payable.');
 		}
@@ -667,7 +667,7 @@ class SupplierInvoices extends DolibarrApi
 	 */
 	public function settounpaid($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('fournisseur', 'facture', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('fournisseur', 'facture', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -676,11 +676,11 @@ class SupplierInvoices extends DolibarrApi
 			throw new RestException(404, 'Supplier invoice not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('fournisseur', $this->invoice->id, 'facture_fourn', 'facture')) {
-			throw new RestException(403, 'Access not allowed for login ' . DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('fournisseur', $this->invoice->id, 'facture_fourn', 'facture')) {
+			throw new RestException(403, 'Access not allowed for login ' . DCADMINApiAccess::$user->login);
 		}
 
-		$result = $this->invoice->setUnpaid(DolibarrApiAccess::$user);
+		$result = $this->invoice->setUnpaid(DCADMINApiAccess::$user);
 		if ($result == 0) {
 			throw new RestException(304, 'Nothing done.');
 		}
@@ -712,11 +712,11 @@ class SupplierInvoices extends DolibarrApi
 	 */
 	public function getLines($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight("fournisseur", "facture", "creer")) {
+		if (!DCADMINApiAccess::$user->hasRight("fournisseur", "facture", "creer")) {
 			throw new RestException(403);
 		}
-		if (!DolibarrApi::_checkAccessToResource('fournisseur', $id, 'facture_fourn', 'facture')) {
-			throw new RestException(403, 'Access not allowed for login ' . DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('fournisseur', $id, 'facture_fourn', 'facture')) {
+			throw new RestException(403, 'Access not allowed for login ' . DCADMINApiAccess::$user->login);
 		}
 
 		$result = $this->invoice->fetch($id);
@@ -753,12 +753,12 @@ class SupplierInvoices extends DolibarrApi
 	 */
 	public function postLine($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight("fournisseur", "facture", "creer")) {
+		if (!DCADMINApiAccess::$user->hasRight("fournisseur", "facture", "creer")) {
 			throw new RestException(403);
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('fournisseur', $id, 'facture_fourn', 'facture')) {
-			throw new RestException(403, 'Access not allowed for login ' . DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('fournisseur', $id, 'facture_fourn', 'facture')) {
+			throw new RestException(403, 'Access not allowed for login ' . DCADMINApiAccess::$user->login);
 		}
 
 		$result = $this->invoice->fetch($id);
@@ -822,12 +822,12 @@ class SupplierInvoices extends DolibarrApi
 	 */
 	public function putLine($id, $lineid, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight("fournisseur", "facture", "creer")) {
+		if (!DCADMINApiAccess::$user->hasRight("fournisseur", "facture", "creer")) {
 			throw new RestException(403);
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('fournisseur', $id, 'facture_fourn', 'facture')) {
-			throw new RestException(403, 'Access not allowed for login ' . DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('fournisseur', $id, 'facture_fourn', 'facture')) {
+			throw new RestException(403, 'Access not allowed for login ' . DCADMINApiAccess::$user->login);
 		}
 
 		$result = $this->invoice->fetch($id);
@@ -903,11 +903,11 @@ class SupplierInvoices extends DolibarrApi
 			throw new RestException(400, 'Line ID is mandatory');
 		}
 
-		if (!DolibarrApiAccess::$user->hasRight("fournisseur", "facture", "creer")) {
+		if (!DCADMINApiAccess::$user->hasRight("fournisseur", "facture", "creer")) {
 			throw new RestException(403);
 		}
-		if (!DolibarrApi::_checkAccessToResource('fournisseur', $id, 'facture_fourn', 'facture')) {
-			throw new RestException(403, 'Access not allowed for login ' . DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('fournisseur', $id, 'facture_fourn', 'facture')) {
+			throw new RestException(403, 'Access not allowed for login ' . DCADMINApiAccess::$user->login);
 		}
 
 		$result = $this->invoice->fetch($id);

@@ -29,9 +29,9 @@ require_once DOL_DOCUMENT_ROOT.'/compta/bank/class/account.class.php';
  *
  * @property DoliDB $db
  * @access protected
- * @class DolibarrApiAccess {@requires user,external}
+ * @class DCADMINApiAccess {@requires user,external}
  */
-class VatPayments extends DolibarrApi
+class VatPayments extends DCADMINApi
 {
 	/**
 	 * @var string[] Mandatory fields, checked when creating a VAT declaration
@@ -72,7 +72,7 @@ class VatPayments extends DolibarrApi
 	 */
 	public function get($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('tax', 'charges', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('tax', 'charges', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -107,7 +107,7 @@ class VatPayments extends DolibarrApi
 	 */
 	public function index($sortfield = "t.rowid", $sortorder = 'ASC', $limit = 100, $page = 0, $sqlfilters = '', $properties = '', $pagination_data = false)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('tax', 'charges', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('tax', 'charges', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -191,7 +191,7 @@ class VatPayments extends DolibarrApi
 	 */
 	public function post($request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('tax', 'charges', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('tax', 'charges', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -209,7 +209,7 @@ class VatPayments extends DolibarrApi
 			$vat->$field = $this->_checkValForAPI($field, $value, $vat);
 		}
 
-		if ($vat->create(DolibarrApiAccess::$user) < 0) {
+		if ($vat->create(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, 'Error when creating VAT payment: '.$vat->error);
 		}
 
@@ -231,7 +231,7 @@ class VatPayments extends DolibarrApi
 	 */
 	public function put($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('tax', 'charges', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('tax', 'charges', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -262,7 +262,7 @@ class VatPayments extends DolibarrApi
 			$vat->$field = $this->_checkValForAPI($field, $value, $vat);
 		}
 
-		if ($vat->update(DolibarrApiAccess::$user) > 0) {
+		if ($vat->update(DCADMINApiAccess::$user) > 0) {
 			return $this->get($id);
 		} else {
 			throw new RestException(500, 'Error when updating VAT payment: '.$vat->error);
@@ -283,7 +283,7 @@ class VatPayments extends DolibarrApi
 	 */
 	public function delete($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('tax', 'charges', 'supprimer')) {
+		if (!DCADMINApiAccess::$user->hasRight('tax', 'charges', 'supprimer')) {
 			throw new RestException(403);
 		}
 
@@ -295,7 +295,7 @@ class VatPayments extends DolibarrApi
 			throw new RestException(404, 'VAT payment not found');
 		}
 
-		if ($vat->delete(DolibarrApiAccess::$user) < 0) {
+		if ($vat->delete(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, 'Error when deleting VAT payment: '.$vat->error);
 		}
 
@@ -325,7 +325,7 @@ class VatPayments extends DolibarrApi
 	 */
 	public function getAllPayments($sortfield = "t.rowid", $sortorder = 'ASC', $limit = 100, $page = 0)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('tax', 'charges', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('tax', 'charges', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -375,7 +375,7 @@ class VatPayments extends DolibarrApi
 	 */
 	public function getPayments($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('tax', 'charges', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('tax', 'charges', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -415,7 +415,7 @@ class VatPayments extends DolibarrApi
 	 */
 	public function getPayment($pid)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('tax', 'charges', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('tax', 'charges', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -445,7 +445,7 @@ class VatPayments extends DolibarrApi
 	 */
 	public function addPayment($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('tax', 'charges', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('tax', 'charges', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -464,12 +464,12 @@ class VatPayments extends DolibarrApi
 			$payment->note = $request_data['note'];
 		}
 
-		if ($payment->create(DolibarrApiAccess::$user) < 0) {
+		if ($payment->create(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, 'Error when creating VAT payment', array_merge(array($payment->error), $payment->errors));
 		}
 
 		if (isModEnabled("bank") && !empty($request_data['accountid'])) {
-			$payment->addPaymentToBank(DolibarrApiAccess::$user, 'payment_vat', '(VATPayment)', (int) $request_data['accountid'], '', '');
+			$payment->addPaymentToBank(DCADMINApiAccess::$user, 'payment_vat', '(VATPayment)', (int) $request_data['accountid'], '', '');
 		}
 
 		return $payment->id;
@@ -491,7 +491,7 @@ class VatPayments extends DolibarrApi
 	 */
 	public function deletePayment($pid)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('tax', 'charges', 'supprimer')) {
+		if (!DCADMINApiAccess::$user->hasRight('tax', 'charges', 'supprimer')) {
 			throw new RestException(403);
 		}
 
@@ -501,7 +501,7 @@ class VatPayments extends DolibarrApi
 			throw new RestException(404, 'VAT payment not found');
 		}
 
-		if ($payment->delete(DolibarrApiAccess::$user) < 0) {
+		if ($payment->delete(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, 'Error when deleting VAT payment: '.$payment->error);
 		}
 

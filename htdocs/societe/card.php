@@ -40,7 +40,7 @@
  */
 
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf
@@ -3483,7 +3483,7 @@ if (is_object($objcanvas) && $objcanvas->displayCanvasExists($canvasdisplayactio
 			// Module Adherent
 			if (isModEnabled('member')) {
 				$langs->load("members");
-				print '<tr><td>'.$langs->trans("LinkedToDolibarrMember").'</td>';
+				print '<tr><td>'.$langs->trans("LinkedToDCADMINMember").'</td>';
 				print '<td>';
 				$adh = new Adherent($db);
 				$result = $adh->fetch(0, '', $object->id);
@@ -3499,15 +3499,15 @@ if (is_object($objcanvas) && $objcanvas->displayCanvasExists($canvasdisplayactio
 
 			// Link user (you must create a contact to get a user)
 			/*
-			print '<tr><td>'.$langs->trans("DolibarrLogin").'</td><td colspan="3">';
+			print '<tr><td>'.$langs->trans("DCADMINLogin").'</td><td colspan="3">';
 			if ($object->user_id) {
 				$dolibarr_user = new User($db);
 				$result = $dolibarr_user->fetch($object->user_id);
 				print $dolibarr_user->getLoginUrl(-1);
 			} else {
-				//print '<span class="opacitymedium">'.$langs->trans("NoDolibarrAccess").'</span>';
+				//print '<span class="opacitymedium">'.$langs->trans("NoDCADMINAccess").'</span>';
 				if (!$object->user_id && $user->hasRight('user', 'user', 'creer')) {
-					print '<a class="aaa" href="'.$_SERVER['PHP_SELF'].'?id='.$object->id.'&action=create_user&token='.newToken().'">'.img_picto($langs->trans("CreateDolibarrLogin"), 'add').' '.$langs->trans("CreateDolibarrLogin").'</a>';
+					print '<a class="aaa" href="'.$_SERVER['PHP_SELF'].'?id='.$object->id.'&action=create_user&token='.newToken().'">'.img_picto($langs->trans("CreateDCADMINLogin"), 'add').' '.$langs->trans("CreateDCADMINLogin").'</a>';
 				}
 			}
 			print '</td></tr>';

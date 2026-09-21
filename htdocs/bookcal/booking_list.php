@@ -28,7 +28,7 @@
  *	\brief      Management of direct debit order or credit transfer of invoices
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf

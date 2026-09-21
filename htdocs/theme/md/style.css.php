@@ -163,7 +163,7 @@ if (empty($user->id) && !empty($_SESSION['dol_login'])) {
 
 // Define css type
 top_httphead('text/css');
-// Important: Following code is to avoid page request by browser and PHP CPU at each Dolibarr page access.
+// Important: Following code is to avoid page request by browser and PHP CPU at each DCADMIN page access.
 header('Cache-Control: max-age=10800, public, must-revalidate');
 
 if (GETPOST('theme', 'aZ09')) {
@@ -6338,7 +6338,7 @@ tr.visible {
 .websiteformtoolbar {
 	position: sticky;
 	top: <?php echo empty($dol_hide_topmenu) ? ($disableimages ? '36px' : '50px') : '0'; ?>;
-	z-index: 1002;	/* Dolibarr menu is 1001, Website menu is 1002 */
+	z-index: 1002;	/* DCADMIN menu is 1001, Website menu is 1002 */
 }
 
 .exampleapachesetup {

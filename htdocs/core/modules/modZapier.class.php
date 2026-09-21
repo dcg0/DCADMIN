@@ -25,12 +25,12 @@
  *  \brief      Description and activation file for the module Zapier
  */
 
-require_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
+require_once DOL_DOCUMENT_ROOT.'/core/modules/DCADMINModules.class.php';
 
 /**
  *  Description and activation class for module Zapier
  */
-class modZapier extends DolibarrModules
+class modZapier extends DCADMINModules
 {
 	/**
 	 * Constructor. Define names, constants, directories, boxes, permissions
@@ -43,7 +43,7 @@ class modZapier extends DolibarrModules
 
 		$this->db = $db;
 		// Id for module (must be unique).
-		// Use here a free id (See in Home -> System information -> Dolibarr for list of used modules id).
+		// Use here a free id (See in Home -> System information -> DCADMIN for list of used modules id).
 		$this->numero = 50330;
 		// Key text used to identify module (for permissions, menus, etc...)
 		$this->rights_class = 'zapier';
@@ -126,7 +126,7 @@ class modZapier extends DolibarrModules
 		$this->langfiles = array("zapier");
 		// Minimum version of PHP required by module
 		//$this->phpmin = array(7, 0);
-		// Minimum version of Dolibarr required by module
+		// Minimum version of DCADMIN required by module
 		$this->need_dolibarr_version = array(10, 0);
 		$this->warnings_activation = array();
 		$this->warnings_activation_ext = array();
@@ -247,7 +247,7 @@ class modZapier extends DolibarrModules
 
 	/**
 	 *  Function called when module is enabled.
-	 *  The init function add constants, boxes, permissions and menus (defined in constructor) into Dolibarr database.
+	 *  The init function add constants, boxes, permissions and menus (defined in constructor) into DCADMIN database.
 	 *  It also creates data directories
 	 *
 	 *  @param      string  $options    Options when enabling module ('', 'noboxes')
@@ -276,7 +276,7 @@ class modZapier extends DolibarrModules
 
 	/**
 	 *  Function called when module is disabled.
-	 *  Remove from database constants, boxes and permissions from Dolibarr database.
+	 *  Remove from database constants, boxes and permissions from DCADMIN database.
 	 *  Data directories are not deleted
 	 *
 	 *  @param      string	$options    Options when enabling module ('', 'noboxes')

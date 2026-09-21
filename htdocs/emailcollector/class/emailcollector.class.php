@@ -1239,7 +1239,7 @@ class EmailCollector extends CommonObject
 					$expire = false;
 					if (is_object($tokenobj) && method_exists($tokenobj, 'getEndOfLife')) {
 						$endOfLife = $tokenobj->getEndOfLife();
-						// time() is used internally in token @phan-suppress-next-line DolibarrForbiddenFunctionPlugin
+						// time() is used internally in token @phan-suppress-next-line DCADMINForbiddenFunctionPlugin
 						if ($endOfLife !== -9002 && $endOfLife !== -9001 && time() > ($endOfLife - 30)) {
 							$expire = true;
 						}
@@ -2416,7 +2416,7 @@ class EmailCollector extends CommonObject
 					}
 
 					if (!empty($resultsearchtrackid)) {
-						// We found a tracker (in recipient email or msgid or into a Reference matching the Dolibarr server)
+						// We found a tracker (in recipient email or msgid or into a Reference matching the DCADMIN server)
 						$trackid = $reg[1].$reg[2];
 
 						$objectid = $reg[2];
@@ -2739,7 +2739,7 @@ class EmailCollector extends CommonObject
 
 						// Make Operation
 						dol_syslog("Execute action ".$operation['type']." actionparam=".$operation['actionparam'].' thirdpartystatic->id='.$thirdpartystatic->id.' contactstatic->id='.$contactstatic->id.' projectstatic->id='.$projectstatic->id);
-						dol_syslog("Execute action fk_element_id=".$fk_element_id." fk_element_type=".$fk_element_type);	// If a Dolibarr tracker id is found, we should now the id of object
+						dol_syslog("Execute action fk_element_id=".$fk_element_id." fk_element_type=".$fk_element_type);	// If a DCADMIN tracker id is found, we should now the id of object
 
 						// Try to guess if this is an email in or out.
 						$actioncode = 'EMAIL_IN';
@@ -3717,8 +3717,8 @@ class EmailCollector extends CommonObject
 										$this->error = 'Failed to create ticket: Can\'t get a valid value for the field ref with numbering template = '.$modele.', thirdparty id = '.$thirdpartystatic->id;
 									} else {
 										// Create ticket
-										$tickettocreate->context['actionmsg2'] = $langs->trans("ActionAC_EMAIL_IN").' - '.$langs->trans("TICKET_CREATEInDolibarr");
-										$tickettocreate->context['actionmsg'] = $langs->trans("ActionAC_EMAIL_IN").' - '.$langs->trans("TICKET_CREATEInDolibarr");
+										$tickettocreate->context['actionmsg2'] = $langs->trans("ActionAC_EMAIL_IN").' - '.$langs->trans("TICKET_CREATEInDCADMIN");
+										$tickettocreate->context['actionmsg'] = $langs->trans("ActionAC_EMAIL_IN").' - '.$langs->trans("TICKET_CREATEInDCADMIN");
 										//$tickettocreate->email_fields_no_propagate_in_actioncomm = 0;
 
 										// Add sender to context array to make sure that confirmation e-mail can be sent by trigger script

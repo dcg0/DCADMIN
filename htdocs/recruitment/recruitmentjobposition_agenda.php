@@ -23,7 +23,7 @@
  *  \brief      Page of RecruitmentJobPosition events
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require_once '../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/contact/class/contact.class.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/company.lib.php';

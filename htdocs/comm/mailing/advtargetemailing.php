@@ -25,7 +25,7 @@
  *					@TODO This page needs a lot of works to be stable and understandable.
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf

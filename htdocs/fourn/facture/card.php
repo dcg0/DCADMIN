@@ -38,7 +38,7 @@
  *	\brief      Page for supplier invoice card (view, edit, validate)
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf
@@ -2574,7 +2574,7 @@ if ($action == 'create') {
 		$mode_reglement_id = GETPOST("mode_reglement_id");
 	}
 
-	// If form was posted (but error returned), we must reuse the value posted in priority (standard Dolibarr behaviour)
+	// If form was posted (but error returned), we must reuse the value posted in priority (standard DCADMIN behaviour)
 	if (!GETPOST('changecompany')) {
 		if (GETPOSTISSET('cond_reglement_id')) {
 			$cond_reglement_id = GETPOSTINT('cond_reglement_id');

@@ -26,9 +26,9 @@ require_once DOL_DOCUMENT_ROOT.'/core/class/cemailtemplate.class.php';
  * API for handling Object of table llx_c_email_templates
  *
  * @access protected
- * @class  DolibarrApiAccess {@requires user,external}
+ * @class  DCADMINApiAccess {@requires user,external}
  */
-class EmailTemplates extends DolibarrApi
+class EmailTemplates extends DCADMINApi
 {
 	/**
 	 * @var string[]       Mandatory fields, checked when create and update object
@@ -96,16 +96,16 @@ class EmailTemplates extends DolibarrApi
 			throw new RestException(403, 'denied delete access to email templates');
 		}
 
-		$result = $this->email_template->apiFetch($id, '', DolibarrApiAccess::$user);
+		$result = $this->email_template->apiFetch($id, '', DCADMINApiAccess::$user);
 		if (!$result || $id == 0) {
 			throw new RestException(404, 'Email Template with id '.$id.' not found');
 		}
 
-		if (!DolibarrApiAccess::$user->admin && (int) DolibarrApiAccess::$user->id != $this->email_template->fk_user) {
+		if (!DCADMINApiAccess::$user->admin && (int) DCADMINApiAccess::$user->id != $this->email_template->fk_user) {
 			throw new RestException(403, 'denied delete access to email templates');
 		}
 
-		if (!$this->email_template->delete(DolibarrApiAccess::$user)) {
+		if (!$this->email_template->delete(DCADMINApiAccess::$user)) {
 			throw new RestException(500, 'Error when delete email template : '.$this->email_template->error);
 		}
 
@@ -138,16 +138,16 @@ class EmailTemplates extends DolibarrApi
 			throw new RestException(403, 'denied delete access to email templates');
 		}
 
-		$result = $this->email_template->apiFetch(0, $label, DolibarrApiAccess::$user);
+		$result = $this->email_template->apiFetch(0, $label, DCADMINApiAccess::$user);
 		if (!$result) {
 			throw new RestException(404, "Email Template with label ".$label." not found");
 		}
 
-		if (!DolibarrApiAccess::$user->admin && (int) DolibarrApiAccess::$user->id != $this->email_template->fk_user) {
+		if (!DCADMINApiAccess::$user->admin && (int) DCADMINApiAccess::$user->id != $this->email_template->fk_user) {
 			throw new RestException(403, 'denied delete access to email templates');
 		}
 
-		if (!$this->email_template->delete(DolibarrApiAccess::$user)) {
+		if (!$this->email_template->delete(DCADMINApiAccess::$user)) {
 			throw new RestException(500, 'Error when delete email template : '.$this->email_template->error);
 		}
 
@@ -236,8 +236,8 @@ class EmailTemplates extends DolibarrApi
 		if (!$fk_user == '') {
 			$sql .= " AND e.fk_user = ".((int) $fk_user);
 		}
-		if (!DolibarrApiAccess::$user->admin) {
-			$sql .= " AND e.fk_user = ".((int) DolibarrApiAccess::$user->id);
+		if (!DCADMINApiAccess::$user->admin) {
+			$sql .= " AND e.fk_user = ".((int) DCADMINApiAccess::$user->id);
 		}
 
 		// Add sql filters
@@ -273,7 +273,7 @@ class EmailTemplates extends DolibarrApi
 			while ($i < $min) {
 				$obj = $this->db->fetch_object($result);
 				$email_template_static = new CEmailTemplate($this->db);
-				if ($email_template_static->apiFetch($obj->rowid, '', DolibarrApiAccess::$user) > 0) {
+				if ($email_template_static->apiFetch($obj->rowid, '', DCADMINApiAccess::$user) > 0) {
 					$obj_ret[] = $this->_filterObjectProperties($this->_cleanObjectDatas($email_template_static), $properties);
 				}
 				$i++;
@@ -343,15 +343,15 @@ class EmailTemplates extends DolibarrApi
 				throw new RestException(400, 'Creating with tms field is forbidden');
 			}
 			if ($field == 'fk_user') {
-				if (!DolibarrApiAccess::$user->admin) {
-					$request_data[$field] = (int) DolibarrApiAccess::$user->id;		// Same rule than into admin/mails_templates.php
+				if (!DCADMINApiAccess::$user->admin) {
+					$request_data[$field] = (int) DCADMINApiAccess::$user->id;		// Same rule than into admin/mails_templates.php
 				}
 			}
 
 			$this->email_template->$field = $this->_checkValForAPI($field, $value, $this->email_template);
 		}
 
-		if ($this->email_template->create(DolibarrApiAccess::$user) < 0) {
+		if ($this->email_template->create(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, "Error creating email template", array_merge(array($this->email_template->error), $this->email_template->errors));
 		}
 
@@ -385,7 +385,7 @@ class EmailTemplates extends DolibarrApi
 			throw new RestException(403, 'denied update access to email templates');
 		}
 
-		$result = $this->email_template->apiFetch($id, '', DolibarrApiAccess::$user);
+		$result = $this->email_template->apiFetch($id, '', DCADMINApiAccess::$user);
 		if (!$result || $id == 0) {
 			throw new RestException(404, 'email template with id='.$id.' not found');
 		}
@@ -398,7 +398,7 @@ class EmailTemplates extends DolibarrApi
 				throw new RestException(400, 'Updating with datec field is forbidden');
 			}
 			if ($field == 'fk_user') {
-				if (!DolibarrApiAccess::$user->admin && (int) $value != $this->email_template->fk_user) {
+				if (!DCADMINApiAccess::$user->admin && (int) $value != $this->email_template->fk_user) {
 					throw new RestException(400, 'Updating with fk_user that is not yourself is not allowed if you are not admin');
 				}
 			}
@@ -412,7 +412,7 @@ class EmailTemplates extends DolibarrApi
 			$this->email_template->$field = $this->_checkValForAPI($field, $value, $this->email_template);
 		}
 
-		if ($this->email_template->update(DolibarrApiAccess::$user) > 0) {
+		if ($this->email_template->update(DCADMINApiAccess::$user) > 0) {
 			return $this->_fetch($id, '');
 		} else {
 			throw new RestException(500, $this->email_template->error);
@@ -445,7 +445,7 @@ class EmailTemplates extends DolibarrApi
 			throw new RestException(403, 'denied update access to email templates');
 		}
 
-		$result = $this->email_template->apiFetch(0, $label, DolibarrApiAccess::$user);
+		$result = $this->email_template->apiFetch(0, $label, DCADMINApiAccess::$user);
 		if (!$result) {
 			throw new RestException(404, 'email template not found');
 		}
@@ -459,7 +459,7 @@ class EmailTemplates extends DolibarrApi
 				throw new RestException(400, 'Updating with datec field is forbidden');
 			}
 			if ($field == 'fk_user') {
-				if (!DolibarrApiAccess::$user->admin && (int) $value != $this->email_template->fk_user) {
+				if (!DCADMINApiAccess::$user->admin && (int) $value != $this->email_template->fk_user) {
 					throw new RestException(400, 'Updating with fk_user that is not yourself is not allowed if you are not admin');
 				}
 			}
@@ -476,7 +476,7 @@ class EmailTemplates extends DolibarrApi
 			$this->email_template->$field = $this->_checkValForAPI($field, $value, $this->email_template);
 		}
 
-		if ($this->email_template->update(DolibarrApiAccess::$user) > 0) {
+		if ($this->email_template->update(DCADMINApiAccess::$user) > 0) {
 			return $this->_fetch(0, $newlabel);
 		} else {
 			throw new RestException(500, $this->email_template->error);
@@ -507,7 +507,7 @@ class EmailTemplates extends DolibarrApi
 			throw new RestException(403, 'denied read access to email templates');
 		}
 
-		$result = $this->email_template->apiFetch($id, $label, DolibarrApiAccess::$user);
+		$result = $this->email_template->apiFetch($id, $label, DCADMINApiAccess::$user);
 		if ($result > 0) {
 			return $this->_cleanObjectDatas($this->email_template);
 		}
@@ -661,19 +661,19 @@ class EmailTemplates extends DolibarrApi
 	{
 		// what kind of access management do we need?
 		$allowaccess = false;
-		if (isModEnabled("societe") && DolibarrApiAccess::$user->hasRight('societe', $accesstype)) {
+		if (isModEnabled("societe") && DCADMINApiAccess::$user->hasRight('societe', $accesstype)) {
 			$allowaccess = true;
 		}
-		if (isModEnabled('member') && DolibarrApiAccess::$user->hasRight('adherent', $accesstype)) {
+		if (isModEnabled('member') && DCADMINApiAccess::$user->hasRight('adherent', $accesstype)) {
 			$allowaccess = true;
 		}
-		if (isModEnabled("propal") && DolibarrApiAccess::$user->hasRight('propal', $accesstype)) {
+		if (isModEnabled("propal") && DCADMINApiAccess::$user->hasRight('propal', $accesstype)) {
 			$allowaccess = true;
 		}
-		if (isModEnabled('order') && DolibarrApiAccess::$user->hasRight('commande', $accesstype)) {
+		if (isModEnabled('order') && DCADMINApiAccess::$user->hasRight('commande', $accesstype)) {
 			$allowaccess = true;
 		}
-		if (isModEnabled('invoice') && DolibarrApiAccess::$user->hasRight('facture', $accesstype)) {
+		if (isModEnabled('invoice') && DCADMINApiAccess::$user->hasRight('facture', $accesstype)) {
 			$allowaccess = true;
 		}
 		if ($allowaccess) {

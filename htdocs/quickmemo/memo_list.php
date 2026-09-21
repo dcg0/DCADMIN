@@ -24,7 +24,7 @@
  *		\brief      List page for memo
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * The main.inc.php has been included so the following variable are now defined:

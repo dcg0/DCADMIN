@@ -31,9 +31,9 @@ require_once DOL_DOCUMENT_ROOT.'/holiday/class/holiday.class.php';
  * @since	23.0.0	Initial implementation
  *
  * @access protected
- * @class  DolibarrApiAccess {@requires user,external}
+ * @class  DCADMINApiAccess {@requires user,external}
  */
-class Holidays extends DolibarrApi
+class Holidays extends DCADMINApi
 {
 	/**
 	 * @var string[]	Mandatory fields, checked when create and update object
@@ -94,7 +94,7 @@ class Holidays extends DolibarrApi
 	 */
 	public function get($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('holiday', 'read')) {
+		if (!DCADMINApiAccess::$user->hasRight('holiday', 'read')) {
 			throw new RestException(403);
 		}
 
@@ -103,8 +103,8 @@ class Holidays extends DolibarrApi
 			throw new RestException(404, 'Leave not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('holiday', $this->holiday)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('holiday', $this->holiday)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$this->holiday->fetchObjectLinked();
@@ -132,14 +132,14 @@ class Holidays extends DolibarrApi
 	 */
 	public function index($sortfield = "t.rowid", $sortorder = 'ASC', $limit = 100, $page = 0, $user_ids = '', $sqlfilters = '', $properties = '', $pagination_data = false)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('holiday', 'read') && !DolibarrApiAccess::$user->hasRight('holiday', 'readall')) {
+		if (!DCADMINApiAccess::$user->hasRight('holiday', 'read') && !DCADMINApiAccess::$user->hasRight('holiday', 'readall')) {
 			throw new RestException(403);
 		}
 
 		$obj_ret = array();
 
 		// case of external user, $societe param is ignored and replaced by user's socid
-		//$socid = DolibarrApiAccess::$user->socid ?: $societe;
+		//$socid = DCADMINApiAccess::$user->socid ?: $societe;
 
 		$sql = "SELECT t.rowid";
 		$sql .= " FROM ".MAIN_DB_PREFIX."holiday AS t LEFT JOIN ".MAIN_DB_PREFIX."holiday_extrafields AS ef ON (ef.fk_object = t.rowid)"; // Link to extrafields is to allow to search parameters in the API GET call, so we will be able to filter on extrafields
@@ -148,8 +148,8 @@ class Holidays extends DolibarrApi
 		if ($user_ids) {
 			$sql .= " AND t.fk_user IN (".$this->db->sanitize($user_ids).")";
 		}
-		if (!DolibarrApiAccess::$user->hasRight('holiday', 'readall')) {
-			$childids = DolibarrApiAccess::$user->getAllChildIds(1);
+		if (!DCADMINApiAccess::$user->hasRight('holiday', 'readall')) {
+			$childids = DCADMINApiAccess::$user->getAllChildIds(1);
 			$sql .= " AND t.fk_user IN (".$this->db->sanitize(implode(',', $childids)).")";
 		}
 
@@ -227,7 +227,7 @@ class Holidays extends DolibarrApi
 	 */
 	public function post($request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('holiday', 'write')) {
+		if (!DCADMINApiAccess::$user->hasRight('holiday', 'write')) {
 			throw new RestException(403, "Insufficiant rights");
 		}
 
@@ -253,7 +253,7 @@ class Holidays extends DolibarrApi
 		  }
 		  $this->holiday->lines = $lines;
 		}*/
-		if ($this->holiday->create(DolibarrApiAccess::$user) < 0) {
+		if ($this->holiday->create(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, "Error creating holiday", array_merge(array($this->holiday->error), $this->holiday->errors));
 		}
 
@@ -280,7 +280,7 @@ class Holidays extends DolibarrApi
 	 */
 	public function put($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('holiday', 'write')) {
+		if (!DCADMINApiAccess::$user->hasRight('holiday', 'write')) {
 			throw new RestException(403);
 		}
 
@@ -289,8 +289,8 @@ class Holidays extends DolibarrApi
 			throw new RestException(404, 'Leave not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('holiday', $this->holiday)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('holiday', $this->holiday)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		if (!is_array($request_data)) {
@@ -320,7 +320,7 @@ class Holidays extends DolibarrApi
 			$this->holiday->$field = $this->_checkValForAPI($field, $value, $this->holiday);
 		}
 
-		if ($this->holiday->update(DolibarrApiAccess::$user) > 0) {
+		if ($this->holiday->update(DCADMINApiAccess::$user) > 0) {
 			return $this->get($id);
 		} else {
 			throw new RestException(500, $this->holiday->error);
@@ -341,7 +341,7 @@ class Holidays extends DolibarrApi
 	 */
 	public function delete($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('holiday', 'delete')) {
+		if (!DCADMINApiAccess::$user->hasRight('holiday', 'delete')) {
 			throw new RestException(403);
 		}
 
@@ -350,11 +350,11 @@ class Holidays extends DolibarrApi
 			throw new RestException(404, 'Leave not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('holiday', $this->holiday)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('holiday', $this->holiday)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		if (!$this->holiday->delete(DolibarrApiAccess::$user)) {
+		if (!$this->holiday->delete(DCADMINApiAccess::$user)) {
 			throw new RestException(500, 'Error when deleting Leave : '.$this->holiday->error);
 		}
 
@@ -387,7 +387,7 @@ class Holidays extends DolibarrApi
 	 */
 	public function validate($id, $notrigger = 0)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('holiday', 'write')) {
+		if (!DCADMINApiAccess::$user->hasRight('holiday', 'write')) {
 			throw new RestException(403, "Insufficiant rights");
 		}
 		$result = $this->holiday->fetch($id);
@@ -395,12 +395,12 @@ class Holidays extends DolibarrApi
 			throw new RestException(404, 'Leave not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('holiday', $this->holiday)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('holiday', $this->holiday)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$this->holiday->status = Holiday::STATUS_VALIDATED;
-		$result = $this->holiday->validate(DolibarrApiAccess::$user, $notrigger);
+		$result = $this->holiday->validate(DCADMINApiAccess::$user, $notrigger);
 		if ($result == 0) {
 			throw new RestException(304, 'Error nothing done. May be object is already validated');
 		}
@@ -433,7 +433,7 @@ class Holidays extends DolibarrApi
 	 */
 	public function approve($id, $notrigger = 0)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('holiday', 'approve')) {
+		if (!DCADMINApiAccess::$user->hasRight('holiday', 'approve')) {
 			throw new RestException(403, "Insufficiant rights");
 		}
 		$result = $this->holiday->fetch($id);
@@ -441,12 +441,12 @@ class Holidays extends DolibarrApi
 			throw new RestException(404, 'Leave not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('holiday', $this->holiday)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('holiday', $this->holiday)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$this->holiday->status = Holiday::STATUS_APPROVED;
-		$result = $this->holiday->approve(DolibarrApiAccess::$user, $notrigger);
+		$result = $this->holiday->approve(DCADMINApiAccess::$user, $notrigger);
 		if ($result == 0) {
 			throw new RestException(304, 'Error nothing done. May be object is already approved');
 		}
@@ -478,7 +478,7 @@ class Holidays extends DolibarrApi
 	 */
 	public function cancel($id, $notrigger = 0)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('holiday', 'write')) {
+		if (!DCADMINApiAccess::$user->hasRight('holiday', 'write')) {
 			throw new RestException(403, "Insufficient rights");
 		}
 
@@ -487,12 +487,12 @@ class Holidays extends DolibarrApi
 			throw new RestException(404, 'Leave not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('holiday', $this->holiday)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('holiday', $this->holiday)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$this->holiday->status = Holiday::STATUS_CANCELED;
-		$result = $this->holiday->update(DolibarrApiAccess::$user, $notrigger);
+		$result = $this->holiday->update(DCADMINApiAccess::$user, $notrigger);
 		if ($result == 0) {
 			throw new RestException(304, 'Error nothing done. May be object is already canceled');
 		}
@@ -525,7 +525,7 @@ class Holidays extends DolibarrApi
 	 */
 	public function refuse($id, $detail_refuse, $notrigger = 0)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('holiday', 'approve')) {
+		if (!DCADMINApiAccess::$user->hasRight('holiday', 'approve')) {
 			throw new RestException(403, "Insufficient rights");
 		}
 
@@ -534,13 +534,13 @@ class Holidays extends DolibarrApi
 			throw new RestException(404, 'Leave not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('holiday', $this->holiday)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('holiday', $this->holiday)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$this->holiday->status = Holiday::STATUS_REFUSED;
 		$this->holiday->detail_refuse = $detail_refuse;
-		$result = $this->holiday->update(DolibarrApiAccess::$user, $notrigger);
+		$result = $this->holiday->update(DCADMINApiAccess::$user, $notrigger);
 		if ($result == 0) {
 			throw new RestException(304, 'Error nothing done. May be object is already refused');
 		}
@@ -575,7 +575,7 @@ class Holidays extends DolibarrApi
 	 */
 	public function reopen($id, $notrigger = 0)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('holiday', 'write')) {
+		if (!DCADMINApiAccess::$user->hasRight('holiday', 'write')) {
 			throw new RestException(403, "Insufficient rights");
 		}
 
@@ -584,8 +584,8 @@ class Holidays extends DolibarrApi
 			throw new RestException(404, 'Leave not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('holiday', $this->holiday)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('holiday', $this->holiday)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		// Check if the holiday is actually canceled
@@ -593,7 +593,7 @@ class Holidays extends DolibarrApi
 			throw new RestException(400, 'Holiday is not canceled. Only canceled holidays can be reopened.');
 		}
 		$this->holiday->status = Holiday::STATUS_VALIDATED;
-		$result = $this->holiday->validate(DolibarrApiAccess::$user, $notrigger);
+		$result = $this->holiday->validate(DCADMINApiAccess::$user, $notrigger);
 		if ($result < 0) {
 			throw new RestException(500, 'Error when canceling holiday: '.$this->holiday->error);
 		}

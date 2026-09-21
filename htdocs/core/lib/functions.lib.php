@@ -46,7 +46,7 @@
 
 /**
  *	\file			htdocs/core/lib/functions.lib.php
- *	\brief			A set of functions for Dolibarr
+ *	\brief			A set of functions for DCADMIN
  *					This file contains all frequently used functions.
  */
 
@@ -145,12 +145,12 @@ function formatLogObject($data)
  * Return the full path of the directory where a module (or an object of a module) stores its files.
  * Path may depends on the entity if a multicompany module is enabled.
  *
- * @param 	CommonObject|BlockedLog|null	$object 	Dolibarr common object.
+ * @param 	CommonObject|BlockedLog|null	$object 	DCADMIN common object.
  * @param 	string 							$module 	Override object element, for example to use 'mycompany' instead of 'societe'
  * @param	int								$forobject	Return the more complete path for the given object (including ref) instead of for the module only.
  * @param	string							$mode		'output' (full main dir) or 'outputrel' (relative dir) or 'temp' (full dir for temporary files) or 'version' (full dir for archived files)
  * @return 	string|null									The path of the relative directory of the module, ending with /
- * @since Dolibarr V18
+ * @since DCADMIN V18
  */
 function getMultidirOutput($object, $module = '', $forobject = 0, $mode = 'output')
 {
@@ -288,7 +288,7 @@ function getMultidirOutput($object, $module = '', $forobject = 0, $mode = 'outpu
  * Return the full path of the directory where a module (or an object of a module) stores its temporary files.
  * Path may depends on the entity if a multicompany module is enabled.
  *
- * @param 	CommonObject 	$object 	Dolibarr common object
+ * @param 	CommonObject 	$object 	DCADMIN common object
  * @param 	string 			$module 	Override object element, for example to use 'mycompany' instead of 'societe'
  * @param	int				$forobject	Return the more complete path for the given object instead of for the module only.
  * @return 	string|null					The path of the relative temp directory of the module
@@ -302,7 +302,7 @@ function getMultidirTemp($object, $module = '', $forobject = 0)
  * Return the full path of the directory where a module (or an object of a module) stores its versioned files.
  * Path may depends on the entity if a multicompany module is enabled.
  *
- * @param 	CommonObject 	$object 	Dolibarr common object
+ * @param 	CommonObject 	$object 	DCADMIN common object
  * @param 	string 			$module 	Override object element, for example to use 'mycompany' instead of 'societe'
  * @param	int				$forobject	Return the more complete path for the given object instead of for the module only.
  * @return string|null					The path of the relative version directory of the module
@@ -314,7 +314,7 @@ function getMultidirVersion($object, $module = '', $forobject = 0)
 
 
 /**
- * Return a Dolibarr global constant string value
+ * Return a DCADMIN global constant string value
  *
  * @param 	string 				$key 		Key to return value, return $default if not set
  * @param 	string|int|float 	$default 	Value to return if not defined
@@ -348,7 +348,7 @@ function getDolGlobalLoginBadCharUnauthorized()
 }
 
 /**
- * Return a Dolibarr global constant int value.
+ * Return a DCADMIN global constant int value.
  * The constants $conf->global->xxx are loaded by the script master.inc.php included at begin of any PHP page.
  *
  * @param string 	$key 		Key to return value, return $default if not set
@@ -363,7 +363,7 @@ function getDolGlobalInt($key, $default = 0)
 }
 
 /**
- * Return a Dolibarr global constant float value.
+ * Return a DCADMIN global constant float value.
  * The constants $conf->global->xxx are loaded by the script master.inc.php included at begin of any PHP page.
  *
  * @param string 	$key 		Key to return value, return $default if not set
@@ -378,7 +378,7 @@ function getDolGlobalFloat($key, $default = 0)
 }
 
 /**
- * Return a Dolibarr global constant boolean value.
+ * Return a DCADMIN global constant boolean value.
  * The constants $conf->global->xxx are loaded by the script master.inc.php included at begin of any PHP page.
  *
  * @param string 	$key 		Key to return value, return $default if not set
@@ -447,7 +447,7 @@ function getDolDefaultContextPage($s)
 }
 
 /**
- * Return Dolibarr user constant string value
+ * Return DCADMIN user constant string value
  *
  * @param string 			$key 		Key to return value, return '' if not set
  * @param string|int|float 	$default 	Value to return
@@ -466,7 +466,7 @@ function getDolUserString($key, $default = '', $tmpuser = null)
 }
 
 /**
- * Return Dolibarr user constant int value
+ * Return DCADMIN user constant int value
  *
  * @param string 	$key 			Key to return value, return 0 if not set
  * @param int 		$default 		Value to return
@@ -520,7 +520,7 @@ define(
 );
 
 /**
- * Is Dolibarr module enabled
+ * Is DCADMIN module enabled
  *
  * @param 	string 	$module 	Module name to check
  * @return 	boolean				True if module is enabled
@@ -1005,7 +1005,7 @@ function GETPOSTINT($paramname, $method = 0, $nodefault = 0)
  * 											Put 2 if you know that number is a user input (so we know we have to fix decimal separator).
  * 					                        Use 0 if unknown (never use this anymore, automatic detection is not reliable with some languages).
  *  @return float                           Value converted into float
- *  @since	Dolibarr V20
+ *  @since	DCADMIN V20
  */
 function GETPOSTFLOAT($paramname, $rounding = '', $option = 2)
 {
@@ -1582,7 +1582,7 @@ function dolSetCookie(string $cookiename, string $cookievalue, int $expire = -1)
 
 if (!function_exists('dol_getprefix')) {
 	/**
-	 *  Return a prefix to use for this Dolibarr instance, for session/cookie names or email id.
+	 *  Return a prefix to use for this DCADMIN instance, for session/cookie names or email id.
 	 *  The prefix is unique for instance and avoid conflict between multi-instances, even when having two instances with same root dir
 	 *  or two instances in same virtual servers.
 	 *  This function must not use dol_hash (that is used for password hash) and need to have all context $conf loaded.
@@ -4697,8 +4697,8 @@ function price2num($amount, $rounding = '', $option = 0)
 		}
 
 		// Convert amount to format with dolibarr dec and thousand (this is because PHP convert a number
-		// to format defined by LC_NUMERIC after a calculation and we want source format to be like defined by Dolibarr setup.
-		// So if number was already a good number, it is converted into local Dolibarr setup.
+		// to format defined by LC_NUMERIC after a calculation and we want source format to be like defined by DCADMIN setup.
+		// So if number was already a good number, it is converted into local DCADMIN setup.
 		if (is_numeric($amount)) {
 			// We put in temps value of decimal ("0.00001"). Works with 0 and 2.0E-5 and 9999.10
 			$temps = sprintf("%10.10F", $amount - intval($amount)); // temps=0.0000000000 or 0.0000200000 or 9999.1000000000
@@ -4773,7 +4773,7 @@ function price2num($amount, $rounding = '', $option = 0)
 		//print ' SS'.$amount.' - '.$nbofdec.' - '.$dec.' - '.$thousand.' - '.$nbofdectoround.'<br>';
 
 		// Convert amount to format with dolibarr dec and thousand (this is because PHP convert a number
-		// to format defined by LC_NUMERIC after a calculation and we want source format to be defined by Dolibarr setup.
+		// to format defined by LC_NUMERIC after a calculation and we want source format to be defined by DCADMIN setup.
 		if (is_numeric($amount)) {
 			// We put in temps value of decimal ("0.00001"). Works with 0 and 2.0E-5 and 9999.10
 			$temps = sprintf("%10.10F", $amount - intval($amount)); // temps=0.0000000000 or 0.0000200000 or 9999.1000000000
@@ -8150,7 +8150,7 @@ function dolGetFirstLastname($firstname, $lastname, $nameorder = -1)
 
 /**
  *  Sort an array using a user defined function. This function is a wrapper to usort without the callable parameter so we can use it into dol_eval().
- *  This function is not used in Dolibarr code.
+ *  This function is not used in DCADMIN code.
  *
  *  @param	array<string|int,mixed>	$arraytosort	Array to sort
  *  @return	array<string|int,mixed>					Return the sorted array (the source array is not modified)
@@ -11218,7 +11218,7 @@ function isAFileWithExecutableContent($filename)
  * Return the value of token currently saved into session with name 'newtoken'.
  * This token must be send by any POST as it will be used by next page for comparison with value in session.
  *
- * @since Dolibarr v10.0.7
+ * @since DCADMIN v10.0.7
  * @return  string
  */
 function newToken()
@@ -11230,7 +11230,7 @@ function newToken()
  * Return the value of token currently saved into session with name 'token'.
  * For ajax call, you must use this token as a parameter of the call into the js calling script (the called ajax php page must also set constant NOTOKENRENEWAL).
  *
- * @since Dolibarr v10.0.7
+ * @since DCADMIN v10.0.7
  * @return  string
  */
 function currentToken()
@@ -11522,7 +11522,7 @@ function dolCheckFilters($sqlfilters, &$error = '', &$parenthesislevel = 0)
 }
 
 /**
- * Function to forge a SQL criteria from a Dolibarr filter syntax string.
+ * Function to forge a SQL criteria from a DCADMIN filter syntax string.
  * This method is called by forgeSQLFromUniversalSearchCriteria()
  *
  * @param  string[]	$matches       Array of found string by regex search. Example: "t.ref:like:'SO-%'" or "t.date_creation:>:'20160101'" or "t.nature:is:NULL"
@@ -11800,7 +11800,7 @@ function buildParamDate($prefix, $timestamp = null, $hourTime = '', $gm = 'auto'
  * @param int<0,1> 	$printfooter Determines if the page footer should be printed (1 = yes, 0 = no).
  * @param int<0,1> 	$showonlymessage If set to 1, only the error message is displayed without any additional information or hooks.
  * @param mixed 	$params Optional parameters to pass to hooks for further processing or customization.
- * @global Conf $conf Dolibarr configuration object (global)
+ * @global Conf $conf DCADMIN configuration object (global)
  * @global DoliDB $db Database connection object (global)
  * @global Translate $langs Language translation object, initialized within the function if not already.
  * @global HookManager $hookmanager Hook manager object, initialized within the function if not already for executing hooks.
@@ -11908,7 +11908,7 @@ function array_merge_recursive_distinct(array $array1, array $array2): array
 /**
  * Get the socid of an object, supporting legacy attribute names.
  *
- * @param object $obj The Dolibarr object
+ * @param object $obj The DCADMIN object
  * @return int|null Returns the socid if found, null otherwise
  */
 function getObjectSocId($obj)

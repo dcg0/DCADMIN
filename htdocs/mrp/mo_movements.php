@@ -25,7 +25,7 @@
  *    \brief      Page to show stock movements of a MO
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf

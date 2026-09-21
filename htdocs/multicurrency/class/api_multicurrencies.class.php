@@ -26,9 +26,9 @@ require_once DOL_DOCUMENT_ROOT.'/core/lib/multicurrency.lib.php';
  * API class for MultiCurrency
  *
  * @access protected
- * @class  DolibarrApiAccess {@requires user,external}
+ * @class  DCADMINApiAccess {@requires user,external}
  */
-class MultiCurrencies extends DolibarrApi
+class MultiCurrencies extends DCADMINApi
 {
 	/**
 	 * Constructor
@@ -61,7 +61,7 @@ class MultiCurrencies extends DolibarrApi
 	{
 		global $db;
 
-		if (!DolibarrApiAccess::$user->hasRight('multicurrency', 'currency', 'read')) {
+		if (!DCADMINApiAccess::$user->hasRight('multicurrency', 'currency', 'read')) {
 			throw new RestException(403, "Insufficient rights to read currency");
 		}
 
@@ -126,7 +126,7 @@ class MultiCurrencies extends DolibarrApi
 			throw new RestException(404, 'Currency not found');
 		}
 
-		if (!DolibarrApiAccess::$user->hasRight('multicurrency', 'currency', 'read')) {
+		if (!DCADMINApiAccess::$user->hasRight('multicurrency', 'currency', 'read')) {
 			throw new RestException(403, "Insufficient rights to read currency");
 		}
 
@@ -151,7 +151,7 @@ class MultiCurrencies extends DolibarrApi
 			throw new RestException(404, 'Currency not found');
 		}
 
-		if (!DolibarrApiAccess::$user->hasRight('multicurrency', 'currency', 'read')) {
+		if (!DCADMINApiAccess::$user->hasRight('multicurrency', 'currency', 'read')) {
 			throw new RestException(403, "Insufficient rights to read currency");
 		}
 
@@ -176,7 +176,7 @@ class MultiCurrencies extends DolibarrApi
 			throw new RestException(404, 'Currency not found');
 		}
 
-		if (!DolibarrApiAccess::$user->hasRight('multicurrency', 'currency', 'read')) {
+		if (!DCADMINApiAccess::$user->hasRight('multicurrency', 'currency', 'read')) {
 			throw new RestException(403, "Insufficient rights to read currency rates");
 		}
 
@@ -213,7 +213,7 @@ class MultiCurrencies extends DolibarrApi
 			throw new RestException(400, "name field missing");
 		}
 
-		if (!DolibarrApiAccess::$user->hasRight('multicurrency', 'currency', 'write')) {
+		if (!DCADMINApiAccess::$user->hasRight('multicurrency', 'currency', 'write')) {
 			throw new RestException(403, "Insufficient rights to create currency");
 		}
 
@@ -230,7 +230,7 @@ class MultiCurrencies extends DolibarrApi
 		}
 
 		// Create Currency
-		if ($multicurrency->create(DolibarrApiAccess::$user) < 0) {
+		if ($multicurrency->create(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, "Error creating currency", array_merge(array($multicurrency->error), $multicurrency->errors));
 		}
 
@@ -259,7 +259,7 @@ class MultiCurrencies extends DolibarrApi
 	 */
 	public function put($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('multicurrency', 'currency', 'write')) {
+		if (!DCADMINApiAccess::$user->hasRight('multicurrency', 'currency', 'write')) {
 			throw new RestException(403, "Insufficient rights to update currency");
 		}
 
@@ -281,7 +281,7 @@ class MultiCurrencies extends DolibarrApi
 			$multicurrency->$field = $this->_checkValForAPI($field, $value, $multicurrency);
 		}
 
-		if ($multicurrency->update(DolibarrApiAccess::$user) < 0) {
+		if ($multicurrency->update(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, "Error updating currency", array_merge(array($multicurrency->error), $multicurrency->errors));
 		}
 
@@ -300,7 +300,7 @@ class MultiCurrencies extends DolibarrApi
 	 */
 	public function delete($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('multicurrency', 'currency', 'delete')) {
+		if (!DCADMINApiAccess::$user->hasRight('multicurrency', 'currency', 'delete')) {
 			throw new RestException(403, "Insufficient rights to delete currency");
 		}
 
@@ -309,7 +309,7 @@ class MultiCurrencies extends DolibarrApi
 			throw new RestException(404, 'Currency not found');
 		}
 
-		if (!$multicurrency->delete(DolibarrApiAccess::$user)) {
+		if (!$multicurrency->delete(DCADMINApiAccess::$user)) {
 			throw new RestException(500, "Error deleting currency", array_merge(array($multicurrency->error), $multicurrency->errors));
 		}
 
@@ -336,7 +336,7 @@ class MultiCurrencies extends DolibarrApi
 	 */
 	public function updateRate($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('multicurrency', 'currency', 'write')) {
+		if (!DCADMINApiAccess::$user->hasRight('multicurrency', 'currency', 'write')) {
 			throw new RestException(403, "Insufficient rights to update currency rate");
 		}
 

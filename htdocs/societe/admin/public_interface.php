@@ -25,7 +25,7 @@
  *		\brief      File of main public page to record a new thidparty
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf

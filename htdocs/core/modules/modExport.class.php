@@ -18,20 +18,20 @@
 
 /**
  *  \defgroup   export      Module Export
- *  \brief      Module to manage data exports from Dolibarr database
+ *  \brief      Module to manage data exports from DCADMIN database
  *
  *  \file       htdocs/core/modules/modExport.class.php
  *  \ingroup    export
  *  \brief      Description and activation file for the module export
  */
 
-include_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
+include_once DOL_DOCUMENT_ROOT.'/core/modules/DCADMINModules.class.php';
 
 
 /**
  *	Class to describe and enable module export
  */
-class modExport extends DolibarrModules
+class modExport extends DCADMINModules
 {
 	/**
 	 *   Constructor. Define names, constants, directories, boxes, permissions
@@ -47,7 +47,7 @@ class modExport extends DolibarrModules
 		$this->module_position = '72';
 		// Module label (no space allowed), used if translation string 'ModuleXXXName' not found (where XXX is value of numeric property 'numero' of module)
 		$this->name = preg_replace('/^mod/i', '', get_class($this));
-		$this->description = "Outils d'exports de donnees Dolibarr (via un assistant)";
+		$this->description = "Outils d'exports de donnees DCADMIN (via un assistant)";
 		// Possible values for version are: 'development', 'experimental', 'dolibarr' or version
 		$this->version = 'dolibarr';
 		$this->const_name = 'MAIN_MODULE_'.strtoupper($this->name);

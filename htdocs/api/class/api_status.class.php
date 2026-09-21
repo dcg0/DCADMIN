@@ -22,12 +22,12 @@ require_once DOL_DOCUMENT_ROOT.'/api/class/api.class.php';
 
 
 /**
- * API that gives the status of the Dolibarr instance.
+ * API that gives the status of the DCADMIN instance.
  *
  * @access protected
- * @class  DolibarrApiAccess {@requires user,external}
+ * @class  DCADMINApiAccess {@requires user,external}
  */
-class Status extends DolibarrApi
+class Status extends DCADMINApi
 {
 	/**
 	 * Constructor of the class
@@ -39,7 +39,7 @@ class Status extends DolibarrApi
 	}
 
 	/**
-	 * Get status (Dolibarr version)
+	 * Get status (DCADMIN version)
 	 *
 	 * @return array
 	 * @phan-return array{success:array{code:int,dolibarr_version:string,access_locked:string,environment?:string,timestamp_now_utc?:int,timestamp_php_tz?:string,date_tz?:string}}

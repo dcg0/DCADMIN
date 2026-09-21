@@ -24,7 +24,7 @@
  * \brief   List page for bookkeeping templates
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../../main.inc.php';
 
 /**

@@ -49,7 +49,7 @@ if (!defined('NOIPCHECK')) {
 
 if (!function_exists('dol_getprefix')) {
 	/**
-	 *  Return a prefix to use for this Dolibarr instance, for session/cookie names or email id.
+	 *  Return a prefix to use for this DCADMIN instance, for session/cookie names or email id.
 	 *  The prefix is unique for instance and avoid conflict between multi-instances, even when having two instances with same root dir
 	 *  or two instances in same virtual servers.
 	 *  This function must not use dol_hash (that is used for password hash) and need to have all context $conf loaded when called.

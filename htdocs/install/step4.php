@@ -23,7 +23,7 @@
 /**
  *	\file       htdocs/install/step4.php
  *	\ingroup	install
- *	\brief      Ask login and password of Dolibarr admin user
+ *	\brief      Ask login and password of DCADMIN admin user
  */
 
 
@@ -73,7 +73,7 @@ $ok = 0;
  *	View
  */
 
-pHeader($langs->trans("DolibarrSetup").' - '.$langs->trans("AdminAccountCreation"), "step5");
+pHeader($langs->trans("DCADMINSetup").' - '.$langs->trans("AdminAccountCreation"), "step5");
 
 // Test if we can run a first install process
 if (!is_writable($conffile)) {
@@ -83,7 +83,7 @@ if (!is_writable($conffile)) {
 }
 
 
-print '<h3><img class="valignmiddle inline-block paddingright" src="../public/theme/common/key.svg" width="20" alt="Database"> '.$langs->trans("DolibarrAdminLogin").'</h3>';
+print '<h3><img class="valignmiddle inline-block paddingright" src="../public/theme/common/key.svg" width="20" alt="Database"> '.$langs->trans("DCADMINAdminLogin").'</h3>';
 
 print $langs->trans("LastStepDesc").'<br><br>';
 

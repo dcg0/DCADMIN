@@ -20,7 +20,7 @@
 /**
  *     	\file       htdocs/public/payment/newpayment.php
  *		\ingroup    core
- *		\brief      File to offer a way to make a payment for a particular Dolibarr object
+ *		\brief      File to offer a way to make a payment for a particular DCADMIN object
  */
 
 if (!defined('NOLOGIN')) {
@@ -44,7 +44,7 @@ if (is_numeric($entity)) {
 	define("DOLENTITY", $entity);
 }
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/company.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/payments.lib.php';

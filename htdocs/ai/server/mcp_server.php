@@ -125,7 +125,7 @@ if ($serviceUser === null) {
 }
 
 // Promote the user to the global $user so MCP tools that legitimately rely on
-// the `global $user` pattern (Dolibarr core convention) see an authenticated
+// the `global $user` pattern (DCADMIN core convention) see an authenticated
 // user. Without this, there is no PHP web session in HTTP MCP context and any
 // tool reading `global $user` would treat the request as unauthenticated even
 // though authentication succeeded above.

@@ -26,7 +26,7 @@
 
 /**
  *	\file			htdocs/core/lib/functions2.lib.php
- *	\brief			A set of functions for Dolibarr
+ *	\brief			A set of functions for DCADMIN
  *					This file contains all rare functions.
  */
 
@@ -308,7 +308,7 @@ function dol_print_object_info($object, $usetable = 0)
 		} else {
 			print ': ';
 		}
-		// user_approve is not defined in Dolibarr code @phan-suppress-next-line PhanUndeclaredProperty
+		// user_approve is not defined in DCADMIN code @phan-suppress-next-line PhanUndeclaredProperty
 		if (!empty($object->user_approve) && is_object($object->user_approve)) {
 			if ($object->user_approve->id) {  // @phan-suppress-current-line PhanUndeclaredProperty
 				// @phan-suppress-next-line PhanUndeclaredProperty,PhanPluginUnknownObjectMethodCall
@@ -494,7 +494,7 @@ function dol_print_object_info($object, $usetable = 0)
 			}
 		}
 
-		if (!empty($object->date_rappro)) {	// Note: date_rappro is not found on Dolibarr classes
+		if (!empty($object->date_rappro)) {	// Note: date_rappro is not found on DCADMIN classes
 			print ' - ';
 			print '<div class="valignmiddle inline-block">';
 			print dol_print_date($object->date_rappro, 'dayhour', 'tzserver');  // @phan-suppress-current-line PhanUndeclaredProperty
@@ -1830,9 +1830,9 @@ function version_db()
 }
 
 /**
- * 	Return Dolibarr version
+ * 	Return DCADMIN version
  *
- * 	@return		string			Dolibarr version
+ * 	@return		string			DCADMIN version
  *  @see		versiondolibarrarray(), versioncompare()
  */
 function version_dolibarr()
@@ -3093,7 +3093,7 @@ function csvClean($newvalue, $charset = '', $separator = '')
 	$newvalue = $langs->convToOutputCharset((string) $newvalue, 'UTF-8', $charset); // newvalue is now encoded into $charset
 
 
-	// Rule Dolibarr: No HTML
+	// Rule DCADMIN: No HTML
 	//print $charset.' '.$newvalue."\n";
 	//$newvalue=dol_string_nohtmltag($newvalue,0,$charset);
 	$newvalue = dol_htmlcleanlastbr($newvalue);
@@ -3226,7 +3226,7 @@ function printCodeForPing($constanttosavelastko, $constanttosavefirstok, $arrayo
 
 
 /**
- * Check that a zip file is Dolibarr rule compliant
+ * Check that a zip file is DCADMIN rule compliant
  *
  * @param   ZipArchive  $zip                The object ZipArchive
  * @param   string      $originalfilename   The name of file submitted
@@ -3408,7 +3408,7 @@ function validateZipFile($zip, $originalfilename, $zipfile, $langs)
 	if (!empty($error)) {
 		dol_syslog("validateZipFile Error");
 
-		$link = '<a target="_blank" class="linktowiki" href="https://wiki.dolibarr.org/index.php/Modules - Packaging rules and Dolistore validation rules">Dolibarr wiki developer documentation</a>';
+		$link = '<a target="_blank" class="linktowiki" href="https://wiki.dolibarr.org/index.php/Modules - Packaging rules and Dolistore validation rules">DCADMIN wiki developer documentation</a>';
 		$return['errormsg'] .= $langs->trans("UnvalidZipFile") .'<br>';
 		$return['errormsg'] .= $langs->trans("SeeDocumentation", $link).'<br>';
 		$return['errormsg'] .= "<br>\n";

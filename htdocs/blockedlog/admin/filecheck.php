@@ -22,10 +22,10 @@
 
 /**
  *  \file       htdocs/blockedlog/admin/filecheck.php
- *  \brief      Page to check Dolibarr files integrity
+ *  \brief      Page to check DCADMIN files integrity
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf
@@ -69,7 +69,7 @@ $versionbadge .= '</span>';
 
 llxHeader('', '', '', '', 0, 0, '', '', '', 'mod-admin page-system_filecheck');
 
-print load_fiche_titre($langs->trans("FileCheckDolibarr"), '', 'title_setup');
+print load_fiche_titre($langs->trans("FileCheckDCADMIN"), '', 'title_setup');
 
 print '<div class="opacitymedium hideonsmartphone justify">'.$langs->trans("FileCheckDesc").'</div>';
 if (isModEnabled('blockedlog')) {

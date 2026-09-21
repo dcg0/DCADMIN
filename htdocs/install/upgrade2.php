@@ -49,7 +49,7 @@ include_once 'inc.php';
  */
 
 if (!file_exists($conffile)) {
-	print 'Error: Dolibarr config file was not found. This may means that Dolibarr is not installed yet. Please call the page "/install/index.php" instead of "/install/upgrade.php").';
+	print 'Error: DCADMIN config file was not found. This may means that DCADMIN is not installed yet. Please call the page "/install/index.php" instead of "/install/upgrade.php").';
 }
 require_once $conffile;
 /**
@@ -279,7 +279,7 @@ if (!GETPOST('action', 'aZ09') || preg_match('/upgrade/i', GETPOST('action', 'aZ
 
 	dol_syslog("Process upgrade2 (step common to all entities)");
 
-	// Force to execute this at begin to avoid the new core code into Dolibarr to be broken.
+	// Force to execute this at begin to avoid the new core code into DCADMIN to be broken.
 	$sql = 'ALTER TABLE '.MAIN_DB_PREFIX.'user ADD COLUMN birth date';
 	$db->query($sql, 1);
 	$sql = 'ALTER TABLE '.MAIN_DB_PREFIX.'user ADD COLUMN dateemployment date';
@@ -4602,7 +4602,7 @@ function migrate_reload_modules($db, $langs, $conf, $listofmodule = array(), $fo
 				if ($res) {
 					$classname = 'mod'.$moduletoreloadshort;
 					$mod = new $classname($db);
-					'@phan-var-force DolibarrModules $mod';
+					'@phan-var-force DCADMINModules $mod';
 
 					//$mod->remove('noboxes');
 					$mod->delete_menus(); // We must delete to be sure it is inserted with new values
@@ -4614,7 +4614,7 @@ function migrate_reload_modules($db, $langs, $conf, $listofmodule = array(), $fo
 					if ($res) {
 						$classname = 'mod'.$moduletoreloadshort;
 						$mod = new $classname($db);
-						'@phan-var-force DolibarrModules $mod';
+						'@phan-var-force DCADMINModules $mod';
 						$mod->init($reloadmode);
 					} else {
 						dolibarr_install_syslog('Failed to include '.strtolower($moduletoreloadshort).'/core/modules/mod'.$moduletoreloadshort.'.class.php', LOG_ERR);

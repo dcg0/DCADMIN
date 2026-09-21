@@ -19,7 +19,7 @@
 
 /**
  *	\file			htdocs/core/lib/functions_fi.lib.php
- *	\brief			A set of finish functions for Dolibarr
+ *	\brief			A set of finish functions for DCADMIN
  *					This file contains rare functions.
  */
 

@@ -23,7 +23,7 @@
  *  \brief	  	Setup page of product lot module
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf
@@ -354,7 +354,7 @@ if (!empty($def)) {
 
 
 if (empty($def) && getDolGlobalInt('MAIN_FEATURES_LEVEL') < 2) {
-	// The feature to define the numbering module of lot or serial is no enabled because it is not used anywhere in Dolibarr code: You can set it
+	// The feature to define the numbering module of lot or serial is no enabled because it is not used anywhere in DCADMIN code: You can set it
 	// but the numbering module is not used.
 	// TODO Use it on lot creation page, when you create a lot and when the lot number is kept empty to define the lot according
 	// to the selected product.

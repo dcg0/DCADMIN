@@ -481,7 +481,7 @@ class McpHandler
 		$declared = method_exists($tool, 'getRequiredRights') ? $tool->getRequiredRights($toolName) : McpTool::RIGHTS_UNDECLARED;
 
 		if ($declared === McpTool::RIGHTS_ENFORCED_DOWNSTREAM) {
-			return '';	// REST API classes check DolibarrApiAccess::$user themselves
+			return '';	// REST API classes check DCADMINApiAccess::$user themselves
 		}
 		if ($declared === McpTool::RIGHTS_UNDECLARED) {
 			dol_syslog("[McpHandler] Tool '".$toolName."' declares no rights: denied.", LOG_WARNING);

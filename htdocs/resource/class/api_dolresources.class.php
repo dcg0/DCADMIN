@@ -34,9 +34,9 @@ require_once DOL_DOCUMENT_ROOT.'/resource/class/dolresource.class.php';
  * conflict with it and the endpoint would not be listed.
  *
  * @access protected
- * @class  DolibarrApiAccess {@requires user,external}
+ * @class  DCADMINApiAccess {@requires user,external}
  */
-class Dolresources extends DolibarrApi
+class Dolresources extends DCADMINApi
 {
 	/**
 	 * @var string[]       Mandatory fields, checked when create object
@@ -76,7 +76,7 @@ class Dolresources extends DolibarrApi
 	 */
 	public function get($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('resource', 'read')) {
+		if (!DCADMINApiAccess::$user->hasRight('resource', 'read')) {
 			throw new RestException(403);
 		}
 
@@ -85,8 +85,8 @@ class Dolresources extends DolibarrApi
 			throw new RestException(404, 'Resource not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('resource', $this->resource->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('resource', $this->resource->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		return $this->_cleanObjectDatas($this->resource);
@@ -113,7 +113,7 @@ class Dolresources extends DolibarrApi
 	 */
 	public function index($sortfield = "t.ref", $sortorder = 'ASC', $limit = 100, $page = 0, $sqlfilters = '', $properties = '')
 	{
-		if (!DolibarrApiAccess::$user->hasRight('resource', 'read')) {
+		if (!DCADMINApiAccess::$user->hasRight('resource', 'read')) {
 			throw new RestException(403);
 		}
 
@@ -176,7 +176,7 @@ class Dolresources extends DolibarrApi
 	 */
 	public function post($request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('resource', 'write')) {
+		if (!DCADMINApiAccess::$user->hasRight('resource', 'write')) {
 			throw new RestException(403);
 		}
 
@@ -195,7 +195,7 @@ class Dolresources extends DolibarrApi
 
 		// Note: create() returns the id of the new resource on success, and a positive
 		// count of errors on failure, so the result must be compared to the id and not to 0.
-		$result = $this->resource->create(DolibarrApiAccess::$user);
+		$result = $this->resource->create(DCADMINApiAccess::$user);
 		if ($result <= 0 || $result != $this->resource->id) {
 			throw new RestException(500, "Error creating resource", array_merge(array($this->resource->error), $this->resource->errors));
 		}
@@ -218,7 +218,7 @@ class Dolresources extends DolibarrApi
 	 */
 	public function put($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('resource', 'write')) {
+		if (!DCADMINApiAccess::$user->hasRight('resource', 'write')) {
 			throw new RestException(403);
 		}
 
@@ -227,8 +227,8 @@ class Dolresources extends DolibarrApi
 			throw new RestException(404, 'Resource not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('resource', $this->resource->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('resource', $this->resource->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		foreach ($request_data as $field => $value) {
@@ -251,7 +251,7 @@ class Dolresources extends DolibarrApi
 			$this->resource->$field = $this->_checkValForAPI($field, $value, $this->resource);
 		}
 
-		if ($this->resource->update(DolibarrApiAccess::$user) <= 0) {
+		if ($this->resource->update(DCADMINApiAccess::$user) <= 0) {
 			throw new RestException(500, $this->resource->error);
 		}
 
@@ -272,7 +272,7 @@ class Dolresources extends DolibarrApi
 	 */
 	public function delete($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('resource', 'delete')) {
+		if (!DCADMINApiAccess::$user->hasRight('resource', 'delete')) {
 			throw new RestException(403);
 		}
 
@@ -281,11 +281,11 @@ class Dolresources extends DolibarrApi
 			throw new RestException(404, 'Resource not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('resource', $this->resource->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('resource', $this->resource->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		if ($this->resource->delete(DolibarrApiAccess::$user) <= 0) {
+		if ($this->resource->delete(DCADMINApiAccess::$user) <= 0) {
 			throw new RestException(500, 'Error when deleting resource: '.$this->resource->error);
 		}
 
@@ -317,7 +317,7 @@ class Dolresources extends DolibarrApi
 	 */
 	public function getElementResources($element_type, $element_id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('resource', 'read')) {
+		if (!DCADMINApiAccess::$user->hasRight('resource', 'read')) {
 			throw new RestException(403);
 		}
 
@@ -353,7 +353,7 @@ class Dolresources extends DolibarrApi
 	 */
 	public function postElementResources($element_type, $element_id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('resource', 'write')) {
+		if (!DCADMINApiAccess::$user->hasRight('resource', 'write')) {
 			throw new RestException(403);
 		}
 
@@ -422,7 +422,7 @@ class Dolresources extends DolibarrApi
 	 */
 	public function deleteElementResources($element_type, $element_id, $id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('resource', 'delete')) {
+		if (!DCADMINApiAccess::$user->hasRight('resource', 'delete')) {
 			throw new RestException(403);
 		}
 
@@ -475,7 +475,7 @@ class Dolresources extends DolibarrApi
 	 */
 	public function getBookingConflicts($id, $date_start, $date_end)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('resource', 'read')) {
+		if (!DCADMINApiAccess::$user->hasRight('resource', 'read')) {
 			throw new RestException(403);
 		}
 
@@ -554,8 +554,8 @@ class Dolresources extends DolibarrApi
 
 		// Linking a resource writes on the element, so the access to the element itself is checked
 		// and not only the permissions on the resources.
-		if (!DolibarrApi::_checkAccessToResource($element_type, $element->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource($element_type, $element->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		return $element;

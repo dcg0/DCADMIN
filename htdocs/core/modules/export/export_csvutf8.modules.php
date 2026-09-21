@@ -58,7 +58,7 @@ class ExportCsvUtf8 extends ExportCsv
 		$this->version = '1.32'; // Driver version
 
 		// If driver use an external library, put its name here
-		$this->label_lib = 'Dolibarr';
+		$this->label_lib = 'DCADMIN';
 		$this->version_lib = DOL_VERSION;
 	}
 

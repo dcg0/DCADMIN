@@ -48,7 +48,7 @@ $entity = (!empty($_GET['entity']) ? (int) $_GET['entity'] : (!empty($_POST['ent
 define("DOLENTITY", $entity);
 // }
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/adherents/class/adherent.class.php';
 require_once DOL_DOCUMENT_ROOT.'/adherents/class/adherent_type.class.php';

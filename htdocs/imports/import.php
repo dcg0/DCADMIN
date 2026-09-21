@@ -1092,7 +1092,7 @@ if ($step == 3 && $datatoimport) {
 
 	print '</td><td width="50%" class="nopaddingrightimp">';
 
-	// Set the list of all possible target fields in Dolibarr.
+	// Set the list of all possible target fields in DCADMIN.
 
 	$optionsall = array();
 	foreach ($fieldstarget as $code => $line) {
@@ -1795,7 +1795,7 @@ if ($step == 4 && $datatoimport) {
 				print ', ';
 			}
 			$newval = $val;
-			// Link to Dolibarr wiki pages
+			// Link to DCADMIN wiki pages
 			/*$helppagename='EN:Table_'.$newval;
 			if ($helppagename && empty($conf->global->MAIN_HELP_DISABLELINK))
 			{
@@ -2295,7 +2295,7 @@ if ($step == 5 && $datatoimport) {
 				print ', ';
 			}
 			$newval = $val;
-			// Link to Dolibarr wiki pages
+			// Link to DCADMIN wiki pages
 			/*$helppagename='EN:Table_'.$newval;
 			if ($helppagename && empty($conf->global->MAIN_HELP_DISABLELINK))
 			{

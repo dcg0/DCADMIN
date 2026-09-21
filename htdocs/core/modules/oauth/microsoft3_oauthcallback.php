@@ -29,7 +29,7 @@
  *        - https://outlook.office.com/IMAP.AccessAsUser.All
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/includes/OAuth/bootstrap.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/oauth.lib.php';
@@ -83,7 +83,7 @@ $keyforparamid = 'OAUTH_'.$genericstring.($keyforprovider ? '-'.$keyforprovider 
 $keyforparamsecret = 'OAUTH_'.$genericstring.($keyforprovider ? '-'.$keyforprovider : '').'_SECRET';
 $keyforparamtenant = 'OAUTH_'.$genericstring.($keyforprovider ? '-'.$keyforprovider : '').'_TENANT';
 
-// Dolibarr storage
+// DCADMIN storage
 $storage = new DoliStorage($db, $conf, $keyforprovider, getDolGlobalString($keyforparamtenant));
 
 $credentials = new Credentials(

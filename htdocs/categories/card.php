@@ -29,7 +29,7 @@
  *		\brief      Page to create a new category
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf

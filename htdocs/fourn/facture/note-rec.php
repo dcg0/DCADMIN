@@ -28,7 +28,7 @@
  *      \brief      Fiche de notes sur une facture recurrent
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 
 /**

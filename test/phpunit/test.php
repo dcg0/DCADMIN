@@ -3,7 +3,7 @@
 /**
  * \file scripts/company/sync_contacts_dolibarr2ldap.php
  * \ingroup ldap company
- * \brief Script to update all contacts from Dolibarr into a LDAP database
+ * \brief Script to update all contacts from DCADMIN into a LDAP database
  */
 
 include "../../htdocs/master.inc.php";

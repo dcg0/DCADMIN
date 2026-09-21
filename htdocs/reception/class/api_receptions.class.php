@@ -28,9 +28,9 @@ require_once DOL_DOCUMENT_ROOT.'/core/lib/company.lib.php';
  * API class for receptions
  *
  * @access protected
- * @class  DolibarrApiAccess {@requires user,external}
+ * @class  DCADMINApiAccess {@requires user,external}
  */
-class Receptions extends DolibarrApi
+class Receptions extends DCADMINApi
 {
 	/**
 	 * @var string[]       Mandatory fields, checked when create and update object
@@ -67,7 +67,7 @@ class Receptions extends DolibarrApi
 	 */
 	public function get($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('reception', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('reception', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -76,8 +76,8 @@ class Receptions extends DolibarrApi
 			throw new RestException(404, 'Reception not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('reception', $this->reception->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('reception', $this->reception->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$this->reception->fetchObjectLinked();
@@ -107,19 +107,19 @@ class Receptions extends DolibarrApi
 	 */
 	public function index($sortfield = "t.rowid", $sortorder = 'ASC', $limit = 100, $page = 0, $thirdparty_ids = '', $sqlfilters = '', $properties = '', $pagination_data = false)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('reception', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('reception', 'lire')) {
 			throw new RestException(403);
 		}
 
 		$obj_ret = array();
 
 		// case of external user, $thirdparty_ids param is ignored and replaced by user's socid
-		$socids = DolibarrApiAccess::$user->socid ?: $thirdparty_ids;
+		$socids = DCADMINApiAccess::$user->socid ?: $thirdparty_ids;
 
 		// If the internal user must only see his customers, force searching by him
 		$search_sale = 0;
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'client', 'voir') && !$socids) {
-			$search_sale = DolibarrApiAccess::$user->id;
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'client', 'voir') && !$socids) {
+			$search_sale = DCADMINApiAccess::$user->id;
 		}
 
 		$sql = "SELECT t.rowid";
@@ -211,7 +211,7 @@ class Receptions extends DolibarrApi
 	 */
 	public function post($request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('reception', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('reception', 'creer')) {
 			throw new RestException(403, "Insufficiant rights");
 		}
 		// Check mandatory fields
@@ -252,7 +252,7 @@ class Receptions extends DolibarrApi
 			$this->reception->lines = $lines;
 		}
 
-		if ($this->reception->create(DolibarrApiAccess::$user) < 0) {
+		if ($this->reception->create(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, "Error creating reception", array_merge(array($this->reception->error), $this->reception->errors));
 		}
 
@@ -271,7 +271,7 @@ class Receptions extends DolibarrApi
 	/*
 	public function getLines($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('reception', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('reception', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -280,8 +280,8 @@ class Receptions extends DolibarrApi
 			throw new RestException(404, 'Reception not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('reception',$this->reception->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('reception',$this->reception->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 		$this->reception->getLinesArray();
 		$result = array();
@@ -307,7 +307,7 @@ class Receptions extends DolibarrApi
 	/*
 	public function postLine($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('reception', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('reception', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -316,8 +316,8 @@ class Receptions extends DolibarrApi
 			throw new RestException(404, 'Reception not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('reception',$this->reception->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('reception',$this->reception->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$request_data = (object) $request_data;
@@ -377,7 +377,7 @@ class Receptions extends DolibarrApi
 	/*
 	public function putLine($id, $lineid, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('reception', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('reception', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -386,8 +386,8 @@ class Receptions extends DolibarrApi
 			throw new RestException(404, 'Reception not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('reception',$this->reception->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('reception',$this->reception->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$request_data = (object) $request_data;
@@ -444,7 +444,7 @@ class Receptions extends DolibarrApi
 	 */
 	public function deleteLine($id, $lineid)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('reception', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('reception', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -453,8 +453,8 @@ class Receptions extends DolibarrApi
 			throw new RestException(404, 'Reception not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('reception', $this->reception->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('reception', $this->reception->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$receptionline = new ReceptionLineBatch($this->db);
@@ -465,7 +465,7 @@ class Receptions extends DolibarrApi
 			throw new RestException(403, 'Line does not belong to this reception');
 		}
 
-		$updateRes = $this->reception->deleteLine(DolibarrApiAccess::$user, $lineid);
+		$updateRes = $this->reception->deleteLine(DCADMINApiAccess::$user, $lineid);
 		if ($updateRes < 0) {
 			throw new RestException(405, $this->reception->error);
 		}
@@ -489,7 +489,7 @@ class Receptions extends DolibarrApi
 	 */
 	public function put($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('reception', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('reception', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -498,8 +498,8 @@ class Receptions extends DolibarrApi
 			throw new RestException(404, 'Reception not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('reception', $this->reception->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('reception', $this->reception->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 		foreach ($request_data as $field => $value) {
 			if ($field == 'id') {
@@ -521,7 +521,7 @@ class Receptions extends DolibarrApi
 			$this->reception->$field = $this->_checkValForAPI($field, $value, $this->reception);
 		}
 
-		if ($this->reception->update(DolibarrApiAccess::$user) > 0) {
+		if ($this->reception->update(DCADMINApiAccess::$user) > 0) {
 			return $this->get($id);
 		} else {
 			throw new RestException(500, $this->reception->error);
@@ -538,7 +538,7 @@ class Receptions extends DolibarrApi
 	 */
 	public function delete($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('reception', 'supprimer')) {
+		if (!DCADMINApiAccess::$user->hasRight('reception', 'supprimer')) {
 			throw new RestException(403);
 		}
 		$result = $this->reception->fetch($id);
@@ -546,11 +546,11 @@ class Receptions extends DolibarrApi
 			throw new RestException(404, 'Reception not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('reception', $this->reception->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('reception', $this->reception->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		if (!$this->reception->delete(DolibarrApiAccess::$user)) {
+		if (!$this->reception->delete(DCADMINApiAccess::$user)) {
 			throw new RestException(500, 'Error when deleting reception : '.$this->reception->error);
 		}
 
@@ -583,7 +583,7 @@ class Receptions extends DolibarrApi
 	 */
 	public function validate($id, $notrigger = 0)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('reception', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('reception', 'creer')) {
 			throw new RestException(403);
 		}
 		$result = $this->reception->fetch($id);
@@ -591,11 +591,11 @@ class Receptions extends DolibarrApi
 			throw new RestException(404, 'Reception not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('reception', $this->reception->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('reception', $this->reception->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		$result = $this->reception->valid(DolibarrApiAccess::$user, $notrigger);
+		$result = $this->reception->valid(DCADMINApiAccess::$user, $notrigger);
 		if ($result == 0) {
 			throw new RestException(304, 'Error nothing done. May be object is already validated');
 		}
@@ -629,7 +629,7 @@ class Receptions extends DolibarrApi
 	public function setinvoiced($id)
 	{
 
-		if (!DolibarrApiAccess::$user->hasRight('reception', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('reception', 'creer')) {
 				throw new RestException(403);
 		}
 		if (empty($id)) {
@@ -640,7 +640,7 @@ class Receptions extends DolibarrApi
 				throw new RestException(404, 'Reception not found');
 		}
 
-		$result = $this->reception->classifyBilled(DolibarrApiAccess::$user);
+		$result = $this->reception->classifyBilled(DCADMINApiAccess::$user);
 		if ($result < 0) {
 				throw new RestException(400, $this->reception->error);
 		}
@@ -668,10 +668,10 @@ class Receptions extends DolibarrApi
 
 		require_once DOL_DOCUMENT_ROOT . '/commande/class/commande.class.php';
 
-		if (!DolibarrApiAccess::$user->hasRight('reception', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('reception', 'lire')) {
 				throw new RestException(403);
 		}
-		if (!DolibarrApiAccess::$user->hasRight('reception', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('reception', 'creer')) {
 				throw new RestException(403);
 		}
 		if (empty($proposalid)) {
@@ -684,7 +684,7 @@ class Receptions extends DolibarrApi
 				throw new RestException(404, 'Order not found');
 		}
 
-		$result = $this->reception->createFromOrder($order, DolibarrApiAccess::$user);
+		$result = $this->reception->createFromOrder($order, DCADMINApiAccess::$user);
 		if( $result < 0) {
 				throw new RestException(405, $this->reception->error);
 		}
@@ -705,7 +705,7 @@ class Receptions extends DolibarrApi
 	 */
 	public function close($id, $notrigger = 0)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('reception', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('reception', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -714,8 +714,8 @@ class Receptions extends DolibarrApi
 			throw new RestException(404, 'Reception not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('reception', $this->reception->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('reception', $this->reception->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$result = $this->reception->setClosed();

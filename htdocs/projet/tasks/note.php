@@ -23,7 +23,7 @@
  *	\brief      Page to show information on a task
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf

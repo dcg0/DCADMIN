@@ -76,7 +76,7 @@ class Export
 	 */
 	public $array_export_code_for_sort = array(); // Array of "idmodule_numexportprofile"
 	/**
-	 * @var DolibarrModules[]
+	 * @var DCADMINModules[]
 	 */
 	public $array_export_module = array(); // Array of Module Names
 	/**
@@ -221,7 +221,7 @@ class Export
 							$classname = $modulename;
 							require_once $file;
 							$module = new $classname($this->db);
-							'@phan-var-force DolibarrModules $module';
+							'@phan-var-force DCADMINModules $module';
 
 							if (isset($module->export_code) && is_array($module->export_code)) {
 								foreach ($module->export_code as $r => $value) {

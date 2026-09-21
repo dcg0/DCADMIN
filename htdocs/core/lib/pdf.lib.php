@@ -142,7 +142,7 @@ function pdf_getInstance($format = '', $metric = 'mm', $pagetype = 'P')
 		define('PDF_CREATOR', 'TCPDF');
 		define('PDF_AUTHOR', 'TCPDF');
 		define('PDF_HEADER_TITLE', 'TCPDF Example');
-		define('PDF_HEADER_STRING', "by Dolibarr ERP CRM");
+		define('PDF_HEADER_STRING', "by DCADMIN ERP CRM");
 		define('PDF_UNIT', 'mm');
 		define('PDF_MARGIN_HEADER', 5);
 		define('PDF_MARGIN_FOOTER', 10);
@@ -165,7 +165,7 @@ function pdf_getInstance($format = '', $metric = 'mm', $pagetype = 'P')
 		// Default: throw exceptions on TCPDF/TCPDI errors instead of die().
 		// A die() in a PDF library produces white pages on web requests and kills
 		// batch jobs on the first bad PDF. Exceptions can be caught and surfaced as
-		// normal Dolibarr errors. Users can opt out by setting
+		// normal DCADMIN errors. Users can opt out by setting
 		// TCPDF_THROW_ERRORS_INSTEAD_OF_DIE = 0 to restore the legacy die() behavior.
 		if (getDolGlobalString('TCPDF_THROW_ERRORS_INSTEAD_OF_DIE', '1')) {
 			define('K_TCPDF_THROW_EXCEPTION_ERROR', true);
@@ -3026,7 +3026,7 @@ function pdf_getlinetotalwithtax($object, $i, $outputlangs, $hidedetails = 0)
  * This function prevents displaying customer data to suppliers or supplier data to customers
  * according to the configuration and the socid of the main object and the linked object.
  *
- * @param object $object The main Dolibarr object (e.g., invoice, order, proposal)
+ * @param object $object The main DCADMIN object (e.g., invoice, order, proposal)
  * @param object $elementobject The linked object to check (e.g., linked order, linked invoice)
  * @return bool Returns true if the linked object can be displayed, false otherwise.
  */

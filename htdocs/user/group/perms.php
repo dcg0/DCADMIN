@@ -32,7 +32,7 @@ if (!defined('CSRFCHECK_WITH_TOKEN')) {
 	define('CSRFCHECK_WITH_TOKEN', '1'); // Force use of CSRF protection with tokens even for GET
 }
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf
@@ -232,8 +232,8 @@ foreach ($modulesdir as $dir) {
 
 					include_once $dir.$file;
 					$objMod = new $modName($db);
-					'@phan-var-force DolibarrModules $objMod';
-					/** @var DolibarrModules $objMod */
+					'@phan-var-force DCADMINModules $objMod';
+					/** @var DCADMINModules $objMod */
 
 					// Load all lang files of module
 					if (isset($objMod->langfiles) && is_array($objMod->langfiles)) {

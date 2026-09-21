@@ -21,14 +21,14 @@
 
 /**
  * \file 		htdocs/core/db/DoliDB.class.php
- * \brief 		Class file to manage Dolibarr database access
+ * \brief 		Class file to manage DCADMIN database access
  */
 
 require_once DOL_DOCUMENT_ROOT.'/core/db/Database.interface.php';
 
 
 /**
- * Class to manage Dolibarr database access
+ * Class to manage DCADMIN database access
  */
 abstract class DoliDB implements Database
 {

@@ -2208,7 +2208,7 @@ if ($oneoptionset) {
 	print '<br>';
 	print '<div class="center" style="padding-top: 10px"><a href="../index.php?mainmenu=home&leftmenu=home'.(GETPOSTISSET("login") ? '&username='.urlencode(GETPOST("login")) : '').'">';
 	print img_picto('', 'url', 'class="pictofixedwidth"');
-	print $langs->trans("GoToDolibarr");
+	print $langs->trans("GoToDCADMIN");
 	print '</a></div>';
 }
 

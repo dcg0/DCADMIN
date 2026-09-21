@@ -30,7 +30,7 @@ require_once DOL_DOCUMENT_ROOT.'/core/triggers/dolibarrtriggers.class.php';
 /**
  *  Class of triggers for security audit events
  */
-class InterfaceLogevents extends DolibarrTriggers
+class InterfaceLogevents extends DCADMINTriggers
 {
 	// List of translation key to use for the description of each event.
 	// TODO reduce this list of of events to use keep USER_CREATE, USER_MODIFY & USER_DELETE and use $user->context['audit'] = 'text to add' to complete message of event.
@@ -70,7 +70,7 @@ class InterfaceLogevents extends DolibarrTriggers
 		parent::__construct($db);
 
 		$this->family 		= "core";
-		$this->description  = "Triggers of this module allows to add security event records inside Dolibarr.";
+		$this->description  = "Triggers of this module allows to add security event records inside DCADMIN.";
 		$this->version 		= self::VERSIONS['prod'];
 		$this->picto 		= 'technic';
 		$this->event_label 	= '';
@@ -79,7 +79,7 @@ class InterfaceLogevents extends DolibarrTriggers
 	}
 
 	/**
-	 * Function called when a Dolibarr security audit event is done.
+	 * Function called when a DCADMIN security audit event is done.
 	 * All functions "runTrigger" are triggered if file is inside directory htdocs/core/triggers or htdocs/module/code/triggers (and declared)
 	 *
 	 * @param	string		$action	Event action code

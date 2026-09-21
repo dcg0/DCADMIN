@@ -23,7 +23,7 @@
 /**
  * \file scripts/members/sync_members_ldap2dolibarr.php
  * \ingroup ldap member
- * \brief Script to update Dolibarr members from LDAP
+ * \brief Script to update DCADMIN members from LDAP
  */
 
 if (!defined('NOSESSION')) {
@@ -148,7 +148,7 @@ if (getDolGlobalString('LDAP_MEMBER_FILTER')) {
 } else {
 	print 'Filter=(' . getDolGlobalString('LDAP_KEY_MEMBERS').'=*)'."\n";
 }
-print "----- To Dolibarr database:\n";
+print "----- To DCADMIN database:\n";
 print "type=".$conf->db->type."\n";
 print "host=".$conf->db->host."\n";
 print "port=".$conf->db->port."\n";
@@ -161,7 +161,7 @@ print "\n";
 
 // Check parameters
 if (!getDolGlobalString('LDAP_MEMBER_DN')) {
-	print $langs->trans("Error").': '.$langs->trans("LDAP setup for members not defined inside Dolibarr")."\n";
+	print $langs->trans("Error").': '.$langs->trans("LDAP setup for members not defined inside DCADMIN")."\n";
 	exit(1);
 }
 if ($typeid <= 0) {
@@ -212,7 +212,7 @@ if ($result >= 0) {
 	$justthese = array();
 	$pricefirst = 0;
 	$pricelast = 0;
-	// We disable synchro Dolibarr-LDAP
+	// We disable synchro DCADMIN-LDAP
 	$conf->global->LDAP_MEMBER_ACTIVE = 0;
 
 	$ldaprecords = $ldap->getRecords('*', getDolGlobalString('LDAP_MEMBER_DN'), getDolGlobalString('LDAP_KEY_MEMBERS'), $required_fields, 'member'); // Filter on 'member' filter param

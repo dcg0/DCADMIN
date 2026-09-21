@@ -29,9 +29,9 @@ require_once DOL_DOCUMENT_ROOT.'/core/lib/company.lib.php';
  *
  * @since	4.0.0	Initial implementation
  * @access protected
- * @class  DolibarrApiAccess {@requires user,external}
+ * @class  DCADMINApiAccess {@requires user,external}
  */
-class Orders extends DolibarrApi
+class Orders extends DCADMINApi
 {
 	/**
 	 * @var string[]       Mandatory fields, checked when create and update object
@@ -127,7 +127,7 @@ class Orders extends DolibarrApi
 	 */
 	private function _fetch($id, $ref = '', $ref_ext = '', $contact_list = -1)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('commande', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('commande', 'lire')) {
 			throw new RestException(403);
 		}
 		if (empty($id) && empty($ref) && empty($ref_ext)) {
@@ -138,8 +138,8 @@ class Orders extends DolibarrApi
 			throw new RestException(404, 'Order not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('commande', $this->commande->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('commande', $this->commande->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		if ($contact_list > -1) {
@@ -191,19 +191,19 @@ class Orders extends DolibarrApi
 	{
 		global $hookmanager;
 
-		if (!DolibarrApiAccess::$user->hasRight('commande', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('commande', 'lire')) {
 			throw new RestException(403);
 		}
 
 		$obj_ret = array();
 
 		// case of external user, $thirdparty_ids param is ignored and replaced by user's socid
-		$socids = DolibarrApiAccess::$user->socid ?: $thirdparty_ids;
+		$socids = DCADMINApiAccess::$user->socid ?: $thirdparty_ids;
 
 		// If the internal user must only see his customers, force searching by him
 		$search_sale = 0;
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'client', 'voir') && !$socids) {
-			$search_sale = DolibarrApiAccess::$user->id;
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'client', 'voir') && !$socids) {
+			$search_sale = DCADMINApiAccess::$user->id;
 		}
 
 		$sql = "SELECT t.rowid";
@@ -328,7 +328,7 @@ class Orders extends DolibarrApi
 	public function post($request_data = null)
 	{
 		global $conf;
-		if (!DolibarrApiAccess::$user->hasRight('commande', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('commande', 'creer')) {
 			throw new RestException(403, "Insufficiant rights");
 		}
 
@@ -342,7 +342,7 @@ class Orders extends DolibarrApi
 		if ($thirdparty_result < 1) {
 			throw new RestException(404, 'Third party with id='.$socid.' not found or not allowed');
 		}
-		if (!DolibarrApi::_checkAccessToResource('societe', $thirdpartytmp->id)) {
+		if (!DCADMINApi::_checkAccessToResource('societe', $thirdpartytmp->id)) {
 			throw new RestException(404, 'Third party with id='.$thirdpartytmp->id.' not found or not allowed');
 		}
 
@@ -369,7 +369,7 @@ class Orders extends DolibarrApi
 		  $this->commande->lines = $lines;
 		}*/
 
-		if ($this->commande->create(DolibarrApiAccess::$user) < 0) {
+		if ($this->commande->create(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, "Error creating order", array_merge(array($this->commande->error), $this->commande->errors));
 		}
 
@@ -390,7 +390,7 @@ class Orders extends DolibarrApi
 	 */
 	public function getLines($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('commande', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('commande', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -399,8 +399,8 @@ class Orders extends DolibarrApi
 			throw new RestException(404, 'Order not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('commande', $this->commande->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('commande', $this->commande->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 		$this->commande->getLinesArray();
 		$result = array();
@@ -424,7 +424,7 @@ class Orders extends DolibarrApi
 	 */
 	public function getLine($id, $lineid, $properties = '')
 	{
-		if (!DolibarrApiAccess::$user->hasRight('commande', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('commande', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -433,8 +433,8 @@ class Orders extends DolibarrApi
 			throw new RestException(404, 'Order not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('commande', $this->commande->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('commande', $this->commande->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$this->commande->fetch_lines();
@@ -461,7 +461,7 @@ class Orders extends DolibarrApi
 	 */
 	public function postLine($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('commande', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('commande', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -470,8 +470,8 @@ class Orders extends DolibarrApi
 			throw new RestException(404, 'Order not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('commande', $this->commande->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('commande', $this->commande->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$request_data = (object) $request_data;
@@ -531,7 +531,7 @@ class Orders extends DolibarrApi
 	 */
 	public function putLine($id, $lineid, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('commande', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('commande', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -540,8 +540,8 @@ class Orders extends DolibarrApi
 			throw new RestException(404, 'Order not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('commande', $this->commande->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('commande', $this->commande->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$request_data = (object) $request_data;
@@ -610,7 +610,7 @@ class Orders extends DolibarrApi
 	 */
 	public function deleteLine($id, $lineid)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('commande', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('commande', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -619,11 +619,11 @@ class Orders extends DolibarrApi
 			throw new RestException(404, 'Order not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('commande', $this->commande->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('commande', $this->commande->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		$updateRes = $this->commande->deleteLine(DolibarrApiAccess::$user, $lineid, $id);
+		$updateRes = $this->commande->deleteLine(DCADMINApiAccess::$user, $lineid, $id);
 		if ($updateRes > 0) {
 			return $this->get($id);
 		} else {
@@ -647,7 +647,7 @@ class Orders extends DolibarrApi
 	 */
 	public function getContacts($id, $type = '')
 	{
-		if (!DolibarrApiAccess::$user->hasRight('commande', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('commande', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -656,8 +656,8 @@ class Orders extends DolibarrApi
 			throw new RestException(404, 'Order not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('commande', $this->commande->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('commande', $this->commande->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$contacts = $this->commande->liste_contact(-1, 'external', 0, $type);
@@ -690,7 +690,7 @@ class Orders extends DolibarrApi
 	 */
 	public function postContact($id, $contactid, $type, $source = "external", $notrigger = 0)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('commande', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('commande', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -760,8 +760,8 @@ class Orders extends DolibarrApi
 		if (!$result) {
 			throw new RestException(404, 'Order not found');
 		}
-		if (!DolibarrApi::_checkAccessToResource('commande', $this->commande->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('commande', $this->commande->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$result = $this->commande->add_contact($contactid, $type, $source, $notrigger);
@@ -812,7 +812,7 @@ class Orders extends DolibarrApi
 	 */
 	public function deleteContact($id, $contactid, $type)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('commande', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('commande', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -821,8 +821,8 @@ class Orders extends DolibarrApi
 			throw new RestException(404, 'Order not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('commande', $this->commande->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('commande', $this->commande->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		foreach (array('internal', 'external') as $source) {
@@ -858,7 +858,7 @@ class Orders extends DolibarrApi
 	 */
 	public function put($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('commande', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('commande', 'creer')) {
 			throw new RestException(403);
 		}
 		if ($id == 0) {
@@ -869,8 +869,8 @@ class Orders extends DolibarrApi
 			throw new RestException(404, 'Order not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('commande', $this->commande->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('commande', $this->commande->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 		foreach ($request_data as $field => $value) {
 			if ($field == 'id') {
@@ -898,7 +898,7 @@ class Orders extends DolibarrApi
 			}
 		}
 
-		if ($this->commande->update(DolibarrApiAccess::$user) > 0) {
+		if ($this->commande->update(DCADMINApiAccess::$user) > 0) {
 			return $this->get($id);
 		} else {
 			throw new RestException(500, $this->commande->error);
@@ -916,7 +916,7 @@ class Orders extends DolibarrApi
 	 */
 	public function delete($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('commande', 'supprimer')) {
+		if (!DCADMINApiAccess::$user->hasRight('commande', 'supprimer')) {
 			throw new RestException(403);
 		}
 		if ($id == 0) {
@@ -927,11 +927,11 @@ class Orders extends DolibarrApi
 			throw new RestException(404, 'Order not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('commande', $this->commande->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('commande', $this->commande->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		if ($this->commande->delete(DolibarrApiAccess::$user) <= 0) {
+		if ($this->commande->delete(DCADMINApiAccess::$user) <= 0) {
 			throw new RestException(500, 'Error when deleting order : '.$this->commande->error);
 		}
 
@@ -967,7 +967,7 @@ class Orders extends DolibarrApi
 	 */
 	public function validate($id, $idwarehouse = 0, $notrigger = 0)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('commande', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('commande', 'creer')) {
 			throw new RestException(403);
 		}
 		$result = $this->commande->fetch($id);
@@ -977,11 +977,11 @@ class Orders extends DolibarrApi
 
 		$result = $this->commande->fetch_thirdparty(); // do not check result, as failure is not fatal (used only for mail notification substitutes)
 
-		if (!DolibarrApi::_checkAccessToResource('commande', $this->commande->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('commande', $this->commande->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		$result = $this->commande->valid(DolibarrApiAccess::$user, $idwarehouse, $notrigger);
+		$result = $this->commande->valid(DCADMINApiAccess::$user, $idwarehouse, $notrigger);
 		if ($result == 0) {
 			throw new RestException(304, 'Error nothing done. May be object is already validated');
 		}
@@ -1019,7 +1019,7 @@ class Orders extends DolibarrApi
 	 */
 	public function reopen($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('commande', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('commande', 'creer')) {
 			throw new RestException(403);
 		}
 		if (empty($id)) {
@@ -1030,11 +1030,11 @@ class Orders extends DolibarrApi
 			throw new RestException(404, 'Order not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('commande', $this->commande->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('commande', $this->commande->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		$result = $this->commande->set_reopen(DolibarrApiAccess::$user);
+		$result = $this->commande->set_reopen(DCADMINApiAccess::$user);
 		if ($result < 0) {
 			throw new RestException(405, $this->commande->error);
 		} elseif ($result == 0) {
@@ -1060,7 +1060,7 @@ class Orders extends DolibarrApi
 	 */
 	public function setinvoiced($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('commande', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('commande', 'creer')) {
 			throw new RestException(403);
 		}
 		if (empty($id)) {
@@ -1071,11 +1071,11 @@ class Orders extends DolibarrApi
 			throw new RestException(404, 'Order not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('commande', $this->commande->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('commande', $this->commande->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		$result = $this->commande->classifyBilled(DolibarrApiAccess::$user);
+		$result = $this->commande->classifyBilled(DCADMINApiAccess::$user);
 		if ($result < 0) {
 			throw new RestException(400, $this->commande->error);
 		}
@@ -1097,7 +1097,7 @@ class Orders extends DolibarrApi
 	 */
 	public function close($id, $notrigger = 0)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('commande', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('commande', 'creer')) {
 			throw new RestException(403);
 		}
 		$result = $this->commande->fetch($id);
@@ -1105,11 +1105,11 @@ class Orders extends DolibarrApi
 			throw new RestException(404, 'Order not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('commande', $this->commande->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('commande', $this->commande->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		$result = $this->commande->cloture(DolibarrApiAccess::$user, $notrigger);
+		$result = $this->commande->cloture(DCADMINApiAccess::$user, $notrigger);
 		if ($result == 0) {
 			throw new RestException(304, 'Error nothing done. May be object is already closed');
 		}
@@ -1123,8 +1123,8 @@ class Orders extends DolibarrApi
 		}
 
 		// test already done
-		// if (!DolibarrApi::_checkAccessToResource('commande', $this->commande->id)) {
-		// 	throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		// if (!DCADMINApi::_checkAccessToResource('commande', $this->commande->id)) {
+		// 	throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		// }
 
 		$this->commande->fetchObjectLinked();
@@ -1144,7 +1144,7 @@ class Orders extends DolibarrApi
 	 */
 	public function settodraft($id, $idwarehouse = -1)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('commande', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('commande', 'creer')) {
 			throw new RestException(403);
 		}
 		$result = $this->commande->fetch($id);
@@ -1152,11 +1152,11 @@ class Orders extends DolibarrApi
 			throw new RestException(404, 'Order not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('commande', $this->commande->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('commande', $this->commande->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		$result = $this->commande->setDraft(DolibarrApiAccess::$user, $idwarehouse);
+		$result = $this->commande->setDraft(DCADMINApiAccess::$user, $idwarehouse);
 		if ($result == 0) {
 			throw new RestException(304, 'Nothing done. May be object is already closed');
 		}
@@ -1170,8 +1170,8 @@ class Orders extends DolibarrApi
 		}
 
 		// test already done
-		// if (!DolibarrApi::_checkAccessToResource('commande', $this->commande->id)) {
-		// 	throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		// if (!DCADMINApi::_checkAccessToResource('commande', $this->commande->id)) {
+		// 	throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		// }
 
 		$this->commande->fetchObjectLinked();
@@ -1198,10 +1198,10 @@ class Orders extends DolibarrApi
 	{
 		require_once DOL_DOCUMENT_ROOT.'/comm/propal/class/propal.class.php';
 
-		if (!DolibarrApiAccess::$user->hasRight('propal', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('propal', 'lire')) {
 			throw new RestException(403);
 		}
-		if (!DolibarrApiAccess::$user->hasRight('commande', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('commande', 'creer')) {
 			throw new RestException(403);
 		}
 		if (empty($proposalid)) {
@@ -1214,11 +1214,11 @@ class Orders extends DolibarrApi
 			throw new RestException(404, 'Proposal not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('propal', $propal->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('propal', $propal->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		$result = $this->commande->createFromProposal($propal, DolibarrApiAccess::$user);
+		$result = $this->commande->createFromProposal($propal, DCADMINApiAccess::$user);
 		if ($result < 0) {
 			throw new RestException(405, $this->commande->error);
 		}
@@ -1246,11 +1246,11 @@ class Orders extends DolibarrApi
 	public function getOrderShipments($id)
 	{
 		require_once DOL_DOCUMENT_ROOT.'/expedition/class/expedition.class.php';
-		if (!DolibarrApiAccess::$user->hasRight('expedition', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('expedition', 'lire')) {
 			throw new RestException(403);
 		}
-		if (!DolibarrApi::_checkAccessToResource('commande', $id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('commande', $id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 		$obj_ret = array();
 		$sql = "SELECT e.rowid";
@@ -1308,7 +1308,7 @@ class Orders extends DolibarrApi
 	public function createOrderShipment($id, $warehouse_id)
 	{
 		require_once DOL_DOCUMENT_ROOT.'/expedition/class/expedition.class.php';
-		if (!DolibarrApiAccess::$user->hasRight('expedition', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('expedition', 'creer')) {
 			throw new RestException(403);
 		}
 		if ($warehouse_id <= 0) {
@@ -1318,14 +1318,14 @@ class Orders extends DolibarrApi
 		if (!$result) {
 			throw new RestException(404, 'Order not found');
 		}
-		if (!DolibarrApi::_checkAccessToResource('commande', $this->commande->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('commande', $this->commande->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 		$shipment = new Expedition($this->db);
 		$shipment->socid = $this->commande->socid;
 		$shipment->origin_id = $this->commande->id;
 		$shipment->origin = $this->commande->element;
-		$result = $shipment->create(DolibarrApiAccess::$user);
+		$result = $shipment->create(DCADMINApiAccess::$user);
 		if ($result <= 0) {
 			throw new RestException(500, 'Error on creating expedition :'.$this->db->lasterror());
 		}

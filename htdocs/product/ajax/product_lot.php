@@ -39,7 +39,7 @@ if (!defined('NOBROWSERNOTIF')) {
 	define('NOBROWSERNOTIF', '1');
 }
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php'; // Load $user and permissions
 require_once DOL_DOCUMENT_ROOT.'/product/stock/class/productlot.class.php';
 

@@ -29,7 +29,7 @@
  */
 
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/core/class/html.formcompany.class.php';
 require_once DOL_DOCUMENT_ROOT.'/core/class/html.formfile.class.php';
@@ -464,7 +464,7 @@ if ($object->id > 0 && (empty($action) || ($action != 'edit' && $action != 'crea
 		print '<tr><td class="titlefieldmiddle">'.$langs->trans("Login").'</td>';
 		if (!empty($object->ldap_sid) && $object->statut == 0) {
 			print '<td class="error">';
-			print $langs->trans("LoginAccountDisableInDolibarr");
+			print $langs->trans("LoginAccountDisableInDCADMIN");
 			print '</td>';
 		} else {
 			print '<td>';

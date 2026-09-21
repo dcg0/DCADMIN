@@ -17,7 +17,7 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../../main.inc.php';
 
 /**
@@ -65,8 +65,8 @@ $documentation->showSidebar(); ?>
 					<div class="link-content"><?php print $langs->trans('DocHowContributeDescription'); ?></div>
 				</a>
 				<a class="doc-link size-default" href="https://www.dolibarr.fr/forum/" target="_blank">
-					<div class="link-title"><span class="fas fa-external-link-alt paddingright"></span> Dolibarr community</div>
-					<div class="link-content">Meet and chat with the Dolibarr community on the dedicated forum</div>
+					<div class="link-title"><span class="fas fa-external-link-alt paddingright"></span> DCADMIN community</div>
+					<div class="link-content">Meet and chat with the DCADMIN community on the dedicated forum</div>
 				</a>
 			</div>
 		</div>
@@ -74,9 +74,9 @@ $documentation->showSidebar(); ?>
 		<?php
 		$indexMenu = $documentation->menu;
 
-		// Remove BackToDolibarr and Documentation Home from menu
+		// Remove BackToDCADMIN and Documentation Home from menu
 		// Remove Resources from menu (Set manually above)
-		unset($indexMenu['BackToDolibarr']);
+		unset($indexMenu['BackToDCADMIN']);
 		unset($indexMenu['DocumentationHome']);
 		unset($indexMenu['Resources']);
 

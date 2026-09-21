@@ -29,9 +29,9 @@ require_once DOL_DOCUMENT_ROOT . '/product/stock/class/productlot.class.php';
  * @since	5.0.0	Initial implementation
  *
  * @access protected
- * @class  DolibarrApiAccess {@requires user,external}
+ * @class  DCADMINApiAccess {@requires user,external}
  */
-class Productlots extends DolibarrApi
+class Productlots extends DCADMINApi
 {
 	/**
 	 * @var string[]       Mandatory fields, checked when create and update object
@@ -70,7 +70,7 @@ class Productlots extends DolibarrApi
 	 */
 	public function get($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('product', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('product', 'lire')) {
 			throw new RestException(403, "Insufficient rights to read an event");
 		}
 		if ($id === 0) {
@@ -118,7 +118,7 @@ class Productlots extends DolibarrApi
 
 		$obj_ret = [];
 
-		if (!DolibarrApiAccess::$user->hasRight('produit', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('produit', 'lire')) {
 			throw new RestException(403, "Insufficient rights to view your products lots");
 		}
 
@@ -215,7 +215,7 @@ class Productlots extends DolibarrApi
 	 */
 	public function post($request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('produit', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('produit', 'creer')) {
 			throw new RestException(403, "Insufficient rights to create your product lot");
 		}
 
@@ -239,7 +239,7 @@ class Productlots extends DolibarrApi
 		  $this->expensereport->lines = $lines;
 		}*/
 
-		if ($this->productlot->create(DolibarrApiAccess::$user) < 0) {
+		if ($this->productlot->create(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, "Error creating event", array_merge(array($this->productlot->error), $this->productlot->errors));
 		}
 
@@ -262,7 +262,7 @@ class Productlots extends DolibarrApi
 	 */
 	public function put($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('produit', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('produit', 'creer')) {
 			throw new RestException(403, "Insufficient rights to create your Product lot");
 		}
 
@@ -275,8 +275,8 @@ class Productlots extends DolibarrApi
 			throw new RestException(404, 'productlot not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('productlot', $this->productlot->id, 'product_lot', '', 'fk_soc', 'rowid')) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('productlot', $this->productlot->id, 'product_lot', '', 'fk_soc', 'rowid')) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 		foreach ($request_data as $field => $value) {
 			if ($field == 'id') {
@@ -297,7 +297,7 @@ class Productlots extends DolibarrApi
 			$this->productlot->$field = $this->_checkValForAPI($field, $value, $this->productlot);
 		}
 
-		if ($this->productlot->update(DolibarrApiAccess::$user) > 0) {
+		if ($this->productlot->update(DCADMINApiAccess::$user) > 0) {
 			return $this->get($id);
 		}
 
@@ -319,7 +319,7 @@ class Productlots extends DolibarrApi
 	 */
 	public function delete($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('produit', 'supprimer')) {
+		if (!DCADMINApiAccess::$user->hasRight('produit', 'supprimer')) {
 			throw new RestException(403, "Insufficient rights to delete your product lot");
 		}
 
@@ -333,11 +333,11 @@ class Productlots extends DolibarrApi
 			throw new RestException(404, 'Product lot not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('productlot', $this->productlot->id, 'product_lot', '', 'fk_soc', 'rowid')) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('productlot', $this->productlot->id, 'product_lot', '', 'fk_soc', 'rowid')) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		if ($this->productlot->delete(DolibarrApiAccess::$user) < 0) {
+		if ($this->productlot->delete(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, 'Error when delete Product lot : '.implode(',', $this->productlot->errors));
 		}
 

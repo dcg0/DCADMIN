@@ -26,14 +26,14 @@
  *  \ingroup    printing
  *  \brief      Description and activation file for the module Receipt Printer
  */
-include_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
+include_once DOL_DOCUMENT_ROOT.'/core/modules/DCADMINModules.class.php';
 
 
 
 /**
  *  Class to describe and activate module Receipt Printer
  */
-class modReceiptPrinter extends DolibarrModules
+class modReceiptPrinter extends DCADMINModules
 {
 	/**
 	 *  Constructor
@@ -72,7 +72,7 @@ class modReceiptPrinter extends DolibarrModules
 		$this->requiredby = array(); // List of module ids to disable if this one is disabled
 		$this->conflictwith = array(); // List of module class names as string this module is in conflict with
 		$this->phpmin = array(7, 0); // Minimum version of PHP required by module
-		$this->need_dolibarr_version = array(3, 9, -2); // Minimum version of Dolibarr required by module
+		$this->need_dolibarr_version = array(3, 9, -2); // Minimum version of DCADMIN required by module
 		$this->conflictwith = array();
 		$this->langfiles = array("receiptprinter");
 
@@ -124,7 +124,7 @@ class modReceiptPrinter extends DolibarrModules
 
 	/**
 	 *      Function called when module is enabled.
-	 *      The init function add constants, boxes, permissions and menus (defined in constructor) into Dolibarr database.
+	 *      The init function add constants, boxes, permissions and menus (defined in constructor) into DCADMIN database.
 	 *      It also creates data directories
 	 *
 	 *      @param      string  $options    Options when enabling module ('', 'noboxes')

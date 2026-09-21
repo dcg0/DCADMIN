@@ -24,7 +24,7 @@
  * 	\brief		Page to setup multicurrency module
  */
 
-// Dolibarr environment
+// DCADMIN environment
 require '../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/admin.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/multicurrency.lib.php';

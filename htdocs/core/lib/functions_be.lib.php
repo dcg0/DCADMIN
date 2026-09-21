@@ -18,7 +18,7 @@
 
 /**
  *	\file			htdocs/core/lib/functions_be.lib.php
- *	\brief			A set of belgium functions for Dolibarr
+ *	\brief			A set of belgium functions for DCADMIN
  *					This file contains rare functions.
  */
 

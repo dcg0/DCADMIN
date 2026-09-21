@@ -29,7 +29,7 @@
  *    \brief      Tab of calendar events per type
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf

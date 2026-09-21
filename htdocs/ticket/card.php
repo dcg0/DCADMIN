@@ -30,7 +30,7 @@
  *   \brief      Page to create/edit/view Tickets
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf

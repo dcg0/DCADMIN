@@ -29,9 +29,9 @@ require_once DOL_DOCUMENT_ROOT.'/compta/bank/class/account.class.php';
  *
  * @property DoliDB $db
  * @access protected
- * @class DolibarrApiAccess {@requires user,external}
+ * @class DCADMINApiAccess {@requires user,external}
  */
-class SocialContributions extends DolibarrApi
+class SocialContributions extends DCADMINApi
 {
 	/**
 	 * @var string[] Mandatory fields, checked when creating a social contribution
@@ -73,7 +73,7 @@ class SocialContributions extends DolibarrApi
 	 */
 	public function get($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('tax', 'charges', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('tax', 'charges', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -106,7 +106,7 @@ class SocialContributions extends DolibarrApi
 	 */
 	public function index($sortfield = "t.rowid", $sortorder = 'ASC', $limit = 100, $page = 0, $sqlfilters = '', $properties = '', $pagination_data = false)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('tax', 'charges', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('tax', 'charges', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -190,7 +190,7 @@ class SocialContributions extends DolibarrApi
 	 */
 	public function post($request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('tax', 'charges', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('tax', 'charges', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -213,7 +213,7 @@ class SocialContributions extends DolibarrApi
 			$contrib->$field = $this->_checkValForAPI($field, $value, $contrib);
 		}
 
-		if ($contrib->create(DolibarrApiAccess::$user) < 0) {
+		if ($contrib->create(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, 'Error when creating social contribution: '.$contrib->error);
 		}
 
@@ -235,7 +235,7 @@ class SocialContributions extends DolibarrApi
 	 */
 	public function put($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('tax', 'charges', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('tax', 'charges', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -269,7 +269,7 @@ class SocialContributions extends DolibarrApi
 			$contrib->$field = $this->_checkValForAPI($field, $value, $contrib);
 		}
 
-		if ($contrib->update(DolibarrApiAccess::$user) > 0) {
+		if ($contrib->update(DCADMINApiAccess::$user) > 0) {
 			return $this->get($id);
 		} else {
 			throw new RestException(500, 'Error when updating social contribution: '.$contrib->error);
@@ -290,7 +290,7 @@ class SocialContributions extends DolibarrApi
 	 */
 	public function delete($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('tax', 'charges', 'supprimer')) {
+		if (!DCADMINApiAccess::$user->hasRight('tax', 'charges', 'supprimer')) {
 			throw new RestException(403);
 		}
 
@@ -300,7 +300,7 @@ class SocialContributions extends DolibarrApi
 			throw new RestException(404, 'Social contribution not found');
 		}
 
-		if ($contrib->delete(DolibarrApiAccess::$user) < 0) {
+		if ($contrib->delete(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, 'Error when deleting social contribution: '.$contrib->error);
 		}
 
@@ -330,7 +330,7 @@ class SocialContributions extends DolibarrApi
 	 */
 	public function getAllPayments($sortfield = "t.rowid", $sortorder = 'ASC', $limit = 100, $page = 0)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('tax', 'charges', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('tax', 'charges', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -380,7 +380,7 @@ class SocialContributions extends DolibarrApi
 	 */
 	public function getPayments($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('tax', 'charges', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('tax', 'charges', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -420,7 +420,7 @@ class SocialContributions extends DolibarrApi
 	 */
 	public function getPayment($pid)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('tax', 'charges', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('tax', 'charges', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -450,7 +450,7 @@ class SocialContributions extends DolibarrApi
 	 */
 	public function addPayment($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('tax', 'charges', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('tax', 'charges', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -469,12 +469,12 @@ class SocialContributions extends DolibarrApi
 			$payment->note = $request_data['note'];
 		}
 
-		if ($payment->create(DolibarrApiAccess::$user) < 0) {
+		if ($payment->create(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, 'Error when creating payment', array_merge(array($payment->error), $payment->errors));
 		}
 
 		if (isModEnabled("bank") && !empty($request_data['accountid'])) {
-			$payment->addPaymentToBank(DolibarrApiAccess::$user, 'payment_sc', '(SocialContributionPayment)', (int) $request_data['accountid'], '', '');
+			$payment->addPaymentToBank(DCADMINApiAccess::$user, 'payment_sc', '(SocialContributionPayment)', (int) $request_data['accountid'], '', '');
 		}
 
 		return $payment->id;
@@ -496,7 +496,7 @@ class SocialContributions extends DolibarrApi
 	 */
 	public function deletePayment($pid)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('tax', 'charges', 'supprimer')) {
+		if (!DCADMINApiAccess::$user->hasRight('tax', 'charges', 'supprimer')) {
 			throw new RestException(403);
 		}
 
@@ -506,7 +506,7 @@ class SocialContributions extends DolibarrApi
 			throw new RestException(404, 'Payment not found');
 		}
 
-		if ($payment->delete(DolibarrApiAccess::$user) < 0) {
+		if ($payment->delete(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, 'Error when deleting payment: '.$payment->error);
 		}
 

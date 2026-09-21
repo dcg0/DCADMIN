@@ -34,7 +34,7 @@ if (!defined('NOREQUIREAJAX')) {
 	define('NOREQUIREAJAX', '1');
 }
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf
@@ -318,7 +318,7 @@ if (!empty($errormsg)) {
 // Build the URL of the original file for the running version.
 // For a stable version (eg 24.0.0) the matching git tag exists, so we compare against that tag.
 // For an alpha/beta/rc version no tag exists yet, so we compare against the develop branch.
-$baseurl = getDolGlobalString('MAIN_FILECHECK_DIFF_BASEURL', 'https://raw.githubusercontent.com/Dolibarr/dolibarr');
+$baseurl = getDolGlobalString('MAIN_FILECHECK_DIFF_BASEURL', 'https://raw.githubusercontent.com/DCADMIN/dolibarr');
 if (preg_match('/alpha|beta|rc/i', DOL_VERSION)) {
 	$ref = 'develop';
 } else {

@@ -37,7 +37,7 @@
 
 require_once 'version.inc.php';		// Define the DOL_VERSION
 
-// Dolibarr must always work with numeric in english format when they are in memory (example: 1234.56)
+// DCADMIN must always work with numeric in english format when they are in memory (example: 1234.56)
 setlocale(LC_NUMERIC, 'C');
 
 // Define syslog constants
@@ -121,7 +121,7 @@ function dol_session_rotate($sessionname = '')
 
 
 // Define localization of conf file
-// --- Start of part replaced by Dolibarr packager makepack-dolibarr
+// --- Start of part replaced by DCADMIN packager makepack-dolibarr
 $conffile = "conf/conf.php";
 $conffiletoshow = "htdocs/conf/conf.php";
 // For debian/redhat like systems
@@ -130,7 +130,7 @@ $conffiletoshow = "htdocs/conf/conf.php";
 
 
 // Include configuration
-// --- End of part replaced by Dolibarr packager makepack-dolibarr
+// --- End of part replaced by DCADMIN packager makepack-dolibarr
 
 // Include configuration
 // @phpstan-ignore-next-line
@@ -223,14 +223,14 @@ if (!$result && !empty($_SERVER["GATEWAY_INTERFACE"])) {    // If install not do
 
 	/*
 	print '<br><center>';
-	print 'The conf/conf.php file was not found or is not readable by the web server. If this is your first access, <a href="'.$path.'install/index.php">click here to start the Dolibarr installation process</a> to create it...';
+	print 'The conf/conf.php file was not found or is not readable by the web server. If this is your first access, <a href="'.$path.'install/index.php">click here to start the DCADMIN installation process</a> to create it...';
 	print '</center><br>';
 	*/
 
 	exit;
 }
 
-// Force PHP error_reporting setup (Dolibarr may report warning without this)
+// Force PHP error_reporting setup (DCADMIN may report warning without this)
 if (version_compare(phpversion(), '8.4', '<')) {
 	if (!empty($dolibarr_strict_mode)) {
 		error_reporting(E_ALL | E_STRICT);
@@ -309,7 +309,7 @@ if (!defined('DOL_DOCUMENT_ROOT')) {
 
 // @phpstan-ignore-next-line if.alwaysTrue
 if (empty(DOL_DOCUMENT_ROOT) || !file_exists(DOL_DOCUMENT_ROOT."/core/lib/functions.lib.php")) {
-	print "Error: Dolibarr config file content seems to be not correctly defined";
+	print "Error: DCADMIN config file content seems to be not correctly defined";
 	if (empty($dolibarr_main_document_root)) {
 		print " (dolibarr_main_document_root can't be unknown).<br>\n";
 	} else {
@@ -329,7 +329,7 @@ include_once DOL_DOCUMENT_ROOT.'/blockedlog/lib/securitycore.lib.php';
 
 
 // Security: CSRF protection
-// This test check if referrer ($_SERVER['HTTP_REFERER']) is same web site than Dolibarr ($_SERVER['HTTP_HOST'])
+// This test check if referrer ($_SERVER['HTTP_REFERER']) is same web site than DCADMIN ($_SERVER['HTTP_HOST'])
 // when we post forms (we allow GET and HEAD to accept direct link from a particular page).
 // Note about $_SERVER[HTTP_HOST/SERVER_NAME]: http://shiflett.org/blog/2006/mar/server-name-versus-http-host
 // See also CSRF protections done into main.inc.php
@@ -357,13 +357,13 @@ if (!defined('NOCSRFCHECK') && isset($dolibarr_nocsrfcheck) && $dolibarr_nocsrfc
 	// Another test is done later on token if option MAIN_SECURITY_CSRF_WITH_TOKEN is on.
 }
 if (empty($dolibarr_main_db_host) && !defined('NOREQUIREDB')) {
-	print '<div class="center">Dolibarr setup is not yet complete.<br><br>'."\n";
-	print '<a href="install/index.php">Click here to finish Dolibarr install process</a> ...</div>'."\n";
+	print '<div class="center">DCADMIN setup is not yet complete.<br><br>'."\n";
+	print '<a href="install/index.php">Click here to finish DCADMIN install process</a> ...</div>'."\n";
 	die;
 }
 if (empty($dolibarr_main_url_root) && !defined('NOREQUIREVIRTUALURL')) {
 	print 'Value for parameter \'dolibarr_main_url_root\' is not defined in your \'htdocs\conf\conf.php\' file.<br>'."\n";
-	print 'You must add this parameter with your full Dolibarr root Url (Example: http://myvirtualdomain/ or http://mydomain/mydolibarrurl/)'."\n";
+	print 'You must add this parameter with your full DCADMIN root Url (Example: http://myvirtualdomain/ or http://mydomain/mydolibarrurl/)'."\n";
 	die;
 }
 

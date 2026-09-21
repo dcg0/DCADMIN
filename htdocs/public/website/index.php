@@ -29,7 +29,7 @@
 /**
  *     	\file       htdocs/public/website/index.php
  *		\ingroup    website
- *		\brief      Wrapper to output pages when website is powered by Dolibarr instead of a native web server
+ *		\brief      Wrapper to output pages when website is powered by DCADMIN instead of a native web server
  */
 
 if (!defined('NOTOKENRENEWAL')) {
@@ -210,7 +210,7 @@ global $dolibarr_main_data_root;
 
 if ($pageid == 'css') {   // No more used ?
 	header('Content-type: text/css');
-	// Important: Following code is to avoid page request by browser and PHP CPU at each Dolibarr page access.
+	// Important: Following code is to avoid page request by browser and PHP CPU at each DCADMIN page access.
 	//header('Cache-Control: max-age=3600, public, must-revalidate');
 	header('Cache-Control: no-cache');
 	$original_file = $dolibarr_main_data_root.($conf->entity > 1 ? '/'.$conf->entity : '').'/website/'.$websitekey.'/styles.css.php';

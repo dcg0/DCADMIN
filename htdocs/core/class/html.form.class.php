@@ -7927,7 +7927,7 @@ class Form
 					/**
 					 * Direct	: 	1 Divisa Currency = X Currency Main.
 					 * Indirect	: 	1 Currency Main = X Divisa Currency.
-					 * Then for Dolibarr use is Indirect for default
+					 * Then for DCADMIN use is Indirect for default
 					 */
 					if (getDolGlobalString('MULTICURRENCY_USE_RATE_DIRECT')) {
 						print ' &nbsp; <span class="opacitymedium">(' . price($rate_direct, 1, $langs, 0, 0) . ' ' . $conf->currency . ' = 1 ' . $currency . ')</span>';

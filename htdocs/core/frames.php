@@ -27,7 +27,7 @@
  *					  /core/frames.php?keyforcontent=EXTERNAL_SITE_URL_abc to show URL defined into conf 'EXTERNAL_SITE_URL_abc'
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/core/class/menubase.class.php';
 
@@ -110,7 +110,7 @@ if ($keyforcontent) {
 		print "
 			<html>
 			<head>
-			<title>Dolibarr frame for external web site</title>
+			<title>DCADMIN frame for external web site</title>
 			</head>
 
 			<frameset ".(!getDolGlobalString('MAIN_MENU_INVERT') ? "rows" : "cols")."=\"".$heightforframes.",*\" border=0 framespacing=0 frameborder=0>

@@ -24,7 +24,7 @@
  * \brief MCP Server tool for products and services.
  *
  * This tool provides functionalities to search, analyze, and retrieve
- * comprehensive details about products and services within Dolibarr.
+ * comprehensive details about products and services within DCADMIN.
  * It also includes inventory analysis and supplier pricing information.
  */
 
@@ -37,7 +37,7 @@ require_once DOL_DOCUMENT_ROOT . '/categories/class/categorie.class.php';
 /**
  * Class ToolProducts
  *
- * Provides various tools related to Dolibarr products and services.
+ * Provides various tools related to DCADMIN products and services.
  */
 class ToolProducts extends McpTool
 {

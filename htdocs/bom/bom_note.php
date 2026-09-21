@@ -22,7 +22,7 @@
  *    \brief      Card with notes on BillOfMaterials
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf

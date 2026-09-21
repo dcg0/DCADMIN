@@ -26,7 +26,7 @@
  *	\brief      Setup page for TakePos module
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php'; // Load $user and permissions
 /**
  * @var Conf $conf

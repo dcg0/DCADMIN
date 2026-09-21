@@ -37,7 +37,7 @@
  *       \brief      Tab of user card
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf
@@ -994,7 +994,7 @@ if ($action == 'create' || $action == 'adduserldap') {
 	if (isModEnabled('ldap') && (getDolGlobalInt('LDAP_SYNCHRO_ACTIVE') === Ldap::SYNCHRO_LDAP_TO_DOLIBARR)) {
 		$liste = array();
 
-		// Show form to add an account from LDAP if sync LDAP -> Dolibarr is set
+		// Show form to add an account from LDAP if sync LDAP -> DCADMIN is set
 		$ldap = new Ldap();
 		$result = $ldap->connectBind();
 		if ($result >= 0) {
@@ -1295,11 +1295,11 @@ if ($action == 'create' || $action == 'adduserldap') {
 	}
 	if (preg_match('/dolibarr/', $dolibarr_main_authentication) || preg_match('/forceuser/', $dolibarr_main_authentication)) {
 		if (!empty($ldap_pass)) {	// For very old system compatibility. Now clear password can't be viewed from LDAP read
-			$valuetoshow .= ($valuetoshow ? ' + ' : '').'<input type="hidden" name="password" value="'.dol_escape_htmltag($ldap_pass).'">'; // Dolibarr password is preffiled with LDAP known password
+			$valuetoshow .= ($valuetoshow ? ' + ' : '').'<input type="hidden" name="password" value="'.dol_escape_htmltag($ldap_pass).'">'; // DCADMIN password is preffiled with LDAP known password
 			$valuetoshow .= preg_replace('/./i', '*', $ldap_pass);
 		} else {
 			// We do not use a field password but a field text to show new password to use.
-			$valuetoshow .= ($valuetoshow ? ' + '.$langs->trans("DolibarrPassword") : '').'<input class="minwidth300 maxwidth400 widthcentpercentminusx" maxlength="128" type="text" id="password" name="password" value="'.dol_escape_htmltag($password).'" autocomplete="new-password" spellcheck="false">';
+			$valuetoshow .= ($valuetoshow ? ' + '.$langs->trans("DCADMINPassword") : '').'<input class="minwidth300 maxwidth400 widthcentpercentminusx" maxlength="128" type="text" id="password" name="password" value="'.dol_escape_htmltag($password).'" autocomplete="new-password" spellcheck="false">';
 			if (!empty($conf->use_javascript_ajax)) {
 				$valuetoshow .= img_picto($langs->transnoentities('Generate'), 'refresh', 'id="generate_password" class="linkobject paddingleft"');
 			}
@@ -1754,7 +1754,7 @@ if ($action == 'create' || $action == 'adduserldap') {
 			print '<tr><td class="titlefieldmiddle">'.$langs->trans("Login").'</td>';
 			if (!empty($object->ldap_sid) && $object->status == User::STATUS_DISABLED) {
 				print '<td class="error">';
-				print $langs->trans("LoginAccountDisableInDolibarr");
+				print $langs->trans("LoginAccountDisableInDCADMIN");
 				print '</td>';
 			} else {
 				print '<td>';
@@ -2032,7 +2032,7 @@ if ($action == 'create' || $action == 'adduserldap') {
 			// Module Adherent
 			if (isModEnabled('member')) {
 				$langs->load("members");
-				print '<tr><td>'.$langs->trans("LinkedToDolibarrMember").'</td>';
+				print '<tr><td>'.$langs->trans("LinkedToDCADMINMember").'</td>';
 				print '<td>';
 				if ($object->fk_member) {
 					$adh = new Adherent($db);
@@ -2815,7 +2815,7 @@ if ($action == 'create' || $action == 'adduserldap') {
 				$valuetoshow .= ($valuetoshow ? (' '.$langs->trans("or").' ') : '').$langs->trans("PasswordOfUserInLDAP");
 			}
 			if (preg_match('/http/', $dolibarr_main_authentication)) {
-				$valuetoshow .= ($valuetoshow ? (' '.$langs->trans("or").' ') : '').$form->textwithpicto((string) $text, $langs->trans("DolibarrInHttpAuthenticationSoPasswordUseless", (string) $dolibarr_main_authentication), 1, 'warning');
+				$valuetoshow .= ($valuetoshow ? (' '.$langs->trans("or").' ') : '').$form->textwithpicto((string) $text, $langs->trans("DCADMINInHttpAuthenticationSoPasswordUseless", (string) $dolibarr_main_authentication), 1, 'warning');
 			}
 			if (preg_match('/dolibarr/', $dolibarr_main_authentication) || preg_match('/forceuser/', $dolibarr_main_authentication)) {
 				if ($permissiontoeditpasswordandsee) {
@@ -3120,7 +3120,7 @@ if ($action == 'create' || $action == 'adduserldap') {
 			// Module Adherent
 			if (isModEnabled('member')) {
 				$langs->load("members");
-				print '<tr><td>'.$langs->trans("LinkedToDolibarrMember").'</td>';
+				print '<tr><td>'.$langs->trans("LinkedToDCADMINMember").'</td>';
 				print '<td>';
 				if ($object->fk_member) {
 					$adh = new Adherent($db);

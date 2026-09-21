@@ -327,7 +327,7 @@ class pdf_tcpdflabel extends CommonStickerGenerator
 
 		$pdf->SetTitle($title);
 		$pdf->SetSubject($title);
-		$pdf->SetCreator("Dolibarr ".DOL_VERSION);
+		$pdf->SetCreator("DCADMIN ".DOL_VERSION);
 		$pdf->SetAuthor($outputlangs->convToOutputCharset($user->getAnonymisableFullName($outputlangs)));
 		$pdf->SetKeyWords($keywords);
 		if (getDolGlobalString('MAIN_DISABLE_PDF_COMPRESSION')) {

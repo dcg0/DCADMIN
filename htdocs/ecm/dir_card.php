@@ -24,7 +24,7 @@
  *	\brief     	Card of a directory for ECM module
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf

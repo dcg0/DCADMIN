@@ -24,7 +24,7 @@
  */
 
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf
@@ -140,7 +140,7 @@ if ($mysoc->country_code == 'FR') {
 
 // Show generic message (for countries that need registration) to explain we need registration to collect data and why
 if (in_array($mysoc->country_code, array('FR')) && !userIsTaxAuditor()) {
-	$organization_for_ping = getDolGlobalString('MAIN_ORGANIZATION_FOR_PING', "Association Dolibarr");
+	$organization_for_ping = getDolGlobalString('MAIN_ORGANIZATION_FOR_PING', "Association DCADMIN");
 	$dataprivacy_url = getDolGlobalString('MAIN_ORGANIZATION_URL_PRIVACY', "https://www.dolibarr.org/legal-privacy-gdpr.php");
 
 	if (!isRegistrationDataSavedAndPushed() || $origin == 'initmodule') {

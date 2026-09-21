@@ -28,7 +28,7 @@
  * McpAuth Class
  *
  * Resolves the credential presented by an MCP client and turns it into a
- * Dolibarr identity. Two credentials are accepted:
+ * DCADMIN identity. Two credentials are accepted:
  *
  * - a user API key (the same key the REST API takes), which authenticates the
  *   request as that user, so tools run with that user's permissions and the
@@ -124,7 +124,7 @@ class McpAuth
 			$server = $_SERVER;
 		}
 		if ($get === null) {
-			$get = $_GET;	// Keep $_GET here: the key is read before any Dolibarr context exists.
+			$get = $_GET;	// Keep $_GET here: the key is read before any DCADMIN context exists.
 		}
 
 		$credential = '';
@@ -193,7 +193,7 @@ class McpAuth
 		$credential = $this->getCredential($server, $get);
 
 		if ($credential === '') {
-			$this->error = 'Missing credentials. Provide a Dolibarr API key with an "Authorization: Bearer <key>" or "DOLAPIKEY: <key>" header.';
+			$this->error = 'Missing credentials. Provide a DCADMIN API key with an "Authorization: Bearer <key>" or "DOLAPIKEY: <key>" header.';
 			return -1;
 		}
 
@@ -265,7 +265,7 @@ class McpAuth
 	 */
 	public function getWwwAuthenticateHeader($resourcemetadataurl = '')
 	{
-		$challenge = 'Bearer realm="Dolibarr MCP"';
+		$challenge = 'Bearer realm="DCADMIN MCP"';
 		if ($resourcemetadataurl !== '') {
 			$challenge .= ', resource_metadata="'.$resourcemetadataurl.'"';
 		}

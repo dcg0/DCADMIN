@@ -27,7 +27,7 @@
  *	\brief      Add a tab on thirdparty view to list all products/services bought or sells by thirdparty
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require "../main.inc.php";
 /**
  * @var Conf $conf

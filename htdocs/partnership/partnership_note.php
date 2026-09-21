@@ -23,7 +23,7 @@
  *  \brief      Tab for notes on Partnership
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 
 require_once DOL_DOCUMENT_ROOT.'/partnership/class/partnership.class.php';

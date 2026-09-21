@@ -20,7 +20,7 @@
 /**
  * \file htdocs/ai/tools/thirdparty.class.php
  * \ingroup ai
- * \brief MCP Server tool for Dolibarr categories.
+ * \brief MCP Server tool for DCADMIN categories.
  */
 
 require_once DOL_DOCUMENT_ROOT . '/societe/class/societe.class.php';
@@ -30,7 +30,7 @@ require_once DOL_DOCUMENT_ROOT . '/contact/class/contact.class.php';
 /**
  * Class ToolThirdParty
  *
- * Provides various tools related to Dolibarr categories.
+ * Provides various tools related to DCADMIN categories.
  */
 class ToolThirdParty extends McpTool
 {
@@ -260,7 +260,7 @@ class ToolThirdParty extends McpTool
 			return ["error" => "DB Error"];
 		}
 
-		// Dolibarr SQL construction
+		// DCADMIN SQL construction
 		if ($count) {
 			$sql = "SELECT COUNT(s.rowid) as nb";
 		} else {

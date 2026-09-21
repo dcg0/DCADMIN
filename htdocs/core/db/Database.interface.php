@@ -23,7 +23,7 @@
  */
 
 /**
- *    Class to manage Dolibarr database access for an SQL database
+ *    Class to manage DCADMIN database access for an SQL database
  */
 interface Database
 {

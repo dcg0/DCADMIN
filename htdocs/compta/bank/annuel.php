@@ -26,7 +26,7 @@
  *		\brief       Page to report input-output of a bank account
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf

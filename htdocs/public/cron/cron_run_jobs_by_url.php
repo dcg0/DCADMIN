@@ -65,7 +65,7 @@ if (php_sapi_name() == "cli") {
 }
 
 // core library
-// Dolibarr environment
+// DCADMIN environment
 require '../../main.inc.php';
 
 // cron jobs library

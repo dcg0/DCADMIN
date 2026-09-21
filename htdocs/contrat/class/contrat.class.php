@@ -3162,7 +3162,7 @@ class Contrat extends CommonObject
 							$cc = getDolGlobalString('CONTRACT_CC_MAIL_FROM');
 
 							$trackid = 'con'.$contractstatic->id;
-							$moreinheader = 'X-Dolibarr-Info: sendReminderForExpiredServices'."\r\n";
+							$moreinheader = 'X-DCADMIN-Info: sendReminderForExpiredServices'."\r\n";
 
 							include_once DOL_DOCUMENT_ROOT.'/core/class/CMailFile.class.php';
 							$cmail = new CMailFile($subject, $to, $email_from, $msg, array(), array(), array(), $cc, '', 0, 1, '', '', $trackid, $moreinheader);

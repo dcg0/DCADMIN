@@ -1761,7 +1761,7 @@ abstract class CommonInvoice extends CommonObject
 						$amountstripe *= 100;
 					}
 
-					$fk_bank_account = getDolGlobalInt('STRIPE_BANK_ACCOUNT_FOR_PAYMENTS');		// Bank account used for SEPA direct debit or credit transfer. Must be the Stripe account in Dolibarr.
+					$fk_bank_account = getDolGlobalInt('STRIPE_BANK_ACCOUNT_FOR_PAYMENTS');		// Bank account used for SEPA direct debit or credit transfer. Must be the Stripe account in DCADMIN.
 					if (!($fk_bank_account > 0)) {
 						$error++;
 						$errorforinvoice++;

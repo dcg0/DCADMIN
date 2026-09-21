@@ -27,7 +27,7 @@
  *		\brief      File of main public page for member module
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf
@@ -228,7 +228,7 @@ if (getDolGlobalString('MEMBER_ENABLE_PUBLIC')) {
 	print '<td></td>';
 	print "</tr>\n";
 
-	// Show the table of all available membership types. If not, show a form (as the default was for Dolibarr <=16.0)
+	// Show the table of all available membership types. If not, show a form (as the default was for DCADMIN <=16.0)
 	$skiptable = getDolGlobalInt('MEMBER_SKIP_TABLE');
 	print '<tr class="oddeven" id="tredit"><td>';
 	print $langs->trans("MembersShowMembershipTypesTable");

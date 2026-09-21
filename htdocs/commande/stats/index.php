@@ -28,7 +28,7 @@
  *		\brief      Page with customers or suppliers orders statistics
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf

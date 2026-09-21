@@ -54,7 +54,7 @@ if (is_numeric($entity)) {
 
 '@phan-var-force CommonObject $object';
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/company.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/payments.lib.php';

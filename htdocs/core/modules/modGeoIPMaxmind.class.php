@@ -23,13 +23,13 @@
  *	\brief      Description and activation file for the module geoipmaxmind
  */
 
-include_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
+include_once DOL_DOCUMENT_ROOT.'/core/modules/DCADMINModules.class.php';
 
 
 /**
  *	Class to describe and enable module Import
  */
-class modGeoIPMaxmind extends DolibarrModules
+class modGeoIPMaxmind extends DCADMINModules
 {
 	/**
 	 *   Constructor. Define names, constants, directories, boxes, permissions
@@ -70,7 +70,7 @@ class modGeoIPMaxmind extends DolibarrModules
 		$this->conflictwith = array(); // List of module class names as string this module is in conflict with
 		$this->phpmin = array(7, 0);
 		$this->phpmax = array();
-		$this->need_dolibarr_version = array(2, 7, -1); // Minimum version of Dolibarr required by module
+		$this->need_dolibarr_version = array(2, 7, -1); // Minimum version of DCADMIN required by module
 		$this->need_javascript_ajax = 1;
 
 		// Constants

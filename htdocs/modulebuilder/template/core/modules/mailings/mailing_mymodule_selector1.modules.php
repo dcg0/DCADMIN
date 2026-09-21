@@ -3,7 +3,7 @@
  * Copyright (C) ---Replace with your own copyright and developer email---
  *
  * This file is an example to follow to add your own email selector inside
- * the Dolibarr email tool.
+ * the DCADMIN email tool.
  * Follow instructions given in README file to know what to change to build
  * your own emailing list selector.
  * Code that need to be changed in this file are marked by "CHANGE THIS" tag.

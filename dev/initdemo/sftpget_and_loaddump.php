@@ -39,7 +39,7 @@ $database = isset($argv[4]) ? $argv[4] : '';
 $loginbase = isset($argv[5]) ? $argv[5] : '';
 $passwordbase = isset($argv[6]) ? $argv[6] : '';
 
-// Include Dolibarr environment
+// Include DCADMIN environment
 $res = 0;
 if (!$res && file_exists($path."../../master.inc.php")) {
 	$res = @include $path."../../master.inc.php";

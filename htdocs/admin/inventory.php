@@ -23,7 +23,7 @@
  * \brief   Setup page of inventories: numbering models and document models
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf

@@ -27,7 +27,7 @@
  *		\brief      Page des information d'une facture fournisseur
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 
 /**

@@ -17,13 +17,13 @@
  */
 /**
  * @var Conf $conf
- * @var DolibarrModules $this
+ * @var DCADMINModules $this
  * @var string $keyforselect
  * @var string $keyforelement
  * @var string $keyforaliasextra
  * @var int $r
  */
-'@phan-var-force DolibarrModules $this';
+'@phan-var-force DCADMINModules $this';
 
 // $keyforselect = name of main table
 // keyforelement = name of picto

@@ -24,7 +24,7 @@
  *   \brief      Page to setup module ClickToDial
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf

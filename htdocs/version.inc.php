@@ -29,14 +29,14 @@
 /**
  *	\file       htdocs/version.inc.php
  * 	\ingroup	core
- *  \brief      File with the public/commercial version of Dolibarr.
+ *  \brief      File with the public/commercial version of DCADMIN.
  */
 
 if (!defined('DOL_APPLICATION_TITLE')) {
-	define('DOL_APPLICATION_TITLE', 'Dolibarr');
+	define('DOL_APPLICATION_TITLE', 'DCADMIN');
 }
 
-// The major version of Dolibarr
+// The major version of DCADMIN
 define('DOL_MAJOR_VERSION', '25');
 define('DOL_MINOR_VERSION', '0.0-alpha');
 

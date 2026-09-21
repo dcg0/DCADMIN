@@ -25,13 +25,13 @@
  *	\ingroup    ldap
  *	\brief		Description and activation file for the module LDAP
  */
-include_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
+include_once DOL_DOCUMENT_ROOT.'/core/modules/DCADMINModules.class.php';
 
 
 /**
  *	Class to describe and enable module Ldap
  */
-class modLdap extends DolibarrModules
+class modLdap extends DCADMINModules
 {
 	/**
 	 *   Constructor. Define names, constants, directories, boxes, permissions

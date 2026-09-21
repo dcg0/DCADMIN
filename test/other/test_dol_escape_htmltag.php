@@ -22,7 +22,7 @@ if (! $res) {
 
 // Show information
 print "\n";
-print "*** PHP Version : ".PHP_VERSION." - Dolibarr Version : ".DOL_VERSION."\n";
+print "*** PHP Version : ".PHP_VERSION." - DCADMIN Version : ".DOL_VERSION."\n";
 
 $a="Wéarning: Permanently added '1.2.3.4' (ECDSA) to the list of known hosts.<br>
 receiving file list ... done<br>

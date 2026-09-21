@@ -39,8 +39,8 @@ return (new PhpCsFixer\Config())
 		// Apply PSR-12 as per https://wiki.dolibarr.org/index.php?title=Langages_et_normes#PHP:~:text=utiliser%20est%20le-,PSR%2D12,-(https%3A//www
 		'@PSR12' => true,  // Disabled for now to limit number of changes
 
-		// Minimum version Dolibarr v18.0.0
-		// Compatibility with min 7.1 is announced with Dolibarr18.0 but
+		// Minimum version DCADMIN v18.0.0
+		// Compatibility with min 7.1 is announced with DCADMIN18.0 but
 		// app is still working with 7.0 so no reason to abandon compatibility with this target for the moment.
 		// So we use target PHP70 for the moment.
 		'@PHP70Migration' => true,

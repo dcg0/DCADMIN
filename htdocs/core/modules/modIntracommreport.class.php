@@ -23,13 +23,13 @@
  * 	\ingroup    Intracomm report
  *	\brief      Description and activation file for the module intracomm report
  */
-include_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
+include_once DOL_DOCUMENT_ROOT.'/core/modules/DCADMINModules.class.php';
 
 
 /**
  *  Description and activation class for module intracommreport
  */
-class modIntracommreport extends DolibarrModules
+class modIntracommreport extends DCADMINModules
 {
 	/**
 	 *   Constructor. Define names, constants, directories, boxes, permissions
@@ -66,7 +66,7 @@ class modIntracommreport extends DolibarrModules
 		$this->requiredby = array(); // List of modules id to disable if this one is disabled
 		$this->conflictwith = array(); // List of modules id this module is in conflict with
 		$this->phpmin = array(7, 0); // Minimum version of PHP required by module
-		$this->need_dolibarr_version = array(13, 0, -5); // Minimum version of Dolibarr required by module
+		$this->need_dolibarr_version = array(13, 0, -5); // Minimum version of DCADMIN required by module
 		$this->langfiles = array("intracommreport");
 
 		// Constants
@@ -128,7 +128,7 @@ class modIntracommreport extends DolibarrModules
 
 	/**
 	 *		Function called when module is enabled.
-	 *		The init function add constants, boxes, permissions and menus (defined in constructor) into Dolibarr database.
+	 *		The init function add constants, boxes, permissions and menus (defined in constructor) into DCADMIN database.
 	 *		It also creates data directories
 	 *
 	 *      @param      string	$options    Options when enabling module ('', 'noboxes')

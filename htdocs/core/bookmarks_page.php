@@ -63,7 +63,7 @@ $left = ($langs->trans("DIRECTION") == 'rtl' ? 'right' : 'left');
  * View
  */
 
-// Important: Following code is to avoid page request by browser and PHP CPU at each Dolibarr page access.
+// Important: Following code is to avoid page request by browser and PHP CPU at each DCADMIN page access.
 if (GETPOSTINT('cache')) {
 	header('Cache-Control: max-age='.GETPOSTINT('cache').', public');
 	// For a .php, we must set an Expires to avoid to have it forced to an expired value by the web server

@@ -35,7 +35,7 @@
  *	\brief      Payment page for supplier/purchase invoices
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 
 /**

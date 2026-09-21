@@ -39,14 +39,14 @@ class ToolConversation extends McpTool
 		return [
 			[
 				"name" => "ask_for_clarification",
-				"description" => "Asks the user for more information needed to complete a Dolibarr ERP-related task. The client-side JavaScript will append the user's response at the end of the original query to maintain context. Only use this when the question is clearly about Dolibarr ERP.",
+				"description" => "Asks the user for more information needed to complete a DCADMIN ERP-related task. The client-side JavaScript will append the user's response at the end of the original query to maintain context. Only use this when the question is clearly about DCADMIN ERP.",
 
 				"inputSchema" => [
 					"type" => "object",
 					"properties" => [
 						"question" => [
 							"type" => "string",
-							"description" => "The specific question to ask the user about Dolibarr ERP."
+							"description" => "The specific question to ask the user about DCADMIN ERP."
 						]
 					],
 					"required" => ["question"]
@@ -54,7 +54,7 @@ class ToolConversation extends McpTool
 			],
 			[
 				"name" => "respond_to_user",
-				"description" => "Sends a one-way informational message to the user about Dolibarr ERP objects and functions ONLY. This tool is strictly restricted to displaying information or errors related to Dolibarr ERP. Do NOT use this tool for general knowledge questions, personal advice, or topics unrelated to Dolibarr ERP.",
+				"description" => "Sends a one-way informational message to the user about DCADMIN ERP objects and functions ONLY. This tool is strictly restricted to displaying information or errors related to DCADMIN ERP. Do NOT use this tool for general knowledge questions, personal advice, or topics unrelated to DCADMIN ERP.",
 				"inputSchema" => [
 					"type" => "object",
 					"properties" => [
@@ -86,13 +86,13 @@ class ToolConversation extends McpTool
 			],
 			[
 				"name" => "reject_general_question",
-				"description" => "Use this tool when the user asks a question that is not related to Dolibarr ERP objects and functions. This tool should not be used for any general knowledge questions, personal advice, or topics outside the scope of Dolibarr ERP.",
+				"description" => "Use this tool when the user asks a question that is not related to DCADMIN ERP objects and functions. This tool should not be used for any general knowledge questions, personal advice, or topics outside the scope of DCADMIN ERP.",
 				"inputSchema" => [
 					"type" => "object",
 					"properties" => [
 						"message" => [
 							"type" => "string",
-							"description" => "A polite message explaining that you can only answer questions about Dolibarr ERP."
+							"description" => "A polite message explaining that you can only answer questions about DCADMIN ERP."
 						]
 					],
 					"required" => ["message"]

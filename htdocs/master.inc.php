@@ -30,7 +30,7 @@
 /**
  *	\file       htdocs/master.inc.php
  * 	\ingroup	core
- *  \brief      File that defines environment for all Dolibarr process (pages or scripts)
+ *  \brief      File that defines environment for all DCADMIN process (pages or scripts)
  * 				This script reads the conf file, init $lang, $db and an empty $user
  */
 
@@ -328,7 +328,7 @@ if (!defined('NOREQUIRETRAN')) {
 }
 
 
-// Create object $mysoc (A thirdparty object that contains properties of companies managed by Dolibarr.
+// Create object $mysoc (A thirdparty object that contains properties of companies managed by DCADMIN.
 if (!defined('NOREQUIREDB') && !defined('NOREQUIRESOC') && $db != null) {
 	require_once DOL_DOCUMENT_ROOT.'/societe/class/societe.class.php';
 

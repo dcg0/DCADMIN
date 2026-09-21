@@ -28,7 +28,7 @@
  *  \brief      Page to list stocks at a given date
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf

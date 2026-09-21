@@ -25,14 +25,14 @@
  *  \ingroup    takepos
  *  \brief      Description and activation file for the module TakePos
  */
-include_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
+include_once DOL_DOCUMENT_ROOT.'/core/modules/DCADMINModules.class.php';
 include_once DOL_DOCUMENT_ROOT.'/categories/class/categorie.class.php';
 
 
 /**
  *  Class to describe and enable module TakePos
  */
-class modTakePos extends DolibarrModules
+class modTakePos extends DCADMINModules
 {
 	/**
 	 * Constructor. Define names, constants, directories, boxes, permissions
@@ -46,7 +46,7 @@ class modTakePos extends DolibarrModules
 		$this->db = $db;
 
 		// Id for module (must be unique).
-		// Use here a free id (See in Home -> System information -> Dolibarr for list of used modules id).
+		// Use here a free id (See in Home -> System information -> DCADMIN for list of used modules id).
 		$this->numero = 50150;
 		// Key text used to identify module (for permissions, menus, etc...)
 		$this->rights_class = 'takepos';
@@ -106,7 +106,7 @@ class modTakePos extends DolibarrModules
 		$this->conflictwith = array(); // List of module class names as string this module is in conflict with
 		$this->langfiles = array("cashdesk");
 		$this->phpmin = array(7, 0); // Minimum version of PHP required by module
-		$this->need_dolibarr_version = array(4, 0); // Minimum version of Dolibarr required by module
+		$this->need_dolibarr_version = array(4, 0); // Minimum version of DCADMIN required by module
 		$this->warnings_activation = array('FR' => array('WarningNoteModulePOSForFrenchLaw', 'WarningNoteModulePOSForFrenchLaw2', 'WarningNoteModulePOSForFrenchLaw3')); // Warning to show when we activate module. array('always' => 'text') or array('FR' => array('text1', 'text2))
 		$this->warnings_activation_ext = array();
 		//$this->automatic_activation = array('FR'=>'TakePosWasAutomaticallyActivatedBecauseOfYourCountryChoice');
@@ -258,7 +258,7 @@ class modTakePos extends DolibarrModules
 
 	/**
 	 *	Function called when module is enabled.
-	 *	The init function add constants, boxes, permissions and menus (defined in constructor) into Dolibarr database.
+	 *	The init function add constants, boxes, permissions and menus (defined in constructor) into DCADMIN database.
 	 *	It also creates data directories
 	 *
 	 *	@param      string	$options    Options when enabling module ('', 'noboxes')
@@ -364,7 +364,7 @@ class modTakePos extends DolibarrModules
 
 	/**
 	 *	Function called when module is disabled.
-	 *	Remove from database constants, boxes and permissions from Dolibarr database.
+	 *	Remove from database constants, boxes and permissions from DCADMIN database.
 	 *	Data directories are not deleted
 	 *
 	 *	@param      string	$options    Options when enabling module ('', 'noboxes')

@@ -30,7 +30,7 @@ require_once DOL_DOCUMENT_ROOT.'/core/triggers/dolibarrtriggers.class.php';
 /**
  *  Class of triggered functions for agenda module
  */
-class InterfaceEventOrganization extends DolibarrTriggers
+class InterfaceEventOrganization extends DCADMINTriggers
 {
 	/**
 	 * Constructor
@@ -49,7 +49,7 @@ class InterfaceEventOrganization extends DolibarrTriggers
 	}
 
 	/**
-	 * Function called when a Dolibarr business event is done.
+	 * Function called when a DCADMIN business event is done.
 	 * All functions "runTrigger" are triggered if file is inside directory htdocs/core/triggers or htdocs/module/code/triggers (and declared)
 	 *
 	 * Following properties may be set before calling trigger. The may be completed by this trigger to be used for writing the event into database:

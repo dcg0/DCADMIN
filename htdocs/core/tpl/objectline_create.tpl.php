@@ -763,7 +763,7 @@ $jsConf = [
 			'creer' => (bool) $user->hasRight('margins', 'creer')
 		]
 	],
-	// TODO move to Dolibarr context lang tool when it will be included
+	// TODO move to DCADMIN context lang tool when it will be included
 	'langs' => [
 		'rateMustBeNumeric' => dol_escape_js($langs->trans("rateMustBeNumeric")),
 		'markRateShouldBeLesserThan100' => dol_escape_js($langs->trans("markRateShouldBeLesserThan100"))
@@ -875,7 +875,7 @@ if (!empty($object->thirdparty)) {
 			const rateValue = rate.val().replace(',', '.').trim();
 			if (rateValue === '' || isNaN(Number(rateValue)))
 			{
-				alert(jsConf.langs.rateMustBeNumeric); // TODO move to Dolibarr context tool setEventMessage when it will be included
+				alert(jsConf.langs.rateMustBeNumeric); // TODO move to DCADMIN context tool setEventMessage when it will be included
 				e.stopPropagation();
 				setTimeout(function () { rate.focus() }, 50);
 				return false;
@@ -1252,9 +1252,9 @@ if (!empty($object->thirdparty)) {
 								});
 							}
 
-							// Execute js context Dolibarr Hooks
-							if (typeof Dolibarr != 'undefined') {
-								Dolibarr.executeHook('objectLineCreate:LoadUnitPrice', {idProdFournPrice, 'socid': jsConf.docObject.socid,ajaxResultData : data, jsConf});
+							// Execute js context DCADMIN Hooks
+							if (typeof DCADMIN != 'undefined') {
+								DCADMIN.executeHook('objectLineCreate:LoadUnitPrice', {idProdFournPrice, 'socid': jsConf.docObject.socid,ajaxResultData : data, jsConf});
 							}
 						},
 						'json'
@@ -1361,9 +1361,9 @@ if (!empty($object->thirdparty)) {
 							}
 						});
 
-						// Execute js context Dolibarr Hooks
-						if (typeof Dolibarr != 'undefined') {
-							Dolibarr.executeHook('objectLineCreate:GetSupplierPrices', {'idprod': idProd, ajaxResultData : data, jsConf});
+						// Execute js context DCADMIN Hooks
+						if (typeof DCADMIN != 'undefined') {
+							DCADMIN.executeHook('objectLineCreate:GetSupplierPrices', {'idprod': idProd, ajaxResultData : data, jsConf});
 						}
 
 						<?php if (getDolGlobalString('PRODUCT_USE_UNITS')) { ?>
@@ -1418,9 +1418,9 @@ if (!empty($object->thirdparty)) {
 					}
 				} else { jQuery("#pbq").val(''); }
 
-				// Execute js context Dolibarr Hooks
-				if (typeof Dolibarr != 'undefined') {
-					Dolibarr.executeHook('objectLineCreate:CustomerPriceByQty', { pbq, pbqup, pbqbase, pbqqty, pbqpercent });
+				// Execute js context DCADMIN Hooks
+				if (typeof DCADMIN != 'undefined') {
+					DCADMIN.executeHook('objectLineCreate:CustomerPriceByQty', { pbq, pbqup, pbqbase, pbqqty, pbqpercent });
 				}
 			}
 
@@ -1608,9 +1608,9 @@ if (!empty($object->thirdparty)) {
 			setforpredef();
 		}
 
-		// Execute js context Dolibarr Hooks
-		if (typeof Dolibarr != 'undefined') {
-			Dolibarr.executeHook('objectLineCreate:ProductSelectionChange');
+		// Execute js context DCADMIN Hooks
+		if (typeof DCADMIN != 'undefined') {
+			DCADMIN.executeHook('objectLineCreate:ProductSelectionChange');
 		}
 	});
 

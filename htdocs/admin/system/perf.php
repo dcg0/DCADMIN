@@ -22,7 +22,7 @@
  *  \brief      Page to show Performance information
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf
@@ -57,7 +57,7 @@ $nowstring = dol_print_date(dol_now(), 'dayhourlog');
 
 llxHeader('', '', '', '', 0, 0, '', '', '', 'mod-admin page-system_perf');
 
-print load_fiche_titre($langs->trans("PerfDolibarr"), '', 'title_setup');
+print load_fiche_titre($langs->trans("PerfDCADMIN"), '', 'title_setup');
 
 print '<span class="opacitymedium">'.$langs->trans("YouMayFindPerfAdviceHere", 'https://wiki.dolibarr.org/index.php/FAQ_Increase_Performance').'</span>';
 print ' &nbsp; &nbsp; ';

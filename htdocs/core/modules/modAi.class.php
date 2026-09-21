@@ -28,12 +28,12 @@
  *  \ingroup    ai
  *  \brief      Description and activation file for module Ai
  */
-include_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
+include_once DOL_DOCUMENT_ROOT.'/core/modules/DCADMINModules.class.php';
 
 /**
  *  Description and activation class for module Ai
  */
-class modAi extends DolibarrModules
+class modAi extends DCADMINModules
 {
 	/**
 	 * Constructor. Define names, constants, directories, boxes, permissions
@@ -47,7 +47,7 @@ class modAi extends DolibarrModules
 		$this->db = $db;
 
 		// Id for module (must be unique).
-		// Use here a free id (See in Home -> System information -> Dolibarr for list of used modules id).
+		// Use here a free id (See in Home -> System information -> DCADMIN for list of used modules id).
 		$this->numero = 4560;
 
 		// Key text used to identify module (for permissions, menus, etc...)
@@ -274,7 +274,7 @@ class modAi extends DolibarrModules
 		// Setup access intentionally remains a hard $user->admin check
 		// (technical setup, no dedicated right declared) so that the
 		// API-key configuration of the AI module stays in admin scope,
-		// in line with how every other Dolibarr module is configured.
+		// in line with how every other DCADMIN module is configured.
 		$this->rights[$r][0] = $this->numero + 1;
 		$this->rights[$r][1] = 'Use the AI Assistant';
 		$this->rights[$r][3] = 0;	// default: NOT granted
@@ -385,7 +385,7 @@ class modAi extends DolibarrModules
 
 	/**
 	 *  Function called when module is enabled.
-	 *  The init function add constants, boxes, permissions and menus (defined in constructor) into Dolibarr database.
+	 *  The init function add constants, boxes, permissions and menus (defined in constructor) into DCADMIN database.
 	 *  It also creates data directories
 	 *
 	 *  @param      string  $options    Options when enabling module ('', 'noboxes')
@@ -410,7 +410,7 @@ class modAi extends DolibarrModules
 
 	/**
 	 *  Function called when module is disabled.
-	 *  Remove from database constants, boxes and permissions from Dolibarr database.
+	 *  Remove from database constants, boxes and permissions from DCADMIN database.
 	 *  Data directories are not deleted
 	 *
 	 *  @param      string	$options    Options when enabling module ('', 'noboxes')

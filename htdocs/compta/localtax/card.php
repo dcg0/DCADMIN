@@ -25,7 +25,7 @@
  *		\brief      Page of second or third tax payments (like IRPF for spain, ...)
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/compta/localtax/class/localtax.class.php';
 require_once DOL_DOCUMENT_ROOT.'/compta/bank/class/account.class.php';

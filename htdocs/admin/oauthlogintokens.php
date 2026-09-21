@@ -24,7 +24,7 @@
  * \brief       Setup page to configure oauth access to login information
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/admin.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/oauth.lib.php';
@@ -143,7 +143,7 @@ if ($action == 'refreshtoken' && $user->admin) {
 
 	$keyforparamtenant = 'OAUTH_'.strtoupper(empty($supportedoauth2array[$keyforsupportedoauth2array]['callbackfile']) ? 'Unknown' : $supportedoauth2array[$keyforsupportedoauth2array]['callbackfile']).($keyforprovider ? '-'.$keyforprovider : '').'_TENANT';
 
-	// Dolibarr storage
+	// DCADMIN storage
 	$storage = new DoliStorage($db, $conf, $keyforprovider, getDolGlobalString($keyforparamtenant));
 	try {
 		// $OAUTH_SERVICENAME is for example 'Google-keyforprovider'
@@ -152,7 +152,7 @@ if ($action == 'refreshtoken' && $user->admin) {
 		dol_syslog("oauthlogintokens.php: Read token for service ".$OAUTH_SERVICENAME);
 		$tokenobj = $storage->retrieveAccessToken($OAUTH_SERVICENAME);
 
-		// tokenobj uses time() @phan-suppress-next-line DolibarrForbiddenFunctionPlugin
+		// tokenobj uses time() @phan-suppress-next-line DCADMINForbiddenFunctionPlugin
 		$expire = ($tokenobj->getEndOfLife() !== -9002 && $tokenobj->getEndOfLife() !== -9001 && time() > ($tokenobj->getEndOfLife() - 30));
 		// We have to save the refresh token in a memory variable because Google give it only once
 		$refreshtoken = $tokenobj->getRefreshToken();
@@ -338,7 +338,7 @@ if ($mode == 'setup' && $user->admin) {
 			$tokenobj = null;
 			// Token
 			require_once DOL_DOCUMENT_ROOT.'/includes/OAuth/bootstrap.php';
-			// Dolibarr storage
+			// DCADMIN storage
 			$storage = new DoliStorage($db, $conf, $keyforprovider, getDolGlobalString($keyforparamtenant));
 			try {
 				// $OAUTH_SERVICENAME is for example 'Google-keyforprovider'
@@ -359,7 +359,7 @@ if ($mode == 'setup' && $user->admin) {
 			$expire = false;
 			// Is token expired or will token expire in the next 30 seconds
 			if (is_object($tokenobj)) {
-				// tokenobj uses time() @phan-suppress-next-line DolibarrForbiddenFunctionPlugin
+				// tokenobj uses time() @phan-suppress-next-line DCADMINForbiddenFunctionPlugin
 				$expire = ($tokenobj->getEndOfLife() !== $tokenobj::EOL_NEVER_EXPIRES && $tokenobj->getEndOfLife() !== $tokenobj::EOL_UNKNOWN && time() > ($tokenobj->getEndOfLife() - 30));
 			}
 			if ($key[1] != '' && $key[2] != '') {

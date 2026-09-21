@@ -15,7 +15,7 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-// Defined some constants and load Dolibarr env to reduce PHPStan bootstrap that fails to load a lot of things.
+// Defined some constants and load DCADMIN env to reduce PHPStan bootstrap that fails to load a lot of things.
 //define('DOL_DOCUMENT_ROOT', __DIR__ . '/../../htdocs');
 //define('DOL_DATA_ROOT', __DIR__ . '/../../documents');
 //define('DOL_URL_ROOT', '/');

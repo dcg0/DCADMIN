@@ -2,7 +2,7 @@
 <?php
 /**
  * \file         build/makepack-dolibarrmodule.php
- * \brief        Dolibarr module package builder (tgz, zip, rpm, deb, exe, aps)
+ * \brief        DCADMIN module package builder (tgz, zip, rpm, deb, exe, aps)
   */
 
 // ============================================================================
@@ -163,8 +163,8 @@ $moduleobj = null;
 if (class_exists($class)) {
 	try {
 		$moduleobj = new $class(null);
-		'@phan-var-force DolibarrModules $moduleobj';
-		/** @var DolibarrModules $moduleobj */
+		'@phan-var-force DCADMINModules $moduleobj';
+		/** @var DCADMINModules $moduleobj */
 	} catch (Exception $e) {
 		$error++;
 		print $e->getMessage();

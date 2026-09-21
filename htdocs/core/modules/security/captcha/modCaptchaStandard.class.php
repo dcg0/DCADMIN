@@ -75,7 +75,7 @@ class modCaptchaStandard extends ModeleCaptcha
 	public function getDescription()
 	{
 		global $langs;
-		return $langs->trans("DolibarrStandardCaptcha");
+		return $langs->trans("DCADMINStandardCaptcha");
 	}
 
 	/**

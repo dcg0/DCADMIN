@@ -26,13 +26,13 @@
  *  \ingroup    product
  *  \brief      Description and activation file for the module product variants
  */
-include_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
+include_once DOL_DOCUMENT_ROOT.'/core/modules/DCADMINModules.class.php';
 
 
 /**
  *  Description and activation class for module Product variants
  */
-class modVariants extends DolibarrModules
+class modVariants extends DCADMINModules
 {
 	/**
 	 *   Constructor. Define names, constants, directories, boxes, permissions
@@ -46,7 +46,7 @@ class modVariants extends DolibarrModules
 		$this->db = $db;
 
 		// Id for module (must be unique).
-		// Use here a free id (See in Home -> System information -> Dolibarr for list of used modules id).
+		// Use here a free id (See in Home -> System information -> DCADMIN for list of used modules id).
 		$this->numero = 610;
 		// Key text used to identify module (for permissions, menus, etc...)
 		$this->rights_class = 'variants';
@@ -85,7 +85,7 @@ class modVariants extends DolibarrModules
 		$this->requiredby = array(); // List of module ids to disable if this one is disabled
 		$this->conflictwith = array(); // List of module class names as string this module is in conflict with
 		$this->phpmin = array(7, 0); // Minimum version of PHP required by module
-		$this->need_dolibarr_version = array(3, 0); // Minimum version of Dolibarr required by module
+		$this->need_dolibarr_version = array(3, 0); // Minimum version of DCADMIN required by module
 		$this->langfiles = array("products");
 
 		// Constants
@@ -469,7 +469,7 @@ class modVariants extends DolibarrModules
 
 	/**
 	 *  Function called when module is enabled.
-	 *  The init function adds constants, boxes, permissions and menus (defined in constructor) into Dolibarr database.
+	 *  The init function adds constants, boxes, permissions and menus (defined in constructor) into DCADMIN database.
 	 *  It also creates data directories
 	 *
 	 *  @param      string	$options    Options when enabling module ('', 'noboxes')

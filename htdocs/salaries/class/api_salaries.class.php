@@ -28,9 +28,9 @@ require_once DOL_DOCUMENT_ROOT.'/salaries/class/paymentsalary.class.php';
  * API class for salaries
  *
  * @access protected
- * @class DolibarrApiAccess {@requires user,external}
+ * @class DCADMINApiAccess {@requires user,external}
  */
-class Salaries extends DolibarrApi
+class Salaries extends DCADMINApi
 {
 	/**
 	 * @var string[] Mandatory fields, checked when creating an object
@@ -79,19 +79,19 @@ class Salaries extends DolibarrApi
 	{
 		$list = array();
 
-		if (!DolibarrApiAccess::$user->hasRight('salaries', 'read')
-			&& !DolibarrApiAccess::$user->hasRight('salaries', 'readchild')
-			&& !DolibarrApiAccess::$user->hasRight('salaries', 'readall')) {
+		if (!DCADMINApiAccess::$user->hasRight('salaries', 'read')
+			&& !DCADMINApiAccess::$user->hasRight('salaries', 'readchild')
+			&& !DCADMINApiAccess::$user->hasRight('salaries', 'readall')) {
 			throw new RestException(403);
 		}
 
 		$sql = "SELECT rowid FROM " . MAIN_DB_PREFIX . "salary as t";
 		$sql .= ' WHERE t.entity IN ('.getEntity('user').')';
-		if (!DolibarrApiAccess::$user->hasRight('salaries', 'readall')) {
-			if (!DolibarrApiAccess::$user->hasRight('salaries', 'readchild')) {
-				$sql .= ' AND t.fk_user = '.((int) DolibarrApiAccess::$user->id);
+		if (!DCADMINApiAccess::$user->hasRight('salaries', 'readall')) {
+			if (!DCADMINApiAccess::$user->hasRight('salaries', 'readchild')) {
+				$sql .= ' AND t.fk_user = '.((int) DCADMINApiAccess::$user->id);
 			} else {
-				$childids = DolibarrApiAccess::$user->getAllChildIds(1);
+				$childids = DCADMINApiAccess::$user->getAllChildIds(1);
 				$sql .= ' AND t.fk_user IN ('.$this->db->sanitize(implode(',', $childids)).')';
 			}
 		}
@@ -145,9 +145,9 @@ class Salaries extends DolibarrApi
 	 */
 	public function get($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('salaries', 'read')
-			&& !DolibarrApiAccess::$user->hasRight('salaries', 'readchild')
-			&& !DolibarrApiAccess::$user->hasRight('salaries', 'readall')) {
+		if (!DCADMINApiAccess::$user->hasRight('salaries', 'read')
+			&& !DCADMINApiAccess::$user->hasRight('salaries', 'readchild')
+			&& !DCADMINApiAccess::$user->hasRight('salaries', 'readall')) {
 			throw new RestException(403);
 		}
 
@@ -157,13 +157,13 @@ class Salaries extends DolibarrApi
 			throw new RestException(404, 'salary not found');
 		}
 
-		if (!DolibarrApiAccess::$user->hasRight('salaries', 'readall')) {
-			if (!DolibarrApiAccess::$user->hasRight('salaries', 'readchild')) {
-				if ($salary->fk_user != DolibarrApiAccess::$user->id) {
+		if (!DCADMINApiAccess::$user->hasRight('salaries', 'readall')) {
+			if (!DCADMINApiAccess::$user->hasRight('salaries', 'readchild')) {
+				if ($salary->fk_user != DCADMINApiAccess::$user->id) {
 					throw new RestException(404, 'salary not found');
 				}
 			} else {
-				$childids = DolibarrApiAccess::$user->getAllChildIds(1);
+				$childids = DCADMINApiAccess::$user->getAllChildIds(1);
 				if (!in_array($salary->fk_user, $childids)) {
 					throw new RestException(404, 'salary not found');
 				}
@@ -183,7 +183,7 @@ class Salaries extends DolibarrApi
 	 */
 	public function post($request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('salaries', 'write')) {
+		if (!DCADMINApiAccess::$user->hasRight('salaries', 'write')) {
 			throw new RestException(403);
 		}
 		// Check mandatory fields
@@ -194,7 +194,7 @@ class Salaries extends DolibarrApi
 			$salary->$field = $this->_checkValForAPI($field, $value, $salary);
 		}
 
-		if ($salary->create(DolibarrApiAccess::$user) < 0) {
+		if ($salary->create(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, 'Error creating salary', array_merge(array($salary->error), $salary->errors));
 		}
 		return $salary->id;
@@ -211,7 +211,7 @@ class Salaries extends DolibarrApi
 	 */
 	public function put($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('salaries', 'write')) {
+		if (!DCADMINApiAccess::$user->hasRight('salaries', 'write')) {
 			throw new RestException(403);
 		}
 
@@ -228,7 +228,7 @@ class Salaries extends DolibarrApi
 			$salary->$field = $this->_checkValForAPI($field, $value, $salary);
 		}
 
-		if ($salary->update(DolibarrApiAccess::$user) > 0) {
+		if ($salary->update(DCADMINApiAccess::$user) > 0) {
 			return $this->get($id);
 		} else {
 			throw new RestException(500, $salary->error);
@@ -243,7 +243,7 @@ class Salaries extends DolibarrApi
 	 */
 	/*public function delete($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('salaries', 'delete')) {
+		if (!DCADMINApiAccess::$user->hasRight('salaries', 'delete')) {
 			throw new RestException(403);
 		}
 		$salary = new Salary($this->db);
@@ -252,7 +252,7 @@ class Salaries extends DolibarrApi
 			throw new RestException(404, 'salary not found');
 		}
 
-		if ($salary->delete(DolibarrApiAccess::$user) < 0) {
+		if ($salary->delete(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, 'error when deleting salary');
 		}
 
@@ -284,19 +284,19 @@ class Salaries extends DolibarrApi
 	{
 		$list = array();
 
-		if (!DolibarrApiAccess::$user->hasRight('salaries', 'read')
-			&& !DolibarrApiAccess::$user->hasRight('salaries', 'readchild')
-			&& !DolibarrApiAccess::$user->hasRight('salaries', 'readall')) {
+		if (!DCADMINApiAccess::$user->hasRight('salaries', 'read')
+			&& !DCADMINApiAccess::$user->hasRight('salaries', 'readchild')
+			&& !DCADMINApiAccess::$user->hasRight('salaries', 'readall')) {
 			throw new RestException(403);
 		}
 
 		$sql = "SELECT t.rowid FROM " . MAIN_DB_PREFIX . "payment_salary as t, ".MAIN_DB_PREFIX."salary as s";
 		$sql .= ' WHERE s.rowid = t.fk_salary AND t.entity IN ('.getEntity('salary').')';
-		if (!DolibarrApiAccess::$user->hasRight('salaries', 'readall')) {
-			if (!DolibarrApiAccess::$user->hasRight('salaries', 'readchild')) {
-				$sql .= ' AND s.fk_user = '.((int) DolibarrApiAccess::$user->id).')';
+		if (!DCADMINApiAccess::$user->hasRight('salaries', 'readall')) {
+			if (!DCADMINApiAccess::$user->hasRight('salaries', 'readchild')) {
+				$sql .= ' AND s.fk_user = '.((int) DCADMINApiAccess::$user->id).')';
 			} else {
-				$childids = DolibarrApiAccess::$user->getAllChildIds(1);
+				$childids = DCADMINApiAccess::$user->getAllChildIds(1);
 				$sql .= ' AND s.fk_user IN ('.$this->db->sanitize(implode(',', $childids)).')';
 			}
 		}
@@ -348,7 +348,7 @@ class Salaries extends DolibarrApi
 		// to read all area allowed.
 		// TODO To support read or readchild case, the get must be done with a SQL that include the paid user with
 		// a where on current user and childids of current user.
-		if (!DolibarrApiAccess::$user->hasRight('salaries', 'readall')) {
+		if (!DCADMINApiAccess::$user->hasRight('salaries', 'readall')) {
 			throw new RestException(403);
 		}
 
@@ -376,7 +376,7 @@ class Salaries extends DolibarrApi
 	 */
 	public function addPayment($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('salaries', 'write')) {
+		if (!DCADMINApiAccess::$user->hasRight('salaries', 'write')) {
 			throw new RestException(403);
 		}
 		// Check mandatory fields
@@ -388,12 +388,12 @@ class Salaries extends DolibarrApi
 			$paymentsalary->$field = $this->_checkValForAPI($field, $value, $paymentsalary);
 		}
 
-		if ($paymentsalary->create(DolibarrApiAccess::$user, 1) < 0) {
+		if ($paymentsalary->create(DCADMINApiAccess::$user, 1) < 0) {
 			throw new RestException(500, 'Error creating paymentsalary', array_merge(array($paymentsalary->error), $paymentsalary->errors));
 		}
 		if (isModEnabled("bank")) {
 			$paymentsalary->addPaymentToBank(
-				DolibarrApiAccess::$user,
+				DCADMINApiAccess::$user,
 				'payment_salary',
 				'(SalaryPayment)',
 				(int) $request_data['accountid'],
@@ -419,7 +419,7 @@ class Salaries extends DolibarrApi
 	 */
 	public function updatePayment($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('salaries', 'write')) {
+		if (!DCADMINApiAccess::$user->hasRight('salaries', 'write')) {
 			throw new RestException(403);
 		}
 
@@ -436,7 +436,7 @@ class Salaries extends DolibarrApi
 			$paymentsalary->$field = $this->_checkValForAPI($field, $value, $paymentsalary);
 		}
 
-		if ($paymentsalary->update(DolibarrApiAccess::$user) > 0) {
+		if ($paymentsalary->update(DCADMINApiAccess::$user) > 0) {
 			return $this->get($id);
 		} else {
 			throw new RestException(500, $paymentsalary->error);
@@ -453,7 +453,7 @@ class Salaries extends DolibarrApi
 	 */
 	/*public function delete($id)
 	 {
-	 if (!DolibarrApiAccess::$user->hasRight('salaries', 'delete')) {
+	 if (!DCADMINApiAccess::$user->hasRight('salaries', 'delete')) {
 	 throw new RestException(403);
 	 }
 	 $paymentsalary = new PaymentSalary($this->db);
@@ -462,7 +462,7 @@ class Salaries extends DolibarrApi
 	 throw new RestException(404, 'paymentsalary not found');
 	 }
 
-	 if ($paymentsalary->delete(DolibarrApiAccess::$user) < 0) {
+	 if ($paymentsalary->delete(DCADMINApiAccess::$user) < 0) {
 	 throw new RestException(500, 'error when deleting paymentsalary');
 	 }
 

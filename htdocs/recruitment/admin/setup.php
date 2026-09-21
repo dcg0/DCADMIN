@@ -23,7 +23,7 @@
  * \brief   Recruitment setup page.
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 
 // Libraries

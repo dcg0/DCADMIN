@@ -21,12 +21,12 @@ if ($documentation === null || !($documentation instanceof Documentation)) { ret
 	<h2 id="titlesection-tool-seteventmessage" class="documentation-title"><?php print $setEventMessageJsContextTitle ?? 'Set event message tool'; ?></h2>
 
 	<p>
-		Instead of calling JNotify directly in your code, use Dolibarr’s setEventMessage tool.
-		Dolibarr provides the configuration option DISABLE_JQUERY_JNOTIFY, which disables the jQuery JNotify system, usually because another notification library will be used instead.
+		Instead of calling JNotify directly in your code, use DCADMIN’s setEventMessage tool.
+		DCADMIN provides the configuration option DISABLE_JQUERY_JNOTIFY, which disables the jQuery JNotify system, usually because another notification library will be used instead.
 	</p>
 
 	<p>
-		If you rely on Dolibarr.tools.setEventMessage(), your code remains compatible even if the underlying notification system changes.
+		If you rely on DCADMIN.tools.setEventMessage(), your code remains compatible even if the underlying notification system changes.
 		The setEventMessage tool can be replaced internally without requiring any changes in your modules or custom scripts.
 	</p>
 	<p>
@@ -36,22 +36,22 @@ if ($documentation === null || !($documentation instanceof Documentation)) { ret
 	<?php
 	$lines = array(
 		'<script nonce="<?php print getNonce() ?>" >',
-		'	document.addEventListener(\'Dolibarr:Ready\', function(e) {',
+		'	document.addEventListener(\'DCADMIN:Ready\', function(e) {',
 		'',
 		'		document.getElementById(\'setEventMessage-success\').addEventListener(\'click\', function(e) {',
-		'			Dolibarr.tools.setEventMessage(\'Success Test\');',
+		'			DCADMIN.tools.setEventMessage(\'Success Test\');',
 		'		});',
 		'',
 		'		document.getElementById(\'setEventMessage-error\').addEventListener(\'click\', function(e) {',
-		'			Dolibarr.tools.setEventMessage(\'Error Test\', \'errors\');',
+		'			DCADMIN.tools.setEventMessage(\'Error Test\', \'errors\');',
 		'		});',
 		'',
 		'		document.getElementById(\'setEventMessage-error-sticky\').addEventListener(\'click\', function(e) {',
-		'			Dolibarr.tools.setEventMessage(\'Error Test\', \'errors\', true);',
+		'			DCADMIN.tools.setEventMessage(\'Error Test\', \'errors\', true);',
 		'		});',
 		'',
 		'		document.getElementById(\'setEventMessage-warning\').addEventListener(\'click\', function(e) {',
-		'			Dolibarr.tools.setEventMessage(\'Warning Test\', \'warnings\');',
+		'			DCADMIN.tools.setEventMessage(\'Warning Test\', \'warnings\');',
 		'		});',
 		'',
 		'	});',
@@ -61,22 +61,22 @@ if ($documentation === null || !($documentation instanceof Documentation)) { ret
 	<div class="documentation-example">
 
 		<script nonce="<?php print getNonce() ?>"  >
-			document.addEventListener('Dolibarr:Ready', function(e) {
+			document.addEventListener('DCADMIN:Ready', function(e) {
 
 				document.getElementById('setEventMessage-success').addEventListener('click', function(e) {
-					Dolibarr.tools.setEventMessage('Success Test')
+					DCADMIN.tools.setEventMessage('Success Test')
 				});
 
 				document.getElementById('setEventMessage-error').addEventListener('click', function(e) {
-					Dolibarr.tools.setEventMessage('Error Test', 'errors');
+					DCADMIN.tools.setEventMessage('Error Test', 'errors');
 				});
 
 				document.getElementById('setEventMessage-error-sticky').addEventListener('click', function(e) {
-					Dolibarr.tools.setEventMessage('Error Test', 'errors', true);
+					DCADMIN.tools.setEventMessage('Error Test', 'errors', true);
 				});
 
 				document.getElementById('setEventMessage-warning').addEventListener('click', function(e) {
-					Dolibarr.tools.setEventMessage('Warning Test', 'warnings');
+					DCADMIN.tools.setEventMessage('Warning Test', 'warnings');
 				});
 
 			});

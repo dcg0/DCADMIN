@@ -47,7 +47,7 @@ class ImportCsv extends ModeleImports
 	public $id;
 
 	/**
-	 * Dolibarr version of driver
+	 * DCADMIN version of driver
 	 * @var string Version, possible values are: 'development', 'experimental', 'dolibarr', 'dolibarr_deprecated' or a version string like 'x.y.z'''|'development'|'dolibarr'|'experimental'
 	 */
 	public $version = 'dolibarr';
@@ -126,7 +126,7 @@ class ImportCsv extends ModeleImports
 		}
 
 		// If driver use an external library, put its name here
-		$this->label_lib = 'Dolibarr';
+		$this->label_lib = 'DCADMIN';
 		$this->version_lib = DOL_VERSION;
 
 		$this->datatoimport = $datatoimport;

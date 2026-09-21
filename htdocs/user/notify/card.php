@@ -28,7 +28,7 @@
  *		\brief      Tab for notifications of third party
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf
@@ -190,7 +190,7 @@ if ($result > 0) {
 	print '<tr><td class="titlefield">'.$langs->trans("Login").'</td>';
 	if (!empty($object->ldap_sid) && $object->status == 0) {
 		print '<td class="error">';
-		print $langs->trans("LoginAccountDisableInDolibarr");
+		print $langs->trans("LoginAccountDisableInDCADMIN");
 		print '</td>';
 	} else {
 		print '<td>';

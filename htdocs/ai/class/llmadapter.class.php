@@ -265,7 +265,7 @@ class UniversalLLMAdapter
 		global $db, $conf;
 
 		if (!is_object($db) || !is_object($conf)) {
-			return;	// no Dolibarr runtime (defensive: adapter may be unit-tested standalone)
+			return;	// no DCADMIN runtime (defensive: adapter may be unit-tested standalone)
 		}
 		// Only errors that talk about the model itself, not quota/auth/network ones.
 		if (!preg_match('/model/i', $msg)) {

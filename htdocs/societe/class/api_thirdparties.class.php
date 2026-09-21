@@ -35,9 +35,9 @@ require_once DOL_DOCUMENT_ROOT.'/core/lib/company.lib.php';
  * @since	3.8.0	Initial implementation
  *
  * @access protected
- * @class  DolibarrApiAccess {@requires user,external}
+ * @class  DCADMINApiAccess {@requires user,external}
  */
-class Thirdparties extends DolibarrApi
+class Thirdparties extends DCADMINApi
 {
 	/**
 	 * @var string[]       Mandatory fields, checked when we create and update the object
@@ -159,17 +159,17 @@ class Thirdparties extends DolibarrApi
 	{
 		$obj_ret = array();
 
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'lire')) {
 			throw new RestException(403);
 		}
 
 		// case of external user, we force socids
-		$socids = DolibarrApiAccess::$user->socid ? (string) DolibarrApiAccess::$user->socid : '';
+		$socids = DCADMINApiAccess::$user->socid ? (string) DCADMINApiAccess::$user->socid : '';
 
 		// If the internal user must only see his customers, force searching by him
 		$search_sale = 0;
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'client', 'voir') && !$socids) {
-			$search_sale = DolibarrApiAccess::$user->id;
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'client', 'voir') && !$socids) {
+			$search_sale = DCADMINApiAccess::$user->id;
 		}
 
 		$sql = "SELECT t.rowid";
@@ -310,7 +310,7 @@ class Thirdparties extends DolibarrApi
 	 */
 	public function post($request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -345,7 +345,7 @@ class Thirdparties extends DolibarrApi
 			$this->company->$field = $this->_checkValForAPI($field, $value, $this->company);
 		}
 
-		if ($this->company->create(DolibarrApiAccess::$user) < 0) {
+		if ($this->company->create(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, 'Error creating thirdparty', array_merge(array($this->company->error), $this->company->errors));
 		}
 		if (isModEnabled('mailing') && !empty($this->company->email) && isset($this->company->no_email)) {
@@ -374,7 +374,7 @@ class Thirdparties extends DolibarrApi
 	 */
 	public function put($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -383,8 +383,8 @@ class Thirdparties extends DolibarrApi
 			throw new RestException(404, 'Thirdparty not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('societe', $this->company->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $this->company->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		foreach ($request_data as $field => $value) {
@@ -409,7 +409,7 @@ class Thirdparties extends DolibarrApi
 			$this->company->setNoEmail($this->company->no_email);
 		}
 
-		if ($this->company->update($id, DolibarrApiAccess::$user, 1, 1, 1, 'update', 1) > 0) {
+		if ($this->company->update($id, DCADMINApiAccess::$user, 1, 1, 1, 'update', 1) > 0) {
 			return $this->get($id);
 		} else {
 			throw new RestException(500, $this->company->error);
@@ -443,7 +443,7 @@ class Thirdparties extends DolibarrApi
 			throw new RestException(400, 'Try to merge a thirdparty into itself');
 		}
 
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -452,8 +452,8 @@ class Thirdparties extends DolibarrApi
 			throw new RestException(404, 'Thirdparty not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('societe', $this->company->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $this->company->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$companytoremove = new Societe($this->db);
@@ -462,11 +462,11 @@ class Thirdparties extends DolibarrApi
 			throw new RestException(404, 'Thirdparty not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('societe', $companytoremove->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $companytoremove->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		$user = DolibarrApiAccess::$user;
+		$user = DCADMINApiAccess::$user;
 		$result = $this->company->mergeCompany($companytoremove->id);
 		if ($result < 0) {
 			throw new RestException(500, 'Error failed to merged thirdparty '.$companytoremove->id.' into '.$id.'. Enable and read log file for more information.');
@@ -489,15 +489,15 @@ class Thirdparties extends DolibarrApi
 	 */
 	public function delete($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'supprimer')) {
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'supprimer')) {
 			throw new RestException(403);
 		}
 		$result = $this->company->fetch($id);
 		if (!$result) {
 			throw new RestException(404, 'Thirdparty not found');
 		}
-		if (!DolibarrApi::_checkAccessToResource('societe', $this->company->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $this->company->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 		$this->company->oldcopy = clone $this->company;  // @phan-suppress-current-line PhanTypeMismatchProperty
 
@@ -553,8 +553,8 @@ class Thirdparties extends DolibarrApi
 			throw new RestException(400, 'Price level must be between 1 and ' . getDolGlobalString('PRODUIT_MULTIPRICES_LIMIT'));
 		}
 
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'creer')) {
-			throw new RestException(403, 'Access to thirdparty '.$id.' not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'creer')) {
+			throw new RestException(403, 'Access to thirdparty '.$id.' not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$result = $this->company->fetch($id);
@@ -566,11 +566,11 @@ class Thirdparties extends DolibarrApi
 			throw new RestException(500, 'Error fetching thirdparty '.$id, array_merge(array($this->company->error), $this->company->errors));
 		}
 
-		if (empty(DolibarrApi::_checkAccessToResource('societe', $this->company->id))) {
-			throw new RestException(403, 'Access to thirdparty '.$id.' not allowed for login '.DolibarrApiAccess::$user->login);
+		if (empty(DCADMINApi::_checkAccessToResource('societe', $this->company->id))) {
+			throw new RestException(403, 'Access to thirdparty '.$id.' not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		$result = $this->company->setPriceLevel($priceLevel, DolibarrApiAccess::$user);
+		$result = $this->company->setPriceLevel($priceLevel, DCADMINApiAccess::$user);
 		if ($result <= 0) {
 			throw new RestException(500, 'Error setting new price level for thirdparty '.$id, array($this->company->db->lasterror()));
 		}
@@ -593,17 +593,17 @@ class Thirdparties extends DolibarrApi
 	 */
 	public function getRepresentative($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'reader')) {
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'reader')) {
 			throw new RestException(403);
 		}
 		$result = $this->company->fetch($id);
 		if (!$result) {
 			throw new RestException(404, 'Thirdparty not found');
 		}
-		if (!DolibarrApi::_checkAccessToResource('societe', $this->company->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $this->company->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
-		$result = $this->company->getSalesRepresentatives(DolibarrApiAccess::$user);
+		$result = $this->company->getSalesRepresentatives(DCADMINApiAccess::$user);
 		/** @var array<array{id:int,lastname:string,firstname:string,email:string,phone:string,office_phone:string,office_fax:string,user_mobile:string,personal_mobile:string,job:string,statut:int,status:int,entity:int,login:string,photo:string,gender:string}> $result */
 
 		return $result;
@@ -625,7 +625,7 @@ class Thirdparties extends DolibarrApi
 	 */
 	public function addRepresentative($id, $representative_id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'creer')) {
 			throw new RestException(403);
 		}
 		$result = $this->company->fetch($id);
@@ -637,10 +637,10 @@ class Thirdparties extends DolibarrApi
 		if (!$result) {
 			throw new RestException(404, 'User not found');
 		}
-		if (!DolibarrApi::_checkAccessToResource('societe', $this->company->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $this->company->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
-		$result = $this->company->add_commercial(DolibarrApiAccess::$user, $representative_id);
+		$result = $this->company->add_commercial(DCADMINApiAccess::$user, $representative_id);
 
 		return $result;
 	}
@@ -661,7 +661,7 @@ class Thirdparties extends DolibarrApi
 	 */
 	public function deleteRepresentative($id, $representative_id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'supprimer')) {
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'supprimer')) {
 			throw new RestException(403);
 		}
 		$result = $this->company->fetch($id);
@@ -673,10 +673,10 @@ class Thirdparties extends DolibarrApi
 		if (!$result) {
 			throw new RestException(404, 'User not found');
 		}
-		if (!DolibarrApi::_checkAccessToResource('societe', $this->company->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $this->company->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
-		$result = $this->company->del_commercial(DolibarrApiAccess::$user, $representative_id);
+		$result = $this->company->del_commercial(DCADMINApiAccess::$user, $representative_id);
 
 		return $result;
 	}
@@ -701,7 +701,7 @@ class Thirdparties extends DolibarrApi
 	 */
 	public function getCategories($id, $sortfield = "s.rowid", $sortorder = 'ASC', $limit = 0, $page = 0)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('categorie', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('categorie', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -711,8 +711,8 @@ class Thirdparties extends DolibarrApi
 		}
 
 		// Check that user has permission on thirdparty ID
-		if (!DolibarrApi::_checkAccessToResource('societe', $this->company)) {
-			throw new RestException(404, 'Third party not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $this->company)) {
+			throw new RestException(404, 'Third party not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$categories = new Categorie($this->db);
@@ -748,7 +748,7 @@ class Thirdparties extends DolibarrApi
 	 */
 	public function addCategory($id, $category_id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -762,11 +762,11 @@ class Thirdparties extends DolibarrApi
 			throw new RestException(404, 'category not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('societe', $this->company->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $this->company->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
-		if (!DolibarrApi::_checkAccessToResource('category', $category->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('category', $category->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$category->add_type($this->company, 'customer');
@@ -792,7 +792,7 @@ class Thirdparties extends DolibarrApi
 	 */
 	public function deleteCategory($id, $category_id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -806,11 +806,11 @@ class Thirdparties extends DolibarrApi
 			throw new RestException(404, 'category not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('societe', $this->company->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $this->company->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
-		if (!DolibarrApi::_checkAccessToResource('category', $category->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('category', $category->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$category->del_type($this->company, 'customer');
@@ -839,7 +839,7 @@ class Thirdparties extends DolibarrApi
 	 */
 	public function getSupplierCategories($id, $sortfield = "s.rowid", $sortorder = 'ASC', $limit = 0, $page = 0)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('categorie', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('categorie', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -849,8 +849,8 @@ class Thirdparties extends DolibarrApi
 		}
 
 		// Check that user has permission on thirdparty ID
-		if (!DolibarrApi::_checkAccessToResource('societe', $this->company)) {
-			throw new RestException(404, 'Third party not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $this->company)) {
+			throw new RestException(404, 'Third party not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$categories = new Categorie($this->db);
@@ -886,7 +886,7 @@ class Thirdparties extends DolibarrApi
 	 */
 	public function addSupplierCategory($id, $category_id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -900,11 +900,11 @@ class Thirdparties extends DolibarrApi
 			throw new RestException(404, 'category not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('societe', $this->company->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $this->company->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
-		if (!DolibarrApi::_checkAccessToResource('category', $category->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('category', $category->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$category->add_type($this->company, 'supplier');
@@ -930,7 +930,7 @@ class Thirdparties extends DolibarrApi
 	 */
 	public function deleteSupplierCategory($id, $category_id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -944,11 +944,11 @@ class Thirdparties extends DolibarrApi
 			throw new RestException(404, 'category not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('societe', $this->company->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $this->company->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
-		if (!DolibarrApi::_checkAccessToResource('category', $category->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('category', $category->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$category->del_type($this->company, 'supplier');
@@ -977,7 +977,7 @@ class Thirdparties extends DolibarrApi
 	 */
 	public function getOutStandingProposals($id, $mode = 'customer')
 	{
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -985,8 +985,8 @@ class Thirdparties extends DolibarrApi
 			throw new RestException(400, 'Thirdparty ID is mandatory');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('societe', $id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$result = $this->company->fetch($id);
@@ -1023,7 +1023,7 @@ class Thirdparties extends DolibarrApi
 	 */
 	public function getOutStandingOrder($id, $mode = 'customer')
 	{
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -1031,8 +1031,8 @@ class Thirdparties extends DolibarrApi
 			throw new RestException(400, 'Thirdparty ID is mandatory');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('societe', $id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$result = $this->company->fetch($id);
@@ -1068,7 +1068,7 @@ class Thirdparties extends DolibarrApi
 	 */
 	public function getOutStandingInvoices($id, $mode = 'customer')
 	{
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -1076,8 +1076,8 @@ class Thirdparties extends DolibarrApi
 			throw new RestException(400, 'Thirdparty ID is mandatory');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('societe', $id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$result = $this->company->fetch($id);
@@ -1113,7 +1113,7 @@ class Thirdparties extends DolibarrApi
 	 */
 	public function getSalesRepresentatives($id, $mode = 0)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -1121,8 +1121,8 @@ class Thirdparties extends DolibarrApi
 			throw new RestException(400, 'Thirdparty ID is mandatory');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('societe', $id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$result = $this->company->fetch($id);
@@ -1130,7 +1130,7 @@ class Thirdparties extends DolibarrApi
 			throw new RestException(404, 'Thirdparty not found');
 		}
 
-		$result = $this->company->getSalesRepresentatives(DolibarrApiAccess::$user, $mode);
+		$result = $this->company->getSalesRepresentatives(DCADMINApiAccess::$user, $mode);
 
 		return $result;
 	}
@@ -1163,7 +1163,7 @@ class Thirdparties extends DolibarrApi
 	{
 		$obj_ret = array();
 
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -1171,8 +1171,8 @@ class Thirdparties extends DolibarrApi
 			throw new RestException(400, 'Thirdparty ID is mandatory');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('societe', $id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$result = $this->company->fetch($id);
@@ -1246,7 +1246,7 @@ class Thirdparties extends DolibarrApi
 	 */
 	public function createFixedAmountDiscount($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -1262,8 +1262,8 @@ class Thirdparties extends DolibarrApi
 		}
 
 		// Check access to resource
-		if (!DolibarrApi::_checkAccessToResource('societe', $id)) {
-			throw new RestException(401, 'Access not allowed for login'.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $id)) {
+			throw new RestException(401, 'Access not allowed for login'.DCADMINApiAccess::$user->login);
 		}
 
 		// Fetch thirdparty to verify it exists
@@ -1317,7 +1317,7 @@ class Thirdparties extends DolibarrApi
 		// Create the discount using Societe::set_remise_except()
 		$this->db->begin();
 
-		$result = $this->company->set_remise_except($amount, DolibarrApiAccess::$user, $description, $vatrate, $discount_type, $price_base_type);
+		$result = $this->company->set_remise_except($amount, DCADMINApiAccess::$user, $description, $vatrate, $discount_type, $price_base_type);
 
 		if ($result > 0) {
 			$this->db->commit();
@@ -1355,7 +1355,7 @@ class Thirdparties extends DolibarrApi
 	{
 		$obj_ret = array();
 
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'creer') || !DolibarrApiAccess::$user->hasRight('societe', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'creer') || !DCADMINApiAccess::$user->hasRight('societe', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -1369,8 +1369,8 @@ class Thirdparties extends DolibarrApi
 			throw new RestException(400, 'Amount are mandatory');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('societe', $id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$result = $this->company->fetch($id);
@@ -1465,9 +1465,9 @@ class Thirdparties extends DolibarrApi
 		$discount->fk_facture_source = 0; // This is to delete only the require record (that we will recreate with two records) and not all family with same fk_facture_source
 		// This is to delete only the require record (that we will recreate with two records) and not all family with same fk_invoice_supplier_source
 		$discount->fk_invoice_supplier_source = 0;
-		$res = $discount->delete(DolibarrApiAccess::$user);
-		$newid1 = $newdiscount1->create(DolibarrApiAccess::$user);
-		$newid2 = $newdiscount2->create(DolibarrApiAccess::$user);
+		$res = $discount->delete(DCADMINApiAccess::$user);
+		$newid1 = $newdiscount1->create(DCADMINApiAccess::$user);
+		$newid2 = $newdiscount2->create(DCADMINApiAccess::$user);
 		if ($res <= 0 || $newid1 <= 0 || $newid2 <= 0) {
 			$this->db->rollback();
 			throw new RestException(500, 'Operation fail');
@@ -1514,15 +1514,15 @@ class Thirdparties extends DolibarrApi
 	 */
 	public function getInvoicesQualifiedForReplacement($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('facture', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('facture', 'lire')) {
 			throw new RestException(403);
 		}
 		if (empty($id)) {
 			throw new RestException(400, 'Thirdparty ID is mandatory');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('societe', $id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		/*$result = $this->thirdparty->fetch($id);
@@ -1563,15 +1563,15 @@ class Thirdparties extends DolibarrApi
 	 */
 	public function getInvoicesQualifiedForCreditNote($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('facture', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('facture', 'lire')) {
 			throw new RestException(403);
 		}
 		if (empty($id)) {
 			throw new RestException(400, 'Thirdparty ID is mandatory');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('societe', $id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		/*$result = $this->thirdparty->fetch($id);
@@ -1609,11 +1609,11 @@ class Thirdparties extends DolibarrApi
 		if (empty($id)) {
 			throw new RestException(400, 'Thirdparty ID is mandatory');
 		}
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'lire')) {
 			throw new RestException(403);
 		}
-		if (!DolibarrApi::_checkAccessToResource('societe', $id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		/**
@@ -1685,12 +1685,12 @@ class Thirdparties extends DolibarrApi
 	 */
 	public function createCompanyNotification($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'creer')) {
 			throw new RestException(403, "User has no right to update thirdparties");
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('societe', $id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		if ($this->company->fetch($id) <= 0) {
@@ -1722,11 +1722,11 @@ class Thirdparties extends DolibarrApi
 			throw new RestException(403, 'Notification already exists');
 		}
 
-		if ($notification->create(DolibarrApiAccess::$user) < 0) {
+		if ($notification->create(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, 'Error creating Thirdparty Notification');
 		}
 
-		if ($notification->update(DolibarrApiAccess::$user) < 0) {
+		if ($notification->update(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, 'Error updating values');
 		}
 
@@ -1753,12 +1753,12 @@ class Thirdparties extends DolibarrApi
 	 */
 	public function createCompanyNotificationByCode($id, $code, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'creer')) {
 			throw new RestException(403, "User has no right to update thirdparties");
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('societe', $id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		if ($this->company->fetch($id) <= 0) {
@@ -1801,11 +1801,11 @@ class Thirdparties extends DolibarrApi
 			throw new RestException(403, 'Notification already exists');
 		}
 
-		if ($notification->create(DolibarrApiAccess::$user) < 0) {
+		if ($notification->create(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, 'Error creating Thirdparty Notification, are request_data well formed?');
 		}
 
-		if ($notification->update(DolibarrApiAccess::$user) < 0) {
+		if ($notification->update(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, 'Error updating values');
 		}
 
@@ -1828,12 +1828,12 @@ class Thirdparties extends DolibarrApi
 	 */
 	public function deleteCompanyNotification($id, $notification_id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'creer')) {
 			throw new RestException(403);
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('societe', $id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$notification = new Notify($this->db);
@@ -1843,7 +1843,7 @@ class Thirdparties extends DolibarrApi
 		$socid = (int) $notification->socid;
 
 		if ($socid == $id) {
-			return $notification->delete(DolibarrApiAccess::$user);
+			return $notification->delete(DCADMINApiAccess::$user);
 		} else {
 			throw new RestException(403, "Not allowed due to bad consistency of input data");
 		}
@@ -1868,12 +1868,12 @@ class Thirdparties extends DolibarrApi
 	 */
 	public function updateCompanyNotification($id, $notification_id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'creer')) {
 			throw new RestException(403, "User has no right to update thirdparties");
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('societe', $id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		if ($this->company->fetch($id) <= 0) {
@@ -1892,7 +1892,7 @@ class Thirdparties extends DolibarrApi
 			$notification->$field = $this->_checkValForAPI($field, $value, $notification);
 		}
 
-		if ($notification->update(DolibarrApiAccess::$user) < 0) {
+		if ($notification->update(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, 'Error updating values');
 		}
 
@@ -1916,15 +1916,15 @@ class Thirdparties extends DolibarrApi
 	 */
 	public function getCompanyBankAccount($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'lire')) {
 			throw new RestException(403);
 		}
 		if (empty($id)) {
 			throw new RestException(400, 'Thirdparty ID is mandatory');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('societe', $id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		/**
@@ -2006,15 +2006,15 @@ class Thirdparties extends DolibarrApi
 	 */
 	public function createCompanyBankAccount($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'creer')) {
 			throw new RestException(403);
 		}
 		if ($this->company->fetch($id) <= 0) {
 			throw new RestException(404, 'Error creating Company Bank account, Company doesn\'t exists');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('societe', $id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$account = new CompanyBankAccount($this->db);
@@ -2031,7 +2031,7 @@ class Thirdparties extends DolibarrApi
 			$account->$field = $this->_checkValForAPI('extrafields', $value, $account);
 		}
 
-		if ($account->create(DolibarrApiAccess::$user) < 0) {
+		if ($account->create(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, 'Error creating Company Bank account');
 		}
 
@@ -2042,7 +2042,7 @@ class Thirdparties extends DolibarrApi
 			$account->date_rum = dol_now();
 		}
 
-		if ($account->update(DolibarrApiAccess::$user) < 0) {
+		if ($account->update(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, 'Error updating values');
 		}
 
@@ -2068,15 +2068,15 @@ class Thirdparties extends DolibarrApi
 	 */
 	public function updateCompanyBankAccount($id, $bankaccount_id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'creer')) {
 			throw new RestException(403);
 		}
 		if ($this->company->fetch($id) <= 0) {
 			throw new RestException(404, 'Error creating Company Bank account, Company doesn\'t exists');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('societe', $id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$account = new CompanyBankAccount($this->db);
@@ -2106,7 +2106,7 @@ class Thirdparties extends DolibarrApi
 			$account->date_rum = dol_now();
 		}
 
-		if ($account->update(DolibarrApiAccess::$user) < 0) {
+		if ($account->update(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, 'Error updating values');
 		}
 
@@ -2129,12 +2129,12 @@ class Thirdparties extends DolibarrApi
 	 */
 	public function deleteCompanyBankAccount($id, $bankaccount_id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'creer')) {
 			throw new RestException(403);
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('societe', $id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$account = new CompanyBankAccount($this->db);
@@ -2144,7 +2144,7 @@ class Thirdparties extends DolibarrApi
 		$socid = (int) $account->socid;
 
 		if ($socid == $id) {
-			return $account->delete(DolibarrApiAccess::$user);
+			return $account->delete(DCADMINApiAccess::$user);
 		} else {
 			throw new RestException(403, "Not allowed due to bad consistency of input data");
 		}
@@ -2178,15 +2178,15 @@ class Thirdparties extends DolibarrApi
 			throw new RestException(404, 'Thirdparty not found');
 		}
 
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'creer')) {
 			throw new RestException(403);
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('societe', $id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		$this->company->setDocModel(DolibarrApiAccess::$user, $model);
+		$this->company->setDocModel(DCADMINApiAccess::$user, $model);
 
 		$this->company->fk_bank = $this->company->fk_account;
 		// $this->company->fk_account = $this->company->fk_account;
@@ -2274,12 +2274,12 @@ class Thirdparties extends DolibarrApi
 	 */
 	public function getSocieteAccounts($id, $site = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'lire')) {
 			throw new RestException(403);
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('societe', $id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		/**
@@ -2351,7 +2351,7 @@ class Thirdparties extends DolibarrApi
 	 */
 	public function getSocieteByAccounts($site, $key_account)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -2368,8 +2368,8 @@ class Thirdparties extends DolibarrApi
 			throw new RestException(404, 'This account have many thirdparties attached or does not exist.');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('societe', $returnThirdparty->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $returnThirdparty->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		return $returnThirdparty;
@@ -2400,12 +2400,12 @@ class Thirdparties extends DolibarrApi
 	 */
 	public function createSocieteAccount($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'creer')) {
 			throw new RestException(403);
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('societe', $id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		if (!isset($request_data['site'])) {
@@ -2432,7 +2432,7 @@ class Thirdparties extends DolibarrApi
 				$account->$field = $this->_checkValForAPI($field, $value, $account);
 			}
 
-			if ($account->create(DolibarrApiAccess::$user) < 0) {
+			if ($account->create(DCADMINApiAccess::$user) < 0) {
 				throw new RestException(500, 'Error creating SocieteAccount entity. Ensure that the ID of thirdparty provided does exist!');
 			}
 
@@ -2472,12 +2472,12 @@ class Thirdparties extends DolibarrApi
 	 */
 	public function postSocieteAccount($id, $site, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'creer')) {
 			throw new RestException(403);
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('societe', $id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$sql = "SELECT rowid, fk_user_creat, date_creation FROM ".MAIN_DB_PREFIX."societe_account WHERE fk_soc = ".((int) $id)." AND site = '".$this->db->escape($site)."'";
@@ -2506,7 +2506,7 @@ class Thirdparties extends DolibarrApi
 			$account->fk_soc = $id;
 			$account->site = $site;
 
-			if ($account->create(DolibarrApiAccess::$user) < 0) {
+			if ($account->create(DCADMINApiAccess::$user) < 0) {
 				throw new RestException(500, 'Error creating SocieteAccount entity.');
 			}
 			// We found an existing SocieteAccount entity, we are replacing it
@@ -2542,7 +2542,7 @@ class Thirdparties extends DolibarrApi
 				$account->$field = $this->_checkValForAPI($field, $value, $account);
 			}
 
-			if ($account->update(DolibarrApiAccess::$user) < 0) {
+			if ($account->update(DCADMINApiAccess::$user) < 0) {
 				throw new RestException(500, 'Error updating SocieteAccount entity.');
 			}
 		}
@@ -2574,12 +2574,12 @@ class Thirdparties extends DolibarrApi
 	 */
 	public function putSocieteAccount($id, $site, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'creer')) {
 			throw new RestException(403);
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('societe', $id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$sql = "SELECT rowid FROM ".MAIN_DB_PREFIX."societe_account WHERE fk_soc = ".((int) $id)." AND site = '".$this->db->escape($site)."'";
@@ -2612,7 +2612,7 @@ class Thirdparties extends DolibarrApi
 				$account->$field = $this->_checkValForAPI($field, $value, $account);
 			}
 
-			if ($account->update(DolibarrApiAccess::$user) < 0) {
+			if ($account->update(DCADMINApiAccess::$user) < 0) {
 				throw new RestException(500, 'Error updating SocieteAccount account');
 			}
 
@@ -2642,12 +2642,12 @@ class Thirdparties extends DolibarrApi
 	 */
 	public function deleteSocieteAccount($id, $site)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'creer')) {
 			throw new RestException(403);
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('societe', $id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$sql = "SELECT rowid FROM ".MAIN_DB_PREFIX."societe_account WHERE fk_soc = ".((int) $id)." AND site = '".$this->db->escape($site)."'";
@@ -2660,7 +2660,7 @@ class Thirdparties extends DolibarrApi
 			$account = new SocieteAccount($this->db);
 			$account->fetch($obj->rowid);
 
-			if ($account->delete(DolibarrApiAccess::$user) < 0) {
+			if ($account->delete(DCADMINApiAccess::$user) < 0) {
 				throw new RestException(500, "Error while deleting $site account attached to this third party");
 			}
 		}
@@ -2683,12 +2683,12 @@ class Thirdparties extends DolibarrApi
 	 */
 	public function deleteSocieteAccounts($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'creer')) {
 			throw new RestException(403);
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('societe', $id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('societe', $id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		/**
@@ -2714,7 +2714,7 @@ class Thirdparties extends DolibarrApi
 				$account = new SocieteAccount($this->db);
 				$account->fetch($obj->rowid);
 
-				if ($account->delete(DolibarrApiAccess::$user) < 0) {
+				if ($account->delete(DCADMINApiAccess::$user) < 0) {
 					throw new RestException(500, 'Error while deleting account attached to this third party');
 				}
 				$i++;
@@ -2796,7 +2796,7 @@ class Thirdparties extends DolibarrApi
 	 *
 	 * @param    ?int	$rowid      Id of third party to load (Use 0 to get a specimen record, use null to use other search criteria)
 	 * @param    string	$ref        Reference of third party, name (Warning, this can return several records)
-	 * @param    string	$ref_ext    External reference of third party (Warning, this information is a free field not provided by Dolibarr)
+	 * @param    string	$ref_ext    External reference of third party (Warning, this information is a free field not provided by DCADMIN)
 	 * @param    string	$barcode    Barcode of third party to load
 	 * @param    string	$idprof1		Prof id 1 of third party (Warning, this can return several records)
 	 * @param    string	$idprof2		Prof id 2 of third party (Warning, this can return several records)
@@ -2814,8 +2814,8 @@ class Thirdparties extends DolibarrApi
 	 */
 	private function _fetch($rowid, $ref = '', $ref_ext = '', $barcode = '', $idprof1 = '', $idprof2 = '', $idprof3 = '', $idprof4 = '', $idprof5 = '', $idprof6 = '', $email = '', $ref_alias = '')
 	{
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'lire')) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login.'. No read permission on thirdparties.');
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'lire')) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login.'. No read permission on thirdparties.');
 		}
 
 		if ($rowid === 0) {
@@ -2827,8 +2827,8 @@ class Thirdparties extends DolibarrApi
 			throw new RestException(404, 'Thirdparty not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('societe', $this->company->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login.' on this thirdparty');
+		if (!DCADMINApi::_checkAccessToResource('societe', $this->company->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login.' on this thirdparty');
 		}
 		if (isModEnabled('mailing')) {
 			$this->company->getNoEmail();

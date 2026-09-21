@@ -37,7 +37,7 @@ if (!defined('NOREQUIREAJAX')) {
 	define('NOREQUIREAJAX', '1');
 }
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php'; // Load $user and permissions
 require_once DOL_DOCUMENT_ROOT.'/compta/facture/class/facture.class.php';
 /**
@@ -133,7 +133,7 @@ if ($action == "add" && $user->hasRight('takepos', 'run')) {
 
 // Title
 $head = '';
-$title = 'TakePOS - Dolibarr '.DOL_VERSION;
+$title = 'TakePOS - DCADMIN '.DOL_VERSION;
 if (getDolGlobalString('MAIN_APPLICATION_TITLE')) {
 	$title = 'TakePOS - ' . getDolGlobalString('MAIN_APPLICATION_TITLE');
 }

@@ -65,7 +65,7 @@ $DEPRECATED_MODULE_MAPPING = array(
 /**
  * Map module names to the 'class' name (the class is: mod<CLASSNAME>)
  * Value is null when the module is not internal to the default
- * Dolibarr setup.
+ * DCADMIN setup.
  */
 $VALID_MODULE_MAPPING = array(
 	'accounting' => 'Accounting',
@@ -320,7 +320,7 @@ return [
 		'shmkeys' => 'array<string,int>', // memory.lib
 		'shmoffset' => 'int', // memory.lib
 		'user' => '\User',
-		'website' => 'string',  // See discussion https://github.com/Dolibarr/dolibarr/pull/28891#issuecomment-2002268334  // Disable because Phan infers Website type
+		'website' => 'string',  // See discussion https://github.com/DCADMIN/dolibarr/pull/28891#issuecomment-2002268334  // Disable because Phan infers Website type
 		'websitepage' => '\WebSitePage',
 		'websitepagefile' => 'string',
 		// 'object' => '\CommonObject',  // Deprecated, not enabled because conflicts with $object assignments
@@ -469,7 +469,7 @@ return [
 	// Add any issue types (such as 'PhanUndeclaredMethod')
 	// here to inhibit them from being reported
 	'suppress_issue_types' => [
-		// Dolibarr uses a lot of internal deprecated stuff, not reporting
+		// DCADMIN uses a lot of internal deprecated stuff, not reporting
 		'PhanDeprecatedProperty',
 		'PhanDeprecatedImplicitNullableParam',
 
@@ -484,10 +484,10 @@ return [
 		// 'PhanPluginUnknownArrayFunctionReturnType',	// a lot of false positive, in most cases, we want to keep the code as it is
 		'PhanTypeMismatchArgumentSuperType', 	// a lot of false positive, in most cases, we want to keep the code as it is
 
-		'PhanPluginWhitespaceTab',		// Dolibarr uses tabs
-		'PhanPluginCanUsePHP71Void',	// Dolibarr is maintaining 7.0 compatibility
-		'PhanPluginShortArray',			// Dolibarr uses array()
-		'PhanPluginShortArrayList',		// Dolibarr uses array()
+		'PhanPluginWhitespaceTab',		// DCADMIN uses tabs
+		'PhanPluginCanUsePHP71Void',	// DCADMIN is maintaining 7.0 compatibility
+		'PhanPluginShortArray',			// DCADMIN uses array()
+		'PhanPluginShortArrayList',		// DCADMIN uses array()
 		// Fixers From PHPDocToRealTypesPlugin:
 		'PhanPluginCanUseParamType',			// Fixer - Report/Add types in the function definition (function abc(string $var) (adds string)
 		'PhanPluginCanUseReturnType',			// Fixer - Report/Add return types in the function definition (function abc(string $var) (adds string)

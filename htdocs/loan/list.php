@@ -25,7 +25,7 @@
  *  \brief      Page to list all loans
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf

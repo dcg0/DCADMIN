@@ -24,7 +24,7 @@
  *      \brief      LDAP user record page
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/usergroups.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/core/class/ldap.class.php';
@@ -126,7 +126,7 @@ print '<table class="border centpercent tableforfield">';
 // Login
 print '<tr><td class="titlefield">'.$langs->trans("Login").'</td>';
 if ($object->ldap_sid) {
-	print '<td class="warning">'.$langs->trans("LoginAccountDisableInDolibarr").'</td>';
+	print '<td class="warning">'.$langs->trans("LoginAccountDisableInDCADMIN").'</td>';
 } else {
 	print '<td>'.$object->login.'</td>';
 }

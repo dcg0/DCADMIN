@@ -27,7 +27,7 @@
 /**
  *       \file       htdocs/install/fileconf.php
  *       \ingroup    install
- *       \brief      Ask all information required to build Dolibarr htdocs/conf/conf.php file (will be written to disk on next page step1)
+ *       \brief      Ask all information required to build DCADMIN htdocs/conf/conf.php file (will be written to disk on next page step1)
  */
 
 include_once 'inc.php';
@@ -85,7 +85,7 @@ $langs->loadLangs(array("install", "errors", "admin"));
 
 dolibarr_install_syslog("- fileconf: entering fileconf.php page");
 
-// You can force preselected values of the config step of Dolibarr by adding a file
+// You can force preselected values of the config step of DCADMIN by adding a file
 // install.forced.php into directory htdocs/install (This is the case with some wizard
 // installer like DoliWamp, DoliMamp or DoliBuntu).
 // We first init "forced values" to nothing.
@@ -144,7 +144,7 @@ if (@file_exists($forcedfile)) {
 
 session_start(); // To be able to keep info into session (used for not losing pass during navigation. pass must not transit through parameters)
 
-pHeader($langs->trans("DolibarrSetup").' - '.$langs->trans("ConfigurationFile"), "step1", "set", "", (empty($force_dolibarr_js_JQUERY) ? '' : $force_dolibarr_js_JQUERY.'/'), 'main-inside-bis');
+pHeader($langs->trans("DCADMINSetup").' - '.$langs->trans("ConfigurationFile"), "step1", "set", "", (empty($force_dolibarr_js_JQUERY) ? '' : $force_dolibarr_js_JQUERY.'/'), 'main-inside-bis');
 
 // Test if we can run a first install process
 if (!is_writable($conffile)) {
@@ -315,11 +315,11 @@ if (!empty($force_install_noedit)) {
 	}
 	?>
 
-	<!-- Dolibarr database -->
+	<!-- DCADMIN database -->
 
 	<tr>
 		<td colspan="3" class="label"><br>
-		<h3><img class="valignmiddle inline-block paddingright" src="../public/theme/common/database.svg" width="20" alt="webserver"> <?php echo $langs->trans("DolibarrDatabase"); ?></h3>
+		<h3><img class="valignmiddle inline-block paddingright" src="../public/theme/common/database.svg" width="20" alt="webserver"> <?php echo $langs->trans("DCADMINDatabase"); ?></h3>
 		</td>
 	</tr>
 

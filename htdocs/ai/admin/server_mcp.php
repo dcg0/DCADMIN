@@ -192,7 +192,7 @@ $form = new Form($db);
 $apiKey = getDolGlobalString('AI_MCP_API_KEY');
 
 // Default Prompt Logic
-$defaultPromptText = " ROLE: Dolibarr ERP AI.
+$defaultPromptText = " ROLE: DCADMIN ERP AI.
 GOAL: Map user intent to specific JSON commands.
 
 CONSTRAINTS:

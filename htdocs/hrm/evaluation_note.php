@@ -26,7 +26,7 @@
  *    \brief      Tab for notes on Evaluation
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 
 require_once DOL_DOCUMENT_ROOT . '/hrm/class/evaluation.class.php';

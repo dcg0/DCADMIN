@@ -20,7 +20,7 @@
 
 /**
  * @file       htdocs/core/lib/html.lib.php
- * @brief      HTML rendering functions for Dolibarr
+ * @brief      HTML rendering functions for DCADMIN
  *             This file contains all HTML output, formatting and display functions.
  *             It was extracted from functions.lib.php to reduce file size and improve maintainability.
  *
@@ -1712,7 +1712,7 @@ function img_picto($titlealt, $picto, $moreatt = '', $pictoisfullpath = 0, $srco
 }
 
 /**
- * Get array to convert the Dolibarr picto keys into Font awesome keys
+ * Get array to convert the DCADMIN picto keys into Font awesome keys
  *
  * @param	string		$mode		'fa' to get conversion array for Font-Awesome
  * @return 	string[]				Array of conversion
@@ -1723,7 +1723,7 @@ function getImgPictoConv($mode = 'fa')
 	global $conf;
 
 	if (empty($mode) || $mode == 'fa') {
-		// Array when the fa picto key is different than the Dolibarr picto key.
+		// Array when the fa picto key is different than the DCADMIN picto key.
 		$arrayconvpictotofa = array(
 			'account' => 'university',
 			'accounting_account' => 'clipboard-list',
@@ -2602,14 +2602,14 @@ function dol_print_error($db = null, $error = '', $errors = null)
 	$langs->loadLangs(array('main', 'errors'));
 
 	if ($_SERVER['DOCUMENT_ROOT']) {    // Mode web
-		$out .= $langs->trans("DolibarrHasDetectedError") . ".<br>\n";
+		$out .= $langs->trans("DCADMINHasDetectedError") . ".<br>\n";
 		if (getDolGlobalInt('MAIN_FEATURES_LEVEL') > 0) {
 			$out .= "You use an experimental or develop level of features, so please do NOT report any bugs or vulnerability, except if problem is confirmed after moving option MAIN_FEATURES_LEVEL back to 0.<br>\n";
 		}
 		$out .= $langs->trans("InformationToHelpDiagnose") . ":<br>\n";
 
 		$out .= "<b>" . $langs->trans("Date") . ":</b> " . dol_print_date(dol_now(), 'dayhourlog') . "<br>\n";
-		$out .= "<b>" . $langs->trans("Dolibarr") . ":</b> " . DOL_VERSION . " - https://www.dolibarr.org<br>\n";
+		$out .= "<b>" . $langs->trans("DCADMIN") . ":</b> " . DOL_VERSION . " - https://www.dolibarr.org<br>\n";
 		if (isset($conf->global->MAIN_FEATURES_LEVEL)) {
 			$out .= "<b>" . $langs->trans("LevelOfFeature") . ":</b> " . getDolGlobalInt('MAIN_FEATURES_LEVEL') . "<br>\n";
 		}
@@ -2715,8 +2715,8 @@ function dol_print_error($db = null, $error = '', $errors = null)
 		$langs->loadLangs(array("main", "errors")); // Reload main because language may have been set only on previous line so we have to reload files we need.
 		// This should not happen, except if there is a bug somewhere. Enabled and check log in such case.
 		print 'This website or feature is currently temporarily not available or failed after a technical error.<br><br>This may be due to a maintenance operation. Current status of operation (' . dol_print_date(dol_now(), 'dayhourrfc') . ') are on next line...<br><br>' . "\n";
-		print $langs->trans("DolibarrHasDetectedError") . '. ';
-		print $langs->trans("YouCanSetOptionDolibarrMainProdToZero");
+		print $langs->trans("DCADMINHasDetectedError") . '. ';
+		print $langs->trans("YouCanSetOptionDCADMINMainProdToZero");
 		if (!defined("MAIN_CORE_ERROR")) {
 			define("MAIN_CORE_ERROR", 1);
 		}

@@ -36,7 +36,7 @@ if (!defined('NOREQUIREHTML')) {
 	define('NOREQUIREHTML', '1'); // If we don't need to load the html.form.class.php
 }
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 
 /**

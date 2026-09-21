@@ -298,7 +298,7 @@ class FunctionsLibTest extends CommonClassTest
 			}
 		}
 
-		// So the directory of an element is either empty, or a directory of the data directory of Dolibarr,
+		// So the directory of an element is either empty, or a directory of the data directory of DCADMIN,
 		// and never the sentinel string returned by getMultidirOutput() when it fails.
 		$allelements = array('contact', 'job', 'position', 'skill', 'evaluation', 'conferenceorbooth',
 			'partnership', 'stocktransfer', 'payment', 'payment_supplier', 'payment_various', 'product',

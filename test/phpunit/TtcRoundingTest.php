@@ -323,7 +323,7 @@ class TtcRoundingTest extends CommonClassTest
 
 	/**
 	 * Whether the object supports subtotal lines (subtotals module enabled and object type wired).
-	 * Kept portable across versions: supplier objects gained subtotals only in later Dolibarr releases.
+	 * Kept portable across versions: supplier objects gained subtotals only in later DCADMIN releases.
 	 *
 	 * @param	CommonObject	$object		Object to test
 	 * @return	bool

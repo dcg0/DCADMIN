@@ -484,7 +484,7 @@ function build_rssfile($format, $title, $desc, $events_array, $outputfile, $filt
 				} else {
 					fwrite($fichier, '<guid isPermaLink="false"><![CDATA['.str_pad($uid, 10, "0", STR_PAD_LEFT).']]></guid>'."\n");
 				}
-				fwrite($fichier, '<source url="'.$url.'"><![CDATA[Dolibarr]]></source>'."\n");
+				fwrite($fichier, '<source url="'.$url.'"><![CDATA[DCADMIN]]></source>'."\n");
 				fwrite($fichier, "</item>\n");
 			}
 		}

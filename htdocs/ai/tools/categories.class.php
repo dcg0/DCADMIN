@@ -20,7 +20,7 @@
 /**
  * \file htdocs/ai/tools/categories.class.php
  * \ingroup ai
- * \brief MCP Server tool for Dolibarr categories.
+ * \brief MCP Server tool for DCADMIN categories.
  */
 
 require_once DOL_DOCUMENT_ROOT . '/categories/class/categorie.class.php';
@@ -28,7 +28,7 @@ require_once DOL_DOCUMENT_ROOT . '/ai/lib/ai.lib.php';
 /**
  * Class ToolCategories
  *
- * Provides various tools related to Dolibarr categories.
+ * Provides various tools related to DCADMIN categories.
  */
 class ToolCategories extends McpTool
 {
@@ -185,7 +185,7 @@ class ToolCategories extends McpTool
 		return [
 			[
 				"name" => "search_categories",
-				"description" => "Search for categories by name or description. Returns a list of matching categories with their IDs, labels, types, and direct links. In Dolibarr, each category has a single type (scope) that determines what kind of objects it can be applied to (e.g., 'product', 'ticket', 'customer').",
+				"description" => "Search for categories by name or description. Returns a list of matching categories with their IDs, labels, types, and direct links. In DCADMIN, each category has a single type (scope) that determines what kind of objects it can be applied to (e.g., 'product', 'ticket', 'customer').",
 				"inputSchema" => [
 					"type" => "object",
 					"properties" => [
@@ -240,7 +240,7 @@ class ToolCategories extends McpTool
 			],
 			[
 				"name" => "create_category",
-				"description" => "Creates a new category in Dolibarr. Requires a 'label' (the category name) and a 'scope' (what type of object it applies to). Example: to create a category 'Urgent' for tickets, use label='Urgent' and scope='ticket'.",
+				"description" => "Creates a new category in DCADMIN. Requires a 'label' (the category name) and a 'scope' (what type of object it applies to). Example: to create a category 'Urgent' for tickets, use label='Urgent' and scope='ticket'.",
 				"inputSchema" => [
 					"type" => "object",
 					"properties" => [
@@ -716,7 +716,7 @@ class ToolCategories extends McpTool
 	}
 
 	/**
-	 * Creates a new category in Dolibarr.
+	 * Creates a new category in DCADMIN.
 	 *
 	 * @param array<string, mixed> $args Array containing 'label' (string), 'scope' (string), 'description' (string, optional), 'parent_category_id' (int, optional), 'color' (string, optional).
 	 * @return array<string, mixed> Success message with new category ID or an error array.

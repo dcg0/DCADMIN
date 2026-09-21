@@ -27,7 +27,7 @@
  *    \brief      Page to create/edit/view evaluation
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf

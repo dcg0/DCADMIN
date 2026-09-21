@@ -20,7 +20,7 @@
 
 /**
  *       \file       htdocs/webservices/server_category.php
- *       \brief      File that is entry point to call Dolibarr WebServices
+ *       \brief      File that is entry point to call DCADMIN WebServices
  */
 
 if (!defined('NOCSRFCHECK')) {
@@ -54,12 +54,12 @@ require_once DOL_DOCUMENT_ROOT."/categories/class/categorie.class.php";
  * @var Translate $langs
  */
 
-dol_syslog("Call Dolibarr webservices interfaces");
+dol_syslog("Call DCADMIN webservices interfaces");
 
 // Enable and test if module web services is enabled
 if (!getDolGlobalString('MAIN_MODULE_WEBSERVICES')) {
 	$langs->load("admin");
-	dol_syslog("Call Dolibarr webservices interfaces with module webservices disabled");
+	dol_syslog("Call DCADMIN webservices interfaces with module webservices disabled");
 	print $langs->trans("WarningModuleNotActive", 'WebServices').'.<br><br>';
 	print $langs->trans("ToActivateModule");
 	exit;
@@ -70,7 +70,7 @@ $server = new nusoap_server();
 $server->soap_defencoding = 'UTF-8';
 $server->decode_utf8 = false;
 $ns = 'http://www.dolibarr.org/ns/';
-$server->configureWSDL('WebServicesDolibarrCategorie', $ns);
+$server->configureWSDL('WebServicesDCADMINCategorie', $ns);
 // @phan-suppress-next-line PhanUndeclaredProperty
 $server->wsdl->schemaTargetNamespace = $ns;
 

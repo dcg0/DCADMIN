@@ -34,7 +34,7 @@ if (!defined('CSRFCHECK_WITH_TOKEN')) {
 	define('CSRFCHECK_WITH_TOKEN', '1'); // Force use of CSRF protection with tokens even for GET
 }
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf
@@ -225,8 +225,8 @@ foreach ($modulesdir as $dir) {
 
 					include_once $dir.$file;
 					$objMod = new $modName($db);
-					'@phan-var-force DolibarrModules $objMod';
-					/** @var DolibarrModules $objMod */
+					'@phan-var-force DCADMINModules $objMod';
+					/** @var DCADMINModules $objMod */
 
 					// Load all lang files of module
 					if (isset($objMod->langfiles) && is_array($objMod->langfiles)) {
@@ -252,7 +252,7 @@ foreach ($modulesdir as $dir) {
 
 $db->commit();
 
-'@phan-var-force DolibarrModules[] $modules';
+'@phan-var-force DCADMINModules[] $modules';
 
 
 // Fix bad value for module_position in table
@@ -436,7 +436,7 @@ print '<table class="border centpercent tableforfield">';
 print '<tr><td id="anchorforperms" class="titlefield">'.$langs->trans("Login").'</td>';
 if (!empty($object->ldap_sid) && $object->status == 0) {
 	print '<td class="error">';
-	print $langs->trans("LoginAccountDisableInDolibarr");
+	print $langs->trans("LoginAccountDisableInDCADMIN");
 	print '</td>';
 } else {
 	print '<td>';

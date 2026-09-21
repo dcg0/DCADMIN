@@ -36,7 +36,7 @@
  *		\brief      Page to administer emails templates
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf
@@ -248,7 +248,7 @@ $tabhelp[25] = array(
 );
 
 
-// We save list of template email Dolibarr can manage. This list can found by a grep into code on "->param['models']"
+// We save list of template email DCADMIN can manage. This list can found by a grep into code on "->param['models']"
 $elementList = array();
 // Add all and none after the sort
 

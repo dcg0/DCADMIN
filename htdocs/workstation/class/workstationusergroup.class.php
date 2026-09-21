@@ -32,7 +32,7 @@ class WorkstationUserGroup extends CommonObject
 	/** @var string Table name in SQL */
 	public $table_element = 'workstation_workstation_usergroup';
 
-	/** @var string Name of the element (tip for better integration in Dolibarr: this value should be the reflection of the class name with ucfirst() function) */
+	/** @var string Name of the element (tip for better integration in DCADMIN: this value should be the reflection of the class name with ucfirst() function) */
 	public $element = 'workstationusergroup';
 
 	/**

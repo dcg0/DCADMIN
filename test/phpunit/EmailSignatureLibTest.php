@@ -166,7 +166,7 @@ class EmailSignatureLibTest extends CommonClassTest
 	}
 
 	/**
-	 * A relative or non-https image URL breaks outside of Dolibarr and is an error.
+	 * A relative or non-https image URL breaks outside of DCADMIN and is an error.
 	 *
 	 * @return void
 	 */

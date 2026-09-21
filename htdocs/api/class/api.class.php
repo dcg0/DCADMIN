@@ -31,7 +31,7 @@ require_once DOL_DOCUMENT_ROOT.'/user/class/user.class.php';
 /**
  * Class for API REST v1
  */
-class DolibarrApi
+class DCADMINApi
 {
 	/**
 	 * @var DoliDB        Database object
@@ -515,7 +515,7 @@ class DolibarrApi
 			$feature2 = explode("|", $feature2);
 		}
 
-		return checkUserAccessToObject(DolibarrApiAccess::$user, $featuresarray, $resource_id, $dbtablename, $feature2, $dbt_keyfield, $dbt_select, $parenttableforentity);
+		return checkUserAccessToObject(DCADMINApiAccess::$user, $featuresarray, $resource_id, $dbtablename, $feature2, $dbt_keyfield, $dbt_select, $parenttableforentity);
 	}
 
 	// phpcs:disable PEAR.NamingConventions.ValidFunctionName.PublicUnderscore

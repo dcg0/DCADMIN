@@ -451,7 +451,7 @@ class MultiCurrency extends CommonObject
 	 * @param	double	$rate	new rate
 	 * @return 	int 			-1 if KO, 1 if OK, 2 if label found and OK
 	 */
-	public function addRateFromDolibarr($code, $rate)
+	public function addRateFromDCADMIN($code, $rate)
 	{
 		global $user;
 
@@ -764,7 +764,7 @@ class MultiCurrency extends CommonObject
 					if ($obj->fetch(0, $code) > 0) {
 						$obj->updateRate($rate);
 					} elseif ($addifnotfound) {
-						$this->addRateFromDolibarr($code, $rate);
+						$this->addRateFromDCADMIN($code, $rate);
 					}
 				}
 			}

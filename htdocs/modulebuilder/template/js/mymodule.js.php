@@ -55,7 +55,7 @@ if (!defined('NOREQUIREAJAX')) {
  * \brief   JavaScript file for module MyModule.
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 $res = 0;
 // Try main.inc.php into web root known defined into CONTEXT_DOCUMENT_ROOT (not always defined)
 if (!$res && !empty($_SERVER["CONTEXT_DOCUMENT_ROOT"])) {
@@ -64,8 +64,8 @@ if (!$res && !empty($_SERVER["CONTEXT_DOCUMENT_ROOT"])) {
 // Try main.inc.php into web root detected using web root calculated from SCRIPT_FILENAME
 $tmp = empty($_SERVER['SCRIPT_FILENAME']) ? '' : $_SERVER['SCRIPT_FILENAME'];
 $tmp2 = realpath(__FILE__);
-$i = strlen($tmp) - 1;  // @phan-suppress-current-line DolibarrForbiddenFunctionPlugin
-$j = strlen($tmp2) - 1;  // @phan-suppress-current-line DolibarrForbiddenFunctionPlugin
+$i = strlen($tmp) - 1;  // @phan-suppress-current-line DCADMINForbiddenFunctionPlugin
+$j = strlen($tmp2) - 1;  // @phan-suppress-current-line DCADMINForbiddenFunctionPlugin
 while ($i > 0 && $j > 0 && isset($tmp[$i]) && isset($tmp2[$j]) && $tmp[$i] == $tmp2[$j]) {
 	$i--;
 	$j--;
@@ -89,7 +89,7 @@ if (!$res) {
 
 // Define js type
 header('Content-Type: application/javascript');
-// Important: Following code is to cache this file to avoid page request by browser at each Dolibarr page access.
+// Important: Following code is to cache this file to avoid page request by browser at each DCADMIN page access.
 // You can use CTRL+F5 to refresh your browser cache.
 header('Cache-Control: max-age=3600, public, must-revalidate');
 ?>

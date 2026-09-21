@@ -21,10 +21,10 @@
 
 /**
  *  \file       htdocs/admin/system/dolibarr.php
- *  \brief      Page to show Dolibarr information
+ *  \brief      Page to show DCADMIN information
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf
@@ -99,7 +99,7 @@ if ($action == 'getlastversion') {
 $form = new Form($db);
 
 $help_url = '';
-$title = $langs->trans("InfoDolibarr");
+$title = $langs->trans("InfoDCADMIN");
 
 llxHeader('', $title, $help_url, '', 0, 0, '', '', '', 'mod-admin page-system_dolibarr');
 
@@ -129,7 +129,7 @@ if (preg_match('/[a-z]+/i', $version)) {
 	$version = 'develop'; // If version contains text, it is not an official tagged version, so we use the full change log.
 }
 
-$urlofchangelog = 'https://raw.githubusercontent.com/Dolibarr/dolibarr/'.$version.'/ChangeLog';
+$urlofchangelog = 'https://raw.githubusercontent.com/DCADMIN/dolibarr/'.$version.'/ChangeLog';
 
 print ' &nbsp; ';
 //print dolButtonToOpenUrlInDialogPopup('changelogpopup', $langs->trans("SeeChangeLog"), $langs->trans("SeeChangeLog"), $urlofchangelog);
@@ -160,7 +160,7 @@ if (function_exists('curl_init')) {
 			// Show version
 			print $langs->trans("LastStableVersion").' : <b>'.(($version != '0.0') ? $version : $langs->trans("Unknown")).'</b>';
 			if ($version != '0.0') {
-				print ' &nbsp; <a href="https://raw.githubusercontent.com/Dolibarr/dolibarr/'.$version.'/ChangeLog" target="_blank" rel="noopener noreferrer external">'.img_picto('', 'url', 'class="paddingright"').$langs->trans("SeeChangeLog").'</a>';
+				print ' &nbsp; <a href="https://raw.githubusercontent.com/DCADMIN/dolibarr/'.$version.'/ChangeLog" target="_blank" rel="noopener noreferrer external">'.img_picto('', 'url', 'class="paddingright"').$langs->trans("SeeChangeLog").'</a>';
 			}
 		} else {
 			print $langs->trans("LastStableVersion").' : <b>'.$langs->trans("UpdateServerOffline").'</b>';
@@ -301,7 +301,7 @@ if (getDolGlobalInt('MAIN_OPTIMIZE_SPEED') & 0x02) {
 // Localisation
 print '<div class="div-table-responsive-no-min">';
 print '<table class="noborder centpercent">';
-print '<tr class="liste_titre"><td class="titlefieldcreate">'.$langs->trans("LocalisationDolibarrParameters").'</td><td></td></tr>'."\n";
+print '<tr class="liste_titre"><td class="titlefieldcreate">'.$langs->trans("LocalisationDCADMINParameters").'</td><td></td></tr>'."\n";
 print '<tr class="oddeven"><td>'.$langs->trans("LanguageBrowserParameter", "HTTP_ACCEPT_LANGUAGE").'</td><td>'.$_SERVER["HTTP_ACCEPT_LANGUAGE"].'</td></tr>'."\n";
 print '<tr class="oddeven"><td>'.$langs->trans("CurrentUserLanguage").'</td><td>'.$langs->getDefaultLang().'</td></tr>'."\n";
 // Thousands
@@ -340,7 +340,7 @@ if ($conf->db->type == 'mysql' || $conf->db->type == 'mysqli') {
 }
 $txt = $langs->trans("OSTZ").' (variable system TZ): '.(!empty($_ENV["TZ"]) ? $_ENV["TZ"] : $langs->trans("NotDefined")).'<br>'."\n";
 $txt .= $langs->trans("PHPTZ").' (date_default_timezone_get() / php.ini date.timezone): '.(getServerTimeZoneString()." / ".(ini_get("date.timezone") ? ini_get("date.timezone") : $langs->trans("NotDefined")))."<br>\n"; // date.timezone must be in valued defined in http://fr3.php.net/manual/en/timezones.europe.php
-$txt .= $langs->trans("Dolibarr constant MAIN_SERVER_TZ").': '.getDolGlobalString('MAIN_SERVER_TZ', $langs->trans("NotDefined"));
+$txt .= $langs->trans("DCADMIN constant MAIN_SERVER_TZ").': '.getDolGlobalString('MAIN_SERVER_TZ', $langs->trans("NotDefined"));
 print '<tr class="oddeven"><td>'.$langs->trans("CurrentTimeZone").'</td><td>'; // Timezone server PHP
 $a = getServerTimeZoneInt('now');
 $b = getServerTimeZoneInt('winter');

@@ -34,7 +34,7 @@ require_once DOL_DOCUMENT_ROOT.'/core/triggers/dolibarrtriggers.class.php';
 /**
  *  Class of triggers for stripe module
  */
-class InterfaceStripe extends DolibarrTriggers
+class InterfaceStripe extends DCADMINTriggers
 {
 	/**
 	 *   Constructor
@@ -53,7 +53,7 @@ class InterfaceStripe extends DolibarrTriggers
 	}
 
 	/**
-	 * Function called when a Dolibarr business event is done.
+	 * Function called when a DCADMIN business event is done.
 	 * All functions "runTrigger" are triggered if file
 	 * is inside directory core/triggers
 	 *
@@ -66,7 +66,7 @@ class InterfaceStripe extends DolibarrTriggers
 	 */
 	public function runTrigger($action, $object, User $user, Translate $langs, Conf $conf)
 	{
-		// Put here code you want to execute when a Dolibarr business event occurs.
+		// Put here code you want to execute when a DCADMIN business event occurs.
 		// Data and type of action are stored into $object and $action
 		global $langs, $db, $conf;
 

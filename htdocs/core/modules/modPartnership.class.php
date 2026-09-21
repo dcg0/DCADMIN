@@ -28,14 +28,14 @@
  *  \ingroup    partnership
  *  \brief      Description and activation file for module Partnership
  */
-include_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
+include_once DOL_DOCUMENT_ROOT.'/core/modules/DCADMINModules.class.php';
 
 /**
  *  Description and activation class for module Partnership
  *  This module is base on this specification :
  *  https://wiki.dolibarr.org/index.php?title=Draft:Module_Partnership_management#Note
  */
-class modPartnership extends DolibarrModules
+class modPartnership extends DCADMINModules
 {
 	/**
 	 * Constructor. Define names, constants, directories, boxes, permissions
@@ -48,7 +48,7 @@ class modPartnership extends DolibarrModules
 		$this->db = $db;
 
 		// Id for module (must be unique).
-		// Use here a free id (See in Home -> System information -> Dolibarr for list of used modules id).
+		// Use here a free id (See in Home -> System information -> DCADMIN for list of used modules id).
 		$this->numero = 58000;
 
 		// Key text used to identify module (for permissions, menus, etc...)
@@ -149,7 +149,7 @@ class modPartnership extends DolibarrModules
 
 		// Prerequisites
 		$this->phpmin = array(7, 0); // Minimum version of PHP required by module
-		$this->need_dolibarr_version = array(11, -3); // Minimum version of Dolibarr required by module
+		$this->need_dolibarr_version = array(11, -3); // Minimum version of DCADMIN required by module
 
 		// Messages at activation
 		$this->warnings_activation = array();
@@ -274,7 +274,7 @@ class modPartnership extends DolibarrModules
 				'jobtype' => 'method',
 				'class' => '/partnership/class/partnershiputils.class.php',
 				'objectname' => 'PartnershipUtils',
-				'method' => 'doWarningOfPartnershipIfDolibarrBacklinkNotfound',
+				'method' => 'doWarningOfPartnershipIfDCADMINBacklinkNotfound',
 				'parameters' => '',
 				'comment' => 'Add a warning on partnership record if the backlink keyword is not found on the partner website.',
 				'frequency' => 1,
@@ -427,7 +427,7 @@ class modPartnership extends DolibarrModules
 
 	/**
 	 *  Function called when module is enabled.
-	 *  The init function add constants, boxes, permissions and menus (defined in constructor) into Dolibarr database.
+	 *  The init function add constants, boxes, permissions and menus (defined in constructor) into DCADMIN database.
 	 *  It also creates data directories
 	 *
 	 *  @param      string  $options    Options when enabling module ('', 'noboxes')
@@ -492,7 +492,7 @@ class modPartnership extends DolibarrModules
 
 	/**
 	 *  Function called when module is disabled.
-	 *  Remove from database constants, boxes and permissions from Dolibarr database.
+	 *  Remove from database constants, boxes and permissions from DCADMIN database.
 	 *  Data directories are not deleted
 	 *
 	 *  @param      string	$options    Options when enabling module ('', 'noboxes')

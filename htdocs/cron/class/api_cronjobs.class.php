@@ -23,9 +23,9 @@ require_once DOL_DOCUMENT_ROOT.'/cron/class/cronjob.class.php';
  * API class for cron jobs
  *
  * @access protected
- * @class  DolibarrApiAccess {@requires user,external}
+ * @class  DCADMINApiAccess {@requires user,external}
  */
-class Cronjobs extends DolibarrApi
+class Cronjobs extends DCADMINApi
 {
 	/**
 	 * @var string[]       Mandatory fields, checked when create and update object
@@ -62,7 +62,7 @@ class Cronjobs extends DolibarrApi
 	 */
 	public function get($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('cron', 'read')) {
+		if (!DCADMINApiAccess::$user->hasRight('cron', 'read')) {
 			throw new RestException(403);
 		}
 
@@ -71,8 +71,8 @@ class Cronjobs extends DolibarrApi
 			throw new RestException(404, 'Cron job not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('cronjob', $this->cronjob->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('cronjob', $this->cronjob->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		return $this->_cleanObjectDatas($this->cronjob);
@@ -99,7 +99,7 @@ class Cronjobs extends DolibarrApi
 	 */
 	public function index($sortfield = "t.rowid", $sortorder = 'ASC', $limit = 100, $page = 0, $status = -1, $sqlfilters = '', $properties = '', $pagination_data = false)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('cron', 'read')) {
+		if (!DCADMINApiAccess::$user->hasRight('cron', 'read')) {
 			throw new RestException(403);
 		}
 
@@ -147,7 +147,7 @@ class Cronjobs extends DolibarrApi
 	 */
 	public function post($request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('cron', 'write') || !DolibarrApiAccess::$user->admin) {
+		if (!DCADMINApiAccess::$user->hasRight('cron', 'write') || !DCADMINApiAccess::$user->admin) {
 			throw new RestException(403, "Insufficient rights - creating a cron job requires an admin user");
 		}
 
@@ -157,7 +157,7 @@ class Cronjobs extends DolibarrApi
 			$this->cronjob->$field = $this->_checkValForAPI($field, $value, $this->cronjob);
 		}
 
-		if ($this->cronjob->create(DolibarrApiAccess::$user) < 0) {
+		if ($this->cronjob->create(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, "Error creating cron job", array_merge(array($this->cronjob->error), $this->cronjob->errors));
 		}
 
@@ -177,7 +177,7 @@ class Cronjobs extends DolibarrApi
 	 */
 	public function put($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('cron', 'write') || !DolibarrApiAccess::$user->admin) {
+		if (!DCADMINApiAccess::$user->hasRight('cron', 'write') || !DCADMINApiAccess::$user->admin) {
 			throw new RestException(403, "Insufficient rights - updating a cron job requires an admin user");
 		}
 
@@ -186,8 +186,8 @@ class Cronjobs extends DolibarrApi
 			throw new RestException(404, 'Cron job not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('cronjob', $this->cronjob->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('cronjob', $this->cronjob->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		foreach ($request_data as $field => $value) {
@@ -197,7 +197,7 @@ class Cronjobs extends DolibarrApi
 			$this->cronjob->$field = $this->_checkValForAPI($field, $value, $this->cronjob);
 		}
 
-		if ($this->cronjob->update(DolibarrApiAccess::$user) > 0) {
+		if ($this->cronjob->update(DCADMINApiAccess::$user) > 0) {
 			return $this->get($id);
 		} else {
 			throw new RestException(500, $this->cronjob->error);
@@ -216,7 +216,7 @@ class Cronjobs extends DolibarrApi
 	 */
 	public function delete($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('cron', 'delete')) {
+		if (!DCADMINApiAccess::$user->hasRight('cron', 'delete')) {
 			throw new RestException(403);
 		}
 
@@ -225,11 +225,11 @@ class Cronjobs extends DolibarrApi
 			throw new RestException(404, 'Cron job not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('cronjob', $this->cronjob->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('cronjob', $this->cronjob->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		if (!$this->cronjob->delete(DolibarrApiAccess::$user)) {
+		if (!$this->cronjob->delete(DCADMINApiAccess::$user)) {
 			throw new RestException(500, 'Error when deleting cron job: '.$this->cronjob->error);
 		}
 
@@ -260,7 +260,7 @@ class Cronjobs extends DolibarrApi
 	 */
 	public function run($id, $securitykey = '')
 	{
-		if (!DolibarrApiAccess::$user->hasRight('cron', 'write') || !DolibarrApiAccess::$user->admin) {
+		if (!DCADMINApiAccess::$user->hasRight('cron', 'write') || !DCADMINApiAccess::$user->admin) {
 			throw new RestException(403, "Insufficient rights - running a cron job requires an admin user");
 		}
 
@@ -273,18 +273,18 @@ class Cronjobs extends DolibarrApi
 			throw new RestException(404, 'Cron job not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('cronjob', $this->cronjob->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('cronjob', $this->cronjob->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$now = dol_now();
 
-		$result = $this->cronjob->run_jobs(DolibarrApiAccess::$user->login);
+		$result = $this->cronjob->run_jobs(DCADMINApiAccess::$user->login);
 		if ($result < 0) {
 			throw new RestException(500, 'Error when running cron job: '.$this->cronjob->error);
 		}
 
-		$result = $this->cronjob->reprogram_jobs(DolibarrApiAccess::$user->login, $now);
+		$result = $this->cronjob->reprogram_jobs(DCADMINApiAccess::$user->login, $now);
 		if ($result <= 0) {
 			throw new RestException(500, 'Job ran but failed to reprogram next run: '.$this->cronjob->error);
 		}

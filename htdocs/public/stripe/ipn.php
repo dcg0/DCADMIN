@@ -42,7 +42,7 @@ if (!defined('USESUFFIXINLOG')) {
 	define('USESUFFIXINLOG', '_stripeipn');
 }
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf
@@ -96,7 +96,7 @@ if (empty($endpoint_secret)) {
 }
 
 if (getDolGlobalString('STRIPE_USER_ACCOUNT_FOR_ACTIONS')) {
-	// We set the user to use for all ipn actions in Dolibarr
+	// We set the user to use for all ipn actions in DCADMIN
 	$user = new User($db);
 	$user->fetch(getDolGlobalInt('STRIPE_USER_ACCOUNT_FOR_ACTIONS'));
 	$user->loadRights();
@@ -393,9 +393,9 @@ if ($event->type == 'payout.created' && getDolGlobalString('STRIPE_AUTO_RECORD_P
 	$supplierinvoice_id = 0;
 	$salary_id = "";
 	$paymentTypeCode = "";				// payment type according to Stripe
-	$paymentTypeCodeInDolibarr = "";	// payment type according to Dolibarr
+	$paymentTypeCodeInDCADMIN = "";	// payment type according to DCADMIN
 	$payment_amount = 0;
-	$payment_amountInDolibarr = 0;
+	$payment_amountInDCADMIN = 0;
 
 	dol_syslog("Try to find a payment in database for the payment_intent id = ".$TRANSACTIONID);
 	dol_syslog("Try to find a payment in database for the payment_intent id = ".$TRANSACTIONID, LOG_DEBUG, 0, '_payment');
@@ -419,8 +419,8 @@ if ($event->type == 'payout.created' && getDolGlobalString('STRIPE_AUTO_RECORD_P
 					$invoice_id = $obj->fk_facture;
 					$supplierinvoice_id = $obj->fk_facture_fourn;
 					$salary_id = $obj->fk_salary;
-					$payment_amountInDolibarr = $obj->amount;
-					$paymentTypeCodeInDolibarr = $obj->type;
+					$payment_amountInDCADMIN = $obj->amount;
+					$paymentTypeCodeInDCADMIN = $obj->type;
 
 					dol_syslog("Found a request in database to pay with direct debit generated (pdid = ".$pdid." directdebitorcreditransfer_id=".$directdebitorcreditransfer_id.")");
 					dol_syslog("Found a request in database to pay with direct debit generated (pdid = ".$pdid." directdebitorcreditransfer_id=".$directdebitorcreditransfer_id.")", LOG_DEBUG, 0, '_payment');
@@ -434,8 +434,8 @@ if ($event->type == 'payout.created' && getDolGlobalString('STRIPE_AUTO_RECORD_P
 				if ($obj->traite == 0) {
 					// This is a card payment not already flagged as sent to Stripe.
 					$invoice_id = $obj->fk_facture;
-					$payment_amountInDolibarr = $obj->amount;
-					$paymentTypeCodeInDolibarr = empty($obj->type) ? 'card' : $obj->type;
+					$payment_amountInDCADMIN = $obj->amount;
+					$paymentTypeCodeInDCADMIN = empty($obj->type) ? 'card' : $obj->type;
 
 					dol_syslog("Found a request in database to pay with card (pdid = ".$pdid."). We should fix status traite to 1");
 					dol_syslog("Found a request in database to pay with card (pdid = ".$pdid."). We should fix status traite to 1", LOG_DEBUG, 0, '_payment');
@@ -457,7 +457,7 @@ if ($event->type == 'payout.created' && getDolGlobalString('STRIPE_AUTO_RECORD_P
 		return -1;
 	}
 
-	if ($paymentTypeCodeInDolibarr) {
+	if ($paymentTypeCodeInDCADMIN) {
 		// Here, we need to do something. A $invoice_id has been found.
 
 		$stripeacc = $stripearrayofkeysbyenv[$servicestatus]['secret_key'];
@@ -475,15 +475,15 @@ if ($event->type == 'payout.created' && getDolGlobalString('STRIPE_AUTO_RECORD_P
 			$paymentTypeCode = "CB";
 		}
 
-		$payment_amount = $payment_amountInDolibarr;
+		$payment_amount = $payment_amountInDCADMIN;
 
 		// TODO Add this checks ? May not be required because the message is already decoded with $event = \Stripe\Webhook::constructEvent($payload, $sig_header, $endpoint_secret);
-		// - Check payment_amount in Stripe (received) is same than the one in Dolibarr
+		// - Check payment_amount in Stripe (received) is same than the one in DCADMIN
 		// - Check that payment intent is succeed (to avoid forged json webhook sent by malicious users)
 
 		$postactionmessages = array();
 
-		if ($paymentTypeCode == "CB" && ($paymentTypeCodeInDolibarr == 'card' || empty($paymentTypeCodeInDolibarr))) {
+		if ($paymentTypeCode == "CB" && ($paymentTypeCodeInDCADMIN == 'card' || empty($paymentTypeCodeInDCADMIN))) {
 			// Case payment type at Stripe side and into prelevement_demande are both CARD.
 			// For this case, payment should already have been recorded so we just update flag of payment request if not yet 1
 
@@ -503,7 +503,7 @@ if ($event->type == 'payout.created' && getDolGlobalString('STRIPE_AUTO_RECORD_P
 			dol_syslog("TODO update flag traite to 1 sql=".$sql);
 			dol_syslog("TODO update flag traite to 1 sql=".$sql, LOG_DEBUG, 0, '_payment');
 			//$db->query($sql);
-		} elseif ($paymentTypeCode == "PRE" && $paymentTypeCodeInDolibarr == 'ban') {
+		} elseif ($paymentTypeCode == "PRE" && $paymentTypeCodeInDCADMIN == 'ban') {
 			// Case payment type is Direct Debit and into prelevement_demande is also BAN.
 			// For this case, payment on invoice (not yet recorded) must be recorded and direct debit order must be closed.
 
@@ -772,7 +772,7 @@ if ($event->type == 'payout.created' && getDolGlobalString('STRIPE_AUTO_RECORD_P
 				$from = getDolGlobalString('MAIN_INFO_SOCIETE_MAIL');
 
 				$trackid = 'inv'.$invoice->id;
-				$moreinheader = 'X-Dolibarr-Info: public stripe ipn.php'."\r\n";
+				$moreinheader = 'X-DCADMIN-Info: public stripe ipn.php'."\r\n";
 				$addr_cc = '';
 				if (!empty($invoice->thirdparty->array_options['options_emailccinvoice'])) {
 					dol_syslog("We add the recipient ".$invoice->thirdparty->array_options['options_emailccinvoice']." as CC", LOG_DEBUG);
@@ -800,12 +800,12 @@ if ($event->type == 'payout.created' && getDolGlobalString('STRIPE_AUTO_RECORD_P
 				dol_syslog("Option STRIPE_IPN_SEND_EMAIL_ON_DIRECT_DEBIT_CONFIRMATION not set to the template label. No email sent.", LOG_DEBUG, 0, '_payment');
 			}
 		} else {
-			dol_syslog("The payment mode of this payment is ".$paymentTypeCode." in Stripe and ".$paymentTypeCodeInDolibarr." in Dolibarr. This case is not managed by the IPN");
-			dol_syslog("The payment mode of this payment is ".$paymentTypeCode." in Stripe and ".$paymentTypeCodeInDolibarr." in Dolibarr. This case is not managed by the IPN", LOG_DEBUG, 0, '_payment');
+			dol_syslog("The payment mode of this payment is ".$paymentTypeCode." in Stripe and ".$paymentTypeCodeInDCADMIN." in DCADMIN. This case is not managed by the IPN");
+			dol_syslog("The payment mode of this payment is ".$paymentTypeCode." in Stripe and ".$paymentTypeCodeInDCADMIN." in DCADMIN. This case is not managed by the IPN", LOG_DEBUG, 0, '_payment');
 		}
 	} else {
-		dol_syslog("Nothing to do in database because we don't know paymentTypeIdInDolibarr");
-		dol_syslog("Nothing to do in database because we don't know paymentTypeIdInDolibarr", LOG_DEBUG, 0, '_payment');
+		dol_syslog("Nothing to do in database because we don't know paymentTypeIdInDCADMIN");
+		dol_syslog("Nothing to do in database because we don't know paymentTypeIdInDCADMIN", LOG_DEBUG, 0, '_payment');
 	}
 } elseif ($event->type == 'payment_intent.payment_failed') {
 	// When a try to take payment has failed. Useful for asynchronous SEPA payment that fails.
@@ -1064,9 +1064,9 @@ if ($event->type == 'payout.created' && getDolGlobalString('STRIPE_AUTO_RECORD_P
 
 	$invoice_id = 0;
 	$paymentTypeCode = "";			// payment type according to Stripe
-	$paymentTypeCodeInDolibarr = "";	// payment type according to Dolibarr
+	$paymentTypeCodeInDCADMIN = "";	// payment type according to DCADMIN
 	$payment_amount = 0;
-	$payment_amountInDolibarr = 0;
+	$payment_amountInDCADMIN = 0;
 
 	dol_syslog("Try to find the payment in database for the payment_intent id = ".$TRANSACTIONID);
 	dol_syslog("Try to find the payment in database for the payment_intent id = ".$TRANSACTIONID, LOG_DEBUG, 0, '_payment');
@@ -1086,8 +1086,8 @@ if ($event->type == 'payout.created' && getDolGlobalString('STRIPE_AUTO_RECORD_P
 				$pdid = $obj->rowid;
 				$invoice_id = $obj->fk_facture;
 				$directdebitorcreditransfer_id = $obj->fk_prelevement_bons;
-				$payment_amountInDolibarr = $obj->amount;
-				$paymentTypeCodeInDolibarr = $obj->type;
+				$payment_amountInDCADMIN = $obj->amount;
+				$paymentTypeCodeInDCADMIN = $obj->type;
 
 				dol_syslog("Found the payment intent for ban in database (pdid = ".$pdid." directdebitorcreditransfer_id=".$directdebitorcreditransfer_id.")");
 				dol_syslog("Found the payment intent for ban in database (pdid = ".$pdid." directdebitorcreditransfer_id=".$directdebitorcreditransfer_id.")", LOG_DEBUG, 0, '_payment');
@@ -1097,8 +1097,8 @@ if ($event->type == 'payout.created' && getDolGlobalString('STRIPE_AUTO_RECORD_P
 				$pdid = $obj->rowid;
 				$invoice_id = $obj->fk_facture;
 				$directdebitorcreditransfer_id = 0;
-				$payment_amountInDolibarr = $obj->amount;
-				$paymentTypeCodeInDolibarr = empty($obj->type) ? 'card' : $obj->type;
+				$payment_amountInDCADMIN = $obj->amount;
+				$paymentTypeCodeInDCADMIN = empty($obj->type) ? 'card' : $obj->type;
 
 				dol_syslog("Found the payment intent for card in database (pdid = ".$pdid." directdebitorcreditransfer_id=".$directdebitorcreditransfer_id.")");
 				dol_syslog("Found the payment intent for card in database (pdid = ".$pdid." directdebitorcreditransfer_id=".$directdebitorcreditransfer_id.")", LOG_DEBUG, 0, '_payment');
@@ -1122,15 +1122,15 @@ if ($event->type == 'payout.created' && getDolGlobalString('STRIPE_AUTO_RECORD_P
 	$tmpinvoice->fetch($invoice_id);
 	$tmpinvoice->fetch_thirdparty();
 
-	dol_syslog("The payment disputed has the amount ".$amountdispute.", fees of ".$fees." and the invoice has ".$payment_amountInDolibarr);
-	dol_syslog("The payment disputed has the amount ".$amountdispute.", fees of ".$fees." and the invoice has ".$payment_amountInDolibarr, LOG_DEBUG, 0, '_payment');
+	dol_syslog("The payment disputed has the amount ".$amountdispute.", fees of ".$fees." and the invoice has ".$payment_amountInDCADMIN);
+	dol_syslog("The payment disputed has the amount ".$amountdispute.", fees of ".$fees." and the invoice has ".$payment_amountInDCADMIN, LOG_DEBUG, 0, '_payment');
 
 	// Amount may differ: sometimes amount for chargback is higher or lower than initial amount. No explanation (may be currencyrate ?)
 	// So we disable this protection
 	/*
-	if ($amountdispute != $payment_amountInDolibarr) {
+	if ($amountdispute != $payment_amountInDCADMIN) {
 		http_response_code(500);
-		print "The payment disputed has the amount ".$amountdispute." and the invoice has ".$payment_amountInDolibarr.". Amount is too different, we don't know what to do.";
+		print "The payment disputed has the amount ".$amountdispute." and the invoice has ".$payment_amountInDCADMIN.". Amount is too different, we don't know what to do.";
 		dol_syslog("Amount differs, we don't know what to do - Return HTTP 500.", LOG_WARNING, 0, '_payment');
 		http_response_code(500);
 		return -1;
@@ -1209,7 +1209,7 @@ if ($event->type == 'payout.created' && getDolGlobalString('STRIPE_AUTO_RECORD_P
 		$paiement = new Paiement($db);
 
 		$amounts = array();
-		$amounts[$tmpinvoice->id] = -1 * $payment_amountInDolibarr;
+		$amounts[$tmpinvoice->id] = -1 * $payment_amountInDCADMIN;
 
 		$paiement->datepaye = dol_now();
 		$paiement->amounts = $amounts; // Array with all payments dispatching with invoice id

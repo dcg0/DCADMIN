@@ -24,7 +24,7 @@
  *    \brief      Page to create/edit/view Bill Of Material
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * The main.inc.php has been included so the following variable are now defined:

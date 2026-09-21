@@ -37,7 +37,7 @@ require_once DOL_DOCUMENT_ROOT.'/core/triggers/dolibarrtriggers.class.php';
 /**
  *  Class of triggered functions for agenda module
  */
-class InterfaceActionsAuto extends DolibarrTriggers
+class InterfaceActionsAuto extends DCADMINTriggers
 {
 	/**
 	 * Constructor
@@ -56,7 +56,7 @@ class InterfaceActionsAuto extends DolibarrTriggers
 	}
 
 	/**
-	 * Function called when a Dolibarr business event is done.
+	 * Function called when a DCADMIN business event is done.
 	 * All functions "runTrigger" are triggered if file is inside directory htdocs/core/triggers or htdocs/module/code/triggers (and declared)
 	 *
 	 * Following properties may be set before calling trigger. The may be completed by this trigger to be used for writing the event into database:
@@ -118,13 +118,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("NewCompanyToDolibarr", $object->name);
+					$object->actionmsg2 = $langs->transnoentities("NewCompanyToDCADMIN", $object->name);
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("NewCompanyToDolibarr", $object->name);
+				$object->actionmsg = $langs->transnoentities("NewCompanyToDCADMIN", $object->name);
 			}
 
 			$object->sendtoid = array();
@@ -136,13 +136,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("COMPANY_MODIFYInDolibarr", $object->name);
+					$object->actionmsg2 = $langs->transnoentities("COMPANY_MODIFYInDCADMIN", $object->name);
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("COMPANY_MODIFYInDolibarr", $object->name);
+				$object->actionmsg = $langs->transnoentities("COMPANY_MODIFYInDCADMIN", $object->name);
 			}
 
 			// For merge event, we add a mention
@@ -174,13 +174,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("CONTACT_CREATEInDolibarr", $object->getFullName($langs));
+					$object->actionmsg2 = $langs->transnoentities("CONTACT_CREATEInDCADMIN", $object->getFullName($langs));
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("CONTACT_CREATEInDolibarr", $object->getFullName($langs));
+				$object->actionmsg = $langs->transnoentities("CONTACT_CREATEInDCADMIN", $object->getFullName($langs));
 			}
 
 			$object->sendtoid = array($object->id => $object->id);
@@ -192,13 +192,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("CONTACT_MODIFYInDolibarr", $object->getFullName($langs));
+					$object->actionmsg2 = $langs->transnoentities("CONTACT_MODIFYInDCADMIN", $object->getFullName($langs));
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("CONTACT_MODIFYInDolibarr", $object->getFullName($langs));
+				$object->actionmsg = $langs->transnoentities("CONTACT_MODIFYInDCADMIN", $object->getFullName($langs));
 			}
 
 			// For merge event, we add a mention
@@ -215,13 +215,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("ContractValidatedInDolibarr", (string) ($object->newref ? $object->newref : (string) $object->ref));
+					$object->actionmsg2 = $langs->transnoentities("ContractValidatedInDCADMIN", (string) ($object->newref ? $object->newref : (string) $object->ref));
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("ContractValidatedInDolibarr", (string) ($object->newref ? $object->newref : (string) $object->ref));
+				$object->actionmsg = $langs->transnoentities("ContractValidatedInDCADMIN", (string) ($object->newref ? $object->newref : (string) $object->ref));
 			}
 
 			$object->sendtoid = array();
@@ -250,13 +250,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("PropalValidatedInDolibarr", (string) ($object->newref ? $object->newref : (string) $object->ref));
+					$object->actionmsg2 = $langs->transnoentities("PropalValidatedInDCADMIN", (string) ($object->newref ? $object->newref : (string) $object->ref));
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("PropalValidatedInDolibarr", (string) ($object->newref ? $object->newref : (string) $object->ref));
+				$object->actionmsg = $langs->transnoentities("PropalValidatedInDCADMIN", (string) ($object->newref ? $object->newref : (string) $object->ref));
 			}
 
 			$object->sendtoid = array();
@@ -267,13 +267,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("PropalBackToDraftInDolibarr", (string) ($object->newref ? $object->newref : (string) $object->ref));
+					$object->actionmsg2 = $langs->transnoentities("PropalBackToDraftInDCADMIN", (string) ($object->newref ? $object->newref : (string) $object->ref));
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("PropalBackToDraftInDolibarr", (string) ($object->newref ? $object->newref : (string) $object->ref));
+				$object->actionmsg = $langs->transnoentities("PropalBackToDraftInDCADMIN", (string) ($object->newref ? $object->newref : (string) $object->ref));
 			}
 
 			$object->sendtoid = array();
@@ -302,13 +302,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("PropalClosedSignedInDolibarr", (string) $object->ref);
+					$object->actionmsg2 = $langs->transnoentities("PropalClosedSignedInDCADMIN", (string) $object->ref);
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("PropalClosedSignedInDolibarr", (string) $object->ref);
+				$object->actionmsg = $langs->transnoentities("PropalClosedSignedInDCADMIN", (string) $object->ref);
 			}
 
 			$object->sendtoid = array();
@@ -319,13 +319,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("PropalClassifiedBilledInDolibarr", (string) $object->ref);
+					$object->actionmsg2 = $langs->transnoentities("PropalClassifiedBilledInDCADMIN", (string) $object->ref);
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("PropalClassifiedBilledInDolibarr", (string) $object->ref);
+				$object->actionmsg = $langs->transnoentities("PropalClassifiedBilledInDCADMIN", (string) $object->ref);
 			}
 
 			$object->sendtoid = array();
@@ -336,13 +336,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("PropalClosedRefusedInDolibarr", (string) $object->ref);
+					$object->actionmsg2 = $langs->transnoentities("PropalClosedRefusedInDCADMIN", (string) $object->ref);
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("PropalClosedRefusedInDolibarr", (string) $object->ref);
+				$object->actionmsg = $langs->transnoentities("PropalClosedRefusedInDCADMIN", (string) $object->ref);
 			}
 
 			$object->sendtoid = array();
@@ -353,13 +353,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("OrderValidatedInDolibarr", (string) ($object->newref ? $object->newref : (string) $object->ref));
+					$object->actionmsg2 = $langs->transnoentities("OrderValidatedInDCADMIN", (string) ($object->newref ? $object->newref : (string) $object->ref));
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("OrderValidatedInDolibarr", (string) ($object->newref ? $object->newref : (string) $object->ref));
+				$object->actionmsg = $langs->transnoentities("OrderValidatedInDCADMIN", (string) ($object->newref ? $object->newref : (string) $object->ref));
 			}
 
 			$object->sendtoid = array();
@@ -370,13 +370,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("OrderDeliveredInDolibarr", (string) $object->ref);
+					$object->actionmsg2 = $langs->transnoentities("OrderDeliveredInDCADMIN", (string) $object->ref);
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("OrderDeliveredInDolibarr", (string) $object->ref);
+				$object->actionmsg = $langs->transnoentities("OrderDeliveredInDCADMIN", (string) $object->ref);
 			}
 
 			$object->sendtoid = array();
@@ -387,13 +387,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("OrderBilledInDolibarr", (string) $object->ref);
+					$object->actionmsg2 = $langs->transnoentities("OrderBilledInDCADMIN", (string) $object->ref);
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("OrderBilledInDolibarr", (string) $object->ref);
+				$object->actionmsg = $langs->transnoentities("OrderBilledInDCADMIN", (string) $object->ref);
 			}
 
 			$object->sendtoid = array();
@@ -404,13 +404,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("OrderCanceledInDolibarr", (string) $object->ref);
+					$object->actionmsg2 = $langs->transnoentities("OrderCanceledInDCADMIN", (string) $object->ref);
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("OrderCanceledInDolibarr", (string) $object->ref);
+				$object->actionmsg = $langs->transnoentities("OrderCanceledInDCADMIN", (string) $object->ref);
 			}
 
 			$object->sendtoid = array();
@@ -439,13 +439,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {	// Label
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("InvoiceValidatedInDolibarr", ($object->newref ? $object->newref : (string) $object->ref));
+					$object->actionmsg2 = $langs->transnoentities("InvoiceValidatedInDCADMIN", ($object->newref ? $object->newref : (string) $object->ref));
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {	// Description
-				$object->actionmsg = $langs->transnoentities("InvoiceValidatedInDolibarr", ($object->newref ? $object->newref : (string) $object->ref));
+				$object->actionmsg = $langs->transnoentities("InvoiceValidatedInDCADMIN", ($object->newref ? $object->newref : (string) $object->ref));
 			}
 
 			$object->sendtoid = array();
@@ -456,13 +456,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("InvoiceBackToDraftInDolibarr", (string) $object->ref);
+					$object->actionmsg2 = $langs->transnoentities("InvoiceBackToDraftInDCADMIN", (string) $object->ref);
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("InvoiceBackToDraftInDolibarr", (string) $object->ref);
+				$object->actionmsg = $langs->transnoentities("InvoiceBackToDraftInDCADMIN", (string) $object->ref);
 			}
 
 			$object->sendtoid = array();
@@ -492,13 +492,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 			// Values for this action can't be defined by caller.
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("InvoicePaidInDolibarr", (string) $object->ref);
+					$object->actionmsg2 = $langs->transnoentities("InvoicePaidInDCADMIN", (string) $object->ref);
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("InvoicePaidInDolibarr", (string) $object->ref);
+				$object->actionmsg = $langs->transnoentities("InvoicePaidInDCADMIN", (string) $object->ref);
 			}
 
 			$object->sendtoid = array();
@@ -509,13 +509,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("InvoiceCanceledInDolibarr", (string) $object->ref);
+					$object->actionmsg2 = $langs->transnoentities("InvoiceCanceledInDCADMIN", (string) $object->ref);
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("InvoiceCanceledInDolibarr", (string) $object->ref);
+				$object->actionmsg = $langs->transnoentities("InvoiceCanceledInDCADMIN", (string) $object->ref);
 			}
 
 			$object->sendtoid = array();
@@ -526,13 +526,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("InterventionCreatedInDolibarr", (string) $object->ref);
+					$object->actionmsg2 = $langs->transnoentities("InterventionCreatedInDCADMIN", (string) $object->ref);
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("InterventionCreatedInDolibarr", (string) $object->ref);
+				$object->actionmsg = $langs->transnoentities("InterventionCreatedInDCADMIN", (string) $object->ref);
 			}
 
 			$object->sendtoid = array();
@@ -543,13 +543,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("InterventionValidatedInDolibarr", ($object->newref ? $object->newref : (string) $object->ref));
+					$object->actionmsg2 = $langs->transnoentities("InterventionValidatedInDCADMIN", ($object->newref ? $object->newref : (string) $object->ref));
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("InterventionValidatedInDolibarr", ($object->newref ? $object->newref : (string) $object->ref));
+				$object->actionmsg = $langs->transnoentities("InterventionValidatedInDCADMIN", ($object->newref ? $object->newref : (string) $object->ref));
 			}
 
 			$object->sendtoid = array();
@@ -560,13 +560,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("InterventionModifiedInDolibarr", (string) $object->ref);
+					$object->actionmsg2 = $langs->transnoentities("InterventionModifiedInDCADMIN", (string) $object->ref);
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("InterventionModifiedInDolibarr", (string) $object->ref);
+				$object->actionmsg = $langs->transnoentities("InterventionModifiedInDCADMIN", (string) $object->ref);
 			}
 
 			$object->sendtoid = array();
@@ -595,13 +595,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("InterventionClassifiedBilledInDolibarr", (string) $object->ref);
+					$object->actionmsg2 = $langs->transnoentities("InterventionClassifiedBilledInDCADMIN", (string) $object->ref);
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("InterventionClassifiedBilledInDolibarr", (string) $object->ref);
+				$object->actionmsg = $langs->transnoentities("InterventionClassifiedBilledInDCADMIN", (string) $object->ref);
 			}
 
 			$object->sendtoid = array();
@@ -612,13 +612,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("InterventionClassifiedUnbilledInDolibarr", (string) $object->ref);
+					$object->actionmsg2 = $langs->transnoentities("InterventionClassifiedUnbilledInDCADMIN", (string) $object->ref);
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("InterventionClassifiedUnbilledInDolibarr", (string) $object->ref);
+				$object->actionmsg = $langs->transnoentities("InterventionClassifiedUnbilledInDCADMIN", (string) $object->ref);
 			}
 
 			$object->sendtoid = array();
@@ -629,13 +629,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("InterventionClosedInDolibarr", (string) $object->ref);
+					$object->actionmsg2 = $langs->transnoentities("InterventionClosedInDCADMIN", (string) $object->ref);
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("InterventionClosedInDolibarr", (string) $object->ref);
+				$object->actionmsg = $langs->transnoentities("InterventionClosedInDCADMIN", (string) $object->ref);
 			}
 
 			$object->sendtoid = array();
@@ -646,13 +646,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("InterventionDeletedInDolibarr", (string) $object->ref);
+					$object->actionmsg2 = $langs->transnoentities("InterventionDeletedInDCADMIN", (string) $object->ref);
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("InterventionDeletedInDolibarr", (string) $object->ref);
+				$object->actionmsg = $langs->transnoentities("InterventionDeletedInDCADMIN", (string) $object->ref);
 			}
 
 			$object->sendtoid = array();
@@ -737,13 +737,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("PropalValidatedInDolibarr", ($object->newref ? $object->newref : (string) $object->ref));
+					$object->actionmsg2 = $langs->transnoentities("PropalValidatedInDCADMIN", ($object->newref ? $object->newref : (string) $object->ref));
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("PropalValidatedInDolibarr", ($object->newref ? $object->newref : (string) $object->ref));
+				$object->actionmsg = $langs->transnoentities("PropalValidatedInDCADMIN", ($object->newref ? $object->newref : (string) $object->ref));
 			}
 
 			$object->sendtoid = array();
@@ -772,13 +772,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("PropalClosedSignedInDolibarr", (string) $object->ref);
+					$object->actionmsg2 = $langs->transnoentities("PropalClosedSignedInDCADMIN", (string) $object->ref);
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("PropalClosedSignedInDolibarr", (string) $object->ref);
+				$object->actionmsg = $langs->transnoentities("PropalClosedSignedInDCADMIN", (string) $object->ref);
 			}
 
 			$object->sendtoid = array();
@@ -789,13 +789,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("PropalClosedRefusedInDolibarr", (string) $object->ref);
+					$object->actionmsg2 = $langs->transnoentities("PropalClosedRefusedInDCADMIN", (string) $object->ref);
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("PropalClosedRefusedInDolibarr", (string) $object->ref);
+				$object->actionmsg = $langs->transnoentities("PropalClosedRefusedInDCADMIN", (string) $object->ref);
 			}
 
 			$object->sendtoid = array();
@@ -806,13 +806,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("OrderCreatedInDolibarr", ($object->newref ? $object->newref : (string) $object->ref));
+					$object->actionmsg2 = $langs->transnoentities("OrderCreatedInDCADMIN", ($object->newref ? $object->newref : (string) $object->ref));
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("OrderCreatedInDolibarr", ($object->newref ? $object->newref : (string) $object->ref));
+				$object->actionmsg = $langs->transnoentities("OrderCreatedInDCADMIN", ($object->newref ? $object->newref : (string) $object->ref));
 			}
 
 			$object->sendtoid = array();
@@ -823,13 +823,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("OrderValidatedInDolibarr", ($object->newref ? $object->newref : (string) $object->ref));
+					$object->actionmsg2 = $langs->transnoentities("OrderValidatedInDCADMIN", ($object->newref ? $object->newref : (string) $object->ref));
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("OrderValidatedInDolibarr", ($object->newref ? $object->newref : (string) $object->ref));
+				$object->actionmsg = $langs->transnoentities("OrderValidatedInDCADMIN", ($object->newref ? $object->newref : (string) $object->ref));
 			}
 
 			$object->sendtoid = array();
@@ -840,13 +840,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("OrderApprovedInDolibarr", (string) $object->ref);
+					$object->actionmsg2 = $langs->transnoentities("OrderApprovedInDCADMIN", (string) $object->ref);
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("OrderApprovedInDolibarr", (string) $object->ref);
+				$object->actionmsg = $langs->transnoentities("OrderApprovedInDCADMIN", (string) $object->ref);
 			}
 
 			$object->sendtoid = array();
@@ -857,13 +857,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("OrderRefusedInDolibarr", (string) $object->ref);
+					$object->actionmsg2 = $langs->transnoentities("OrderRefusedInDCADMIN", (string) $object->ref);
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("OrderRefusedInDolibarr", (string) $object->ref);
+				$object->actionmsg = $langs->transnoentities("OrderRefusedInDCADMIN", (string) $object->ref);
 			}
 
 			if (!empty($object->refuse_note)) {
@@ -879,13 +879,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("OrderCanceledInDolibarr", (string) $object->ref);
+					$object->actionmsg2 = $langs->transnoentities("OrderCanceledInDCADMIN", (string) $object->ref);
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("OrderCanceledInDolibarr", (string) $object->ref);
+				$object->actionmsg = $langs->transnoentities("OrderCanceledInDCADMIN", (string) $object->ref);
 			}
 
 			if (!empty($object->cancel_note)) {
@@ -901,13 +901,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("SupplierOrderSubmitedInDolibarr", ($object->newref ?: (string) $object->ref), $object->getInputMethod());
+					$object->actionmsg2 = $langs->transnoentities("SupplierOrderSubmitedInDCADMIN", ($object->newref ?: (string) $object->ref), $object->getInputMethod());
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("SupplierOrderSubmitedInDolibarr", ($object->newref ? $object->newref : (string) $object->ref));
+				$object->actionmsg = $langs->transnoentities("SupplierOrderSubmitedInDCADMIN", ($object->newref ? $object->newref : (string) $object->ref));
 			}
 
 			if (!empty($object->context['comments'])) {
@@ -923,13 +923,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("SupplierOrderReceivedInDolibarr", ($object->newref ? $object->newref : (string) $object->ref));
+					$object->actionmsg2 = $langs->transnoentities("SupplierOrderReceivedInDCADMIN", ($object->newref ? $object->newref : (string) $object->ref));
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("SupplierOrderReceivedInDolibarr", ($object->newref ? $object->newref : (string) $object->ref));
+				$object->actionmsg = $langs->transnoentities("SupplierOrderReceivedInDCADMIN", ($object->newref ? $object->newref : (string) $object->ref));
 			}
 
 			$object->sendtoid = array();
@@ -975,13 +975,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("InvoiceCreatedInDolibarr", ($object->newref ? $object->newref : (string) $object->ref));
+					$object->actionmsg2 = $langs->transnoentities("InvoiceCreatedInDCADMIN", ($object->newref ? $object->newref : (string) $object->ref));
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("InvoiceCreatedInDolibarr", ($object->newref ? $object->newref : (string) $object->ref));
+				$object->actionmsg = $langs->transnoentities("InvoiceCreatedInDCADMIN", ($object->newref ? $object->newref : (string) $object->ref));
 			}
 
 			$object->sendtoid = array();
@@ -992,13 +992,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("InvoiceValidatedInDolibarr", ($object->newref ? $object->newref : (string) $object->ref));
+					$object->actionmsg2 = $langs->transnoentities("InvoiceValidatedInDCADMIN", ($object->newref ? $object->newref : (string) $object->ref));
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("InvoiceValidatedInDolibarr", ($object->newref ? $object->newref : (string) $object->ref));
+				$object->actionmsg = $langs->transnoentities("InvoiceValidatedInDCADMIN", ($object->newref ? $object->newref : (string) $object->ref));
 			}
 
 			$object->sendtoid = array();
@@ -1009,13 +1009,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("InvoiceBackToDraftInDolibarr", (string) $object->ref);
+					$object->actionmsg2 = $langs->transnoentities("InvoiceBackToDraftInDCADMIN", (string) $object->ref);
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("InvoiceBackToDraftInDolibarr", (string) $object->ref);
+				$object->actionmsg = $langs->transnoentities("InvoiceBackToDraftInDCADMIN", (string) $object->ref);
 			}
 
 			$object->sendtoid = array();
@@ -1044,13 +1044,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("InvoicePaidInDolibarr", (string) $object->ref);
+					$object->actionmsg2 = $langs->transnoentities("InvoicePaidInDCADMIN", (string) $object->ref);
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("InvoicePaidInDolibarr", (string) $object->ref);
+				$object->actionmsg = $langs->transnoentities("InvoicePaidInDCADMIN", (string) $object->ref);
 			}
 
 			$object->sendtoid = array();
@@ -1060,13 +1060,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("InvoiceCanceledInDolibarr", (string) $object->ref);
+					$object->actionmsg2 = $langs->transnoentities("InvoiceCanceledInDCADMIN", (string) $object->ref);
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("InvoiceCanceledInDolibarr", (string) $object->ref);
+				$object->actionmsg = $langs->transnoentities("InvoiceCanceledInDCADMIN", (string) $object->ref);
 			}
 
 			$object->sendtoid = array();
@@ -1078,13 +1078,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("MemberValidatedInDolibarr", $object->getFullName($langs));
+					$object->actionmsg2 = $langs->transnoentities("MemberValidatedInDCADMIN", $object->getFullName($langs));
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("MemberValidatedInDolibarr", $object->getFullName($langs));
+				$object->actionmsg = $langs->transnoentities("MemberValidatedInDCADMIN", $object->getFullName($langs));
 				$object->actionmsg .= "\n".$langs->transnoentities("Member").': '.$object->getFullName($langs);
 				$object->actionmsg .= "\n".$langs->transnoentities("Type").': '.$object->type;
 			}
@@ -1097,13 +1097,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("MemberModifiedInDolibarr", $object->getFullName($langs));
+					$object->actionmsg2 = $langs->transnoentities("MemberModifiedInDCADMIN", $object->getFullName($langs));
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("MemberModifiedInDolibarr", $object->getFullName($langs));
+				$object->actionmsg = $langs->transnoentities("MemberModifiedInDCADMIN", $object->getFullName($langs));
 				$object->actionmsg .= "\n".$langs->transnoentities("Member").': '.$object->getFullName($langs);
 				$object->actionmsg .= "\n".$langs->transnoentities("Type").': '.$object->type;
 			}
@@ -1124,13 +1124,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("MemberSubscriptionAddedInDolibarr", (string) $object->id, $member->getFullName($langs));
+					$object->actionmsg2 = $langs->transnoentities("MemberSubscriptionAddedInDCADMIN", (string) $object->id, $member->getFullName($langs));
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("MemberSubscriptionAddedInDolibarr", (string) $object->id, $member->getFullName($langs));
+				$object->actionmsg = $langs->transnoentities("MemberSubscriptionAddedInDCADMIN", (string) $object->id, $member->getFullName($langs));
 				$object->actionmsg .= "\n".$langs->transnoentities("Member").': '.$member->getFullName($langs);
 				$object->actionmsg .= "\n".$langs->transnoentities("Type").': '.$object->fk_type;
 				$object->actionmsg .= "\n".$langs->transnoentities("Amount").': '.$object->amount;
@@ -1156,13 +1156,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("MemberSubscriptionModifiedInDolibarr", (string) $object->id, $member->getFullName($langs));
+					$object->actionmsg2 = $langs->transnoentities("MemberSubscriptionModifiedInDCADMIN", (string) $object->id, $member->getFullName($langs));
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("MemberSubscriptionModifiedInDolibarr", (string) $object->id, $member->getFullName($langs));
+				$object->actionmsg = $langs->transnoentities("MemberSubscriptionModifiedInDCADMIN", (string) $object->id, $member->getFullName($langs));
 				$object->actionmsg .= "\n".$langs->transnoentities("Member").': '.$member->getFullName($langs);
 				$object->actionmsg .= "\n".$langs->transnoentities("Type").': '.$object->fk_type;
 				$object->actionmsg .= "\n".$langs->transnoentities("Amount").': '.$object->amount;
@@ -1189,13 +1189,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("MemberSubscriptionDeletedInDolibarr", (string) $object->ref, $member->getFullName($langs));
+					$object->actionmsg2 = $langs->transnoentities("MemberSubscriptionDeletedInDCADMIN", (string) $object->ref, $member->getFullName($langs));
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("MemberSubscriptionDeletedInDolibarr", (string) $object->ref, $member->getFullName($langs));
+				$object->actionmsg = $langs->transnoentities("MemberSubscriptionDeletedInDCADMIN", (string) $object->ref, $member->getFullName($langs));
 				$object->actionmsg .= "\n".$langs->transnoentities("Member").': '.$member->getFullName($langs);
 				$object->actionmsg .= "\n".$langs->transnoentities("Type").': '.$object->fk_type;
 				$object->actionmsg .= "\n".$langs->transnoentities("Amount").': '.$object->amount;
@@ -1214,13 +1214,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("MemberResiliatedInDolibarr", $object->getFullName($langs));
+					$object->actionmsg2 = $langs->transnoentities("MemberResiliatedInDCADMIN", $object->getFullName($langs));
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("MemberResiliatedInDolibarr", $object->getFullName($langs));
+				$object->actionmsg = $langs->transnoentities("MemberResiliatedInDCADMIN", $object->getFullName($langs));
 				$object->actionmsg .= "\n".$langs->transnoentities("Member").': '.$object->getFullName($langs);
 				$object->actionmsg .= "\n".$langs->transnoentities("Type").': '.$object->type;
 			}
@@ -1233,13 +1233,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("MemberDeletedInDolibarr", $object->getFullName($langs));
+					$object->actionmsg2 = $langs->transnoentities("MemberDeletedInDCADMIN", $object->getFullName($langs));
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("MemberDeletedInDolibarr", $object->getFullName($langs));
+				$object->actionmsg = $langs->transnoentities("MemberDeletedInDCADMIN", $object->getFullName($langs));
 				$object->actionmsg .= "\n".$langs->transnoentities("Member").': '.$object->getFullName($langs);
 				$object->actionmsg .= "\n".$langs->transnoentities("Type").': '.$object->type;
 			}
@@ -1252,13 +1252,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("MemberExcludedInDolibarr", $object->getFullName($langs));
+					$object->actionmsg2 = $langs->transnoentities("MemberExcludedInDCADMIN", $object->getFullName($langs));
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("MemberExcludedInDolibarr", $object->getFullName($langs));
+				$object->actionmsg = $langs->transnoentities("MemberExcludedInDCADMIN", $object->getFullName($langs));
 				$object->actionmsg .= "\n".$langs->transnoentities("Member").': '.$object->getFullName($langs);
 				$object->actionmsg .= "\n".$langs->transnoentities("Type").': '.$object->type;
 			}
@@ -1272,13 +1272,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("ProjectCreatedInDolibarr", (string) $object->ref);
+					$object->actionmsg2 = $langs->transnoentities("ProjectCreatedInDCADMIN", (string) $object->ref);
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("ProjectCreatedInDolibarr", (string) $object->ref);
+				$object->actionmsg = $langs->transnoentities("ProjectCreatedInDCADMIN", (string) $object->ref);
 				$object->actionmsg .= "\n".$langs->transnoentities("Project").': '.(string) $object->ref;
 			}
 
@@ -1290,13 +1290,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("ProjectValidatedInDolibarr", (string) $object->ref);
+					$object->actionmsg2 = $langs->transnoentities("ProjectValidatedInDCADMIN", (string) $object->ref);
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("ProjectValidatedInDolibarr", (string) $object->ref);
+				$object->actionmsg = $langs->transnoentities("ProjectValidatedInDCADMIN", (string) $object->ref);
 				$object->actionmsg .= "\n".$langs->transnoentities("Project").': '.(string) $object->ref;
 			}
 
@@ -1308,13 +1308,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("ProjectModifiedInDolibarr", (string) $object->ref);
+					$object->actionmsg2 = $langs->transnoentities("ProjectModifiedInDCADMIN", (string) $object->ref);
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("ProjectModifiedInDolibarr", (string) $object->ref);
+				$object->actionmsg = $langs->transnoentities("ProjectModifiedInDCADMIN", (string) $object->ref);
 			}
 
 			//$object->actionmsg .= "\n".$langs->transnoentities("Task").': ???';
@@ -1347,9 +1347,9 @@ class InterfaceActionsAuto extends DolibarrTriggers
 			$langs->loadLangs(array("agenda", "other", "projects"));
 
 			if (empty($object->actionmsg2)) {
-				$object->actionmsg2 = $langs->transnoentities("ProjectDeletedInDolibarr", (string) $object->ref);
+				$object->actionmsg2 = $langs->transnoentities("ProjectDeletedInDCADMIN", (string) $object->ref);
 			}
-			$object->actionmsg = $langs->transnoentities("ProjectDeletedInDolibarr", (string) $object->ref);
+			$object->actionmsg = $langs->transnoentities("ProjectDeletedInDCADMIN", (string) $object->ref);
 
 			$object->sendtoid = array();
 		} elseif ($action == 'PROJECT_CLOSE' && $object instanceof Project) {
@@ -1358,13 +1358,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("ProjectClosedInDolibarr", (string) $object->ref);
+					$object->actionmsg2 = $langs->transnoentities("ProjectClosedInDCADMIN", (string) $object->ref);
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("ProjectClosedInDolibarr", (string) $object->ref);
+				$object->actionmsg = $langs->transnoentities("ProjectClosedInDCADMIN", (string) $object->ref);
 			}
 
 			$object->sendtoid = array();
@@ -1376,13 +1376,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("TaskCreatedInDolibarr", (string) $object->ref);
+					$object->actionmsg2 = $langs->transnoentities("TaskCreatedInDCADMIN", (string) $object->ref);
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("TaskCreatedInDolibarr", (string) $object->ref);
+				$object->actionmsg = $langs->transnoentities("TaskCreatedInDCADMIN", (string) $object->ref);
 				$object->actionmsg .= "\n".$langs->transnoentities("Task").': '.(string) $object->ref;
 			}
 
@@ -1394,13 +1394,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("TaskModifiedInDolibarr", (string) $object->ref);
+					$object->actionmsg2 = $langs->transnoentities("TaskModifiedInDCADMIN", (string) $object->ref);
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("TaskModifiedInDolibarr", (string) $object->ref);
+				$object->actionmsg = $langs->transnoentities("TaskModifiedInDCADMIN", (string) $object->ref);
 				$object->actionmsg .= "\n".$langs->transnoentities("Task").': '.(string) $object->ref;
 			}
 
@@ -1412,13 +1412,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("TaskDeletedInDolibarr", (string) $object->ref);
+					$object->actionmsg2 = $langs->transnoentities("TaskDeletedInDCADMIN", (string) $object->ref);
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("TaskDeletedInDolibarr", (string) $object->ref);
+				$object->actionmsg = $langs->transnoentities("TaskDeletedInDCADMIN", (string) $object->ref);
 				$object->actionmsg .= "\n".$langs->transnoentities("Task").': '.(string) $object->ref;
 			}
 
@@ -1430,13 +1430,13 @@ class InterfaceActionsAuto extends DolibarrTriggers
 
 			if (empty($object->actionmsg2)) {
 				if (empty($object->context['actionmsg2'])) {
-					$object->actionmsg2 = $langs->transnoentities("TICKET_ASSIGNEDInDolibarr", (string) $object->ref);
+					$object->actionmsg2 = $langs->transnoentities("TICKET_ASSIGNEDInDCADMIN", (string) $object->ref);
 				} else {
 					$object->actionmsg2 = $object->context['actionmsg2'];
 				}
 			}
 			if (empty($object->actionmsg)) {
-				$object->actionmsg = $langs->transnoentities("TICKET_ASSIGNEDInDolibarr", (string) $object->ref);
+				$object->actionmsg = $langs->transnoentities("TICKET_ASSIGNEDInDCADMIN", (string) $object->ref);
 			}
 
 			if (isset($object->oldcopy->fk_user_assign) && $object->oldcopy->fk_user_assign > 0) {
@@ -1474,21 +1474,21 @@ class InterfaceActionsAuto extends DolibarrTriggers
 			if (empty($object->actionmsg2)) {
 				// Load translation files required by the page
 				$langs->loadLangs(array("agenda", "other"));
-				if ($langs->transnoentities($action."InDolibarr", (empty($object->newref) ? (string) $object->ref : $object->newref)) != $action."InDolibarr") {	// specific translation key
-					$object->actionmsg2 = $langs->transnoentities($action."InDolibarr", (empty($object->newref) ? (string) $object->ref : $object->newref));
+				if ($langs->transnoentities($action."InDCADMIN", (empty($object->newref) ? (string) $object->ref : $object->newref)) != $action."InDCADMIN") {	// specific translation key
+					$object->actionmsg2 = $langs->transnoentities($action."InDCADMIN", (empty($object->newref) ? (string) $object->ref : $object->newref));
 				} else {	// generic translation key
 					$tmp = explode('_', $action);
-					$object->actionmsg2 = $langs->transnoentities($tmp[count($tmp) - 1]."InDolibarr", (empty($object->newref) ? (string) $object->ref : $object->newref));
+					$object->actionmsg2 = $langs->transnoentities($tmp[count($tmp) - 1]."InDCADMIN", (empty($object->newref) ? (string) $object->ref : $object->newref));
 				}
 			}
 			if (empty($object->actionmsg)) {
 				// Load translation files required by the page
 				$langs->loadLangs(array("agenda", "other"));
-				if ($langs->transnoentities($action."InDolibarr", (empty($object->newref) ? (string) $object->ref : $object->newref)) != $action."InDolibarr") {	// specific translation key
-					$object->actionmsg = $langs->transnoentities($action."InDolibarr", (empty($object->newref) ? (string) $object->ref : $object->newref));
+				if ($langs->transnoentities($action."InDCADMIN", (empty($object->newref) ? (string) $object->ref : $object->newref)) != $action."InDCADMIN") {	// specific translation key
+					$object->actionmsg = $langs->transnoentities($action."InDCADMIN", (empty($object->newref) ? (string) $object->ref : $object->newref));
 				} else {	// generic translation key
 					$tmp = explode('_', $action);
-					$object->actionmsg = $langs->transnoentities($tmp[count($tmp) - 1]."InDolibarr", (empty($object->newref) ? (string) $object->ref : $object->newref));
+					$object->actionmsg = $langs->transnoentities($tmp[count($tmp) - 1]."InDCADMIN", (empty($object->newref) ? (string) $object->ref : $object->newref));
 				}
 				if (isModEnabled('multicompany') && property_exists($object, 'entity') && $object->entity > 1) {
 					$object->actionmsg .= ' ('.$langs->trans("Entity").' '.$object->entity.')';

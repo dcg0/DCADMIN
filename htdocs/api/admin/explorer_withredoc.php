@@ -18,7 +18,7 @@
  */
 
 /**
- * 	\defgroup   api     Module DolibarrApi
+ * 	\defgroup   api     Module DCADMINApi
  *  \brief      API explorer using the swagger.json file
  *  \file       htdocs/api/admin/explorer_withredoc.php
  *
@@ -38,7 +38,7 @@ require_once '../../main.inc.php';
 // Enable and test if module Api is enabled
 if (!isModEnabled('api')) {
 	$langs->load("admin");
-	dol_syslog("Call of Dolibarr API interfaces with module API REST are disabled");
+	dol_syslog("Call of DCADMIN API interfaces with module API REST are disabled");
 	print $langs->trans("WarningModuleNotActive", 'Api').'.<br><br>';
 	print $langs->trans("ToActivateModule");
 	//session_destroy();
@@ -48,7 +48,7 @@ if (!isModEnabled('api')) {
 // Test if explorer is not disabled
 if (getDolGlobalString('API_EXPLORER_DISABLED')) {
 	$langs->load("admin");
-	dol_syslog("Call Dolibarr API interfaces with module REST disabled");
+	dol_syslog("Call DCADMIN API interfaces with module REST disabled");
 	print $langs->trans("WarningAPIExplorerDisabled").'.<br><br>';
 	//session_destroy();
 	exit(0);

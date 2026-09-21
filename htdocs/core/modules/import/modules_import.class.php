@@ -72,7 +72,7 @@ class ModeleImports
 	public $extension;
 
 	/**
-	 * Dolibarr version of driver
+	 * DCADMIN version of driver
 	 * @var string Version, possible values are: 'development', 'experimental', 'dolibarr', 'dolibarr_deprecated' or a version string like 'x.y.z'''|'development'|'dolibarr'|'experimental'
 	 */
 	public $version = 'dolibarr';
@@ -1784,7 +1784,7 @@ class ModeleImports
 							$resql = $this->db->query($sql);
 							if ($resql) {
 								if (!$is_table_category_link) {
-									$last_insert_id_array[$tablename] = $this->db->last_insert_id($tablename); // store the last inserted auto_increment id for each table, so that child tables can be inserted with the appropriate id. This must be done just after the INSERT request, else we risk losing the id (because another sql query will be issued somewhere in Dolibarr).
+									$last_insert_id_array[$tablename] = $this->db->last_insert_id($tablename); // store the last inserted auto_increment id for each table, so that child tables can be inserted with the appropriate id. This must be done just after the INSERT request, else we risk losing the id (because another sql query will be issued somewhere in DCADMIN).
 								}
 								$insertdone = true;
 								if (!$importissimulation && $importtriggermode === 'strict_line') {

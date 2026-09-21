@@ -35,7 +35,7 @@ if (!defined('NOREQUIRESOC')) {
 	define('NOREQUIRESOC', '1');
 }
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/core/class/fileupload.class.php';	// Class to upload common files
 require_once DOL_DOCUMENT_ROOT.'/core/class/genericobject.class.php';

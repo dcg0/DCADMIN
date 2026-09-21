@@ -27,7 +27,7 @@
  *
  * All AI tools must extend this class. It provides a standard interface for defining
  * tool capabilities and executing them, along with common utility methods for interacting
- * with Dolibarr.
+ * with DCADMIN.
  */
 abstract class McpTool
 {

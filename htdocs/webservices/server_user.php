@@ -19,7 +19,7 @@
 
 /**
  *       \file       htdocs/webservices/server_user.php
- *       \brief      File that is entry point to call Dolibarr WebServices
+ *       \brief      File that is entry point to call DCADMIN WebServices
  */
 
 if (!defined('NOCSRFCHECK')) {
@@ -64,7 +64,7 @@ $langs->load("main");
 // Enable and test if module web services is enabled
 if (!getDolGlobalString('MAIN_MODULE_WEBSERVICES')) {
 	$langs->load("admin");
-	dol_syslog("Call Dolibarr webservices interfaces with module webservices disabled");
+	dol_syslog("Call DCADMIN webservices interfaces with module webservices disabled");
 	print $langs->trans("WarningModuleNotActive", 'WebServices').'.<br><br>';
 	print $langs->trans("ToActivateModule");
 	exit;
@@ -75,7 +75,7 @@ $server = new nusoap_server();
 $server->soap_defencoding = 'UTF-8';
 $server->decode_utf8 = false;
 $ns = 'http://www.dolibarr.org/ns/';
-$server->configureWSDL('WebServicesDolibarrUser', $ns);
+$server->configureWSDL('WebServicesDCADMINUser', $ns);
 // @phan-suppress-next-line PhanUndeclaredProperty
 $server->wsdl->schemaTargetNamespace = $ns;
 

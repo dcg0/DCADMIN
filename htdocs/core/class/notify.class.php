@@ -767,7 +767,7 @@ class Notify
 
 						$appli = $mysoc->name;
 
-						$subject = '['.$appli.'] '.$outputlangs->transnoentitiesnoconv("DolibarrNotification").($projtitle ? ' '.$projtitle : '');
+						$subject = '['.$appli.'] '.$outputlangs->transnoentitiesnoconv("DCADMINNotification").($projtitle ? ' '.$projtitle : '');
 
 						switch ($notifcode) {
 							case 'BILL_CANCEL':
@@ -1107,7 +1107,7 @@ class Notify
 
 				$appli = $mysoc->name;
 
-				$subject = '['.$appli.'] '.$langs->transnoentitiesnoconv("DolibarrNotification").($projtitle ? ' '.$projtitle : '');
+				$subject = '['.$appli.'] '.$langs->transnoentitiesnoconv("DCADMINNotification").($projtitle ? ' '.$projtitle : '');
 
 				switch ($notifcode) {
 					case 'BILL_VALIDATE':

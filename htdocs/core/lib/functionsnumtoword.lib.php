@@ -21,7 +21,7 @@
 
 /**
  *  \file			htdocs/core/lib/functionsnumtoword.lib.php
- *	\brief			A set of functions for Dolibarr
+ *	\brief			A set of functions for DCADMIN
  *					This file contains all frequently used functions.
  */
 
@@ -397,7 +397,7 @@ function dolNumberToWord($numero, $langs, $numorcurrency = 'number')
 		}
 	}
 
-	/* Dolibarr 3.6.2 doesn't have $langs->default, why ask $lang like a parameter in case it exists? */
+	/* DCADMIN 3.6.2 doesn't have $langs->default, why ask $lang like a parameter in case it exists? */
 	if (((is_object($langs) && $langs->getDefaultLang(0) == 'es_MX') || (!is_object($langs) && $langs == 'es_MX')) && $numorcurrency == 'currency') {
 		if ($numero >= 1 && $numero < 2) {
 			return ("UN PESO ".$parte_decimal." / 100 M.N.");

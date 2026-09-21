@@ -24,7 +24,7 @@
  * \brief		Setup page to configure loan module
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 
 // Class

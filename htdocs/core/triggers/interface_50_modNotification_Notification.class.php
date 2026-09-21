@@ -32,7 +32,7 @@ include_once DOL_DOCUMENT_ROOT.'/core/class/notify.class.php';
 /**
  *  Class of triggers for notification module
  */
-class InterfaceNotification extends DolibarrTriggers
+class InterfaceNotification extends DCADMINTriggers
 {
 	/**
 	 * @var string[]
@@ -58,7 +58,7 @@ class InterfaceNotification extends DolibarrTriggers
 	}
 
 	/**
-	 * Function called when a Dolibarr business event is done.
+	 * Function called when a DCADMIN business event is done.
 	 * All functions "runTrigger" are triggered if file is inside directory htdocs/core/triggers or htdocs/module/code/triggers (and declared)
 	 *
 	 * @param string		$action		Event action code

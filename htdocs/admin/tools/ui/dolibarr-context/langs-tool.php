@@ -17,7 +17,7 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../../../main.inc.php';
 
 /**
@@ -40,8 +40,8 @@ $langs->load('uxdocumentation');
 
 //
 $documentation = new Documentation($db);
-$group = 'UxDolibarrContext';
-$experimentName = 'UxDolibarrContextLangsTool';
+$group = 'UxDCADMINContext';
+$experimentName = 'UxDCADMINContextLangsTool';
 
 $experimentAssetsPath = dolBuildUrl('/public/includes/dolibarr-js-context');
 $js = [
@@ -55,7 +55,7 @@ $css = [];
 $documentation->docHeader($langs->trans($experimentName, $group), $js, $css);
 
 // Set view for menu and breadcrumb
-$documentation->view = [$group, 'UxDolibarrContext', $experimentName];
+$documentation->view = [$group, 'UxDCADMINContext', $experimentName];
 
 // Output sidebar
 $documentation->showSidebar(); ?>
@@ -74,7 +74,7 @@ $documentation->showSidebar(); ?>
 			<h2 id="titlesection-basicusage" class="documentation-title">Introduction</h2>
 
 			<p>
-				The Dolibarr Context Langs Tool is a powerful JavaScript utility to manage translations and locales dynamically.<br/>
+				The DCADMIN Context Langs Tool is a powerful JavaScript utility to manage translations and locales dynamically.<br/>
 				It allows you to load translation domains, set the current language, clear cache, and retrieve translated strings in your scripts.
 			</p>
 
@@ -84,10 +84,10 @@ $documentation->showSidebar(); ?>
 			<h2 id="titlesection-setup-contextvars" class="documentation-title">Setup Context Variables</h2>
 			<p>
 				Before using the tool, you should declare the necessary context variables on your page.<br/>
-				These variables allow the tool to know the current Dolibarr version, the default language, and the interface URL used to fetch translations.
+				These variables allow the tool to know the current DCADMIN version, the default language, and the interface URL used to fetch translations.
 			</p>
 			<p>
-				However, like the setEventMessage tool, the Langs tool is a core tool and is always loaded by Dolibarr.<br/>
+				However, like the setEventMessage tool, the Langs tool is a core tool and is always loaded by DCADMIN.<br/>
 				Therefore, in most cases, you do not need to set these variables manually, as they are already defined.
 			</p>
 			<div class="documentation-example">
@@ -95,7 +95,7 @@ $documentation->showSidebar(); ?>
 				<?php
 				$lines = array(
 					'<script nonce="'.getNonce().'" >',
-					'Dolibarr.setContextVars(<?php print json_encode([',
+					'DCADMIN.setContextVars(<?php print json_encode([',
 					'	\'DOL_VERSION\' => DOL_VERSION,',
 					'	\'MAIN_LANG_DEFAULT\'  => $langs->getDefaultLang(),',
 					'	\'DOL_LANG_INTERFACE_URL\' =>  dol_buildpath(\'public/langs/langs-tool-interface.php\', 1),',
@@ -125,38 +125,38 @@ $documentation->showSidebar(); ?>
 				<?php
 				$lines = array(
 					'<script nonce="'.getNonce().'" >',
-					'document.addEventListener(\'Dolibarr:Ready\', async function(e) {',
+					'document.addEventListener(\'DCADMIN:Ready\', async function(e) {',
 					'',
-					'	if(Dolibarr.checkToolExist(\'langs\')){ // not mandatory because langs tool will be a core tool',
+					'	if(DCADMIN.checkToolExist(\'langs\')){ // not mandatory because langs tool will be a core tool',
 					'',
 					'		// Load langs',
-					'		Dolibarr.tools.langs.load(\'uxdocumentation\'); // will use cache but need to load lang in new local',
+					'		DCADMIN.tools.langs.load(\'uxdocumentation\'); // will use cache but need to load lang in new local',
 					'',
 					'		// Clear cache',
 					'		document.getElementById(\'clearCache\').addEventListener(\'click\', async function(e) {',
-					'			await Dolibarr.tools.langs.clearCache();',
-					'			const txt = Dolibarr.tools.langs.trans(\'CacheCleared\');',
-					'			Dolibarr.tools.setEventMessage(txt);',
+					'			await DCADMIN.tools.langs.clearCache();',
+					'			const txt = DCADMIN.tools.langs.trans(\'CacheCleared\');',
+					'			DCADMIN.tools.setEventMessage(txt);',
 					'		});',
 					'',
 					'		// SET lang in fr_FR',
 					'		document.getElementById(\'setlangFr\').addEventListener(\'click\', async function(e) {',
-					'			await Dolibarr.tools.langs.setLocale(\'fr_FR\');',
-					'			const txt = Dolibarr.tools.langs.trans(\'LangsLocalChangedTo\', \'fr_FR\');',
-					'			Dolibarr.tools.setEventMessage(txt);',
+					'			await DCADMIN.tools.langs.setLocale(\'fr_FR\');',
+					'			const txt = DCADMIN.tools.langs.trans(\'LangsLocalChangedTo\', \'fr_FR\');',
+					'			DCADMIN.tools.setEventMessage(txt);',
 					'		});',
 					'',
 					'		// SET lang in en_US',
 					'		document.getElementById(\'setlangEn\').addEventListener(\'click\', async function(e) {',
-					'			await Dolibarr.tools.langs.setLocale(\'en_US\');',
-					'			const txt = Dolibarr.tools.langs.trans(\'LangsLocalChangedTo\', \'en_US\');',
-					'			Dolibarr.tools.setEventMessage(txt);',
+					'			await DCADMIN.tools.langs.setLocale(\'en_US\');',
+					'			const txt = DCADMIN.tools.langs.trans(\'LangsLocalChangedTo\', \'en_US\');',
+					'			DCADMIN.tools.setEventMessage(txt);',
 					'		});',
 					'',
 					'		// pop a message in current lang',
 					'		document.getElementById(\'popmessage\').addEventListener(\'click\', async function(e) {',
-					'			const txt = Dolibarr.tools.langs.trans(\'ContextLangToolTest\');',
-					'			Dolibarr.tools.setEventMessage(txt);',
+					'			const txt = DCADMIN.tools.langs.trans(\'ContextLangToolTest\');',
+					'			DCADMIN.tools.setEventMessage(txt);',
 					'		});',
 					'	}',
 					'});',

@@ -29,7 +29,7 @@
  *       \brief       Page reporting Turnover (CA) by thirdparty
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf

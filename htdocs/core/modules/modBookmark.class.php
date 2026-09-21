@@ -25,13 +25,13 @@
  *	\brief      Description and activation file for the module Bookmarks
  */
 
-include_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
+include_once DOL_DOCUMENT_ROOT.'/core/modules/DCADMINModules.class.php';
 
 
 /**
  *	Class to describe and enable module Bookmark
  */
-class modBookmark extends DolibarrModules
+class modBookmark extends DCADMINModules
 {
 	/**
 	 *   Constructor. Define names, constants, directories, boxes, permissions

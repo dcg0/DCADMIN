@@ -253,7 +253,7 @@ class MCPServer
 			'protocolVersion' => $negotiated,
 			'capabilities' => $this->serverCapabilities(),
 			'serverInfo' => [
-				'name' => 'Dolibarr MCP Server',
+				'name' => 'DCADMIN MCP Server',
 				'version' => $this->version
 			]
 		];
@@ -291,7 +291,7 @@ class MCPServer
 			// upgrade: safe to cache, but it is per-installation, not user-specific.
 			'cacheScope' => 'public',
 			'ttlMs' => 3600000,
-			'instructions' => 'Dolibarr ERP/CRM MCP server. Tools are permission-filtered per authenticated user; lists honor Dolibarr entity and rights.'
+			'instructions' => 'DCADMIN ERP/CRM MCP server. Tools are permission-filtered per authenticated user; lists honor DCADMIN entity and rights.'
 		];
 	}
 

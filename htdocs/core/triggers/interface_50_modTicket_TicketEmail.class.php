@@ -31,7 +31,7 @@ require_once DOL_DOCUMENT_ROOT.'/core/class/html.formmail.class.php';
 /**
  *  Class of triggers for ticket module
  */
-class InterfaceTicketEmail extends DolibarrTriggers
+class InterfaceTicketEmail extends DCADMINTriggers
 {
 	/**
 	 *   Constructor
@@ -50,7 +50,7 @@ class InterfaceTicketEmail extends DolibarrTriggers
 	}
 
 	/**
-	 *      Function called when a Dolibarr business event is done.
+	 *      Function called when a DCADMIN business event is done.
 	 *      All functions "runTrigger" are triggered if file is inside directory htdocs/core/triggers
 	 *
 	 *      @param  string    		$action Event action code

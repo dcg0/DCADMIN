@@ -29,9 +29,9 @@ require_once DOL_DOCUMENT_ROOT.'/core/lib/company.lib.php';
  * API class for ticket object
  *
  * @access protected
- * @class  DolibarrApiAccess {@requires user,external}
+ * @class  DCADMINApiAccess {@requires user,external}
  */
-class Tickets extends DolibarrApi
+class Tickets extends DCADMINApi
 {
 	/**
 	 * @var string[]       Mandatory fields, checked when create and update object
@@ -136,7 +136,7 @@ class Tickets extends DolibarrApi
 	{
 		global $conf;
 
-		if (!DolibarrApiAccess::$user->hasRight('ticket', 'read')) {
+		if (!DCADMINApiAccess::$user->hasRight('ticket', 'read')) {
 			throw new RestException(403);
 		}
 
@@ -193,8 +193,8 @@ class Tickets extends DolibarrApi
 			$this->ticket->messages = $messages;
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('ticket', $this->ticket->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('ticket', $this->ticket->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		if ($contact_list > -1) {
@@ -233,19 +233,19 @@ class Tickets extends DolibarrApi
 	 */
 	public function index($socid = 0, $sortfield = "t.rowid", $sortorder = "ASC", $limit = 100, $page = 0, $sqlfilters = '', $properties = '', $loadcontacts = 0, $pagination_data = false)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('ticket', 'read')) {
+		if (!DCADMINApiAccess::$user->hasRight('ticket', 'read')) {
 			throw new RestException(403);
 		}
 
 		$obj_ret = array();
 
-		$socid = DolibarrApiAccess::$user->socid ?: $socid;
+		$socid = DCADMINApiAccess::$user->socid ?: $socid;
 
 		$search_sale = null;
 		// If the internal user must only see his customers, force searching by him
 		$search_sale = 0;
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'client', 'voir') && !$socid) {
-			$search_sale = DolibarrApiAccess::$user->id;
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'client', 'voir') && !$socid) {
+			$search_sale = DCADMINApiAccess::$user->id;
 		}
 
 		$sql = "SELECT t.rowid";
@@ -353,7 +353,7 @@ class Tickets extends DolibarrApi
 	public function post($request_data = null)
 	{
 		$ticketstatic = new Ticket($this->db);
-		if (!DolibarrApiAccess::$user->hasRight('ticket', 'write')) {
+		if (!DCADMINApiAccess::$user->hasRight('ticket', 'write')) {
 			throw new RestException(403);
 		}
 
@@ -368,7 +368,7 @@ class Tickets extends DolibarrApi
 			if ($thirdparty_result < 1) {
 				throw new RestException(404, 'Thirdparty with id='.$socid.' not found or not allowed');
 			}
-			if (!DolibarrApi::_checkAccessToResource('societe', $thirdpartytmp->id)) {
+			if (!DCADMINApi::_checkAccessToResource('societe', $thirdpartytmp->id)) {
 				throw new RestException(404, 'Thirdparty with id='.$thirdpartytmp->id.' not found or not allowed');
 			}
 		}
@@ -389,7 +389,7 @@ class Tickets extends DolibarrApi
 			$this->ticket->track_id = generate_random_id(16);
 		}
 
-		if ($this->ticket->create(DolibarrApiAccess::$user) < 0) {
+		if ($this->ticket->create(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, "Error creating ticket", array_merge(array($this->ticket->error), $this->ticket->errors));
 		}
 
@@ -408,7 +408,7 @@ class Tickets extends DolibarrApi
 	 */
 	public function postNewMessage($request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('ticket', 'write')) {
+		if (!DCADMINApiAccess::$user->hasRight('ticket', 'write')) {
 			throw new RestException(403);
 		}
 
@@ -449,8 +449,8 @@ class Tickets extends DolibarrApi
 			throw new RestException(404, 'Ticket not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('ticket', $this->ticket->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('ticket', $this->ticket->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$this->ticket->message = $ticketMessageText;
@@ -525,7 +525,7 @@ class Tickets extends DolibarrApi
 			}
 		}
 
-		$actionid = $this->ticket->createTicketMessage(DolibarrApiAccess::$user, 0, $filename_list, $mimetype_list, $mimefilename_list);
+		$actionid = $this->ticket->createTicketMessage(DCADMINApiAccess::$user, 0, $filename_list, $mimetype_list, $mimefilename_list);
 		if ($actionid <= 0) {
 			throw new RestException(500, 'Error when creating ticket');
 		}
@@ -546,7 +546,7 @@ class Tickets extends DolibarrApi
 	 */
 	public function put($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('ticket', 'write')) {
+		if (!DCADMINApiAccess::$user->hasRight('ticket', 'write')) {
 			throw new RestException(403);
 		}
 
@@ -555,8 +555,8 @@ class Tickets extends DolibarrApi
 			throw new RestException(404, 'Ticket not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('ticket', $this->ticket->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('ticket', $this->ticket->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		// Check thirdparty validity
@@ -567,7 +567,7 @@ class Tickets extends DolibarrApi
 			if ($thirdparty_result < 1) {
 				throw new RestException(404, 'Thirdparty with id='.$socid.' not found or not allowed');
 			}
-			if (!DolibarrApi::_checkAccessToResource('societe', $thirdpartytmp->id)) {
+			if (!DCADMINApi::_checkAccessToResource('societe', $thirdpartytmp->id)) {
 				throw new RestException(404, 'Thirdparty with id='.$thirdpartytmp->id.' not found or not allowed');
 			}
 		}
@@ -592,7 +592,7 @@ class Tickets extends DolibarrApi
 			$this->ticket->$field = $this->_checkValForAPI($field, $value, $this->ticket);
 		}
 
-		if ($this->ticket->update(DolibarrApiAccess::$user) > 0) {
+		if ($this->ticket->update(DCADMINApiAccess::$user) > 0) {
 			return $this->get($id);
 		} else {
 			throw new RestException(500, $this->ticket->error);
@@ -609,7 +609,7 @@ class Tickets extends DolibarrApi
 	 */
 	public function delete($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('ticket', 'delete')) {
+		if (!DCADMINApiAccess::$user->hasRight('ticket', 'delete')) {
 			throw new RestException(403);
 		}
 		$result = $this->ticket->fetch($id);
@@ -617,11 +617,11 @@ class Tickets extends DolibarrApi
 			throw new RestException(404, 'Ticket not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('ticket', $this->ticket->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('ticket', $this->ticket->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		if (!$this->ticket->delete(DolibarrApiAccess::$user)) {
+		if (!$this->ticket->delete(DCADMINApiAccess::$user)) {
 			throw new RestException(500, 'Error when deleting ticket');
 		}
 
@@ -795,7 +795,7 @@ class Tickets extends DolibarrApi
 	public function postContact(int $id, int $contactid, string $type, string $source = "external", int $notrigger = 0): array
 	{
 		// Check permissions
-		if (!DolibarrApiAccess::$user->hasRight('ticket', 'write')) {
+		if (!DCADMINApiAccess::$user->hasRight('ticket', 'write')) {
 			throw new RestException(403);
 		}
 
@@ -849,8 +849,8 @@ class Tickets extends DolibarrApi
 		if (!$result) {
 			throw new RestException(404, 'Ticket not found');
 		}
-		if (!DolibarrApi::_checkAccessToResource('ticket', $this->ticket->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('ticket', $this->ticket->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$result = $this->ticket->add_contact($contactid, $type, $source, $notrigger);
@@ -905,7 +905,7 @@ class Tickets extends DolibarrApi
 	public function deleteContact(int $id, int $contactid, string $type, string $source = "external"): array
 	{
 		// Check permissions
-		if (!DolibarrApiAccess::$user->hasRight('ticket', 'write')) {
+		if (!DCADMINApiAccess::$user->hasRight('ticket', 'write')) {
 			throw new RestException(403);
 		}
 
@@ -923,8 +923,8 @@ class Tickets extends DolibarrApi
 			throw new RestException(404, 'Ticket not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('ticket', $this->ticket->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('ticket', $this->ticket->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$contacts = $this->ticket->liste_contact(-1, $source);

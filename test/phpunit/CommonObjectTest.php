@@ -140,7 +140,7 @@ class CommonObjectTest extends CommonClassTest
 		$this->assertTrue($localobject->isInt(array('type' => 'tinyint(4)')), 'tinyint(4)');
 		$this->assertTrue($localobject->isInt(array('type' => 'smallint(6)')), 'smallint(6)');
 		$this->assertTrue($localobject->isInt(array('type' => 'bigint(20)')), 'bigint(20)');
-		// Dolibarr foreign-key column syntax "integer:Class:path" must keep being detected.
+		// DCADMIN foreign-key column syntax "integer:Class:path" must keep being detected.
 		$this->assertTrue($localobject->isInt(array('type' => 'integer:User:user/class/user.class.php')), 'integer:User:...');
 
 		// Non-integer types must not be detected, including strings that merely contain "int".

@@ -23,7 +23,7 @@
  *      \brief      Page to setup printing module
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 
 require_once DOL_DOCUMENT_ROOT.'/core/lib/admin.lib.php';
@@ -240,7 +240,7 @@ if ($mode == 'setup' && $user->admin) {
 				print '<td>'.$langs->trans("Token").'</td>';
 				print '<td colspan="2">';
 				$tokenobj = null;
-				// Dolibarr storage
+				// DCADMIN storage
 				$storage = new DoliStorage($db, $conf, $keyforprovider);
 				try {
 					$tokenobj = $storage->retrieveAccessToken($OAUTH_SERVICENAME_GOOGLE);

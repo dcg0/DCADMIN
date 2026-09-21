@@ -78,7 +78,7 @@ if (@file_exists($forcedfile)) {
 	include_once $forcedfile;
 }
 
-dolibarr_install_syslog("- check: Dolibarr install/upgrade process started");
+dolibarr_install_syslog("- check: DCADMIN install/upgrade process started");
 
 
 /*
@@ -210,7 +210,7 @@ if (!function_exists("simplexml_load_string")) {
 	$extensionok[] = 'Xml';
 }
 
-// Check if Dom is supported. Dolibarr uses DOMDocument to sanitize html, so a page can not even be rendered without it.
+// Check if Dom is supported. DCADMIN uses DOMDocument to sanitize html, so a page can not even be rendered without it.
 if (!extension_loaded("dom")) {
 	$langs->load("errors");
 	print '<img src="../theme/eldy/img/warning.png" alt="Error" class="valignmiddle paddingright"> '.$langs->trans("ErrorPHPDoesNotSupport", "Dom")."<br>\n";

@@ -57,7 +57,7 @@ $entity = (!empty($_GET['entity']) ? (int) $_GET['entity'] : (!empty($_POST['ent
 define("DOLENTITY", $entity);
 
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf
@@ -204,7 +204,7 @@ function llxFooterVierge()  // @phan-suppress-current-line PhanRedefineFunction
 	printCommonFooter('public');
 
 	if (!empty($conf->use_javascript_ajax)) {
-		print "\n".'<!-- Includes JS Footer of Dolibarr -->'."\n";
+		print "\n".'<!-- Includes JS Footer of DCADMIN -->'."\n";
 		print '<script src="'.DOL_URL_ROOT.'/core/js/lib_foot.js.php?lang='.$langs->defaultlang.'"></script>'."\n";
 	}
 
@@ -516,7 +516,7 @@ if (empty($reshook) && $action == 'add') {	// Test on permission not required he
 					$texttosend = make_substitutions(dol_concatdesc($msg, $adht->getMailOnValid()), $substitutionarray, $outputlangs);
 
 					if ($subjecttosend && $texttosend) {
-						$moreinheader = 'X-Dolibarr-Info: send_an_email by public/members/new.php'."\r\n";
+						$moreinheader = 'X-DCADMIN-Info: send_an_email by public/members/new.php'."\r\n";
 
 						$result = $object->sendEmail($texttosend, $subjecttosend, array(), array(), array(), "", "", 0, -1, '', $moreinheader);
 					}

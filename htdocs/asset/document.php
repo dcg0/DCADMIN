@@ -24,7 +24,7 @@
  *  \brief      Page for attached files on assets
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf

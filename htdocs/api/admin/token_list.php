@@ -27,7 +27,7 @@
  *		\brief      Page to setup Webservices REST module
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/admin.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/api.lib.php';
@@ -142,7 +142,7 @@ if (($action == 'delete' && $confirm == 'yes')) {
 	$nbok = 0;
 	$TMsg = array();
 
-	//$toselect could contain duplicate entries, cf https://github.com/Dolibarr/dolibarr/issues/26244
+	//$toselect could contain duplicate entries, cf https://github.com/DCADMIN/dolibarr/issues/26244
 	$unique_arr = array_unique($toselect);
 	foreach ($unique_arr as $toselectid) {
 		$sql = "DELETE FROM ".MAIN_DB_PREFIX."oauth_token";

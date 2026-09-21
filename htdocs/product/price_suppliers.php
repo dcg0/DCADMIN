@@ -34,7 +34,7 @@
  *  \brief      Page of tab suppliers for products
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf
@@ -525,7 +525,7 @@ if ($id > 0 || $ref) {
 				if (empty($reshook)) {
 					if (empty($form->result)) {
 						print '<a href="'.DOL_URL_ROOT.'/societe/card.php?action=create&type=f&backtopage='.urlencode($_SERVER["PHP_SELF"].'?id='.((int) $object->id).'&action='.urlencode($action).($action == 'create_price' ? '&token='.newToken() : '')).'">';
-						print img_picto($langs->trans("CreateDolibarrThirdPartySupplier"), 'add', 'class="marginleftonly"');
+						print img_picto($langs->trans("CreateDCADMINThirdPartySupplier"), 'add', 'class="marginleftonly"');
 						print '</a>';
 					}
 				}

@@ -1,6 +1,6 @@
 <?php
 
-namespace Dolibarr;
+namespace DCADMIN;
 
 global $globalaaa;
 $globalaaa = 'globalaaa';

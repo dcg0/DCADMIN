@@ -104,7 +104,7 @@ div.mainmenu.generic4::before {
 	font-size: 0.9em;
 }
 
-/* Define square Dolibarr logo in pure CSS */
+/* Define square DCADMIN logo in pure CSS */
 
 .fa-dolibarr-css{
 	color: #235481;

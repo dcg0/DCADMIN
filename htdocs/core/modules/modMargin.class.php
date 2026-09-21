@@ -24,13 +24,13 @@
  *      \ingroup    margin
  *      \brief      Description and activation file for the module Margin
  */
-include_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
+include_once DOL_DOCUMENT_ROOT.'/core/modules/DCADMINModules.class.php';
 
 
 /**
  * 	Class to describe module Margin
  */
-class modMargin extends DolibarrModules
+class modMargin extends DCADMINModules
 {
 	/**
 	 * 	Constructor
@@ -42,7 +42,7 @@ class modMargin extends DolibarrModules
 		$this->db = $db;
 
 		// Id for module (must be unique).
-		// Use here a free id (See in Home -> System information -> Dolibarr for list of used modules id).
+		// Use here a free id (See in Home -> System information -> DCADMIN for list of used modules id).
 		$this->numero = 59000;
 		// Key text used to identify module (for permissions, menus, etc...)
 		$this->rights_class = 'margins';
@@ -75,7 +75,7 @@ class modMargin extends DolibarrModules
 		$this->requiredby = array(); // List of module ids to disable if this one is disabled
 		$this->conflictwith = array(); // List of module class names as string this module is in conflict with
 		$this->phpmin = array(7, 0); // Minimum version of PHP required by module
-		$this->need_dolibarr_version = array(3, 2); // Minimum version of Dolibarr required by module
+		$this->need_dolibarr_version = array(3, 2); // Minimum version of DCADMIN required by module
 		$this->langfiles = array("margins");
 
 		// Constants

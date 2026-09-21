@@ -26,7 +26,7 @@
  *       \brief      Statistics for customers orders by product
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/product.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/commande/class/commande.class.php';

@@ -125,7 +125,7 @@ function checkLoginPassEntity($usertotest, $passwordtotest, $entitytotest, $auth
 
 if (!function_exists('dol_loginfunction')) {
 	/**
-	 * Show Dolibarr default login page.
+	 * Show DCADMIN default login page.
 	 * Part of this code is also duplicated into main.inc.php::top_htmlhead
 	 *
 	 * @param       Translate   $langs      Lang object (must be initialized by a new).
@@ -161,7 +161,7 @@ if (!function_exists('dol_loginfunction')) {
 				$title = $customapplication;
 			}
 		}
-		$titletruedolibarrversion = constant('DOL_VERSION'); // $title used by login template after the @ to inform of true Dolibarr version
+		$titletruedolibarrversion = constant('DOL_VERSION'); // $title used by login template after the @ to inform of true DCADMIN version
 
 		// Note: $conf->css looks like '/theme/eldy/style.css.php'
 		/*
@@ -475,7 +475,7 @@ function encodedecode_dbpassconf($level = 0)
  * @param       int        		$length                	Length of random string (Used only if $generic is true)
  * @return		string		    						New value for password
  * @see dol_hash(), dolJSToSetRandomPassword()
- * @phan-suppress DolibarrForbiddenFunctionPlugin
+ * @phan-suppress DCADMINForbiddenFunctionPlugin
  */
 function getRandomPassword($generic = false, $replaceambiguouschars = null, $length = 32)
 {

@@ -24,7 +24,7 @@
  */
 
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf
@@ -170,7 +170,7 @@ $setupnotempty += count($formSetup->items);
  * Actions
  */
 
-// For retrocompatibility Dolibarr < 15.0
+// For retrocompatibility DCADMIN < 15.0
 if (versioncompare(explode('.', DOL_VERSION), array(15)) < 0 && $action == 'update' && !empty($user->admin)) {
 	$formSetup->saveConfFromPost();
 }
@@ -378,13 +378,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	toggleDisplayLineSize(!QUICKMEMO_DISABLE_AUTO_RESIZE_FONT_SIZE);
 
-	Dolibarr.on('delConstant', (data) => {
+	DCADMIN.on('delConstant', (data) => {
 		if(data.code === 'QUICKMEMO_DISABLE_AUTO_RESIZE_FONT_SIZE'){
 			toggleDisplayLineSize(true);
 		}
 	});
 
-	Dolibarr.on('setConstant', (data) => {
+	DCADMIN.on('setConstant', (data) => {
 		if(data.code === 'QUICKMEMO_DISABLE_AUTO_RESIZE_FONT_SIZE'){
 			toggleDisplayLineSize(false);
 		}

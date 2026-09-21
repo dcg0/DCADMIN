@@ -33,7 +33,7 @@ require_once DOL_DOCUMENT_ROOT.'/partnership/core/modules/partnership/modules_pa
 class mod_partnership_standard extends ModeleNumRefPartnership
 {
 	/**
-	 * Dolibarr version of the loaded document
+	 * DCADMIN version of the loaded document
 	 * @var string Version, possible values are: 'development', 'experimental', 'dolibarr', 'dolibarr_deprecated' or a version string like 'x.y.z'''|'development'|'dolibarr'|'experimental'
 	 */
 	public $version = 'dolibarr'; // 'development', 'experimental', 'dolibarr'

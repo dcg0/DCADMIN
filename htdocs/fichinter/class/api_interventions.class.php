@@ -38,9 +38,9 @@ require_once DOL_DOCUMENT_ROOT.'/core/lib/company.lib.php';
  * @since	7.0.0	Initial implementation
  *
  * @access	protected
- * @class	DolibarrApiAccess {@requires user,external}
+ * @class	DCADMINApiAccess {@requires user,external}
  */
-class Interventions extends DolibarrApi
+class Interventions extends DCADMINApi
 {
 	/**
 	 * @var string[]	Mandatory fields, checked when create and update object
@@ -91,7 +91,7 @@ class Interventions extends DolibarrApi
 	 */
 	public function get($id, $ref = '', $ref_ext = '', $contact_list = 1)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('ficheinter', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('ficheinter', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -100,8 +100,8 @@ class Interventions extends DolibarrApi
 			throw new RestException(404, 'Intervention not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('fichinter', $this->fichinter->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('fichinter', $this->fichinter->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		if ($contact_list > -1) {
@@ -146,7 +146,7 @@ class Interventions extends DolibarrApi
 	 */
 	public function index($sortfield = "t.rowid", $sortorder = 'ASC', $limit = 100, $page = 0, $thirdparty_ids = '', $sqlfilters = '', $properties = '', $contact_type = '', $pagination_data = false, $loadlinkedobjects = 0)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('ficheinter', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('ficheinter', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -155,12 +155,12 @@ class Interventions extends DolibarrApi
 		$obj_ret = array();
 
 		// case of external user, $thirdparty_ids param is ignored and replaced by user's socid
-		$socids = DolibarrApiAccess::$user->socid ?: $thirdparty_ids;
+		$socids = DCADMINApiAccess::$user->socid ?: $thirdparty_ids;
 
 		// If the internal user must only see his customers, force searching by him
 		$search_sale = 0;
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'client', 'voir') && !$socids) {
-			$search_sale = DolibarrApiAccess::$user->id;
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'client', 'voir') && !$socids) {
+			$search_sale = DCADMINApiAccess::$user->id;
 		}
 
 		$sql = "SELECT t.rowid";
@@ -272,7 +272,7 @@ class Interventions extends DolibarrApi
 	 */
 	public function post($request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('ficheinter', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('ficheinter', 'creer')) {
 			throw new RestException(403, "Insufficiant rights");
 		}
 		// Check mandatory fields
@@ -287,7 +287,7 @@ class Interventions extends DolibarrApi
 			$this->fichinter->$field = $this->_checkValForAPI($field, $value, $this->fichinter);
 		}
 
-		if ($this->fichinter->create(DolibarrApiAccess::$user) < 0) {
+		if ($this->fichinter->create(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, "Error creating intervention", array_merge(array($this->fichinter->error), $this->fichinter->errors));
 		}
 
@@ -309,7 +309,7 @@ class Interventions extends DolibarrApi
 	 */
 	public function put($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('ficheinter', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('ficheinter', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -318,8 +318,8 @@ class Interventions extends DolibarrApi
 			throw new RestException(404, 'Fichinter not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('fichinter', $this->fichinter->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('fichinter', $this->fichinter->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 		foreach ($request_data as $field => $value) {
 			if ($field == 'id') {
@@ -340,7 +340,7 @@ class Interventions extends DolibarrApi
 			$this->fichinter->$field = $this->_checkValForAPI($field, $value, $this->fichinter);
 		}
 
-		if ($this->fichinter->update(DolibarrApiAccess::$user) > 0) {
+		if ($this->fichinter->update(DCADMINApiAccess::$user) > 0) {
 			return $this->get($id);
 		} else {
 			throw new RestException(500, $this->fichinter->error);
@@ -363,7 +363,7 @@ class Interventions extends DolibarrApi
 	 */
 	public function getLines($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('ficheinter', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('ficheinter', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -372,8 +372,8 @@ class Interventions extends DolibarrApi
 			throw new RestException(404, 'Intervention not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('fichinter', $this->fichinter->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('fichinter', $this->fichinter->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$this->fichinter->fetch_lines();
@@ -402,7 +402,7 @@ class Interventions extends DolibarrApi
 	 */
 	public function postLine($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('ficheinter', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('ficheinter', 'creer')) {
 			throw new RestException(403, "Insufficiant rights");
 		}
 		// Check mandatory fields
@@ -422,12 +422,12 @@ class Interventions extends DolibarrApi
 			throw new RestException(404, 'Intervention not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('fichinter', $this->fichinter->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('fichinter', $this->fichinter->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$updateRes = $this->fichinter->addLine(
-			DolibarrApiAccess::$user,
+			DCADMINApiAccess::$user,
 			$id,
 			$this->fichinter->description,
 			$this->fichinter->date,
@@ -455,7 +455,7 @@ class Interventions extends DolibarrApi
 	 */
 	public function delete($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('ficheinter', 'supprimer')) {
+		if (!DCADMINApiAccess::$user->hasRight('ficheinter', 'supprimer')) {
 			throw new RestException(403);
 		}
 		$result = $this->fichinter->fetch($id);
@@ -463,11 +463,11 @@ class Interventions extends DolibarrApi
 			throw new RestException(404, 'Intervention not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('fichinter', $this->fichinter->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('fichinter', $this->fichinter->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		if (!$this->fichinter->delete(DolibarrApiAccess::$user)) {
+		if (!$this->fichinter->delete(DCADMINApiAccess::$user)) {
 			throw new RestException(500, 'Error when delete intervention : '.$this->fichinter->error);
 		}
 
@@ -500,7 +500,7 @@ class Interventions extends DolibarrApi
 	 */
 	public function validate($id, $notrigger = 0)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('ficheinter', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('ficheinter', 'creer')) {
 			throw new RestException(403, "Insufficiant rights");
 		}
 		$result = $this->fichinter->fetch($id);
@@ -508,11 +508,11 @@ class Interventions extends DolibarrApi
 			throw new RestException(404, 'Intervention not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('fichinter', $this->fichinter->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('fichinter', $this->fichinter->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		$result = $this->fichinter->setValid(DolibarrApiAccess::$user, $notrigger);
+		$result = $this->fichinter->setValid(DCADMINApiAccess::$user, $notrigger);
 		if ($result == 0) {
 			throw new RestException(304, 'Error nothing done. May be object is already validated');
 		}
@@ -548,7 +548,7 @@ class Interventions extends DolibarrApi
 	 */
 	public function close($id, $notrigger = 0)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('ficheinter', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('ficheinter', 'creer')) {
 			throw new RestException(403, "Insufficiant rights");
 		}
 		$result = $this->fichinter->fetch($id);
@@ -556,11 +556,11 @@ class Interventions extends DolibarrApi
 			throw new RestException(404, 'Intervention not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('fichinter', $this->fichinter->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('fichinter', $this->fichinter->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		$result = $this->fichinter->setClose(DolibarrApiAccess::$user, $notrigger);
+		$result = $this->fichinter->setClose(DCADMINApiAccess::$user, $notrigger);
 		if ($result == 0) {
 			throw new RestException(304, 'Error nothing done. May be object is already closed');
 		}
@@ -591,7 +591,7 @@ class Interventions extends DolibarrApi
 	 */
 	public function deleteLine($id, $lineid)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('ficheinter', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('ficheinter', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -604,8 +604,8 @@ class Interventions extends DolibarrApi
 			throw new RestException(403, 'Intervention not in draft status : '.$this->fichinter->getLibStatut(1));
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('ficheinter', $this->fichinter->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('ficheinter', $this->fichinter->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$objectline = new FichinterLigne($this->db);
@@ -616,7 +616,7 @@ class Interventions extends DolibarrApi
 			throw new RestException(403, 'Line does not belong to this intervention');
 		}
 
-		$updateRes = $objectline->deleteLine(DolibarrApiAccess::$user);
+		$updateRes = $objectline->deleteLine(DCADMINApiAccess::$user);
 
 		if ($updateRes >= 0) {
 			return $this->_cleanObjectDatas($this->fichinter);
@@ -643,7 +643,7 @@ class Interventions extends DolibarrApi
 	 */
 	public function settodraft($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('ficheinter', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('ficheinter', 'creer')) {
 			throw new RestException(403, "Insufficiant rights");
 		}
 		$result = $this->fichinter->fetch($id);
@@ -651,11 +651,11 @@ class Interventions extends DolibarrApi
 			throw new RestException(404, 'Intervention not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('ficheinter', $this->fichinter->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('ficheinter', $this->fichinter->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		$result = $this->fichinter->setDraft(DolibarrApiAccess::$user);
+		$result = $this->fichinter->setDraft(DCADMINApiAccess::$user);
 		if ($result == 0) {
 			throw new RestException(304, 'Nothing done. . May be object is already set as draft.');
 		}
@@ -687,7 +687,7 @@ class Interventions extends DolibarrApi
 	 */
 	public function addContact($id, $fk_socpeople, $type_contact, $source, $notrigger = 0)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('ficheinter', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('ficheinter', 'creer')) {
 			throw new RestException(403);
 		}
 		$result = $this->fichinter->fetch($id);
@@ -695,8 +695,8 @@ class Interventions extends DolibarrApi
 			throw new RestException(404, 'Interventional not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('ficheinter', $this->fichinter->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('ficheinter', $this->fichinter->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$result = $this->fichinter->add_contact($fk_socpeople, $type_contact, $source, $notrigger);
@@ -728,7 +728,7 @@ class Interventions extends DolibarrApi
 	 */
 	public function getContacts($id, $type = '', $source = '')
 	{
-		if (!DolibarrApiAccess::$user->hasRight('ficheinter', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('ficheinter', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -737,8 +737,8 @@ class Interventions extends DolibarrApi
 			throw new RestException(404, 'Interventional not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('ficheinter', $this->fichinter->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('ficheinter', $this->fichinter->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		if (empty($source) || $source == 'external') {
@@ -774,7 +774,7 @@ class Interventions extends DolibarrApi
 	 */
 	public function deleteContact($id, $contactid, $type)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('ficheinter', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('ficheinter', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -784,8 +784,8 @@ class Interventions extends DolibarrApi
 			throw new RestException(404, 'Interventional not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('ficheinter', $this->fichinter->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('ficheinter', $this->fichinter->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 		foreach (array('internal', 'external') as $source) {
 			$contacts = $this->fichinter->liste_contact(-1, $source);
@@ -829,8 +829,8 @@ class Interventions extends DolibarrApi
 			throw new RestException(403, 'Intervention not in draft status : '.$this->fichinter->getLibStatut(1));
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('ficheinter', $this->fichinter->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('ficheinter', $this->fichinter->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$objectline = new FichinterLigne($this->db);
@@ -855,7 +855,7 @@ class Interventions extends DolibarrApi
 			$objectline->rang = (int) sanitizeVal($request_data->rang);
 		}
 
-		$updateRes = $objectline->update(DolibarrApiAccess::$user);
+		$updateRes = $objectline->update(DCADMINApiAccess::$user);
 
 		if ($updateRes >= 0) {
 			$result = $this->fichinter->fetch($id);

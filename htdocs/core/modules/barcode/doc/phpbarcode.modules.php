@@ -34,7 +34,7 @@ require_once DOL_DOCUMENT_ROOT.'/core/lib/barcode.lib.php'; // This is to includ
 class modPhpbarcode extends ModeleBarCode
 {
 	/**
-	 * Dolibarr version of the loaded document
+	 * DCADMIN version of the loaded document
 	 * @var string Version, possible values are: 'development', 'experimental', 'dolibarr', 'dolibarr_deprecated' or a version string like 'x.y.z''development'|'experimental'|'dolibarr'
 	 */
 	public $version = 'dolibarr';

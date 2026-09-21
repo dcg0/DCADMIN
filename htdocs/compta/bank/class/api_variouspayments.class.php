@@ -25,9 +25,9 @@ require_once DOL_DOCUMENT_ROOT.'/compta/bank/class/paymentvarious.class.php';
  *
  * @property DoliDB $db
  * @access protected
- * @class DolibarrApiAccess {@requires user,external}
+ * @class DCADMINApiAccess {@requires user,external}
  */
-class VariousPayments extends DolibarrApi
+class VariousPayments extends DCADMINApi
 {
 	/**
 	 * @var string[] Mandatory fields, checked when creating an object
@@ -60,7 +60,7 @@ class VariousPayments extends DolibarrApi
 	 */
 	public function get($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('banque', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('banque', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -97,7 +97,7 @@ class VariousPayments extends DolibarrApi
 	 */
 	public function index($sortfield = "t.rowid", $sortorder = 'ASC', $limit = 100, $page = 0, $sqlfilters = '', $properties = '', $pagination_data = false)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('banque', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('banque', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -181,7 +181,7 @@ class VariousPayments extends DolibarrApi
 	 */
 	public function post($request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('banque', 'modifier')) {
+		if (!DCADMINApiAccess::$user->hasRight('banque', 'modifier')) {
 			throw new RestException(403);
 		}
 
@@ -199,7 +199,7 @@ class VariousPayments extends DolibarrApi
 			$payment->$field = $this->_checkValForAPI($field, $value, $payment);
 		}
 
-		if ($payment->create(DolibarrApiAccess::$user) < 0) {
+		if ($payment->create(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, 'Error when creating various payment: '.$payment->error);
 		}
 
@@ -221,7 +221,7 @@ class VariousPayments extends DolibarrApi
 	 */
 	public function put($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('banque', 'modifier')) {
+		if (!DCADMINApiAccess::$user->hasRight('banque', 'modifier')) {
 			throw new RestException(403);
 		}
 
@@ -252,7 +252,7 @@ class VariousPayments extends DolibarrApi
 			$payment->$field = $this->_checkValForAPI($field, $value, $payment);
 		}
 
-		if ($payment->update(DolibarrApiAccess::$user) > 0) {
+		if ($payment->update(DCADMINApiAccess::$user) > 0) {
 			return $this->get($id);
 		} else {
 			throw new RestException(500, 'Error when updating various payment: '.$payment->error);
@@ -273,7 +273,7 @@ class VariousPayments extends DolibarrApi
 	 */
 	public function delete($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('banque', 'modifier')) {
+		if (!DCADMINApiAccess::$user->hasRight('banque', 'modifier')) {
 			throw new RestException(403);
 		}
 
@@ -285,7 +285,7 @@ class VariousPayments extends DolibarrApi
 			throw new RestException(404, 'Various payment not found');
 		}
 
-		if ($payment->delete(DolibarrApiAccess::$user) < 0) {
+		if ($payment->delete(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, 'Error when deleting various payment: '.$payment->error);
 		}
 

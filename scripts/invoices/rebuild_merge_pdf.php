@@ -39,7 +39,7 @@ if (substr($sapi_type, 0, 3) == 'cgi') {
 	exit(1);
 }
 
-// Include Dolibarr environment
+// Include DCADMIN environment
 require_once $path."../../htdocs/master.inc.php";
 require_once DOL_DOCUMENT_ROOT.'/core/lib/functionscli.lib.php';
 // After this $db is an opened handler to database. We close it at end of file.

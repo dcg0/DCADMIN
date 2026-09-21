@@ -36,7 +36,7 @@ require_once DOL_DOCUMENT_ROOT.'/core/modules/bom/modules_bom.php';
 class mod_bom_advanced extends ModeleNumRefBoms
 {
 	/**
-	 * Dolibarr version of the loaded document
+	 * DCADMIN version of the loaded document
 	 * @var string Version, possible values are: 'development', 'experimental', 'dolibarr', 'dolibarr_deprecated' or a version string like 'x.y.z'''|'development'|'dolibarr'|'experimental'
 	 */
 	public $version = 'dolibarr'; // 'development', 'experimental', 'dolibarr'

@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
- * Module to manage resources into Dolibarr ERP/CRM
+ * Module to manage resources into DCADMIN ERP/CRM
  */
 
 /**
@@ -27,13 +27,13 @@
  * 	\ingroup	resource
  * 	\brief		Description and activation file for the module Resource
  */
-include_once DOL_DOCUMENT_ROOT."/core/modules/DolibarrModules.class.php";
+include_once DOL_DOCUMENT_ROOT."/core/modules/DCADMINModules.class.php";
 
 
 /**
  * Description and activation class for module Resource
  */
-class modResource extends DolibarrModules
+class modResource extends DCADMINModules
 {
 	/**
 	 * 	Constructor. Define names, constants, directories, boxes, permissions
@@ -48,7 +48,7 @@ class modResource extends DolibarrModules
 
 		// Id for module (must be unique).
 		// Use a free id here
-		// (See in Home -> System information -> Dolibarr for list of used modules id).
+		// (See in Home -> System information -> DCADMIN for list of used modules id).
 		$this->numero = 63000;
 
 		// Key text used to identify module (for permissions, menus, etc...)
@@ -291,7 +291,7 @@ class modResource extends DolibarrModules
 	/**
 	 * Function called when module is enabled.
 	 * The init function add constants, boxes, permissions and menus
-	 * (defined in constructor) into Dolibarr database.
+	 * (defined in constructor) into DCADMIN database.
 	 * It also creates data directories
 	 *
 	 * 	@param		string	$options	Options when enabling module ('', 'noboxes')

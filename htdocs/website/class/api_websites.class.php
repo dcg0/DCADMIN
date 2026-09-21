@@ -32,9 +32,9 @@ require_once DOL_DOCUMENT_ROOT.'/core/lib/website2.lib.php';
  * API class for websites
  *
  * @access protected
- * @class  DolibarrApiAccess {@requires user,external}
+ * @class  DCADMINApiAccess {@requires user,external}
  */
-class Websites extends DolibarrApi
+class Websites extends DCADMINApi
 {
 	/**
 	 * @var Website {@type Website}
@@ -119,7 +119,7 @@ class Websites extends DolibarrApi
 	 */
 	public function index($sortfield = "t.rowid", $sortorder = 'ASC', $limit = 100, $page = 0, $sqlfilters = '', $properties = '')
 	{
-		if (!DolibarrApiAccess::$user->hasRight('website', 'read')) {
+		if (!DCADMINApiAccess::$user->hasRight('website', 'read')) {
 			throw new RestException(403);
 		}
 
@@ -211,7 +211,7 @@ class Websites extends DolibarrApi
 	 */
 	public function indexPages($id, $sortfield = "t.pageurl", $sortorder = 'ASC', $limit = 100, $page = 0, $sqlfilters = '', $properties = '')
 	{
-		if (!DolibarrApiAccess::$user->hasRight('website', 'read')) {
+		if (!DCADMINApiAccess::$user->hasRight('website', 'read')) {
 			throw new RestException(403);
 		}
 
@@ -220,8 +220,8 @@ class Websites extends DolibarrApi
 			throw new RestException(404, 'Website not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('website', $this->website->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('website', $this->website->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$obj_ret = array();
@@ -304,7 +304,7 @@ class Websites extends DolibarrApi
 	 */
 	public function getPage($id, $pageid)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('website', 'read')) {
+		if (!DCADMINApiAccess::$user->hasRight('website', 'read')) {
 			throw new RestException(403);
 		}
 
@@ -313,8 +313,8 @@ class Websites extends DolibarrApi
 			throw new RestException(404, 'Website not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('website', $this->website->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('website', $this->website->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$result = $this->websitepage->fetch($pageid);
@@ -353,7 +353,7 @@ class Websites extends DolibarrApi
 	 */
 	public function putPage($id, $pageid, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('website', 'write')) {
+		if (!DCADMINApiAccess::$user->hasRight('website', 'write')) {
 			throw new RestException(403);
 		}
 
@@ -362,8 +362,8 @@ class Websites extends DolibarrApi
 			throw new RestException(404, 'Website not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('website', $this->website->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('website', $this->website->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$result = $this->websitepage->fetch($pageid);
@@ -404,7 +404,7 @@ class Websites extends DolibarrApi
 		// Security: check PHP content if user does not have writephp permission
 		$phpfullcodestring = dolKeepOnlyPhpCode($this->websitepage->content);
 		if ($phpfullcodestringold != $phpfullcodestring) {
-			if (!DolibarrApiAccess::$user->hasRight('website', 'writephp')) {
+			if (!DCADMINApiAccess::$user->hasRight('website', 'writephp')) {
 				throw new RestException(403, 'NotAllowedToAddDynamicContent');
 			}
 		}
@@ -413,7 +413,7 @@ class Websites extends DolibarrApi
 		$this->websitepage->content = preg_replace('/<head>.*<\/head>/ims', '', $this->websitepage->content);
 
 		// Update the page in database
-		$result = $this->websitepage->update(DolibarrApiAccess::$user);
+		$result = $this->websitepage->update(DCADMINApiAccess::$user);
 		if ($result < 0) {
 			throw new RestException(500, $this->websitepage->error);
 		}
@@ -525,7 +525,7 @@ class Websites extends DolibarrApi
 			throw new RestException(400, 'bad value for parameter id or ref');
 		}
 
-		if (!DolibarrApiAccess::$user->hasRight('website', 'read')) {
+		if (!DCADMINApiAccess::$user->hasRight('website', 'read')) {
 			throw new RestException(403);
 		}
 
@@ -534,8 +534,8 @@ class Websites extends DolibarrApi
 			throw new RestException(404, 'Website not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('website', $this->website->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('website', $this->website->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		return $this->_cleanObjectDatas($this->website);

@@ -26,7 +26,7 @@
  *  \brief      List of various payments
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../../main.inc.php';
 
 /**

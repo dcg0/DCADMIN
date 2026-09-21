@@ -23,12 +23,12 @@
  *  \ingroup    socialnetworks
  *  \brief      Description and activation file for the module SocialNetworks
  */
-include_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
+include_once DOL_DOCUMENT_ROOT.'/core/modules/DCADMINModules.class.php';
 
 /**
  *	Class to describe a SocialNetworks module
  */
-class modSocialNetworks extends DolibarrModules
+class modSocialNetworks extends DCADMINModules
 {
 	/**
 	 *   Constructor. Define names, constants, directories, boxes, permissions

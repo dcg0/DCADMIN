@@ -31,7 +31,7 @@
  *       \brief      Page of linked files onto donation
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf

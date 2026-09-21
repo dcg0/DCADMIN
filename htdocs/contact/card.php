@@ -34,7 +34,7 @@
  */
 
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf
@@ -1297,14 +1297,14 @@ if (is_object($objcanvas) && $objcanvas->displayCanvasExists($action)) {
 				print '</td></tr>';
 			}
 
-			// Login Dolibarr
-			print '<tr><td>'.$langs->trans("DolibarrLogin").'</td><td colspan="3">';
+			// Login DCADMIN
+			print '<tr><td>'.$langs->trans("DCADMINLogin").'</td><td colspan="3">';
 			if ($object->user_id) {
 				$dolibarr_user = new User($db);
 				$result = $dolibarr_user->fetch($object->user_id);
 				print $dolibarr_user->getLoginUrl(1);
 			} else {
-				print '<span class="opacitymedium">'.$langs->trans("NoDolibarrAccess").'</span>';
+				print '<span class="opacitymedium">'.$langs->trans("NoDCADMINAccess").'</span>';
 			}
 			print '</td></tr>';
 
@@ -1384,7 +1384,7 @@ if (is_object($objcanvas) && $objcanvas->displayCanvasExists($action)) {
 					$text .= $langs->trans("UserWillBeInternalUser");
 				}
 			}
-			print $form->formconfirm($_SERVER["PHP_SELF"]."?id=".$object->id, $langs->trans("CreateDolibarrLogin"), $text, "confirm_create_user", $formquestion, 'yes');
+			print $form->formconfirm($_SERVER["PHP_SELF"]."?id=".$object->id, $langs->trans("CreateDCADMINLogin"), $text, "confirm_create_user", $formquestion, 'yes');
 		}
 
 		$linkback = '<a href="'.DOL_URL_ROOT.'/contact/list.php?restore_lastsearch_values=1">'.$langs->trans("BackToList").'</a>';
@@ -1569,15 +1569,15 @@ if (is_object($objcanvas) && $objcanvas->displayCanvasExists($action)) {
 			print '</td></tr>';
 		}
 
-		print '<tr><td>'.$langs->trans("DolibarrLogin").'</td><td>';
+		print '<tr><td>'.$langs->trans("DCADMINLogin").'</td><td>';
 		if ($object->user_id) {
 			$dolibarr_user = new User($db);
 			$result = $dolibarr_user->fetch($object->user_id);
 			print $dolibarr_user->getLoginUrl(-1);
 		} else {
-			//print '<span class="opacitymedium">'.$langs->trans("NoDolibarrAccess").'</span>';
+			//print '<span class="opacitymedium">'.$langs->trans("NoDCADMINAccess").'</span>';
 			if (!$object->user_id && $user->hasRight('user', 'user', 'creer')) {
-				print '<a class="aaa" href="'.$_SERVER['PHP_SELF'].'?id='.$object->id.'&action=create_user&token='.newToken().'">'.img_picto($langs->trans("CreateDolibarrLogin"), 'add', 'class="pictofixedwidth"').$langs->trans("CreateDolibarrLogin").'</a>';
+				print '<a class="aaa" href="'.$_SERVER['PHP_SELF'].'?id='.$object->id.'&action=create_user&token='.newToken().'">'.img_picto($langs->trans("CreateDCADMINLogin"), 'add', 'class="pictofixedwidth"').$langs->trans("CreateDCADMINLogin").'</a>';
 			}
 		}
 		print '</td></tr>';

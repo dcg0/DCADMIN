@@ -139,7 +139,7 @@ if (!empty($this->control->tpl['action_delete'])) {
 <?php } ?>
 
 <tr>
-	<td><?php echo $langs->trans("DolibarrLogin"); ?></td>
+	<td><?php echo $langs->trans("DCADMINLogin"); ?></td>
 	<td colspan="3"><?php echo $this->control->tpl['dolibarr_user']; ?></td>
 </tr>
 
@@ -154,7 +154,7 @@ if (empty($user->socid)) {
 	}
 
 	if (!$this->control->tpl['user_id'] && $user->hasRight('user', 'user', 'creer')) {
-		print '<a class="butAction" href="'.$_SERVER["PHP_SELF"].'?id='.$this->control->tpl['id'].'&action=create_user&token='.newToken().'&canvas='.$canvas.'">'.$langs->trans("CreateDolibarrLogin").'</a>';
+		print '<a class="butAction" href="'.$_SERVER["PHP_SELF"].'?id='.$this->control->tpl['id'].'&action=create_user&token='.newToken().'&canvas='.$canvas.'">'.$langs->trans("CreateDCADMINLogin").'</a>';
 	}
 
 	if ($user->hasRight('societe', 'contact', 'supprimer')) {

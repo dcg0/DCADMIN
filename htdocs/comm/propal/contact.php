@@ -27,7 +27,7 @@
  *       \brief      Tab to manage contacts/addresses of proposal
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/comm/propal/class/propal.class.php';
 require_once DOL_DOCUMENT_ROOT.'/contact/class/contact.class.php';

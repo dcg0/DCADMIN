@@ -25,7 +25,7 @@
  *      \brief      Page of setup of security
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf
@@ -206,7 +206,7 @@ print '<input type="hidden" name="consttype" value="yesno">';
 // Load array with all password generation modules: scan core/modules/security/generate/
 // plus, for each enabled module declaring module_parts['models'], its own
 // core/modules/security/generate/ subdirectory — same multi-root convention already used
-// by every numbering-module scan in Dolibarr (see e.g. Facture::getNextNumRef()).
+// by every numbering-module scan in DCADMIN (see e.g. Facture::getNextNumRef()).
 $dirmodels = array_merge(array('/'), (array) $conf->modules_parts['models']);
 $arrayhandler = array();
 foreach ($dirmodels as $reldir) {

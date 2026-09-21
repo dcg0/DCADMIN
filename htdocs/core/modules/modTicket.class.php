@@ -26,13 +26,13 @@
  *     \ingroup     ticket
  *     \brief       Description and activation file for the module Ticket
  */
-require_once DOL_DOCUMENT_ROOT."/core/modules/DolibarrModules.class.php";
+require_once DOL_DOCUMENT_ROOT."/core/modules/DCADMINModules.class.php";
 
 
 /**
  * Description and activation class for module Ticket
  */
-class modTicket extends DolibarrModules
+class modTicket extends DCADMINModules
 {
 	/**
 	 *     Constructor. Define names, constants, directories, boxes, permissions
@@ -48,7 +48,7 @@ class modTicket extends DolibarrModules
 
 		// Id for module (must be unique).
 		// Use a free id here
-		// (See in Home -> System information -> Dolibarr for list of used modules id).
+		// (See in Home -> System information -> DCADMIN for list of used modules id).
 		$this->numero = 56000;
 		// Key text used to identify module (for permissions, menus, etc...)
 		$this->rights_class = 'ticket';
@@ -115,9 +115,9 @@ class modTicket extends DolibarrModules
 			['TICKET_DELAY_SINCE_LAST_RESPONSE', 'chaine', '0', 'Maximum wanted elapsed time between two answers on the same ticket (in hours). Display a warning in tickets list if not respected.', 0],
 			['TICKET_NOTIFY_AT_CLOSING', 'chaine', '0', 'Default notify contacts when closing a module', 0],
 			['TICKET_PRODUCT_CATEGORY', 'chaine', 0, 'The category of product that is being used to find contract to link to created ticket', 0],
-			['TICKET_NOTIFICATION_EMAIL_FROM', 'chaine', getDolGlobalString('MAIN_MAIL_EMAIL_FROM'), 'Email to use by default as sender for messages sent from Dolibarr', 0],
-			['TICKET_MESSAGE_MAIL_INTRO', 'chaine', $langs->trans('TicketMessageMailIntroText'), 'Introduction text of ticket replies sent from Dolibarr', 0],
-			['TICKET_MESSAGE_MAIL_SIGNATURE', 'chaine', $default_footer, 'Signature to use by default for messages sent from Dolibarr', 0],
+			['TICKET_NOTIFICATION_EMAIL_FROM', 'chaine', getDolGlobalString('MAIN_MAIL_EMAIL_FROM'), 'Email to use by default as sender for messages sent from DCADMIN', 0],
+			['TICKET_MESSAGE_MAIL_INTRO', 'chaine', $langs->trans('TicketMessageMailIntroText'), 'Introduction text of ticket replies sent from DCADMIN', 0],
+			['TICKET_MESSAGE_MAIL_SIGNATURE', 'chaine', $default_footer, 'Signature to use by default for messages sent from DCADMIN', 0],
 			['MAIN_EMAILCOLLECTOR_MAIL_WITHOUT_HEADER', 'chaine', "1", 'Disable the rendering of headers in tickets', 0],
 			['MAIN_SECURITY_ENABLECAPTCHA_TICKET', 'chaine', getDolGlobalInt('MAIN_SECURITY_ENABLECAPTCHA_TICKET'), 'Enable captcha code by default', 0],
 			['TICKET_SHOW_COMPANY_LOGO', 'chaine', getDolGlobalInt('TICKET_SHOW_COMPANY_LOGO', 1), 'Enable logo header on ticket public page', 0],
@@ -396,7 +396,7 @@ class modTicket extends DolibarrModules
 
 	/**
 	 *	Function called when module is enabled.
-	 *	The init function add constants, boxes, permissions and menus (defined in constructor) into Dolibarr database.
+	 *	The init function add constants, boxes, permissions and menus (defined in constructor) into DCADMIN database.
 	 *	It also creates data directories
 	 *
 	 *	@param      string	$options    Options when enabling module ('', 'noboxes')

@@ -23,7 +23,7 @@
  * \brief   Webhook setup page.
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 require_once DOL_DOCUMENT_ROOT."/core/lib/admin.lib.php";
 require_once DOL_DOCUMENT_ROOT.'/webhook/lib/webhook.lib.php';

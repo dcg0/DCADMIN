@@ -34,7 +34,7 @@
  */
 
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require_once '../main.inc.php';
 /**
  * @var Conf $conf

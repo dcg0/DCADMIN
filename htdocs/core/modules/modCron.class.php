@@ -24,13 +24,13 @@
  *  \ingroup    cron
  *  \brief      Description and activation file for the module Jobs
  */
-include_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
+include_once DOL_DOCUMENT_ROOT.'/core/modules/DCADMINModules.class.php';
 
 
 /**
  *	Class to describe a Cron module
  */
-class modCron extends DolibarrModules
+class modCron extends DCADMINModules
 {
 	/**
 	 *   Constructor. Define names, constants, directories, boxes, permissions
@@ -47,7 +47,7 @@ class modCron extends DolibarrModules
 		$this->family = "base";
 		// Module label (no space allowed), used if translation string 'ModuleXXXName' not found (where XXX is value of numeric property 'numero' of module)
 		$this->name = preg_replace('/^mod/i', '', get_class($this));
-		$this->description = "Enable the Dolibarr cron service";
+		$this->description = "Enable the DCADMIN cron service";
 		// Possible values for version are: 'development', 'experimental', 'dolibarr' or version
 		$this->version = 'dolibarr';
 		// Key used in llx_const table to save module status enabled/disabled (where MYMODULE is value of property name of module in uppercase)

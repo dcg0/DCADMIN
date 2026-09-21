@@ -29,7 +29,7 @@
  *      \brief      Page to show a cash fence
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf

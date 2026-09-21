@@ -23,7 +23,7 @@ require_once DOL_DOCUMENT_ROOT . '/core/class/extrafields.class.php';
 /**
  * \class ToolNavigation
  *
- * \brief AI tool for generating navigation URLs in Dolibarr
+ * \brief AI tool for generating navigation URLs in DCADMIN
  */
 class ToolNavigation extends McpTool
 {
@@ -37,7 +37,7 @@ class ToolNavigation extends McpTool
 		return [
 			[
 				"name" => "navigate_to_page",
-				"description" => "Generates a valid Dolibarr URL. Handles generic names (e.g., 'invoice' maps to customer invoices) and directory structures automatically. Can filter lists by status.",
+				"description" => "Generates a valid DCADMIN URL. Handles generic names (e.g., 'invoice' maps to customer invoices) and directory structures automatically. Can filter lists by status.",
 				"inputSchema" => [
 					"type" => "object",
 					"properties" => [
@@ -195,7 +195,7 @@ class ToolNavigation extends McpTool
 	}
 
 	/**
-	 * Maps human-readable status terms to Dolibarr URL parameters for a given element type.
+	 * Maps human-readable status terms to DCADMIN URL parameters for a given element type.
 	 * This is the core logic for accurate list filtering.
 	 *
 	 * @param string $elementType The normalized element type (e.g., 'invoice_customer')
@@ -270,7 +270,7 @@ class ToolNavigation extends McpTool
 	}
 
 	/**
-	 * Maps user-friendly names to specific Dolibarr paths
+	 * Maps user-friendly names to specific DCADMIN paths
 	 *
 	 * @param string $input User input object type
 	 * @param string $view View type (list, card, create)

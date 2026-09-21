@@ -34,7 +34,7 @@ if (!defined('NOSCANPOSTFORINJECTION')) {
 	define('NOSCANPOSTFORINJECTION', '1'); // Do not check anti SQL+XSS injection attack test
 }
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 require_once DOL_DOCUMENT_ROOT . '/core/lib/functions.lib.php';
 
@@ -1540,8 +1540,8 @@ if ($dirins && $action == 'initobject' && $module && $objectname) {		// Test on 
 			if (class_exists($class)) {
 				try {
 					$moduleobj = new $class($db);
-					'@phan-var-force DolibarrModules $moduleobj';
-					/** @var DolibarrModules $moduleobj */
+					'@phan-var-force DCADMINModules $moduleobj';
+					/** @var DCADMINModules $moduleobj */
 				} catch (Exception $e) {
 					$error++;
 					dol_print_error($db, $e->getMessage());
@@ -1716,8 +1716,8 @@ if ($dirins && $action == 'initobject' && $module && $objectname) {		// Test on 
 		if (class_exists($class)) {
 			try {
 				$moduleobj = new $class($db);
-				'@phan-var-force DolibarrModules $moduleobj';
-				/** @var DolibarrModules $moduleobj */
+				'@phan-var-force DCADMINModules $moduleobj';
+				/** @var DCADMINModules $moduleobj */
 			} catch (Exception $e) {
 				$error++;
 				dol_print_error($db, $e->getMessage());
@@ -1960,8 +1960,8 @@ if ($dirins && $action == 'initdic' && $module && empty($cancel) /* && $user->ha
 		if (class_exists($class)) {
 			try {
 				$moduleobj = new $class($db);
-				'@phan-var-force DolibarrModules $moduleobj';
-				/** @var DolibarrModules $moduleobj */
+				'@phan-var-force DCADMINModules $moduleobj';
+				/** @var DCADMINModules $moduleobj */
 			} catch (Exception $e) {
 				$error++;
 				dol_print_error($db, $e->getMessage());
@@ -2224,8 +2224,8 @@ if ($dirins && $action == 'confirm_deletemodule' /* && $user->hasRight("modulebu
 		if (class_exists($class)) {
 			try {
 				$moduleobj = new $class($db);
-				'@phan-var-force DolibarrModules $moduleobj';
-				/** @var DolibarrModules $moduleobj */
+				'@phan-var-force DCADMINModules $moduleobj';
+				/** @var DCADMINModules $moduleobj */
 			} catch (Exception $e) {
 				$error++;
 				dol_print_error($db, $e->getMessage());
@@ -2324,8 +2324,8 @@ if ($dirins && $action == 'confirm_deleteobject' && $objectname /* && $user->has
 		if (class_exists($class)) {
 			try {
 				$moduleobj = new $class($db);
-				'@phan-var-force DolibarrModules $moduleobj';
-				/** @var DolibarrModules $moduleobj */
+				'@phan-var-force DCADMINModules $moduleobj';
+				/** @var DCADMINModules $moduleobj */
 			} catch (Exception $e) {
 				$error++;
 				dol_print_error($db, $e->getMessage());
@@ -2430,8 +2430,8 @@ if (($dirins && $action == 'confirm_deletedictionary' && $dicname) || ($dirins &
 	if (class_exists($class)) {
 		try {
 			$moduleobj = new $class($db);
-			'@phan-var-force DolibarrModules $moduleobj';
-			/** @var DolibarrModules $moduleobj */
+			'@phan-var-force DCADMINModules $moduleobj';
+			/** @var DCADMINModules $moduleobj */
 		} catch (Exception $e) {
 			$error++;
 			dol_print_error($db, $e->getMessage());
@@ -2519,8 +2519,8 @@ if ($dirins && $action == 'updatedictionary' && GETPOST('dictionnarykey') /* && 
 	if (class_exists($class)) {
 		try {
 			$moduleobj = new $class($db);
-			'@phan-var-force DolibarrModules $moduleobj';
-			/** @var DolibarrModules $moduleobj */
+			'@phan-var-force DCADMINModules $moduleobj';
+			/** @var DCADMINModules $moduleobj */
 		} catch (Exception $e) {
 			$error++;
 			dol_print_error($db, $e->getMessage());
@@ -2592,8 +2592,8 @@ if ($dirins && $action == 'generatepackage' /* && $user->hasRight("modulebuilder
 	if (class_exists($class)) {
 		try {
 			$moduleobj = new $class($db);
-			'@phan-var-force DolibarrModules $moduleobj';
-			/** @var DolibarrModules $moduleobj */
+			'@phan-var-force DCADMINModules $moduleobj';
+			/** @var DCADMINModules $moduleobj */
 		} catch (Exception $e) {
 			$error++;
 			dol_print_error($db, $e->getMessage());
@@ -2646,8 +2646,8 @@ if ($dirins && $action == 'addright' && !empty($module) && empty($cancel) /* && 
 	if (class_exists($class)) {
 		try {
 			$moduleobj = new $class($db);
-			'@phan-var-force DolibarrModules $moduleobj';
-			/** @var DolibarrModules $moduleobj */
+			'@phan-var-force DCADMINModules $moduleobj';
+			/** @var DCADMINModules $moduleobj */
 		} catch (Exception $e) {
 			$error++;
 			dol_print_error($db, $e->getMessage());
@@ -2742,8 +2742,8 @@ if ($dirins && GETPOST('action') == 'update_right' && GETPOST('modifyright') && 
 	if (class_exists($class)) {
 		try {
 			$moduleobj = new $class($db);
-			'@phan-var-force DolibarrModules $moduleobj';
-			/** @var DolibarrModules $moduleobj */
+			'@phan-var-force DCADMINModules $moduleobj';
+			/** @var DCADMINModules $moduleobj */
 		} catch (Exception $e) {
 			$error++;
 			dol_print_error($db, $e->getMessage());
@@ -2862,8 +2862,8 @@ if ($dirins && $action == 'confirm_deleteright' && !empty($module) && GETPOSTINT
 	if (class_exists($class)) {
 		try {
 			$moduleobj = new $class($db);
-			'@phan-var-force DolibarrModules $moduleobj';
-			/** @var DolibarrModules $moduleobj */
+			'@phan-var-force DCADMINModules $moduleobj';
+			/** @var DCADMINModules $moduleobj */
 		} catch (Exception $e) {
 			$error++;
 			dol_print_error($db, $e->getMessage());
@@ -3032,8 +3032,8 @@ if ($dirins && $action == 'confirm_deletemenu' && GETPOSTINT('menukey') /* && $u
 	if (class_exists($class)) {
 		try {
 			$moduleobj = new $class($db);
-			'@phan-var-force DolibarrModules $moduleobj';
-			/** @var DolibarrModules $moduleobj */
+			'@phan-var-force DCADMINModules $moduleobj';
+			/** @var DCADMINModules $moduleobj */
 		} catch (Exception $e) {
 			$error++;
 			dol_print_error($db, $e->getMessage());
@@ -3097,8 +3097,8 @@ if ($dirins && $action == 'addmenu' && empty($cancel) /* && $user->hasRight("mod
 	if (class_exists($class)) {
 		try {
 			$moduleobj = new $class($db);
-			'@phan-var-force DolibarrModules $moduleobj';
-			/** @var DolibarrModules $moduleobj */
+			'@phan-var-force DCADMINModules $moduleobj';
+			/** @var DCADMINModules $moduleobj */
 		} catch (Exception $e) {
 			$error++;
 			dol_print_error($db, $e->getMessage());
@@ -3256,8 +3256,8 @@ if ($dirins && $action == "update_menu" && GETPOSTINT('menukey') && GETPOST('tab
 		if (class_exists($class)) {
 			try {
 				$moduleobj = new $class($db);
-				'@phan-var-force DolibarrModules $moduleobj';
-				/** @var DolibarrModules $moduleobj */
+				'@phan-var-force DCADMINModules $moduleobj';
+				/** @var DCADMINModules $moduleobj */
 			} catch (Exception $e) {
 				$error++;
 				dol_print_error($db, $e->getMessage());
@@ -3361,8 +3361,8 @@ if ($dirins && $action == "update_props_module" && !empty(GETPOST('keydescriptio
 	if (class_exists($class)) {
 		try {
 			$moduleobj = new $class($db);
-			'@phan-var-force DolibarrModules $moduleobj';
-			/** @var DolibarrModules $moduleobj */
+			'@phan-var-force DCADMINModules $moduleobj';
+			/** @var DCADMINModules $moduleobj */
 		} catch (Exception $e) {
 			$error++;
 			dol_print_error($db, $e->getMessage());
@@ -3539,8 +3539,8 @@ if (!empty($module) && $module != 'initmodule' && $module != 'deletemodule') {
 	if (class_exists($class)) {
 		try {
 			$moduleobj = new $class($db);
-			'@phan-var-force DolibarrModules $moduleobj';
-			/** @var DolibarrModules $moduleobj */
+			'@phan-var-force DCADMINModules $moduleobj';
+			/** @var DCADMINModules $moduleobj */
 		} catch (Exception $e) {
 			$error++;
 			print $e->getMessage();
@@ -7015,8 +7015,8 @@ if ($module == 'initmodule') {
 			if (class_exists($class)) {
 				try {
 					$moduleobj = new $class($db);
-					'@phan-var-force DolibarrModules $moduleobj';
-					/** @var DolibarrModules $moduleobj */
+					'@phan-var-force DCADMINModules $moduleobj';
+					/** @var DCADMINModules $moduleobj */
 				} catch (Exception $e) {
 					$error++;
 					dol_print_error($db, $e->getMessage());

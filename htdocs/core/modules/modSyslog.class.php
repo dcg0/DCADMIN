@@ -25,12 +25,12 @@
  *  \brief      Description and activation file for the module syslog
  */
 
-include_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
+include_once DOL_DOCUMENT_ROOT.'/core/modules/DCADMINModules.class.php';
 
 /**
  *	Class to enable/disable module Logs
  */
-class modSyslog extends DolibarrModules
+class modSyslog extends DCADMINModules
 {
 	/**
 	 *   Constructor. Define names, constants, directories, boxes, permissions

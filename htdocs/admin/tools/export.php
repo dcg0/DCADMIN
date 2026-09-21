@@ -26,7 +26,7 @@
  *		\brief      Page to export a database into a dump file
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf

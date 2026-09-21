@@ -1276,7 +1276,7 @@ function updateDictionaryInFile($module, $file, $dicts)
  * including columns such as 'rowid', 'code', 'label', 'position', 'use_default', 'active', etc. The table name is constructed based on the provided $namedic parameter.
  *
  * @param	string	$modulename 	The lowercase name of the module for which the dictionary table is being created.
- * @param	string	$file 			The file path to the Dolibarr module builder file where the dictionaries are defined.
+ * @param	string	$file 			The file path to the DCADMIN module builder file where the dictionaries are defined.
  * @param	string	$namedic 		The name of the dictionary, which will also be used as the base for the table name.
  * @param	?array{langs:string,tabname:string[],tablib:string[],tabsql:string[],tabsqlsort:string[],tabfield:string[],tabfieldvalue:string[],tabfieldinsert:string[],tabrowid:string[],tabcond:array<string|bool|int>,tabhelp:array<array{code:string,field2:string}>}	$dictionnaires	An optional array containing pre-existing dictionary data, including tabname, tablib, tabsql, etc.
  * @return	int<-1,-1> 					Return int < 0 if error, return nothing on success
@@ -1443,7 +1443,7 @@ function countItemsInDirectory($path, $type = 1)
 /**
  * Return the map of optional tabs that can be generated for a ModuleBuilder object.
  * The CARD tab is always generated and is therefore not listed here.
- * HISTORY is an alias of AGENDA (object event history is the agenda tab in Dolibarr).
+ * HISTORY is an alias of AGENDA (object event history is the agenda tab in DCADMIN).
  *
  * @return	array<string,array{file:string,var:string,marker:string,label:string}>	Map: tab key => metadata
  */

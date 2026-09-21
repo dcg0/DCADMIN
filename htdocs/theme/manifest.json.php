@@ -62,7 +62,7 @@ require_once __DIR__.'/../main.inc.php';
  */
 
 top_httphead('text/json');
-// Important: Following code is to avoid page request by browser and PHP CPU at each Dolibarr page access.
+// Important: Following code is to avoid page request by browser and PHP CPU at each DCADMIN page access.
 header('Cache-Control: max-age=10800, public, must-revalidate');
 // For a text/json, we must set an Expires to avoid to have it forced to an expired value by the web server
 header('Expires: '.gmdate('D, d M Y H:i:s', dol_now('gmt') + 10800).' GMT');
@@ -152,7 +152,7 @@ if (getDolGlobalString('MAIN_MANIFEST_APPLI_LOGO_URL')) {
 	}
 }
 
-// Add Dolibarr std icon
+// Add DCADMIN std icon
 if (empty($manifest->icons)) {
 	$icon = new stdClass();
 	$icon->src = DOL_URL_ROOT.'/theme/dolibarr_256x256_color.png';

@@ -25,7 +25,7 @@
  *    \brief      Page to list and view unalterable logs
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf
@@ -344,7 +344,7 @@ if (isALNERunningVersion(1) && $mysoc->country_code == 'FR') {
 // Get the encoded HMAC key.
 $hmac_encoded_secret_key = $block_static->getEncodedHMACSecretKey();	// Can be old 'dolcrypt:...' if migration not yet complete but should be 'dolobfuscationv1...'
 if (empty($hmac_encoded_secret_key)) {
-	// This is no more the case since Dolibarr v23 and Blockedlog v2+
+	// This is no more the case since DCADMIN v23 and Blockedlog v2+
 	print '<div class="error mess2">';
 	print 'Error: BLOCKEDLOG_HMAC_KEY was not found. It should have been initialized to a value "BLOCKEDLOG_HMAC_...." during initialization of module BlockedLog or during migration from a very old version.';
 	print '</div>';

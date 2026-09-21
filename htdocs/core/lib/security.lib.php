@@ -40,7 +40,7 @@ include_once DOL_DOCUMENT_ROOT.'/blockedlog/lib/securitycore.lib.php';
  *	@param   string		$key		rule to use for delta ('0', '1' or 'myownkey')
  *	@return  string					encoded string with format 'passcrypted'
  *  @see dol_decode(), dolEncrypt()
- *  @phan-suppress DolibarrForbiddenFunctionPlugin
+ *  @phan-suppress DCADMINForbiddenFunctionPlugin
  */
 function dol_encode($chain, $key = '1')
 {
@@ -72,7 +72,7 @@ function dol_encode($chain, $key = '1')
  *	@param   string		$key		rule to use for delta ('0', '1' or 'myownkey')
  *	@return  string					decoded string
  *  @see dol_encode(), dolDecrypt
- *  @phan-suppress DolibarrForbiddenFunctionPlugin
+ *  @phan-suppress DCADMINForbiddenFunctionPlugin
  */
 function dol_decode($chain, $key = '1')
 {
@@ -120,7 +120,7 @@ function dolGetRandomBytes($length)
  * 	@param 		string		$password	Password to hash
  * 	@param		'md5'|'md5frommd5'|'smd5'|'sha'|'ssha'|'sha256'|'ssha256'|'sha384'|'ssha384'|'sha512'|'ssha512'|'crypt'|'clear'		$type		Type of hash
  * 	@return		string					Hash of password
- *  @phan-suppress DolibarrForbiddenFunctionPlugin
+ *  @phan-suppress DCADMINForbiddenFunctionPlugin
  */
 function dolGetLdapPasswordHash($password, $type = 'md5')
 {
@@ -133,7 +133,7 @@ function dolGetLdapPasswordHash($password, $type = 'md5')
 	if ($type === 'md5') {
 		return '{MD5}' . base64_encode(hash("md5", $password, true)); //For OpenLdap with md5 (based on an unencrypted password in base)
 	} elseif ($type === 'md5frommd5') {
-		return '{MD5}' . base64_encode(hex2bin($password)); // Create OpenLDAP MD5 password from Dolibarr MD5 password
+		return '{MD5}' . base64_encode(hex2bin($password)); // Create OpenLDAP MD5 password from DCADMIN MD5 password
 	} elseif ($type === 'smd5') {
 		return "{SMD5}" . base64_encode(hash("md5", $password . $salt, true) . $salt);
 	} elseif ($type === 'sha') {
@@ -276,9 +276,9 @@ function restrictedArea(User $user, $features, $object = 0, $tableandshare = '',
 	// if commonObjectLine : Using many2one related commonObject
 	// @see commonObjectLine::parentElement
 	if (in_array($features, ['commandedet', 'propaldet', 'facturedet', 'supplier_proposaldet', 'evaluationdet', 'skilldet', 'deliverydet', 'contratdet'])) {
-		$features = substr($features, 0, -3);  // @phan-suppress-current-line  DolibarrForbiddenFunctionPlugin
+		$features = substr($features, 0, -3);  // @phan-suppress-current-line  DCADMINForbiddenFunctionPlugin
 	} elseif (in_array($features, ['stocktransferline', 'inventoryline', 'bomline', 'expensereport_det', 'facture_fourn_det'])) {
-		$features = substr($features, 0, -4);  // @phan-suppress-current-line  DolibarrForbiddenFunctionPlugin
+		$features = substr($features, 0, -4);  // @phan-suppress-current-line  DCADMINForbiddenFunctionPlugin
 	} elseif ($features == 'commandefournisseurdispatch') {
 		$features = 'commandefournisseur';
 	} elseif ($features == 'invoice_supplier_det_rec') {
@@ -1360,7 +1360,7 @@ function getMaxFileSizeArray()
  * @param	string		$ip			IP address to check (ex: 192.168.0.50, 2001:db8:3333:4444::5555:6666)
  * @param	string		$cidr		Network IP CIDR notation (ex: 192.168.0.0/24, 2001:db8:3333:4444::/64)
  * @return	int						1 if IP is in CIDR range, 0 if IP out of CIDR range, -1 if check error
- * @phan-suppress DolibarrForbiddenFunctionPlugin
+ * @phan-suppress DCADMINForbiddenFunctionPlugin
  */
 function checkIPInCidr($ip, $cidr)
 {
@@ -1374,7 +1374,7 @@ function checkIPInCidr($ip, $cidr)
 	}
 
 	// Require same address IPvX family
-	if (strlen($ip_bin) !== strlen($net_bin)) {  // @phan-suppress-current-line  DolibarrForbiddenFunctionPlugin
+	if (strlen($ip_bin) !== strlen($net_bin)) {  // @phan-suppress-current-line  DCADMINForbiddenFunctionPlugin
 		return -1;
 	}
 
@@ -1386,7 +1386,7 @@ function checkIPInCidr($ip, $cidr)
 
 	// Compare full bytes and partial bytes
 	if ($full_bytes > 0) {
-		if (substr($ip_bin, 0, $full_bytes) !== substr($net_bin, 0, $full_bytes)) {  // @phan-suppress-current-line  DolibarrForbiddenFunctionPlugin
+		if (substr($ip_bin, 0, $full_bytes) !== substr($net_bin, 0, $full_bytes)) {  // @phan-suppress-current-line  DCADMINForbiddenFunctionPlugin
 			return 0;
 		}
 	}

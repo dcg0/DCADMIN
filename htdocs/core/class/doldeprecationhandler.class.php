@@ -33,7 +33,7 @@ trait DolDeprecationHandler
 	// protected $enableDynamicProperties = true;
 
 	// Define the following in the class using the trait
-	// to disallow Dolibarr deprecation warnings.
+	// to disallow DCADMIN deprecation warnings.
 	//
 	// protected $enableDeprecatedReporting = false;
 

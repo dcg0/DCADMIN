@@ -49,5 +49,5 @@ if (!getDolGlobalString('STRIPE_LIVE')/* || GETPOST('forcesandbox', 'alpha') */)
 }
 
 \Stripe\Stripe::setApiKey($stripearrayofkeys['secret_key']);
-\Stripe\Stripe::setAppInfo("Dolibarr Stripe", DOL_VERSION, "https://www.dolibarr.org"); // add dolibarr version
+\Stripe\Stripe::setAppInfo("DCADMIN Stripe", DOL_VERSION, "https://www.dolibarr.org"); // add dolibarr version
 \Stripe\Stripe::setApiVersion(getDolGlobalString('STRIPE_FORCE_VERSION', "2022-11-15")); // force version API

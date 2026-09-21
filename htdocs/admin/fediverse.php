@@ -30,7 +30,7 @@
  *      \brief      Page to setup fedivers in module Socialnetworks
  */
 
-//load Dolibarr environment
+//load DCADMIN environment
 require '../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/admin.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/socialnetwork.lib.php';

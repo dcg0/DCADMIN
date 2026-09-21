@@ -210,7 +210,7 @@ abstract class CommonObject
 	 *  	'date', 'datetime', 'timestamp', 'duration',
 	 *  	'boolean', 'checkbox', 'radio', 'array',
 	 *  	'email', 'phone', 'url', 'password', 'ip'
-	 *		Note: Filter must be a Dolibarr Universal Filter syntax string. Example: "(t.ref:like:'SO-%') or (t.date_creation:>:'20160101') or (t.status:!=:0) or (t.nature:is:NULL)"
+	 *		Note: Filter must be a DCADMIN Universal Filter syntax string. Example: "(t.ref:like:'SO-%') or (t.date_creation:>:'20160101') or (t.status:!=:0) or (t.nature:is:NULL)"
 	 * 'length' the length of field. Example: 255, '24,8'
 	 * 'label' the translation key.
 	 * 'langfile' the key of the language file for translation.
@@ -9296,7 +9296,7 @@ abstract class CommonObject
 					dol_include_once($InfoFieldList[1]);
 
 					if ($classname && !class_exists($classname)) {
-						// from V19 of Dolibarr, In some cases link use element instead of class, example project_task
+						// from V19 of DCADMIN, In some cases link use element instead of class, example project_task
 						// TODO use newObjectByElement() introduce in V20 by PR #30036 for better errors management
 						$element_prop = getElementProperties($classname);
 						if ($element_prop) {
@@ -9610,7 +9610,7 @@ abstract class CommonObject
 			if (!$validate->isFetchable((int) $fieldValue, $classname, $classpath)) {
 				$lastIsFetchableError = $validate->error;
 
-				// from V19 of Dolibarr, In some cases link use element instead of class, example project_task
+				// from V19 of DCADMIN, In some cases link use element instead of class, example project_task
 				if ($validate->isFetchableElement((int) $fieldValue, $classname)) {
 					return true;
 				}

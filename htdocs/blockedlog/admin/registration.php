@@ -25,7 +25,7 @@
  */
 
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf
@@ -151,7 +151,7 @@ if ($action == 'update') {
 		$error++;
 	}
 
-	// Check that we don't change the SIREN. A new Dolibarr instance must be created to change SIREN.
+	// Check that we don't change the SIREN. A new DCADMIN instance must be created to change SIREN.
 	if ($mysoc->country_code == 'FR' && $tmpthirdparty->idprof1 && $tmpthirdparty->idprof1 != $mysoc->idprof1 && isALNERunningVersion()) {
 		$langs->load("blockedlog");
 		setEventMessages($langs->trans("BlockedLogProfID1ChangeNotAllowedFR"), null, 'errors');
@@ -401,7 +401,7 @@ if ($mysoc->country_code == 'FR') {
 
 // Show generic message (for countries that need registration) to explain we need registration to collect data and why
 if (in_array($mysoc->country_code, array('FR'))) {
-	$organization_for_ping = getDolGlobalString('MAIN_ORGANIZATION_FOR_PING', "Association Dolibarr");
+	$organization_for_ping = getDolGlobalString('MAIN_ORGANIZATION_FOR_PING', "Association DCADMIN");
 	$dataprivacy_url = getDolGlobalString('MAIN_ORGANIZATION_URL_PRIVACY', "https://www.dolibarr.org/legal-privacy-gdpr.php");
 
 	if (!isRegistrationDataSavedAndPushed() || $origin == 'initmodule') {

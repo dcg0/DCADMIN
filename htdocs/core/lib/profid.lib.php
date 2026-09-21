@@ -28,7 +28,7 @@
  *  Check if a string passes the Luhn algorithm test.
  *  @param		string|int		$str		string to check
  *  @return		bool						True if the string passes the Luhn algorithm check, False otherwise
- *  @since		Dolibarr V20
+ *  @since		DCADMIN V20
  */
 function isValidLuhn($str)
 {
@@ -55,7 +55,7 @@ function isValidLuhn($str)
  *  @param		string		$siren			SIREN to check
  *  @param  	int			$lengthonly		Make surface test only (length, ...)
  *  @return		boolean						True if valid, False otherwise
- *  @since		Dolibarr V20
+ *  @since		DCADMIN V20
  */
 function isValidSiren($siren, $lengthonly = 0)
 {
@@ -76,7 +76,7 @@ function isValidSiren($siren, $lengthonly = 0)
  *  @param		string		$siret			SIRET to check
  *  @param  	int			$lengthonly		Make surface test only (length, ...)
  *  @return		boolean						True if valid, False otherwise
- *  @since		Dolibarr V20
+ *  @since		DCADMIN V20
  */
 function isValidSiret($siret, $lengthonly = 0)
 {
@@ -108,7 +108,7 @@ function isValidSiret($siret, $lengthonly = 0)
  *
  *  @param		string		$str		NIF to check
  *  @return		boolean					True if valid, False otherwise
- *  @since		Dolibarr V20
+ *  @since		DCADMIN V20
  */
 function isValidTinForPT($str)
 {
@@ -129,7 +129,7 @@ function isValidTinForPT($str)
  *
  *  @param		string		$str		TIN to check
  *  @return		boolean					True if valid, False otherwise
- *  @since		Dolibarr V20
+ *  @since		DCADMIN V20
  */
 function isValidTinForDZ($str)
 {
@@ -150,7 +150,7 @@ function isValidTinForDZ($str)
  *
  *  @param		string		$str		NN to check
  *  @return		boolean					True if valid, False otherwise
- *  @since		Dolibarr V20
+ *  @since		DCADMIN V20
  */
 function isValidTinForBE($str)
 {
@@ -174,7 +174,7 @@ function isValidTinForBE($str)
  *
  *  @param		string		$str		TIN to check
  *  @return		int<-4,3>				1 if NIF ok, 2 if CIF ok, 3 if NIE ok, -1 if NIF bad, -2 if CIF bad, -3 if NIE bad, -4 if unexpected bad
- *  @since		Dolibarr V20
+ *  @since		DCADMIN V20
  */
 function isValidTinForES($str)
 {
@@ -261,7 +261,7 @@ function isValidTinForES($str)
  *  @param		int			$idprof			1,2,3,4,5,6 (Example: 1=siren, 2=siret, 3=naf, 4=rcs/rm)
  *  @param		string		$country_code	Country code of the third party (Example: 'FR')
  *  @return		bool						True if a space can only be a separator
- *  @since		Dolibarr V24
+ *  @since		DCADMIN V24
  */
 function isProfIdWithoutSpace($idprof, $country_code)
 {

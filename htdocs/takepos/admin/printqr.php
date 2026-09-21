@@ -22,7 +22,7 @@
  *	\brief      Print QR Menu
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 
 /**

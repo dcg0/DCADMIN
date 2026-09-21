@@ -29,7 +29,7 @@
  *	\brief      Project card
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf
@@ -586,7 +586,7 @@ if (empty($reshook)) {
 			$newobject = new Project($db);
 			$newobject->fetch($result);
 
-			setEventMessages($langs->trans("ProjectCreatedInDolibarr", $newobject->ref), null, 'mesgs');
+			setEventMessages($langs->trans("ProjectCreatedInDCADMIN", $newobject->ref), null, 'mesgs');
 
 			header('Location: '.$_SERVER['PHP_SELF'].'?id='.$result.'&action=edit&comefromclone=1');
 			exit;

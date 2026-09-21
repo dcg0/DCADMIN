@@ -33,7 +33,7 @@ if (!empty($_POST['mode']) && $_POST['mode'] === 'label') {	// Page is called to
 	}
 }
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf

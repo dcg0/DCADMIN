@@ -1081,7 +1081,7 @@ function aiCheckCsrfToken($context = '')
 /**
  * Remove extrafields flagged as personal data from an API-shaped payload.
  *
- * Dolibarr lets an administrator mark an extrafield as personal data
+ * DCADMIN lets an administrator mark an extrafield as personal data
  * (GDPR). Such values must not travel to an AI provider, but the
  * REST objects the bridge returns carry every extrafield in array_options,
  * and the assistant tools that read array_options directly do the same.

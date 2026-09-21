@@ -35,12 +35,12 @@ class mailing_pomme extends MailingTargets
 	/**
 	 * @var string name of mailing module
 	 */
-	public $name = 'DolibarrUsers';
+	public $name = 'DCADMINUsers';
 
 	/**
 	 * @var string This label is used if no translation is found for key XXX neither MailingModuleDescXXX where XXX=name is found
 	 */
-	public $desc = 'Dolibarr users with emails'; // Label used if no translation found for MailingModuleDescXXX or XXX=name
+	public $desc = 'DCADMIN users with emails'; // Label used if no translation found for MailingModuleDescXXX or XXX=name
 
 	/**
 	 * @var string[] Module mailing actif si modules require_module actifs
@@ -84,7 +84,7 @@ class mailing_pomme extends MailingTargets
 		$langs->load("users");
 
 		$statssql = array();
-		$sql = "SELECT '".$this->db->escape($langs->trans("DolibarrUsers"))."' as label,";
+		$sql = "SELECT '".$this->db->escape($langs->trans("DCADMINUsers"))."' as label,";
 		$sql .= " count(distinct(u.email)) as nb";
 		$sql .= " FROM ".MAIN_DB_PREFIX."user as u";
 		$sql .= " WHERE u.email != ''"; // u.email IS NOT NULL est implicit dans ce test

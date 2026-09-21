@@ -29,7 +29,7 @@
  *       \brief      tab for Adding, editing, deleting a member's memberships
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf
@@ -437,7 +437,7 @@ if (empty($reshook) && $user->hasRight('adherent', 'cotisation', 'creer') && $ac
 						$listofmimes = array(dol_mimetype($file));
 					}
 
-					$moreinheader = 'X-Dolibarr-Info: send_an_email by adherents/subscription.php'."\r\n";
+					$moreinheader = 'X-DCADMIN-Info: send_an_email by adherents/subscription.php'."\r\n";
 
 					$result = $object->sendEmail($texttosend, $subjecttosend, $listofpaths, $listofmimes, $listofnames, "", "", 0, -1, '', $moreinheader);
 					if ($result < 0) {
@@ -640,11 +640,11 @@ print '<tr><td>'.$form->textwithpicto($langs->trans("MembershipPublic"), $langs-
 $cols = 2;
 include DOL_DOCUMENT_ROOT.'/core/tpl/extrafields_view.tpl.php';
 
-// Third party Dolibarr
+// Third party DCADMIN
 if (isModEnabled('societe')) {
 	print '<tr><td>';
 	print '<table class="nobordernopadding centpercent"><tr><td>';
-	print $langs->trans("LinkedToDolibarrThirdParty");
+	print $langs->trans("LinkedToDCADMINThirdParty");
 	print '</td>';
 	if ($action != 'editthirdparty' && $user->hasRight('adherent', 'creer')) {
 		print '<td class="right"><a class="editfielda" href="'.$_SERVER["PHP_SELF"].'?action=editthirdparty&token='.newToken().'&rowid='.$object->id.'">'.img_edit($langs->trans('SetLinkToThirdParty'), 1).'</a></td>';
@@ -683,10 +683,10 @@ if (isModEnabled('societe')) {
 	print '</td></tr>';
 }
 
-// Login Dolibarr - Link to user
+// Login DCADMIN - Link to user
 print '<tr><td>';
 print '<table class="nobordernopadding centpercent"><tr><td>';
-print $langs->trans("LinkedToDolibarrUser");
+print $langs->trans("LinkedToDCADMINUser");
 print '</td>';
 if ($action != 'editlogin' && $user->hasRight('adherent', 'creer')) {
 	print '<td class="right">';
@@ -705,7 +705,7 @@ if ($action == 'editlogin') {
 		$linkeduser->fetch($object->user_id);
 		print $linkeduser->getNomUrl(-1);
 	} else {
-		print '<span class="opacitymedium">'.$langs->trans("NoDolibarrAccess").'</span>';
+		print '<span class="opacitymedium">'.$langs->trans("NoDCADMINAccess").'</span>';
 	}
 }
 print '</td></tr>';
@@ -978,7 +978,7 @@ if (($action == 'createsubscription' || $action == 'create_thirdparty') && $user
 		}
 		// @todo Add other extrafields mandatory for thirdparty creation
 
-		print $form->formconfirm($_SERVER["PHP_SELF"]."?rowid=".$object->id, $langs->trans("CreateDolibarrThirdParty"), $langs->trans("ConfirmCreateThirdParty"), "confirm_create_thirdparty", $formquestion, 1);
+		print $form->formconfirm($_SERVER["PHP_SELF"]."?rowid=".$object->id, $langs->trans("CreateDCADMINThirdParty"), $langs->trans("ConfirmCreateThirdParty"), "confirm_create_thirdparty", $formquestion, 1);
 	}
 
 
@@ -1095,7 +1095,7 @@ if (($action == 'createsubscription' || $action == 'create_thirdparty') && $user
 					}
 					print $langs->trans("NoThirdPartyAssociatedToMember");
 					print ' - <a href="'.$_SERVER["PHP_SELF"].'?rowid='.$object->id.'&action=create_thirdparty&token='.newToken().'">';
-					print $langs->trans("CreateDolibarrThirdParty");
+					print $langs->trans("CreateDCADMINThirdParty");
 					print '</a>)';
 				}
 				if (!getDolGlobalString('ADHERENT_VAT_FOR_SUBSCRIPTIONS') || getDolGlobalString('ADHERENT_VAT_FOR_SUBSCRIPTIONS') != 'defaultforfoundationcountry') {
@@ -1125,7 +1125,7 @@ if (($action == 'createsubscription' || $action == 'create_thirdparty') && $user
 					}
 					print $langs->trans("NoThirdPartyAssociatedToMember");
 					print ' - <a href="'.$_SERVER["PHP_SELF"].'?rowid='.$object->id.'&action=create_thirdparty&token='.newToken().'">';
-					print $langs->trans("CreateDolibarrThirdParty");
+					print $langs->trans("CreateDCADMINThirdParty");
 					print '</a>)';
 				}
 				if (!getDolGlobalString('ADHERENT_VAT_FOR_SUBSCRIPTIONS') || getDolGlobalString('ADHERENT_VAT_FOR_SUBSCRIPTIONS') != 'defaultforfoundationcountry') {

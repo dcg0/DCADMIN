@@ -80,7 +80,7 @@ $jsConf = [
 
 ?>
 <script nonce="<?php print getNonce(); ?>">
-Dolibarr.on('Ready', function() {
+DCADMIN.on('Ready', function() {
 	/**
 	 * @typedef {Object} JsConfElementObject
 	 * @property {number} id
@@ -122,14 +122,14 @@ Dolibarr.on('Ready', function() {
 	function initTableDnD() {
 		if (!jsConf.activeAjaxReorder) return;
 
-		Dolibarr.log("Prepare tableDnd for #" + jsConf.tagIdForTableDND);
+		DCADMIN.log("Prepare tableDnd for #" + jsConf.tagIdForTableDND);
 		// TODO : replace old tableDnD with modern SortableJS
 		tableDnDInstance = $("#" + jsConf.tagIdForTableDND).tableDnD({
 			onDrop: function (table, row) {
 				var page_y = jQuery(document).scrollTop();
 				var reloadpage = jsConf.forceReloadPage;
-				Dolibarr.log("tableDND onDrop");
-				Dolibarr.log(decodeURI($("#" + jsConf.tagIdForTableDND).tableDnDSerialize()));
+				DCADMIN.log("tableDND onDrop");
+				DCADMIN.log(decodeURI($("#" + jsConf.tagIdForTableDND).tableDnDSerialize()));
 				$(`#${jsConf.tagIdForTableDND} tr[data-element=extrafield]`).attr('id', '');	// Set extrafields id to empty value in order to ignore them in tableDnDSerialize function
 				$(`#${jsConf.tagIdForTableDND} tr[data-ignoreidfordnd=1]`).attr('id', '');	// Set id to empty value in order to ignore them in tableDnDSerialize function
 				var roworder = cleanSerialize(decodeURI($(`#${jsConf.tagIdForTableDND}`).tableDnDSerialize()));
@@ -150,9 +150,9 @@ Dolibarr.on('Ready', function() {
 				$.post(`${jsConf.DOL_URL_ROOT}/core/ajax/row.php`,
 					postData,
 					function () {
-						Dolibarr.log("tableDND end of ajax call, reloadpage = " + reloadpage);
+						DCADMIN.log("tableDND end of ajax call, reloadpage = " + reloadpage);
 
-						Dolibarr.executeHook('documentRowMoved', postData)
+						DCADMIN.executeHook('documentRowMoved', postData)
 
 						if (reloadpage == 1) {
 							location.href = jsConf.redirectURL + '&page_y=' + page_y;
@@ -174,8 +174,8 @@ Dolibarr.on('Ready', function() {
 	applyCssAndDisplay();
 	initTableDnD();
 
-	Dolibarr.on('reloadDocumentLine', /** @param {{lineId:number, lineElement:string}} data */  function (data) {
-		Dolibarr.log('triggered by hook reloadDocumentLine : TEMPLATE AJAXROW.TPL.PHP')
+	DCADMIN.on('reloadDocumentLine', /** @param {{lineId:number, lineElement:string}} data */  function (data) {
+		DCADMIN.log('triggered by hook reloadDocumentLine : TEMPLATE AJAXROW.TPL.PHP')
 		applyCssAndDisplay();
 		initTableDnD();
 	});

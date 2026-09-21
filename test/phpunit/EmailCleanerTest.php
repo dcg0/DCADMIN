@@ -13,7 +13,7 @@
  * \brief      PHPUnit tests for deterministic email conversation context.
  */
 
-// These unit tests need no configured Dolibarr installation or database connection.
+// These unit tests need no configured DCADMIN installation or database connection.
 if (!defined('DOL_DOCUMENT_ROOT')) {
 	define('DOL_DOCUMENT_ROOT', dirname(__FILE__).'/../../htdocs');
 }

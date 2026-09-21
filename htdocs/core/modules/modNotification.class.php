@@ -24,12 +24,12 @@
  *  \ingroup    notification
  *  \brief      Description and activation file for the module Notification
  */
-include_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
+include_once DOL_DOCUMENT_ROOT.'/core/modules/DCADMINModules.class.php';
 
 /**
  *	Class to describe and enable module Mailing
  */
-class modNotification extends DolibarrModules
+class modNotification extends DCADMINModules
 {
 	/**
 	 *   Constructor. Define names, constants, directories, boxes, permissions
@@ -48,7 +48,7 @@ class modNotification extends DolibarrModules
 		$this->module_position = '22';
 		// Module label (no space allowed), used if translation string 'ModuleXXXName' not found (where XXX is value of numeric property 'numero' of module)
 		$this->name = preg_replace('/^mod/i', '', get_class($this));
-		$this->description = "EMail notifications (push) on business Dolibarr events";
+		$this->description = "EMail notifications (push) on business DCADMIN events";
 		$this->descriptionlong = 'Module600Long';
 		// Possible values for version are: 'development', 'experimental', 'dolibarr' or version
 		$this->version = 'dolibarr';
@@ -83,7 +83,7 @@ class modNotification extends DolibarrModules
 
 	/**
 	 *		Function called when module is enabled.
-	 *		The init function add constants, boxes, permissions and menus (defined in constructor) into Dolibarr database.
+	 *		The init function add constants, boxes, permissions and menus (defined in constructor) into DCADMIN database.
 	 *		It also creates data directories
 	 *
 	 *      @param      string	$options    Options when enabling module ('', 'noboxes')

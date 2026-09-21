@@ -29,9 +29,9 @@ require_once DOL_DOCUMENT_ROOT.'/product/class/api_products.class.php';
  * @since	5.0.0	Initial implementation
  *
  * @access protected
- * @class  DolibarrApiAccess {@requires user,external}
+ * @class  DCADMINApiAccess {@requires user,external}
  */
-class Warehouses extends DolibarrApi
+class Warehouses extends DCADMINApi
 {
 	/**
 	 * @var string[]       Mandatory fields, checked when create and update object
@@ -73,7 +73,7 @@ class Warehouses extends DolibarrApi
 	 */
 	public function get($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('stock', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('stock', 'lire')) {
 			throw new RestException(403);
 		}
 		if ($id == 0) {
@@ -84,8 +84,8 @@ class Warehouses extends DolibarrApi
 			throw new RestException(404, 'warehouse not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('stock', $this->warehouse->id, 'entrepot')) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('stock', $this->warehouse->id, 'entrepot')) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		return $this->_cleanObjectDatas($this->warehouse);
@@ -121,7 +121,7 @@ class Warehouses extends DolibarrApi
 	{
 		$obj_ret = array();
 
-		if (!DolibarrApiAccess::$user->hasRight('stock', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('stock', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -215,7 +215,7 @@ class Warehouses extends DolibarrApi
 	 */
 	public function post($request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('stock', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('stock', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -238,7 +238,7 @@ class Warehouses extends DolibarrApi
 
 			$this->warehouse->$field = $this->_checkValForAPI($field, $value, $this->warehouse);
 		}
-		if ($this->warehouse->create(DolibarrApiAccess::$user) < 0) {
+		if ($this->warehouse->create(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, "Error creating warehouse", array_merge(array($this->warehouse->error), $this->warehouse->errors));
 		}
 		return $this->warehouse->id;
@@ -265,7 +265,7 @@ class Warehouses extends DolibarrApi
 	 */
 	public function put($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('stock', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('stock', 'creer')) {
 			throw new RestException(403);
 		}
 		if ($id == 0) {
@@ -276,8 +276,8 @@ class Warehouses extends DolibarrApi
 			throw new RestException(404, 'warehouse not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('stock', $this->warehouse->id, 'entrepot')) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('stock', $this->warehouse->id, 'entrepot')) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		foreach ($request_data as $field => $value) {
@@ -307,7 +307,7 @@ class Warehouses extends DolibarrApi
 			$this->warehouse->$field = $this->_checkValForAPI($field, $value, $this->warehouse);
 		}
 
-		$updateresult = $this->warehouse->update($id, DolibarrApiAccess::$user);
+		$updateresult = $this->warehouse->update($id, DCADMINApiAccess::$user);
 		if ($updateresult > 0) {
 			return $this->get($id);
 		} else {
@@ -335,7 +335,7 @@ class Warehouses extends DolibarrApi
 	 */
 	public function delete($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('stock', 'supprimer')) {
+		if (!DCADMINApiAccess::$user->hasRight('stock', 'supprimer')) {
 			throw new RestException(403);
 		}
 		if ($id == 0) {
@@ -346,11 +346,11 @@ class Warehouses extends DolibarrApi
 			throw new RestException(404, 'warehouse not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('stock', $this->warehouse->id, 'entrepot')) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('stock', $this->warehouse->id, 'entrepot')) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		if (!$this->warehouse->delete(DolibarrApiAccess::$user)) {
+		if (!$this->warehouse->delete(DCADMINApiAccess::$user)) {
 			throw new RestException(500, 'error when delete warehouse');
 		}
 
@@ -395,7 +395,7 @@ class Warehouses extends DolibarrApi
 	*/
 	public function listProducts($id = 0, $sortfield = "t.rowid", $sortorder = 'ASC', $limit = 100, $page = 0, $includestockdata = 0, $includesubproducts = false, $includeparentid = false, $includetrans = false, $properties = '', $pagination_data = false)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('stock', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('stock', 'lire')) {
 			throw new RestException(403);
 		}
 		if ((int) $id == 0) {

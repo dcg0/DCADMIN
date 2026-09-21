@@ -17,7 +17,7 @@
  */
 /**
  *	\file			htdocs/core/modules/substitutions/functions_numberwords.lib.php
- *	\brief			A set of functions for Dolibarr
+ *	\brief			A set of functions for DCADMIN
  *					This file contains functions for plugin numberwords.
  */
 /**

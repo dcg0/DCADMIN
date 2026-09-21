@@ -39,7 +39,7 @@ abstract class ModelePDFSalary extends CommonDocGenerator
 
 	// phpcs:disable PEAR.NamingConventions.ValidFunctionName.ScopeNotCamelCaps
 	/**
-	 * Legacy method required by Dolibarr PDF system
+	 * Legacy method required by DCADMIN PDF system
 	 * Delegates to camelCase method
 	 *
 	 * @param DoliDB $db Database handler

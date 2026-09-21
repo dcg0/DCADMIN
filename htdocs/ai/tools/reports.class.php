@@ -34,7 +34,7 @@ require_once DOL_DOCUMENT_ROOT . '/core/lib/date.lib.php';
 /**
  * Class ToolReports
  *
- * Provides various tools related to Dolibarr reports.
+ * Provides various tools related to DCADMIN reports.
  */
 class ToolReports extends McpTool
 {
@@ -45,7 +45,7 @@ class ToolReports extends McpTool
 	 *
 	 * 	@param	DoliDB		$db			Database handler
 	 * 	@param	User|null	$user		Service user provided by McpHandler (from AI_MCP_USER_ID)
-	 * 	@param	Conf|null	$conf		Dolibarr config (optional)
+	 * 	@param	Conf|null	$conf		DCADMIN config (optional)
 	 */
 	public function __construct(DoliDB $db, $user = null, $conf = null)
 	{
@@ -218,7 +218,7 @@ class ToolReports extends McpTool
 	 *
 	 * If `thirdparty_id` is provided, it is returned directly.
 	 * Otherwise, if `thirdparty_name` is provided, the function searches
-	 * the Dolibarr societe table using a LIKE match and returns the first match.
+	 * the DCADMIN societe table using a LIKE match and returns the first match.
 	 *
 	 * @param array<string, mixed> $args Input parameters (thirdparty_id, thirdparty_name)
 	 *

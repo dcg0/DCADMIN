@@ -864,7 +864,7 @@ function ajax_object_onoff($object, $code, $field, $text_on, $text_off, $input =
 					function(response) {
 						//alert(response.responseText);
 						console.warn(response.responseText);
-						Dolibarr.tools.setEventMessage(response.responseText, "errors");
+						DCADMIN.tools.setEventMessage(response.responseText, "errors");
 					}
 				);
             });
@@ -909,7 +909,7 @@ function ajax_object_onoff($object, $code, $field, $text_on, $text_off, $input =
 					function(response) {
 						//alert(response.responseText);
 						console.warn(response.responseText);
-						Dolibarr.tools.setEventMessage(response.responseText, "errors");
+						DCADMIN.tools.setEventMessage(response.responseText, "errors");
 					}
 				);
             });

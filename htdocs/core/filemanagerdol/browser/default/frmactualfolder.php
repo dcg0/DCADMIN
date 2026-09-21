@@ -21,7 +21,7 @@
 
 define('NOTOKENRENEWAL', 1); // Disables token renewal
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../../../main.inc.php';
 /**
  * @var Conf $conf
@@ -58,7 +58,7 @@ top_httphead();
 		<title>Folder path</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <?php
-print '<!-- Includes CSS for Dolibarr theme -->'."\n";
+print '<!-- Includes CSS for DCADMIN theme -->'."\n";
 // Output style sheets (optioncss='print' or ''). Note: $conf->css looks like '/theme/eldy/style.css.php'
 $themepath = dol_buildpath($conf->css, 1);
 $themesubdir = '';

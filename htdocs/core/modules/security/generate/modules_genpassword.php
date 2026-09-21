@@ -152,7 +152,7 @@ abstract class ModeleGenPassword
 	 * stored in USER_PASSWORD_GENERATED, e.g. 'standard', 'PasswordGuard'). Scans
 	 * core/modules/security/generate/ plus, for each enabled module declaring
 	 * module_parts['models'], its own core/modules/security/generate/ subdirectory — the same
-	 * multi-root convention used by every numbering-module scan in Dolibarr (see e.g.
+	 * multi-root convention used by every numbering-module scan in DCADMIN (see e.g.
 	 * Facture::getNextNumRef()). This lets a module contribute its own modGeneratePassXxx class
 	 * from its own directory without any further core patch.
 	 *

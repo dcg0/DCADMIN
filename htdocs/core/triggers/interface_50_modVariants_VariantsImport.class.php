@@ -44,7 +44,7 @@ require_once DOL_DOCUMENT_ROOT.'/core/triggers/dolibarrtriggers.class.php';
  * weaker invariant that can be decided on a single line is enforced: a child product belongs
  * to exactly one combination.
  */
-class InterfaceVariantsImport extends DolibarrTriggers
+class InterfaceVariantsImport extends DCADMINTriggers
 {
 	/**
 	 * Tables of the module that need a business reconciliation after an import
@@ -75,7 +75,7 @@ class InterfaceVariantsImport extends DolibarrTriggers
 	}
 
 	/**
-	 * Function called when a Dolibarr business event is done.
+	 * Function called when a DCADMIN business event is done.
 	 *
 	 * @param	string		$action		Event action code
 	 * @param	CommonObject|stdClass		$object		Object, a business object prototype or a stdClass when it comes from the import engine

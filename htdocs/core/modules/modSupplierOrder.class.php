@@ -31,12 +31,12 @@
  *  \ingroup    supplier_order
  *  \brief      Description and activation file for the module Supplier order
  */
-include_once DOL_DOCUMENT_ROOT . '/core/modules/DolibarrModules.class.php';
+include_once DOL_DOCUMENT_ROOT . '/core/modules/DCADMINModules.class.php';
 
 /**
  *    Description and activation class for module supplier order
  */
-class modSupplierOrder extends DolibarrModules
+class modSupplierOrder extends DCADMINModules
 {
 	/**
 	 *   Constructor. Define names, constants, directories, boxes, permissions
@@ -544,7 +544,7 @@ class modSupplierOrder extends DolibarrModules
 
 	/**
 	 *        Function called when module is enabled.
-	 *        The init function add constants, boxes, permissions and menus (defined in constructor) into Dolibarr database.
+	 *        The init function add constants, boxes, permissions and menus (defined in constructor) into DCADMIN database.
 	 *        It also creates data directories
 	 *
 	 * @param string $options Options when enabling module ('', 'noboxes')

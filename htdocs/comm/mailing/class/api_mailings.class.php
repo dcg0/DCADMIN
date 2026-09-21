@@ -28,9 +28,9 @@ require_once DOL_DOCUMENT_ROOT.'/comm/mailing/class/mailing_targets.class.php';
  * @since	23.0.0	Initial implementation
  *
  * @access protected
- * @class  DolibarrApiAccess {@requires user,external}
+ * @class  DCADMINApiAccess {@requires user,external}
  */
-class Mailings extends DolibarrApi
+class Mailings extends DCADMINApi
 {
 	/**
 	 * @var string[]       Mandatory fields, checked when create and update object
@@ -99,7 +99,7 @@ class Mailings extends DolibarrApi
 	 */
 	private function _fetch($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('mailing', 'read')) {
+		if (!DCADMINApiAccess::$user->hasRight('mailing', 'read')) {
 			throw new RestException(403);
 		}
 
@@ -108,14 +108,14 @@ class Mailings extends DolibarrApi
 			throw new RestException(404, 'Mass mailing not found, id='.$id);
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('mailing', $this->mailing->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('mailing', $this->mailing->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$this->mailing->fetchObjectLinked();
 
-		if (!DolibarrApi::_checkAccessToResource('project', ((int) $this->mailing->fk_project))) {
-			throw new RestException(403, 'Access (project) not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('project', ((int) $this->mailing->fk_project))) {
+			throw new RestException(403, 'Access (project) not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		return $this->_cleanObjectDatas($this->mailing);
@@ -146,14 +146,14 @@ class Mailings extends DolibarrApi
 	 */
 	public function index($sortfield = "t.rowid", $sortorder = 'ASC', $limit = 100, $page = 0, $fk_projects = '', $sqlfilters = '', $properties = '', $pagination_data = false, $loadlinkedobjects = 0)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('mailing', 'read')) {
+		if (!DCADMINApiAccess::$user->hasRight('mailing', 'read')) {
 			throw new RestException(403);
 		}
 
 		$arrayProjects = explode(",", $fk_projects);
 		foreach ($arrayProjects as $project => $value) {
-			if (!DolibarrApi::_checkAccessToResource('project', ((int) $value))) {
-				throw new RestException(403, 'Access (project) not allowed for login '.DolibarrApiAccess::$user->login);
+			if (!DCADMINApi::_checkAccessToResource('project', ((int) $value))) {
+				throw new RestException(403, 'Access (project) not allowed for login '.DCADMINApiAccess::$user->login);
 			}
 		}
 
@@ -257,7 +257,7 @@ class Mailings extends DolibarrApi
 	 */
 	public function indexTargets($id, $sortfield = "t.rowid", $sortorder = 'ASC', $limit = 100, $page = 0, $sqlfilters = '', $properties = '', $pagination_data = false)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('mailing', 'read')) {
+		if (!DCADMINApiAccess::$user->hasRight('mailing', 'read')) {
 			throw new RestException(403);
 		}
 
@@ -267,8 +267,8 @@ class Mailings extends DolibarrApi
 		}
 
 		$fk_project = $this->mailing->fk_project;
-		if (!DolibarrApi::_checkAccessToResource('project', ((int) $fk_project))) {
-			throw new RestException(403, 'Access (project) not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('project', ((int) $fk_project))) {
+			throw new RestException(403, 'Access (project) not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$obj_ret = array();
@@ -355,7 +355,7 @@ class Mailings extends DolibarrApi
 	 */
 	public function clone($id, $cloneContent = 1, $cloneRecipients = 1, $notrigger = 0)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('mailing', 'write')) {
+		if (!DCADMINApiAccess::$user->hasRight('mailing', 'write')) {
 			throw new RestException(403, "Insufficient rights");
 		}
 		$result = $this->mailing->fetch($id);
@@ -363,11 +363,11 @@ class Mailings extends DolibarrApi
 			throw new RestException(404, 'Mass mailing to clone not found, id='.$id);
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('project', ((int) $this->mailing->fk_project))) {
-			throw new RestException(403, 'Access (project) not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('project', ((int) $this->mailing->fk_project))) {
+			throw new RestException(403, 'Access (project) not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		$cloningResult = $this->mailing->createFromClone(DolibarrApiAccess::$user, ((int) $id), ((int) $cloneContent), ((int) $cloneRecipients), ((int) $notrigger));
+		$cloningResult = $this->mailing->createFromClone(DCADMINApiAccess::$user, ((int) $id), ((int) $cloneContent), ((int) $cloneRecipients), ((int) $notrigger));
 		if ($cloningResult < 0) {
 			throw new RestException(500, "Error cloning mass mailing", array_merge(array($this->mailing->error), $this->mailing->errors));
 		}
@@ -394,7 +394,7 @@ class Mailings extends DolibarrApi
 	 */
 	public function post($request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('mailing', 'write')) {
+		if (!DCADMINApiAccess::$user->hasRight('mailing', 'write')) {
 			throw new RestException(403, "Insufficiant rights");
 		}
 		// Check mandatory fields
@@ -407,15 +407,15 @@ class Mailings extends DolibarrApi
 				continue;
 			}
 			if ($field === 'fk_project') {
-				if (!DolibarrApi::_checkAccessToResource('project', ((int) $value))) {
-					throw new RestException(403, 'Access (project) not allowed for login '.DolibarrApiAccess::$user->login);
+				if (!DCADMINApi::_checkAccessToResource('project', ((int) $value))) {
+					throw new RestException(403, 'Access (project) not allowed for login '.DCADMINApiAccess::$user->login);
 				}
 			}
 
 			$this->mailing->$field = $this->_checkValForAPI($field, $value, $this->mailing);
 		}
 
-		if ($this->mailing->create(DolibarrApiAccess::$user) < 0) {
+		if ($this->mailing->create(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, "Error creating mass mailing", array_merge(array($this->mailing->error), $this->mailing->errors));
 		}
 
@@ -439,7 +439,7 @@ class Mailings extends DolibarrApi
 	 */
 	public function put($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('mailing', 'write')) {
+		if (!DCADMINApiAccess::$user->hasRight('mailing', 'write')) {
 			throw new RestException(403);
 		}
 
@@ -448,12 +448,12 @@ class Mailings extends DolibarrApi
 			throw new RestException(404, 'Mass mailing not found, id='.$id);
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('project', ((int) $this->mailing->fk_project))) {
-			throw new RestException(403, 'Access (project) not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('project', ((int) $this->mailing->fk_project))) {
+			throw new RestException(403, 'Access (project) not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('mailing', $this->mailing->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('mailing', $this->mailing->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 		foreach ($request_data as $field => $value) {
 			if ($field == 'id') {
@@ -474,7 +474,7 @@ class Mailings extends DolibarrApi
 			$this->mailing->$field = $this->_checkValForAPI($field, $value, $this->mailing);
 		}
 
-		if ($this->mailing->update(DolibarrApiAccess::$user) > 0) {
+		if ($this->mailing->update(DCADMINApiAccess::$user) > 0) {
 			return $this->get($id);
 		} else {
 			throw new RestException(500, $this->mailing->error);
@@ -497,7 +497,7 @@ class Mailings extends DolibarrApi
 	 */
 	public function delete($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('mailing', 'delete')) {
+		if (!DCADMINApiAccess::$user->hasRight('mailing', 'delete')) {
 			throw new RestException(403);
 		}
 		$result = $this->mailing->fetch($id);
@@ -505,15 +505,15 @@ class Mailings extends DolibarrApi
 			throw new RestException(404, 'Mass mailing not found, id='.$id);
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('project', ((int) $this->mailing->fk_project))) {
-			throw new RestException(403, 'Access (project) not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('project', ((int) $this->mailing->fk_project))) {
+			throw new RestException(403, 'Access (project) not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('mailing', $this->mailing->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('mailing', $this->mailing->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		if (!$this->mailing->delete(DolibarrApiAccess::$user)) {
+		if (!$this->mailing->delete(DCADMINApiAccess::$user)) {
 			throw new RestException(500, 'Error when delete Mass mailing : '.$this->mailing->error);
 		}
 
@@ -545,7 +545,7 @@ class Mailings extends DolibarrApi
 	 */
 	public function updateTarget($id, $targetid, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('mailing', 'write')) {
+		if (!DCADMINApiAccess::$user->hasRight('mailing', 'write')) {
 			throw new RestException(403);
 		}
 
@@ -561,12 +561,12 @@ class Mailings extends DolibarrApi
 			throw new RestException(404, 'Target id='.$targetid.' is does not belong to mailing id='.$id);
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('project', ((int) $this->mailing->fk_project))) {
-			throw new RestException(403, 'Access (project) not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('project', ((int) $this->mailing->fk_project))) {
+			throw new RestException(403, 'Access (project) not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('mailing', $this->mailing->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('mailing', $this->mailing->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 		foreach ($request_data as $field => $value) {
 			if ($field == 'id') {
@@ -584,7 +584,7 @@ class Mailings extends DolibarrApi
 			$this->mailing_target->$field = $this->_checkValForAPI($field, $value, $this->mailing_target);
 		}
 
-		if ($this->mailing_target->update(DolibarrApiAccess::$user) > 0) {
+		if ($this->mailing_target->update(DCADMINApiAccess::$user) > 0) {
 			return $this->getTarget($id, $targetid);
 		} else {
 			throw new RestException(500, $this->mailing_target->error);
@@ -611,7 +611,7 @@ class Mailings extends DolibarrApi
 	 */
 	public function postTarget($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('mailing', 'write')) {
+		if (!DCADMINApiAccess::$user->hasRight('mailing', 'write')) {
 			throw new RestException(403, "Insufficiant rights");
 		}
 		// Check mandatory fields
@@ -626,8 +626,8 @@ class Mailings extends DolibarrApi
 				continue;
 			}
 			if ($field === 'fk_project') {
-				if (!DolibarrApi::_checkAccessToResource('project', ((int) $value))) {
-					throw new RestException(403, 'Access (project) not allowed for login '.DolibarrApiAccess::$user->login);
+				if (!DCADMINApi::_checkAccessToResource('project', ((int) $value))) {
+					throw new RestException(403, 'Access (project) not allowed for login '.DCADMINApiAccess::$user->login);
 				}
 			}
 
@@ -639,8 +639,8 @@ class Mailings extends DolibarrApi
 				if ($fetchMailingResult < 0) {
 					throw new RestException(404, 'Mass mailing not found, id='.((int) $value));
 				}
-				if (!DolibarrApi::_checkAccessToResource('project', ((int) $this->mailing->fk_project))) {
-					throw new RestException(403, 'Access (project) not allowed for login '.DolibarrApiAccess::$user->login);
+				if (!DCADMINApi::_checkAccessToResource('project', ((int) $this->mailing->fk_project))) {
+					throw new RestException(403, 'Access (project) not allowed for login '.DCADMINApiAccess::$user->login);
 				}
 				$fk_mailing_id = ((int) $value);
 			}
@@ -652,7 +652,7 @@ class Mailings extends DolibarrApi
 			throw new RestException(404, 'Mass mailing not found, id='.((int) $fk_mailing_id));
 		}
 
-		if ($this->mailing_target->create(DolibarrApiAccess::$user) < 0) {
+		if ($this->mailing_target->create(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, "Error creating mass mailing target", array_merge(array($this->mailing->error), $this->mailing->errors));
 		}
 
@@ -693,7 +693,7 @@ class Mailings extends DolibarrApi
 	 */
 	private function _fetchTarget($id, $targetid)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('mailing', 'read')) {
+		if (!DCADMINApiAccess::$user->hasRight('mailing', 'read')) {
 			throw new RestException(403);
 		}
 
@@ -709,12 +709,12 @@ class Mailings extends DolibarrApi
 			throw new RestException(404, 'Target id='.$targetid.' is does not belong to mailing id='.$id);
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('project', ((int) $this->mailing->fk_project))) {
-			throw new RestException(403, 'Access (project) not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('project', ((int) $this->mailing->fk_project))) {
+			throw new RestException(403, 'Access (project) not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('mailing', $this->mailing->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('mailing', $this->mailing->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		return $this->_cleanTargetDatas($this->mailing_target);
@@ -739,7 +739,7 @@ class Mailings extends DolibarrApi
 	 */
 	public function deleteTarget($id, $targetid)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('mailing', 'delete')) {
+		if (!DCADMINApiAccess::$user->hasRight('mailing', 'delete')) {
 			throw new RestException(403);
 		}
 
@@ -754,14 +754,14 @@ class Mailings extends DolibarrApi
 		if ($id != $this->mailing_target->fk_mailing) {
 			throw new RestException(404, 'Target id='.$targetid.' is does not belong to mailing id='.$id);
 		}
-		if (!DolibarrApi::_checkAccessToResource('project', ((int) $this->mailing->fk_project))) {
-			throw new RestException(403, 'Access (project) not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('project', ((int) $this->mailing->fk_project))) {
+			throw new RestException(403, 'Access (project) not allowed for login '.DCADMINApiAccess::$user->login);
 		}
-		if (!DolibarrApi::_checkAccessToResource('mailing', $this->mailing->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('mailing', $this->mailing->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		if (!$this->mailing_target->delete(DolibarrApiAccess::$user)) {
+		if (!$this->mailing_target->delete(DCADMINApiAccess::$user)) {
 			throw new RestException(500, 'Error when delete Mass mailing target: '.$this->mailing->error);
 		}
 
@@ -791,7 +791,7 @@ class Mailings extends DolibarrApi
 	 */
 	public function deleteTargets($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('mailing', 'delete')) {
+		if (!DCADMINApiAccess::$user->hasRight('mailing', 'delete')) {
 			throw new RestException(403);
 		}
 		$result = $this->mailing->fetch($id);
@@ -799,12 +799,12 @@ class Mailings extends DolibarrApi
 			throw new RestException(404, 'Mass mailing not found, id='.$id);
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('project', ((int) $this->mailing->fk_project))) {
-			throw new RestException(403, 'Access (project) not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('project', ((int) $this->mailing->fk_project))) {
+			throw new RestException(403, 'Access (project) not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('mailing', $this->mailing->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('mailing', $this->mailing->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$count = $this->mailing->countNbOfTargets('all');
@@ -838,7 +838,7 @@ class Mailings extends DolibarrApi
 	 */
 	public function resetTargetsStatus($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('mailing', 'write')) {
+		if (!DCADMINApiAccess::$user->hasRight('mailing', 'write')) {
 			throw new RestException(403);
 		}
 		$result = $this->mailing->fetch($id);
@@ -846,16 +846,16 @@ class Mailings extends DolibarrApi
 			throw new RestException(404, 'Mass mailing not found, id='.$id);
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('project', ((int) $this->mailing->fk_project))) {
-			throw new RestException(403, 'Access (project) not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('project', ((int) $this->mailing->fk_project))) {
+			throw new RestException(403, 'Access (project) not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('mailing', $this->mailing->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('mailing', $this->mailing->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$count = $this->mailing->countNbOfTargets('all');
-		if (!$this->mailing->reset_targets_status(DolibarrApiAccess::$user)) {
+		if (!$this->mailing->reset_targets_status(DCADMINApiAccess::$user)) {
 			throw new RestException(500, 'Error when reset targets status of Mass mailing : '.$this->mailing->error);
 		}
 
@@ -884,7 +884,7 @@ class Mailings extends DolibarrApi
 	 */
 	public function settodraft($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('mailing', 'write')) {
+		if (!DCADMINApiAccess::$user->hasRight('mailing', 'write')) {
 			throw new RestException(403);
 		}
 		$result = $this->mailing->fetch($id);
@@ -892,15 +892,15 @@ class Mailings extends DolibarrApi
 			throw new RestException(404, 'Mass mailing not found, id='.$id);
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('project', ((int) $this->mailing->fk_project))) {
-			throw new RestException(403, 'Access (project) not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('project', ((int) $this->mailing->fk_project))) {
+			throw new RestException(403, 'Access (project) not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('mailing', $this->mailing->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('mailing', $this->mailing->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		$result = $this->mailing->setDraft(DolibarrApiAccess::$user);
+		$result = $this->mailing->setDraft(DCADMINApiAccess::$user);
 		if ($result == 0) {
 			throw new RestException(304, 'Nothing done. May be object is already draft');
 		}
@@ -936,7 +936,7 @@ class Mailings extends DolibarrApi
 	 */
 	public function validate($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('mailing', 'write')) {
+		if (!DCADMINApiAccess::$user->hasRight('mailing', 'write')) {
 			throw new RestException(403);
 		}
 		$result = $this->mailing->fetch($id);
@@ -944,15 +944,15 @@ class Mailings extends DolibarrApi
 			throw new RestException(404, 'Mass mailing not found, id='.$id);
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('project', ((int) $this->mailing->fk_project))) {
-			throw new RestException(403, 'Access (project) not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('project', ((int) $this->mailing->fk_project))) {
+			throw new RestException(403, 'Access (project) not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('mailing', $this->mailing->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('mailing', $this->mailing->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		$result = $this->mailing->valid(DolibarrApiAccess::$user);
+		$result = $this->mailing->valid(DCADMINApiAccess::$user);
 		if ($result == 0) {
 			throw new RestException(304, 'Error nothing done. May be object is already validated');
 		}

@@ -326,7 +326,7 @@ class Adherent extends CommonObject
 	 *  	'date', 'datetime', 'timestamp', 'duration',
 	 *  	'boolean', 'checkbox', 'radio', 'array',
 	 *  	'mail', 'phone', 'url', 'password', 'ip'
-	 *		Note: Filter must be a Dolibarr Universal Filter syntax string. Example: "(t.ref:like:'SO-%') or (t.date_creation:>:'20160101') or (t.status:!=:0) or (t.nature:is:NULL)"
+	 *		Note: Filter must be a DCADMIN Universal Filter syntax string. Example: "(t.ref:like:'SO-%') or (t.date_creation:>:'20160101') or (t.status:!=:0) or (t.nature:is:NULL)"
 	 *  'length' the length of field. Example: 255, '24,8'
 	 *  'label' the translation key.
 	 *  'alias' the alias used into some old hard coded SQL requests
@@ -369,7 +369,7 @@ class Adherent extends CommonObject
 		'morphy' => array('type' => 'varchar(3)', 'label' => 'MemberNature', 'enabled' => 1, 'visible' => 1, 'notnull' => 1, 'position' => 55),
 		'fk_adherent_type' => array('type' => 'integer', 'label' => 'MemberType', 'enabled' => 1, 'visible' => 1, 'notnull' => 1, 'position' => 60),
 		'societe' => array('type' => 'varchar(128)', 'label' => 'Societe', 'enabled' => 1, 'visible' => 1, 'position' => 65, 'showoncombobox' => 2),
-		'fk_soc' => array('type' => 'integer:Societe:societe/class/societe.class.php', 'label' => 'LinkedToDolibarrThirdParty', 'enabled' => 1, 'visible' => 1, 'position' => 70),
+		'fk_soc' => array('type' => 'integer:Societe:societe/class/societe.class.php', 'label' => 'LinkedToDCADMINThirdParty', 'enabled' => 1, 'visible' => 1, 'position' => 70),
 		'address' => array('type' => 'text', 'label' => 'Address', 'enabled' => 1, 'visible' => -1, 'position' => 75),
 		'zip' => array('type' => 'varchar(10)', 'label' => 'Zip', 'enabled' => 1, 'visible' => -1, 'position' => 80),
 		'town' => array('type' => 'varchar(50)', 'label' => 'Town', 'enabled' => 1, 'visible' => -1, 'position' => 85),
@@ -3078,7 +3078,7 @@ class Adherent extends CommonObject
 				// Just for the case we use old md5 encryption (deprecated, no more used, kept for compatibility)
 				if (!getDolGlobalString('MAIN_SECURITY_HASH_ALGO') || getDolGlobalString('MAIN_SECURITY_HASH_ALGO') == 'md5') {
 					if ($this->pass_indatabase_crypted && getDolGlobalString('LDAP_MEMBER_FIELD_PASSWORD_CRYPTED')) {
-						// Create OpenLDAP MD5 password from Dolibarr MD5 password
+						// Create OpenLDAP MD5 password from DCADMIN MD5 password
 						// Note: This suppose that "pass_indatabase_crypted" is a md5 (this should not happen anymore)"
 						$info[getDolGlobalString('LDAP_MEMBER_FIELD_PASSWORD_CRYPTED')] = dolGetLdapPasswordHash($this->pass_indatabase_crypted, 'md5frommd5');
 					}
@@ -3341,7 +3341,7 @@ class Adherent extends CommonObject
 							$cc = getDolGlobalString('ADHERENT_CC_MAIL_FROM');
 
 							$trackid = 'mem'.$adherent->id;
-							$moreinheader = 'X-Dolibarr-Info: sendReminderForExpiredSubscription'."\r\n";
+							$moreinheader = 'X-DCADMIN-Info: sendReminderForExpiredSubscription'."\r\n";
 
 							include_once DOL_DOCUMENT_ROOT.'/core/class/CMailFile.class.php';
 							$cmail = new CMailFile($subject, $to, $email_from, $msg, array(), array(), array(), $cc, '', 0, 1, '', '', $trackid, $moreinheader);

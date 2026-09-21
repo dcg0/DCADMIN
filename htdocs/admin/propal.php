@@ -31,7 +31,7 @@
  *		\brief      Setup page for commercial proposal module
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf

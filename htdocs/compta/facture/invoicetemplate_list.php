@@ -32,7 +32,7 @@
  *	\brief      Page to show list of template/recurring invoices
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf

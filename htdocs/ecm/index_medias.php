@@ -26,7 +26,7 @@
  *	\brief      Main page for ECM section of public media directories area
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf

@@ -24,7 +24,7 @@
  *		\brief      Page to add payment of a loan
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf

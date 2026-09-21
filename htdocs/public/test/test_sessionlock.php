@@ -56,7 +56,7 @@ print '<br>';
 print 'session_status='.session_status().' (before main.inc.php)';
 print '<br>';
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 @include '../../main.inc.php';
 /**
  * @var DoliDB $db

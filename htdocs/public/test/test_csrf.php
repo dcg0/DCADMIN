@@ -16,7 +16,7 @@ if (!defined("NOLOGIN")) {
 	define("NOLOGIN", '1'); // If this page is public (can be called outside logged session)
 }
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 @include '../../main.inc.php';
 /**
  * @var DoliDB $db
@@ -44,7 +44,7 @@ header("X-Content-Type-Options: nosniff"); // With the nosniff option, if the se
 header("X-Frame-Options: SAMEORIGIN"); // Frames allowed only if on same domain (stop some XSS attacks)
 ?>
 
-This is a form to test if a CSRF exists into a Dolibarr page.<br>
+This is a form to test if a CSRF exists into a DCADMIN page.<br>
 <br>
 - Change url to send request to into this file (URL to a hard coded page on a server B)<br>
 - Open this form into a virtual server A.<br>

@@ -27,7 +27,7 @@
  * \brief   Ai setup page.
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf
@@ -117,7 +117,7 @@ $dirmodels = array_merge(array('/'), (array) $conf->modules_parts['models']);
 // Access control
 // Setup intentionally stays admin-only: per @sonikf and @eldy feedback,
 // the AI module's technical setup (API keys, provider configuration) is
-// a task done by the admin user, just like for every other Dolibarr module.
+// a task done by the admin user, just like for every other DCADMIN module.
 // Per-user/group AI usage is gated separately by 'ai/assistant/use'.
 if (!$user->admin) {
 	accessforbidden();

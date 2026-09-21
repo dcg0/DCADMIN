@@ -23,7 +23,7 @@
  *     \brief       Page to public interface of module Ticket
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 require_once DOL_DOCUMENT_ROOT."/core/lib/admin.lib.php";
 require_once DOL_DOCUMENT_ROOT."/ticket/class/ticket.class.php";
@@ -450,7 +450,7 @@ if (getDolGlobalInt('TICKET_ENABLE_PUBLIC_INTERFACE')) {
 
 	// Add first contact id found in database from submitter email entered into public interface
 	// Feature disabled: This has a security trouble. The public interface is a no login interface, so being able to show the contact info from an
-	// email decided by the submiter allows anybody to get information on any contact (customer or supplier) in Dolibarr database.
+	// email decided by the submiter allows anybody to get information on any contact (customer or supplier) in DCADMIN database.
 	// He can even check if contact exists by trying any email if this feature is enabled.
 	/*
 	print '<tr class="oddeven"><td>'.$langs->trans("TicketAssignContactToMessage").'</td>';

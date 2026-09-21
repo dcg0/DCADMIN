@@ -36,7 +36,7 @@ if (!defined("NOSESSION")) {
 	define("NOSESSION", '1');
 }
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 @include '../../main.inc.php';
 /**
  * @var DoliDB $db

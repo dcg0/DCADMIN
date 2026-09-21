@@ -30,7 +30,7 @@
  *		\remarks	Nearly same file than fournisseur/paiement/card.php
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf

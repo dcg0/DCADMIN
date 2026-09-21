@@ -34,7 +34,7 @@ if (!defined('NOLOGIN') && $forlogin) {
 	define("NOLOGIN", 1); // This means this output page does not require to be logged.
 }
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../../main.inc.php';
 /**
  * @var Conf $conf
@@ -132,7 +132,7 @@ if ($action != 'delete' && !GETPOST('afteroauthloginreturn') && (empty($statewit
 
 
 
-// Dolibarr storage
+// DCADMIN storage
 $storage = new DoliStorage($db, $conf, $keyforprovider);
 
 $keyforurl = 'OAUTH_'.$genericstring.($keyforprovider ? '-'.$keyforprovider : '').'_URL';

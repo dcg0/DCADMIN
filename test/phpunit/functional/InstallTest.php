@@ -114,7 +114,7 @@ class InstallTest extends PHPUnit_Extensions_Selenium2TestCase
 	 */
 	public function testInstallPageTitle()
 	{
-		$this->assertStringContainsString('Dolibarr', $this->title());
+		$this->assertStringContainsString('DCADMIN', $this->title());
 	}
 
 	/**

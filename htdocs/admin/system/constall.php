@@ -21,10 +21,10 @@
 
 /**
  *		\file 		htdocs/admin/system/constall.php
- *		\brief      Page to show all Dolibarr setup (config file and database constants)
+ *		\brief      Page to show all DCADMIN setup (config file and database constants)
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 
 /**

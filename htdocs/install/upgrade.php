@@ -46,7 +46,7 @@ include_once 'inc.php';
  */
 
 if (!file_exists($conffile)) {
-	print 'Error: Dolibarr config file was not found. This may means that Dolibarr is not installed yet. Please call the page "/install/index.php" instead of "/install/upgrade.php").';
+	print 'Error: DCADMIN config file was not found. This may means that DCADMIN is not installed yet. Please call the page "/install/index.php" instead of "/install/upgrade.php").';
 }
 require_once $conffile;
 /**
@@ -380,7 +380,7 @@ if (!GETPOST('action', 'aZ09') || preg_match('/upgrade/i', GETPOST('action', 'aZ
 				$listoffileprocessed[$dir.$file] = $dir.$file;
 
 
-				// Scan if there is migration scripts that depends of Dolibarr version
+				// Scan if there is migration scripts that depends of DCADMIN version
 				// for modules htdocs/module/sql or htdocs/custom/module/sql (files called "dolibarr_x.y.z-a.b.c.sql" or "dolibarr_always.sql")
 				$modulesfile = array();
 				foreach ($conf->file->dol_document_root as $type => $dirroot) {
@@ -416,7 +416,7 @@ if (!GETPOST('action', 'aZ09') || preg_match('/upgrade/i', GETPOST('action', 'aZ
 							print '<tr><td class="nowrap">'.$langs->trans("ChoosedMigrateScript").' (external modules '.$dirofmodule.')</td><td class="right">'.$modulefileshort.'</td></tr>'."\n";
 
 							// Run sql script
-							$okmodule = run_sql($modulefilelong, 0, 0, 1); // Note: Result of migration of external module should not decide if we continue migration of Dolibarr or not.
+							$okmodule = run_sql($modulefilelong, 0, 0, 1); // Note: Result of migration of external module should not decide if we continue migration of DCADMIN or not.
 							$listoffileprocessed[$modulefilelong] = $modulefilelong;
 						} else {
 							print '<tr><td class="nowrap">'.$langs->trans("ChoosedMigrateScript").' (external modules '.$dirofmodule.')</td><td class="right">'.$modulefileshort.'</td></tr>'."\n";

@@ -26,7 +26,7 @@
  *		\brief      Page to setup default permissions of a new user
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/admin.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/functions2.lib.php';
@@ -100,7 +100,7 @@ foreach ($modulesdir as $dir) {
 					include_once $dir.$file;
 					$objMod = new $modName($db);
 
-					'@phan-var-force DolibarrModules $objMod';
+					'@phan-var-force DCADMINModules $objMod';
 
 					// Load all lang files of module
 					if (isset($objMod->langfiles) && is_array($objMod->langfiles)) {
@@ -121,7 +121,7 @@ foreach ($modulesdir as $dir) {
 }
 
 $db->commit();
-'@phan-var-force DolibarrModules[] $modules';
+'@phan-var-force DCADMINModules[] $modules';
 
 $head = security_prepare_head();
 

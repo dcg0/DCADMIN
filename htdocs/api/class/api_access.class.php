@@ -43,11 +43,11 @@ use Luracast\Restler\Defaults;
 use Luracast\Restler\RestException;
 
 /**
- * Dolibarr API access class
+ * DCADMIN API access class
  */
-class DolibarrApiAccess implements iAuthenticate
+class DCADMINApiAccess implements iAuthenticate
 {
-	const REALM = 'Restricted Dolibarr API';
+	const REALM = 'Restricted DCADMIN API';
 
 	/**
 	 * @var DoliDB	Database handler
@@ -348,7 +348,7 @@ class DolibarrApiAccess implements iAuthenticate
 
 		$userClass::setCacheIdentifier(static::$role);
 
-		Resources::$accessControlFunction = 'DolibarrApiAccess::verifyAccess';
+		Resources::$accessControlFunction = 'DCADMINApiAccess::verifyAccess';
 		$requirefortest = static::$requires;
 		if (!is_array($requirefortest)) {
 			$requirefortest = explode(',', $requirefortest);
@@ -369,15 +369,15 @@ class DolibarrApiAccess implements iAuthenticate
 	/**
 	 * Check that the role of user is among a the given list defined into static::$requires
 	 *
-	 * @param   array{class:array{DolibarrApiAccess:array{properties:array{requires?:bool}}}} $m Properties of method
+	 * @param   array{class:array{DCADMINApiAccess:array{properties:array{requires?:bool}}}} $m Properties of method
 	 *
 	 * @access private
 	 * @return bool
 	 */
 	public static function verifyAccess(array $m)
 	{
-		$requires = isset($m['class']['DolibarrApiAccess']['properties']['requires'])
-				? $m['class']['DolibarrApiAccess']['properties']['requires']
+		$requires = isset($m['class']['DCADMINApiAccess']['properties']['requires'])
+				? $m['class']['DCADMINApiAccess']['properties']['requires']
 				: false;
 
 

@@ -28,9 +28,9 @@ require_once DOL_DOCUMENT_ROOT . '/compta/bank/class/account.class.php';
  *
  * @property DoliDB $db
  * @access protected
- * @class DolibarrApiAccess {@requires user,external}
+ * @class DCADMINApiAccess {@requires user,external}
  */
-class BankAccounts extends DolibarrApi
+class BankAccounts extends DCADMINApi
 {
 	/**
 	 * @var string[] Mandatory fields, checked when creating an object
@@ -72,7 +72,7 @@ class BankAccounts extends DolibarrApi
 	{
 		$list = array();
 
-		if (!DolibarrApiAccess::$user->hasRight('banque', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('banque', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -135,7 +135,7 @@ class BankAccounts extends DolibarrApi
 	 */
 	public function get($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('banque', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('banque', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -158,7 +158,7 @@ class BankAccounts extends DolibarrApi
 	 */
 	public function post($request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('banque', 'configurer')) {
+		if (!DCADMINApiAccess::$user->hasRight('banque', 'configurer')) {
 			throw new RestException(403);
 		}
 		// Check mandatory fields
@@ -177,7 +177,7 @@ class BankAccounts extends DolibarrApi
 			$account->$field = $this->_checkValForAPI($field, $value, $account);
 		}
 
-		if ($account->create(DolibarrApiAccess::$user) < 0) {
+		if ($account->create(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, 'Error creating bank account', array_merge(array($account->error), $account->errors));
 		}
 		return $account->id;
@@ -209,7 +209,7 @@ class BankAccounts extends DolibarrApi
 	 */
 	public function transfer($bankaccount_from_id = 0, $bankaccount_to_id = 0, $date = null, $description = "", $amount = 0.0, $amount_to = 0.0, $cheque_number = "")
 	{
-		if (!DolibarrApiAccess::$user->hasRight('banque', 'configurer')) {
+		if (!DCADMINApiAccess::$user->hasRight('banque', 'configurer')) {
 			throw new RestException(403);
 		}
 
@@ -251,7 +251,7 @@ class BankAccounts extends DolibarrApi
 		$bank_line_id_from = 0;
 		$bank_line_id_to = 0;
 		$result = 0;
-		$user = DolibarrApiAccess::$user;
+		$user = DCADMINApiAccess::$user;
 
 		// By default, electronic transfer from bank to bank
 		$typefrom = 'PRE';
@@ -335,7 +335,7 @@ class BankAccounts extends DolibarrApi
 	 */
 	public function put($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('banque', 'configurer')) {
+		if (!DCADMINApiAccess::$user->hasRight('banque', 'configurer')) {
 			throw new RestException(403);
 		}
 
@@ -364,7 +364,7 @@ class BankAccounts extends DolibarrApi
 			$account->$field = $this->_checkValForAPI($field, $value, $account);
 		}
 
-		if ($account->update(DolibarrApiAccess::$user) > 0) {
+		if ($account->update(DCADMINApiAccess::$user) > 0) {
 			return $this->get($id);
 		} else {
 			throw new RestException(500, $account->error);
@@ -381,7 +381,7 @@ class BankAccounts extends DolibarrApi
 	 */
 	public function delete($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('banque', 'configurer')) {
+		if (!DCADMINApiAccess::$user->hasRight('banque', 'configurer')) {
 			throw new RestException(403);
 		}
 		$account = new Account($this->db);
@@ -390,7 +390,7 @@ class BankAccounts extends DolibarrApi
 			throw new RestException(404, 'account not found');
 		}
 
-		if ($account->delete(DolibarrApiAccess::$user) < 0) {
+		if ($account->delete(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, 'error when deleting account');
 		}
 
@@ -462,7 +462,7 @@ class BankAccounts extends DolibarrApi
 	{
 		$list = array();
 
-		if (!DolibarrApiAccess::$user->hasRight('banque', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('banque', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -526,7 +526,7 @@ class BankAccounts extends DolibarrApi
 	 */
 	public function addLine($id, $date, $type, $label, $amount, $category = 0, $cheque_number = '', $cheque_writer = '', $cheque_bank = '', $accountancycode = '', $datev = null, $num_releve = '')
 	{
-		if (!DolibarrApiAccess::$user->hasRight('banque', 'modifier')) {
+		if (!DCADMINApiAccess::$user->hasRight('banque', 'modifier')) {
 			throw new RestException(403);
 		}
 
@@ -551,7 +551,7 @@ class BankAccounts extends DolibarrApi
 			$amount,
 			$cheque_number,
 			$category,
-			DolibarrApiAccess::$user,
+			DCADMINApiAccess::$user,
 			$cheque_writer,
 			$cheque_bank,
 			$accountancycode,
@@ -579,7 +579,7 @@ class BankAccounts extends DolibarrApi
 	 */
 	public function addLink($id, $line_id, $url_id, $url, $label, $type)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('banque', 'modifier')) {
+		if (!DCADMINApiAccess::$user->hasRight('banque', 'modifier')) {
 			throw new RestException(403);
 		}
 
@@ -625,7 +625,7 @@ class BankAccounts extends DolibarrApi
 	 */
 	public function getLinks($id, $line_id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('banque', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('banque', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -654,7 +654,7 @@ class BankAccounts extends DolibarrApi
 	 */
 	public function getDetailAccountLine($line_id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('banque', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('banque', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -679,7 +679,7 @@ class BankAccounts extends DolibarrApi
 	 */
 	public function updateLine($id, $line_id, $label)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('banque', 'modifier')) {
+		if (!DCADMINApiAccess::$user->hasRight('banque', 'modifier')) {
 			throw new RestException(403);
 		}
 
@@ -721,7 +721,7 @@ class BankAccounts extends DolibarrApi
 	 */
 	public function deleteLine($id, $line_id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('banque', 'modifier')) {
+		if (!DCADMINApiAccess::$user->hasRight('banque', 'modifier')) {
 			throw new RestException(403);
 		}
 
@@ -741,7 +741,7 @@ class BankAccounts extends DolibarrApi
 			throw new RestException(400, 'Line does not belong to this account');
 		}
 
-		if ($accountLine->delete(DolibarrApiAccess::$user) < 0) {
+		if ($accountLine->delete(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, 'error when deleting account line');
 		}
 
@@ -764,7 +764,7 @@ class BankAccounts extends DolibarrApi
 	 */
 	public function getBalance($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('banque', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('banque', 'lire')) {
 			throw new RestException(403);
 		}
 

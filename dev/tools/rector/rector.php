@@ -84,11 +84,11 @@ return static function (RectorConfig $rectorConfig): void {
 	//Not yet ready: $rectorconfig->rule(Rector\CodeQuality\Rector\If_\CompleteMissingIfElseBracketRector::class);
 	$rectorConfig->rule(Rector\CodeQuality\Rector\For_\ForRepeatedCountToOwnVariableRector::class);
 
-	$rectorConfig->rule(Dolibarr\Rector\Renaming\EmptyGlobalToFunction::class);
-	$rectorConfig->rule(Dolibarr\Rector\Renaming\EmptyUserRightsToFunction::class);
-	$rectorConfig->rule(Dolibarr\Rector\Renaming\GlobalToFunction::class);
-	$rectorConfig->rule(Dolibarr\Rector\Renaming\UserRightsToFunction::class);
-	$rectorConfig->rule(Dolibarr\Rector\Renaming\UsePositiveExit::class);
+	$rectorConfig->rule(DCADMIN\Rector\Renaming\EmptyGlobalToFunction::class);
+	$rectorConfig->rule(DCADMIN\Rector\Renaming\EmptyUserRightsToFunction::class);
+	$rectorConfig->rule(DCADMIN\Rector\Renaming\GlobalToFunction::class);
+	$rectorConfig->rule(DCADMIN\Rector\Renaming\UserRightsToFunction::class);
+	$rectorConfig->rule(DCADMIN\Rector\Renaming\UsePositiveExit::class);
 
 
 	// This fix <> into != but it breaks other rules, so added at end.
@@ -97,7 +97,7 @@ return static function (RectorConfig $rectorConfig): void {
 	/*
 	$rectorConfig->skip([
 		Rector\BetterPhpDocParser\PhpDocParser\BetterPhpDocParser::class,
-		Dolibarr\Rector\Renaming\GlobalToFunction::class
+		DCADMIN\Rector\Renaming\GlobalToFunction::class
 	]);
 	*/
 

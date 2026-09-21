@@ -34,7 +34,7 @@
  *	\brief		Payment list for expense reports
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../../main.inc.php';
 /**
  * @var Conf $conf

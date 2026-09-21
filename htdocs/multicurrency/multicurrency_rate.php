@@ -35,7 +35,7 @@
  *    \brief      Page to list multicurrency rate
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/core/class/html.formother.class.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/multicurrency.lib.php';
@@ -315,7 +315,7 @@ if (!in_array($action, array("updateRate", "deleteRate"))) {
 	/**
 	* Direct	: 	1 Divisa Currency = X Currency Main.
 	* Indirect	: 	1 Currency Main = X Divisa Currency.
-	* Then for Dolibarr use is Indirect for default
+	* Then for DCADMIN use is Indirect for default
 	* MULTICURRENCY_USE_RATE_INDIRECT <-- is deprecated
 	*/
 	if (getDolGlobalString('MULTICURRENCY_USE_RATE_DIRECT')) {

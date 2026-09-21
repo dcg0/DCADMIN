@@ -27,13 +27,13 @@
  *  \brief      Description and activation file for the module ECM
  */
 
-include_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
+include_once DOL_DOCUMENT_ROOT.'/core/modules/DCADMINModules.class.php';
 
 
 /**
  * 	Description and activation class for module ECM
  */
-class modECM extends DolibarrModules
+class modECM extends DCADMINModules
 {
 	/**
 	 *   Constructor. Define names, constants, directories, boxes, permissions

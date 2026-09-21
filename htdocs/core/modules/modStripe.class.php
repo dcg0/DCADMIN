@@ -24,13 +24,13 @@
  *  \ingroup    stripe
  *  \brief      Description and activation file for the module Stripe
  */
-include_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
+include_once DOL_DOCUMENT_ROOT.'/core/modules/DCADMINModules.class.php';
 
 
 /**
  * 	Description and activation class for module Paybox
  */
-class modStripe extends DolibarrModules
+class modStripe extends DCADMINModules
 {
 	/**
 	 *   Constructor. Define names, constants, directories, boxes, permissions
@@ -42,7 +42,7 @@ class modStripe extends DolibarrModules
 		$this->db = $db;
 
 		// Id for module (must be unique).
-		// Use here a free id (See in Home -> System information -> Dolibarr for list of used modules id).
+		// Use here a free id (See in Home -> System information -> DCADMIN for list of used modules id).
 		$this->numero = 50300;
 		// Key text used to identify module (for permissions, menus, etc...)
 		$this->rights_class = 'stripe';
@@ -74,7 +74,7 @@ class modStripe extends DolibarrModules
 		$this->depends = array(); // List of modules id that must be enabled if this module is enabled
 		$this->requiredby = array(); // List of modules id to disable if this one is disabled
 		$this->phpmin = array(7, 0); // Minimum version of PHP required by module
-		$this->need_dolibarr_version = array(5, 0); // Minimum version of Dolibarr required by module
+		$this->need_dolibarr_version = array(5, 0); // Minimum version of DCADMIN required by module
 		$this->langfiles = array("stripe");
 
 		// Constants

@@ -24,7 +24,7 @@
 /**
  * \file scripts/members/sync_members_types_dolibarr2ldap.php
  * \ingroup ldap core
- * \brief Script to update member types in LDAP from the Dolibarr database
+ * \brief Script to update member types in LDAP from the DCADMIN database
  */
 
 if (!defined('NOSESSION')) {
@@ -80,7 +80,7 @@ dol_syslog($script_file." launched with arg ".implode(',', $argv));
 
 /*
  * if (getDolGlobalString('LDAP_SYNCHRO_ACTIVE')) {
- * print $langs->trans("LDAPSynchronizationNotSetupInDolibarr");
+ * print $langs->trans("LDAPSynchronizationNotSetupInDCADMIN");
  * exit(1);
  * }
  */

@@ -32,7 +32,7 @@
  *       \brief      Page of linked files onto salaries
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require '../main.inc.php';
 /**
  * @var Conf $conf

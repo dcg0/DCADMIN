@@ -19,7 +19,7 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  *
  * This file is base on pg2mysql provided as Open source by lightbox.org.
- * It was enhanced and updated by the Dolibarr team.
+ * It was enhanced and updated by the DCADMIN team.
  */
 
 /**

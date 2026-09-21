@@ -23,7 +23,7 @@
 
 /**
  * Class to parse language files and translate them
- * This is a language automatic translator parser for Dolibarr
+ * This is a language automatic translator parser for DCADMIN
  */
 class autoTranslator
 {

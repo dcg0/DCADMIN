@@ -28,9 +28,9 @@ require_once DOL_DOCUMENT_ROOT.'/core/lib/company.lib.php';
  * API class for supplier proposal
  *
  * @access protected
- * @class  DolibarrApiAccess {@requires user,external}
+ * @class  DCADMINApiAccess {@requires user,external}
  */
-class SupplierProposals extends DolibarrApi
+class SupplierProposals extends DCADMINApi
 {
 	/**
 	 * @var string[]       Mandatory fields, checked when create and update object
@@ -64,7 +64,7 @@ class SupplierProposals extends DolibarrApi
 	 */
 	public function delete($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('supplier_proposal', 'supprimer')) {
+		if (!DCADMINApiAccess::$user->hasRight('supplier_proposal', 'supprimer')) {
 			throw new RestException(403);
 		}
 		$result = $this->supplier_proposal->fetch($id);
@@ -72,11 +72,11 @@ class SupplierProposals extends DolibarrApi
 			throw new RestException(404, 'Supplier Proposal not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('supplier_proposal', $this->supplier_proposal->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('supplier_proposal', $this->supplier_proposal->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
-		if (!$this->supplier_proposal->delete(DolibarrApiAccess::$user)) {
+		if (!$this->supplier_proposal->delete(DCADMINApiAccess::$user)) {
 			throw new RestException(500, 'Error when delete Supplier Proposal : '.$this->supplier_proposal->error);
 		}
 
@@ -100,7 +100,7 @@ class SupplierProposals extends DolibarrApi
 	 */
 	public function get($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('supplier_proposal', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('supplier_proposal', 'lire')) {
 			throw new RestException(403);
 		}
 
@@ -109,8 +109,8 @@ class SupplierProposals extends DolibarrApi
 			throw new RestException(404, 'Supplier Proposal not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('supplier_proposal', $this->supplier_proposal->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('supplier_proposal', $this->supplier_proposal->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		$this->supplier_proposal->fetchObjectLinked();
@@ -127,7 +127,7 @@ class SupplierProposals extends DolibarrApi
 	 */
 	public function post($request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('supplier_proposal', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('supplier_proposal', 'creer')) {
 			throw new RestException(403, "Insufficiant rights");
 		}
 		// Check mandatory fields
@@ -159,7 +159,7 @@ class SupplierProposals extends DolibarrApi
 		  $this->propal->lines = $lines;
 		}*/
 
-		if ($this->supplier_proposal->create(DolibarrApiAccess::$user) < 0) {
+		if ($this->supplier_proposal->create(DCADMINApiAccess::$user) < 0) {
 			throw new RestException(500, "Error creating supplier proposal", array_merge(array($this->supplier_proposal->error), $this->supplier_proposal->errors));
 		}
 
@@ -177,7 +177,7 @@ class SupplierProposals extends DolibarrApi
 	 */
 	public function put($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('supplier_proposal', 'creer')) {
+		if (!DCADMINApiAccess::$user->hasRight('supplier_proposal', 'creer')) {
 			throw new RestException(403);
 		}
 
@@ -186,8 +186,8 @@ class SupplierProposals extends DolibarrApi
 			throw new RestException(404, 'Supplier proposal not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('supplier_proposal', $this->supplier_proposal->id)) {
-			throw new RestException(403, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('supplier_proposal', $this->supplier_proposal->id)) {
+			throw new RestException(403, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 		foreach ($request_data as $field => $value) {
 			if ($field == 'id') {
@@ -212,12 +212,12 @@ class SupplierProposals extends DolibarrApi
 			$this->supplier_proposal->fin_validite = $this->supplier_proposal->date_creation + ($this->supplier_proposal->duree_validite * 24 * 3600);
 		}
 		if (!empty($this->supplier_proposal->fin_validite)) {
-			if ($this->supplier_proposal->set_echeance(DolibarrApiAccess::$user, $this->supplier_proposal->fin_validite) < 0) {
+			if ($this->supplier_proposal->set_echeance(DCADMINApiAccess::$user, $this->supplier_proposal->fin_validite) < 0) {
 				throw new RestException(500, $this->supplier_proposal->error);
 			}
 		}
 
-		if ($this->supplier_proposal->update(DolibarrApiAccess::$user) > 0) {
+		if ($this->supplier_proposal->update(DCADMINApiAccess::$user) > 0) {
 			return $this->get($id);
 		} else {
 			throw new RestException(500, $this->supplier_proposal->error);
@@ -243,19 +243,19 @@ class SupplierProposals extends DolibarrApi
 	 */
 	public function index($sortfield = "t.rowid", $sortorder = 'ASC', $limit = 100, $page = 0, $thirdparty_ids = '', $sqlfilters = '', $properties = '', $pagination_data = false)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('supplier_proposal', 'lire')) {
+		if (!DCADMINApiAccess::$user->hasRight('supplier_proposal', 'lire')) {
 			throw new RestException(403);
 		}
 
 		$obj_ret = array();
 
 		// case of external user, $thirdparty_ids param is ignored and replaced by user's socid
-		$socids = DolibarrApiAccess::$user->socid ?: $thirdparty_ids;
+		$socids = DCADMINApiAccess::$user->socid ?: $thirdparty_ids;
 
 		// If the internal user must only see his customers, force searching by him
 		$search_sale = 0;
-		if (!DolibarrApiAccess::$user->hasRight('societe', 'client', 'voir') && !$socids) {
-			$search_sale = DolibarrApiAccess::$user->id;
+		if (!DCADMINApiAccess::$user->hasRight('societe', 'client', 'voir') && !$socids) {
+			$search_sale = DCADMINApiAccess::$user->id;
 		}
 
 		$sql = "SELECT t.rowid";

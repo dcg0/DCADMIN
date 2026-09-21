@@ -34,9 +34,9 @@ require_once DOL_DOCUMENT_ROOT.'/workstation/class/workstation.class.php';
  * API class for workstations
  *
  * @access protected
- * @class  DolibarrApiAccess {@requires user,external}
+ * @class  DCADMINApiAccess {@requires user,external}
  */
-class Workstations extends DolibarrApi
+class Workstations extends DCADMINApi
 {
 	/**
 	 * @var Workstation {@type Workstation}
@@ -112,13 +112,13 @@ class Workstations extends DolibarrApi
 	{
 		global $db, $conf;
 
-		if (!DolibarrApiAccess::$user->hasRight('workstation', 'workstation', 'read')) {
+		if (!DCADMINApiAccess::$user->hasRight('workstation', 'workstation', 'read')) {
 			throw new RestException(403);
 		}
 
 		$obj_ret = array();
 
-		$socid = DolibarrApiAccess::$user->socid ?: '';
+		$socid = DCADMINApiAccess::$user->socid ?: '';
 
 		$sql = "SELECT t.rowid, t.ref";
 		$sql .= " FROM ".$this->db->prefix()."workstation_workstation as t";
@@ -316,7 +316,7 @@ class Workstations extends DolibarrApi
 
 		$id = (empty($id) ? 0 : $id);
 
-		if (!DolibarrApiAccess::$user->hasRight('workstation', 'workstation', 'read')) {
+		if (!DCADMINApiAccess::$user->hasRight('workstation', 'workstation', 'read')) {
 			throw new RestException(403);
 		}
 
@@ -325,8 +325,8 @@ class Workstations extends DolibarrApi
 			throw new RestException(404, 'Workstation not found');
 		}
 
-		if (!DolibarrApi::_checkAccessToResource('workstation', $this->workstation->id)) {
-			throw new RestException(401, 'Access not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DCADMINApi::_checkAccessToResource('workstation', $this->workstation->id)) {
+			throw new RestException(401, 'Access not allowed for login '.DCADMINApiAccess::$user->login);
 		}
 
 		return $this->_cleanObjectDatas($this->workstation);

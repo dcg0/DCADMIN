@@ -24,7 +24,7 @@
  *  \brief      Tab for documents linked to RecruitmentCandidature
  */
 
-// Load Dolibarr environment
+// Load DCADMIN environment
 require_once '../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/company.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/files.lib.php';

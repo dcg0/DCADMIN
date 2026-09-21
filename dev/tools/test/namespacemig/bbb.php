@@ -2,10 +2,10 @@
 
 //use \Aaa as Aaa;
 
-use Dolibarr\Aaa as Aaa;
-use function Dolibarr\faaa as faaa; // Need php 5.6+
+use DCADMIN\Aaa as Aaa;
+use function DCADMIN\faaa as faaa; // Need php 5.6+
 
-//use const Dolibarr\AAA;
+//use const DCADMIN\AAA;
 
 //use Bbb as Bbb;
 

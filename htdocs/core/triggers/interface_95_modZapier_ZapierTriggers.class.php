@@ -28,7 +28,7 @@ require_once DOL_DOCUMENT_ROOT.'/core/triggers/dolibarrtriggers.class.php';
 /**
  *  Class of triggers for Zapier module
  */
-class InterfaceZapierTriggers extends DolibarrTriggers
+class InterfaceZapierTriggers extends DCADMINTriggers
 {
 	/**
 	 * Constructor
@@ -47,7 +47,7 @@ class InterfaceZapierTriggers extends DolibarrTriggers
 	}
 
 	/**
-	 * Function called when a Dolibarr business event is done.
+	 * Function called when a DCADMIN business event is done.
 	 * All functions "runTrigger" are triggered if file
 	 * is inside directory core/triggers
 	 *
