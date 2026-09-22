@@ -171,7 +171,7 @@ jobs:
 
       - name: Convert Raw Log to Annotations
         uses: mdeweerd/logToCheckStyle@v2026.8.2
-        if: ${{ failure() }}
+        if: ${{ failure() && hashFiles(env.RAW_LOG) != '' }}
         with:
           in: ${{ env.RAW_LOG }}
 
