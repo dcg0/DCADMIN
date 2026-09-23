@@ -1,0 +1,30 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.dclaboratory.dcadmin'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'com.dclaboratory.dcadmin'
+        minSdk 23
+        targetSdk 35
+        versionCode 1
+        versionName '1.0.0'
+        buildConfigField 'String', 'DCADMIN_URL', '"' + (project.findProperty('dcadminUrl') ?: 'http://10.0.2.2:8080') + '"'
+    }
+
+    buildFeatures {
+        buildConfig true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    packaging {
+        resources.excludes += ['/META-INF/{AL2.0,LGPL2.1}']
+    }
+}
