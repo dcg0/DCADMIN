@@ -1,5 +1,11 @@
 # DOLIBARR ERP & CRM
 
+
+<p align="center">
+  <a href="https://github.com/dcg0/DCADMIN/actions/workflows/security.yml"><img src="https://github.com/dcg0/DCADMIN/actions/workflows/security.yml/badge.svg" alt="Security checks"></a>
+  <a href="https://github.com/dcg0/DCADMIN/security"><img src="https://img.shields.io/badge/security-policy-available-176b46" alt="Security policy available"></a>
+</p>
+
 ![Downloads per day](https://img.shields.io/sourceforge/dw/dolibarr.svg)
 ![Docker hub pulls](https://img.shields.io/docker/pulls/dolibarr/dolibarr.svg)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.2-8892BF.svg?style=flat-square)](https://php.net/)
